@@ -4,7 +4,7 @@
 </head>
 
 
-<div class="nav">
+<div class="nav" id="nav">
     <div class="innernav">
     <div class="logo" >
         <img class="logotop" src="css/okoklogo-transformed.ico">
@@ -24,23 +24,48 @@
     </div>
 
 </div>
-<div class="menu" style="display:none;">
+<div id="menu" class="menu" style="display:none;">
     <div class="menuitem">
-        My Account
+       <p>My Account</p>
     </div>
     <div class="menuitem">
-        Settings
+        <p>Settings</p>
     </div>
     <div class="menuitem">
-        Info
+        <p>Info</p>
     </div>
     <div class="menuitem">
-        Logout
+        <p>Logout</p>
+    </div>
+    <div class="menuitem">
+        <p>My Account</p>
+    </div>
+    <div class="menuitem">
+        <p>Settings</p>
+    </div>
+    <div class="menuitem">
+        <p>Info</p>
+    </div>
+    <div class="menuitem">
+        <p>Logout</p>
     </div>
 </div>
 <script>
-    var image = document.getElementById('profile');
-    var div = document.getElementById('menu');
+    let image = document.getElementById('profile');
+
+    let div = document.getElementById('menu');
+    let nav=document.getElementById('nav');
+    let flag=0
     image.addEventListener('click', function() {
-        div.style.display = 'flex';})
+        if(flag===0){
+            flag=1
+            div.style.display = 'flex';
+            nav.style.position='relative'
+            div.style.position='absolute';
+            div.style.zIndex=9999
+        }else if(flag===1){
+            div.style.display = 'none'
+            flag=0;
+        }
+       })
 </script>

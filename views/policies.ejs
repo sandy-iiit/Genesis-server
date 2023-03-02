@@ -22,7 +22,7 @@
         At Genesis Insurances, we are committed to providing our customers with the best possible service and support. We understand that health insurance can be a complex topic, and we are here to guide you every step of the way. Contact us today to learn more about our health insurance policies and how we can help protect your health and finances.</p>
 </div>
 <div class="container">
-    <%for(let i=0;i<array.length;i++){%>
+    <%for(let i=0;i<array.length-1;i++){%>
 
     <div class="card">
        <div class="item">
@@ -37,12 +37,16 @@
        <div class="item">
            <h2><%=array[i].cost%></h2>
        </div>
-        <div class="item">        <button class="button"> Select </button>
+        <div class="item">
+            <button class="button"> Select </button>
         </div>
 
    </div>
 <%}%>
 </div>
+<div>
+    <a href="#nav"><button class="below">Back To Top</button></a>
 
+</div>
 </body>
 </html>
