@@ -1,0 +1,30 @@
+<head>
+    <link rel="stylesheet" href="/css/policies.css">
+    <link rel="stylesheet" href="/css/login.css">
+
+</head>
+<%- include('navbar.ejs') %>
+
+<div class="container">
+    <%for(let i=0;i<array.length;i++){%>
+
+    <div class="card">
+       <div class="item">
+          <h1><%=array[i].name%></h1>
+       </div>
+       <div class="item">
+           <h2><%=array[i].term%></h2>
+       </div>
+       <div class="item">
+          <h2><%=array[i].percentage%></h2>
+       </div>
+       <div class="item">
+           <h2><%=array[i].cost%></h2>
+       </div>
+        <div class="item">        <button class="button"> Select </button>
+        </div>
+
+   </div>
+<%}%>
+</div>
+

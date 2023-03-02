@@ -1,0 +1,194 @@
+
+body {
+    text-align: center;
+    vertical-align: middle;
+    background-color: white;
+    background-size: cover;
+    background-position: top;
+}
+.nav{
+    background-color: yellowgreen;
+    height: 80px;
+    width: 100%;
+   display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-position: top;
+    border-radius: 100px;
+    margin-bottom: 20px;
+
+}
+.innernav{
+    display: flex;
+    justify-content: space-evenly;
+}
+.main-buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+}
+
+.logotop{
+    width: 60px;
+    height: 60px;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+.nav1{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+}
+
+.theform{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-content: space-between;
+   
+  
+}
+
+
+.login-form{
+    margin-left: 35%;
+    margin-top: 12%;
+    width: 30%;
+    height: 60vh;
+     background-color: rgba(250, 250, 00, 0.3);
+    opacity: 1;
+    z-index: -10;
+
+    }
+
+input{
+
+    width: 350px;
+    height: 35px;
+    border-style: solid;
+    border-color: yellow;
+    border-width: 2px;
+    border-radius: 100px;
+    margin: 10px;
+    animation: inputer 3s;
+    font-size: 20px;
+
+    
+
+}    
+
+
+input,select{
+    font-size: 20px;
+
+}
+
+input:focus { 
+    outline: none !important;
+    border-color: chartreuse;
+    box-shadow: 0 0 5px chartreuse;
+    font-size: 20px;
+
+}
+
+::placeholder{
+
+    color: yellowgreen;
+    font-size: large;
+    text-align: center;
+
+}
+
+.logbut{
+
+    width: 200px;
+    height: 35px;
+    background-color: yellowgreen;
+    border-radius: 100px;
+    font-size: large;
+    color: whitesmoke;
+    margin-right: 5px;
+    border-style: none;
+    animation: btn 3s;
+}
+
+.loginimg{
+    width: 150px;
+    height: 150px;
+    margin-top: 50px;
+    animation: logo 3s;
+}
+
+.navbut{
+    width: 140px;
+    height: 45px;
+    background-color: white;
+    margin-right: 15px;
+    border-radius: 100px;
+    border-style: none;
+    color: black;
+
+
+}
+
+.logbut:active{
+
+    animation: click 0.5s;
+}
+
+.logbut:hover{
+    width: 250px;
+    height: 40px;
+    background-color:yellowgreen;
+
+}
+
+
+
+@keyframes logo{
+
+    0%{width: 0;height: 0;}
+    100% {width: 150px;height: 150px;}
+}
+
+@keyframes inputer{
+    0%{width: 0;height: 0;}
+    80% {
+        width: 450px;
+        height: 45px;}
+        100%{
+            width: 350px;
+            height: 35px;
+        }
+}
+
+@keyframes btn{
+    0%{width: 0;height: 0;}
+    50% {
+        width: 250px;
+        height: 40px;}
+
+80%{
+    width: 150px;
+    height: 30px;
+}
+
+        100%{
+
+            width: 200px;
+            height: 35px;
+        }
+}
+
+@keyframes click{
+
+    50%{
+       
+        transform: translateY(10px);
+    }
+
+}

@@ -1,0 +1,22 @@
+<head>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<%- include('navbar.ejs') %>
+<div class="login-form" >
+
+    <form id="form1" action="/" class="theform" name="form1" >
+        <img class="loginimg" src="css/okoklogo-transformed.ico">
+        <input name="name" type="text" placeholder="Name">
+        <input name="email" type="email" placeholder="Email" >
+        <input type="password" placeholder="Password" >
+        <button id="but" class="logbut"  type="submit" >jjj</button>
+
+    </form>
+
+</div>
+<script>
+   const changeName=()=>{
+       document.getElementById('but').innerText='Submit';
+   }
+</script>
+
