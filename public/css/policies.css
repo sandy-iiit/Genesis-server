@@ -1,10 +1,30 @@
 body{
-    background-color: #eee;
+    background-color: #cccccc;
 }
+.heading{
+    font-family: "Apple Chancery";
+    background-color: #EA047E;
+    color: white;
+    border-radius: 100px;
+    text-align: center;
+    margin-left: 90px;
+    width: 1250px;
+    z-index: -1;
 
+}
+.matter{
+    margin:0 100px 100px 100px;
+    font-size: larger;
+    width: 1250px;
+    line-height: 50px;
+    font-family: Avenir;
+    background-color: skyblue;
+    border-radius: 70px;
+    z-index: -1;
+}
 .container{
     border-radius: 20px;
-    background-color: skyblue;
+    background-color: #eeefff;
     position: relative;
     display: flex;
     flex-wrap: wrap;
@@ -18,7 +38,8 @@ body{
 .card{
     border-radius: 20px;
     border-style: solid;
-    border-color: skyblue;
+
+    border-color: #F56EB3;
     background-color: white;
     text-align: center;
     width:300px ;
@@ -31,9 +52,11 @@ body{
 .button{
     width: 150px;
     height: 40px;
-    background-color: yellowgreen;
+    background-color: #EA047E;
     border-radius: 100px;
     border-style: none;
+    color: whitesmoke;
+    font-size: larger;
 
 }
 
@@ -47,7 +70,7 @@ body{
     height: 450px;
     width: 450px;
     margin: 0;
-    box-shadow: 5px 5px 5px 4px skyblue;
+    box-shadow: 0 0 60px 0 rgba(245, 110, 179, 1);
 }
 
 .item{
@@ -55,4 +78,9 @@ body{
     margin:2px;
 }
 
+.innernav{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
 

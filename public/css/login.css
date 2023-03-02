@@ -6,8 +6,20 @@ body {
     background-size: cover;
     background-position: top;
 }
+button{
+    font-size: larger;
+}
+.logo{
+    background-color: white;
+    border-radius: 100px;
+    margin-left: 20px;
+    text-align: center;
+    height: 70px;
+    width: 70px;
+
+}
 .nav{
-    background-color: yellowgreen;
+    background-color: #F56EB3;
     height: 80px;
     width: 100%;
    display: flex;
@@ -15,12 +27,14 @@ body {
     align-items: center;
     background-position: top;
     border-radius: 100px;
-    margin-bottom: 20px;
+    position: sticky;
+    z-index: 1;
 
 }
 .innernav{
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
 }
 .main-buttons{
     display: flex;
@@ -32,8 +46,7 @@ body {
 .logotop{
     width: 60px;
     height: 60px;
-    margin-left: 20px;
-    margin-top: 10px;
+   margin: auto auto auto auto ;
 }
 .nav1{
     display: flex;
@@ -52,14 +65,26 @@ body {
    
   
 }
+.profile{
+    width: 45px;
+    height: 45px;
+    margin: auto 10px auto auto ;
+    border-radius: 25px;
+    cursor: pointer;
+}
+.profile:active{
+    animation: click 0.5s;
+}
 
 
 .login-form{
     margin-left: 35%;
     margin-top: 12%;
+    border-radius: 50px;
+
     width: 30%;
     height: 60vh;
-     background-color: rgba(250, 250, 00, 0.3);
+     background-color: #eeefff;
     opacity: 1;
     z-index: -10;
 
@@ -70,7 +95,7 @@ input{
     width: 350px;
     height: 35px;
     border-style: solid;
-    border-color: yellow;
+    border-color: #EA047E;
     border-width: 2px;
     border-radius: 100px;
     margin: 10px;
@@ -97,7 +122,7 @@ input:focus {
 
 ::placeholder{
 
-    color: yellowgreen;
+    color: #EA047E;
     font-size: large;
     text-align: center;
 
@@ -107,7 +132,7 @@ input:focus {
 
     width: 200px;
     height: 35px;
-    background-color: yellowgreen;
+    background-color: #EA047E;
     border-radius: 100px;
     font-size: large;
     color: whitesmoke;
@@ -131,11 +156,12 @@ input:focus {
     border-radius: 100px;
     border-style: none;
     color: black;
+    cursor: pointer;
 
 
 }
 
-.logbut:active{
+.logbut,.navbut:active{
 
     animation: click 0.5s;
 }
@@ -143,10 +169,23 @@ input:focus {
 .logbut:hover{
     width: 250px;
     height: 40px;
-    background-color:yellowgreen;
+    background-color:#EA047E;
 
 }
 
+.menu{
+    justify-content: space-evenly;
+    width: 300px;
+    height: 400px;
+    flex-direction: column;
+    z-index: 1;
+    margin-left: 80%;
+}
+.menuitem{
+    width: 280px;
+    height: 75px;
+    background-color: deepskyblue;
+}
 
 
 @keyframes logo{
