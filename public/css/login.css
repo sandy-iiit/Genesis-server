@@ -19,14 +19,14 @@ button{
 
 }
 .nav{
-    background-color: #F56EB3;
-    height: 80px;
+    background-color: #3E54AC;
+    height: 90px;
     width: 100%;
    display: flex;
     justify-content: space-between;
     align-items: center;
     background-position: top;
-    border-radius: 100px;
+    /*border-radius: 100px;*/
     position: sticky;
     z-index: 1;
 
@@ -151,12 +151,16 @@ input:focus {
 .navbut{
     width: 140px;
     height: 45px;
-    background-color: white;
+    background-color: #3E54AC;
     margin-right: 15px;
-    border-radius: 100px;
     border-style: none;
-    color: black;
     cursor: pointer;
+    color: white;
+}
+.navbut:hover{
+    border-radius: 100px;
+    background-color: white;
+    color: black;
 
 
 }
@@ -185,14 +189,14 @@ input:focus {
     text-align: center;
     vertical-align: center;
     margin: 0;
-    border-color: #EA047E;
+    border-color: #3E54AC;
     width: 270px;
     height: 50px;
-    background-color: rgba(245,110,179,0.75);
+    background-color: rgba(236,242,255,0.9);
 }
 .menuitem:hover{
     height: 65px;
-    border-color: #EA047E;
+    border-color: #3E54AC;
     border-style: solid;
     cursor: pointer;
 }
@@ -206,7 +210,7 @@ input:focus {
 }
 
 .menuitem>p:hover{
-    color: blue;
+    color: #3E54AC;
     font-size: 25px;
 
 }

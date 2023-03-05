@@ -4,5 +4,6 @@ const router = express.Router()
 const userController=require('/Users/dattasandeepchoragudi/html/WebstormProjects/Genesis/controllers/user.js')
 
 router.get('/login',userController.getLogin)
-router.get('/policies',userController.getPolicies)
+router.get('/healthpolicies',userController.getHealthPolicies)
+router.get('/transportpolicies',userController.getVehiclePolicies)
 module.exports = router
