@@ -33,13 +33,14 @@ body{
     text-align: center;
     overflow: hidden;
     right: -90px;
+
 }
 
 .card{
     border-radius: 20px;
     border-style: solid;
 
-    border-color: #F56EB3;
+    border-color: #3E54AC;
     background-color: white;
     text-align: center;
     width:300px ;
@@ -70,12 +71,13 @@ body{
     height: 420px;
     width: 420px;
     margin: 0;
-    box-shadow: 0 0 60px 0 rgba(245, 110, 179, 1);
+    box-shadow: 0 0 60px 0 rgba(0, 191, 255, 1);
 }
 
 .item{
     flex:1 1 500px;
     margin:2px;
+    color: d;
 }
 
 .innernav{
@@ -87,7 +89,7 @@ body{
 .below{
    margin: 30px;
     border-radius: 40px;
-    background-color: #EA047E;
+    background-color: #3E54AC;
     color: white;
     width: 150px;
     height: 40px;

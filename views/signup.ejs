@@ -1,0 +1,54 @@
+
+
+<head>
+    <link rel="stylesheet" href="/css/signup.css">
+</head>
+<%- include('navbar.ejs') %>
+
+<div class='signupdiv'>
+    <form class="signup-form" action="/">
+        <img class="loginimg" src="css/okoklogo-transformed.ico">
+        <div>
+            <input id="name" type="text" class="signup-input" placeholder="Name">
+        </div>
+        <div>
+            <input id="email" type="text" class="signup-input" placeholder="Email">
+        </div>
+
+        <div class="agesex">
+            <div>
+                <input id="age" type="number" class="signup-age" min="18" placeholder="Age">
+            </div>
+            <div>
+                <select>
+                    <option>Sex</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
+            </div>
+        </div>
+
+
+
+        <div>
+            <input id="address" type="text" class="signup-input" placeholder="Address">
+        </div>
+        <div>
+            <input id="password" type="password" class="signup-input" placeholder="Password">
+        </div>
+        <div class="phone">
+            <div>
+                <input id="country-code" type="number" class="signup-age" placeholder="+91">
+            </div>
+            <div>
+                <input id="phone" type="number" class="signup-phn" placeholder="Phone Number">
+
+            </div>
+        </div>
+
+        <button class="submit" type="submit">
+            Submit
+        </button>
+    </form>
+
+</div>

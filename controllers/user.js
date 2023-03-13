@@ -2,6 +2,13 @@
 exports.getLogin =(req,res,next)=>{
     res.render('login',{})
 }
+exports.getSignup =(req,res,next)=>{
+    res.render('signup',{})
+}
+
+exports.getHome=(req,res,next)=>{
+    res.render('home',{})
+}
 arr=[{name:'insurance name',term:'x yrs',percentage:90+'%',cost:'f'},{name:'insurance name',term:'x yrs',percentage:90+'%',cost:'f'},
     {name:'insurance name',term:'x yrs',percentage:90+'%',cost:'f'},{name:'insurance name',term:'x yrs',percentage:90+'%',cost:'f'},{name:'insurance name',term:'x yrs',percentage:90+'%',cost:''},{name:'insurance name',term:'x yrs',percentage:90+'%',cost:''},{name:'insurance name',term:'x yrs',percentage:90+'%',cost:''},{name:'insurance name',term:'x yrs',percentage:90+'%',cost:''},{name:'insurance name',term:'x yrs',percentage:90+'%',cost:''},{name:'insurance name',term:'x yrs',percentage:90+'%',cost:''},{name:'insurance name',term:'x yrs',percentage:90+'%',cost:''},{name:'insurance name',term:'x yrs',percentage:90+'%',cost:''}]
 exports.getHealthPolicies=(req,res,next)=>{
@@ -9,4 +16,8 @@ exports.getHealthPolicies=(req,res,next)=>{
 }
 exports.getVehiclePolicies=(req,res,next)=>{
     res.render('transportpolicies',{array:arr})
+}
+
+exports.getDetails=(req,res,next)=>{
+    res.render('details',{})
 }

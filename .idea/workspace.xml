@@ -2,15 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3be042da-4e68-4c26-9a6a-7034ea0b4519" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/public/css/transportpolicies.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/transportpolicies.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/details.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/navbar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/signup.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/details.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/my-details.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/signup.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/healthpolicies.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/healthpolicies.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/policies.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/healthpolicies.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/userRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/userRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/healthpolicies.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/healthpolicies.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/home.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/home.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/login.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/login.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/navbar.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/navbar.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/policies.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/healthpolicies.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +56,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.14.0&quot;,
     &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.14.0&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/dattasandeepchoragudi/html/WebstormProjects/Genesis/public/css&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/dattasandeepchoragudi/html/WebstormProjects/Genesis&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -79,7 +85,12 @@
       <workItem from="1677791970439" duration="6000" />
       <workItem from="1677791999579" duration="1091000" />
       <workItem from="1677826689207" duration="894000" />
-      <workItem from="1678027178810" duration="306000" />
+      <workItem from="1678027178810" duration="2011000" />
+      <workItem from="1678206936506" duration="406000" />
+      <workItem from="1678284078204" duration="611000" />
+      <workItem from="1678689095427" duration="668000" />
+      <workItem from="1678713808901" duration="1432000" />
+      <workItem from="1678719276394" duration="12674000" />
     </task>
     <servers />
   </component>

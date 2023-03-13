@@ -1,0 +1,142 @@
+
+.signup-input{
+    width: 400px;
+    height: 50px;
+    border-radius: 100px;
+    border-style: solid;
+    border-color: #3E54AC;
+    font-size: 20px;
+    color: #3E54AC;
+    margin: 8px auto 8px auto;
+    animation: inputer 3s;
+}
+
+input:focus{
+    box-shadow: 0 0 10px deepskyblue;
+
+}
+
+
+.signup-age{
+    width: 100px;
+    height: 50px;
+    border-radius: 100px;
+    border-style: solid;
+    border-color: #3E54AC;
+    font-size: 20px;
+    color: #3E54AC;
+    animation: lilbtn 3s;
+}
+
+
+select{
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+    color: #3E54AC;
+    border-radius: 100px;
+    border-color: #3E54AC;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.loginimg{
+    width: 150px;
+    height: 150px;
+    animation: logo 3s;
+    margin:20px auto 40px auto;
+    animation: logo 3s;
+
+}
+.logo{
+    background-color: white;
+    border-radius: 100px;
+    margin-left: 20px;
+    text-align: center;
+    height: 70px;
+    width: 70px;
+
+}
+.signup-form{
+    height: 700px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+align-items: center;
+    background-color: rgba(236,242,255,0.9);
+    border-radius: 50px;
+    margin-top: 55px;
+
+}
+
+.signupdiv{
+    margin: 0 auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    height:800px;
+    align-items: center;
+}
+
+input::placeholder{
+    color: #3E54AC;
+    font-size: 20px;
+}
+
+.agesex{
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.signup-phn{
+    width: 200px;
+    border-radius: 100px;
+    height: 50px;
+    border-color: #3E54AC;
+    border-style: solid;
+    border-width: 2px;
+    animation: lilbtn 3s;
+    color: #3E54AC;
+    font-size: 20px;
+}
+
+.phone{
+    width: 400px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+::placeholder{
+    padding-left: 5px;
+}
+
+.submit {
+    background-color: #3E54AC;
+    color: white;
+    width: 180px;
+    height: 50px;
+    border-radius: 100px;
+    border-style: none;
+    margin: 20px auto 20px auto;
+    animation: btn 3s;
+}
+
+.submit:hover{
+    box-shadow: 0 0 20px deepskyblue;
+
+}
+
+button:active{
+    animation: click 1s;
+}
+
+
+
+
+
+
+
+
