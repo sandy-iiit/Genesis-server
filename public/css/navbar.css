@@ -105,6 +105,8 @@ a{
     border-radius: 20%;
     align-items: center;
     margin-top: 0;
+    animation: slideDown 300ms ease-in-out forwards
+
 }
 .menuitem{
     text-align: center;
@@ -112,7 +114,7 @@ a{
     margin: 0;
     width: 270px;
     height: 50px;
-    background-color: rgba(236,242,255,0.9);
+    background-color: rgba(192,212,250,0.7);
     border-style: none;
 }
 .menuitem:hover{
@@ -145,3 +147,16 @@ a{
     }
 
 }
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-60px)
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0)
+    }
+}
+
+

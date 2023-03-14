@@ -3,8 +3,8 @@
 <head>
     <link rel="stylesheet" href="/css/signup.css">
 </head>
+<body >
 <%- include('navbar.ejs') %>
-
 <div class='signupdiv'>
     <form class="signup-form" action="/">
         <img class="loginimg" src="css/okoklogo-transformed.ico">
@@ -38,7 +38,7 @@
         </div>
         <div class="phone">
             <div>
-                <input id="country-code" type="number" class="signup-age" placeholder="+91">
+                <input id="country-code" type="number" class="country-code" placeholder="+91">
             </div>
             <div>
                 <input id="phone" type="number" class="signup-phn" placeholder="Phone Number">
@@ -49,6 +49,10 @@
         <button class="submit" type="submit">
             Submit
         </button>
+        <div style="display: flex;justify-content: space-around;padding-bottom: 5px"><a >Already have an account?</a><a href="/login">Login</a></div>
     </form>
 
+    <button style="background-color: white;border-style: none"></button>
+
 </div>
+</body>
