@@ -8,14 +8,14 @@ body{
 
 }
 .signup-input{
-    width: 300px;
+    width: 130%;
     height: 40px;
     border-radius: 30px;
     border-style: none;
     border-color: #3E54AC;
     font-size: 20px;
     color: #3E54AC;
-    margin: 8px auto 8px auto;
+    margin: 4% auto 4% -12%;
     animation: inputer 3s;
 }
 
@@ -26,43 +26,48 @@ input:focus{
 
 
 .signup-age{
-    width: 90px;
+    width: 35%;
     height: 40px;
     border-radius: 30px;
     border-style: none;
     font-size: 20px;
     color: #3E54AC;
     animation: lilbtn 3s;
-    margin-left: 50px;
+    margin-left: 33%;
+    margin-top: 4%;
+    margin-bottom: 4%;
 
 }
 
 .country-code{
-    width: 90px;
+    width: 40%;
     height: 40px;
     border-radius: 30px;
     border-style: none;
     font-size: 20px;
     color: #3E54AC;
     animation: lilbtn 3s;
-    margin-left: 25px;
+    margin-left: 35%;
+    margin-top: 4%;
 }
 
 select{
-    width: 90px;
+    width: 60%;
     height: 40px;
     font-size: 20px;
     color: #3E54AC;
     border-radius: 30px;
     border-style: none;
     margin-right: 50px;
+    margin-top: 4%;
+    margin-bottom: 4%;
 }
 
 .loginimg{
-    width: 150px;
-    height: 150px;
+    width: 40%;
+    height: 40%;
     animation: logo 3s;
-    margin:20px auto 40px auto;
+    margin:5% auto 5% auto;
     animation: logo 3s;
 
 }
@@ -76,8 +81,8 @@ select{
 
 }
 .signup-form{
-    height: 600px;
-    width: 400px;
+    height: 100%;
+    width: 82%;
     display: flex;
     flex-direction: column;
 align-items: center;
@@ -92,8 +97,8 @@ align-items: center;
     margin: 5% auto 0 14%;
     display: flex;
     flex-direction: column;
-    width: 500px;
-    height:600px;
+    width: 35%;
+    height:100%;
     align-items: center;
 }
 
@@ -110,7 +115,7 @@ input::placeholder{
 }
 
 .signup-phn{
-    width: 180px;
+    width: 90%;
     border-radius: 30px;
     height: 40px;
     border-color: #3E54AC;
@@ -119,7 +124,8 @@ input::placeholder{
     animation: lilbtn 3s;
     color: #3E54AC;
     font-size: 20px;
-    margin-right: 20px;
+    margin-left: -17%;
+    margin-top: 4%;
 }
 
 .phone{
@@ -137,7 +143,7 @@ input::placeholder{
     background-color: #3E54AC;
     color: white;
     width: 180px;
-    height: 50px;
+    height: 60px;
     border-radius: 30px;
     border-style: none;
     margin: 20px auto 20px auto;

@@ -15,8 +15,8 @@ button{
     border-radius: 100px;
     margin-left: 20px;
     text-align: center;
-    height: 70px;
-    width: 70px;
+    height: 50%;
+    width: 50%;
 
 }
 
@@ -27,7 +27,7 @@ button{
     justify-content: space-between;
     align-items: center;
     align-content: space-between;
-    width: 400px;
+    width: 100%;
     position: relative;
 
 
@@ -41,8 +41,8 @@ button{
 
     border-radius: 40px;
 
-    width: 400px;
-    height: 500px;
+    width: 25%;
+    height: 60%;
     background-color: rgba(192,212,250,0.9);
     opacity: 1;
     margin-bottom: 35%;
@@ -51,13 +51,13 @@ button{
 
 input{
 
-    width: 300px;
+    width: 75%;
     height: 40px;
     border-style: none;
     border-color: #3E54AC;
     border-width: 2px;
     border-radius: 100px;
-    margin: 10px;
+    margin: 3%;
     animation: inputer 3s;
     font-size: 20px;
 
@@ -83,13 +83,13 @@ input:focus {
 ::placeholder{
 
     color: #3E54AC;
-    font-size: large;
+    font-size: 20px;
 padding-left: 5px;
 }
 
 .logbut{
 
-    width: 180px;
+    width: 45%;
     height: 40px;
     background-color: #3E54AC;
     border-radius: 100px;
@@ -102,10 +102,10 @@ padding-left: 5px;
 }
 
 .loginimg{
-    width: 150px;
-    height: 150px;
-    margin-top: 50px;
-    animation: logo 3s;
+    width: 50%;
+    height: 60%;
+    margin-top: 10%;
+    margin-bottom: 7%;
 }
 
 .logbut:active{
