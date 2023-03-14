@@ -1,9 +1,9 @@
 body{
-    background-color: #cccccc;
+    background-color: white;
 }
 .heading{
     font-family: "Apple Chancery";
-    background-color: #EA047E;
+    background-color: #F56EB3;
     color: white;
     border-radius: 100px;
     text-align: center;
@@ -24,25 +24,26 @@ body{
 }
 .container{
     border-radius: 20px;
-    background-color: #eeefff;
+    background-color: rgba(192,212,250,0.7);
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    width: 90%;
+    width: 87%;
     margin: 0;
     text-align: center;
     overflow: hidden;
-    right: -90px;
+    right: -9%;
+
 }
 
 .card{
     border-radius: 20px;
     border-style: solid;
 
-    border-color: #F56EB3;
+    border-color: #3E54AC;
     background-color: white;
     text-align: center;
-    width:300px ;
+    width:23% ;
     display: flex;
     margin: 50px 50px 50px 65px;
     height: 300px;
@@ -52,7 +53,7 @@ body{
 .button{
     width: 150px;
     height: 40px;
-    background-color: #EA047E;
+    background-color: #3E54AC;
     border-radius: 100px;
     border-style: none;
     color: whitesmoke;
@@ -62,20 +63,21 @@ body{
 
 .button:hover{
 
-    width: 200px;
+    width: 50%;
     height: 50px;
 }
 
 .card:hover{
-    height: 420px;
-    width: 420px;
-    margin: 0;
-    box-shadow: 0 0 60px 0 rgba(245, 110, 179, 1);
+    height: 400px;
+    width: 28%;
+    margin: 2%;
+    box-shadow: 0 0 60px 0 rgba(0, 191, 255, 1);
 }
 
 .item{
     flex:1 1 500px;
     margin:2px;
+    color: d;
 }
 
 .innernav{
@@ -87,7 +89,7 @@ body{
 .below{
     margin: 30px;
     border-radius: 40px;
-    background-color: #EA047E;
+    background-color: #3E54AC;
     color: white;
     width: 150px;
     height: 40px;
