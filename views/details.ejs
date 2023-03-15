@@ -6,22 +6,60 @@
 
 <div class="side-container">
     <div class="side-item">
-     <p>Details    </p>
+     <a href="/my-details"><p>Details</p></a>
     </div>
 
     <div class="side-item">
-      <p> Current policies</p>
+     <a><p> Current policies</p></a>
     </div>
 
     <div class="side-item">
-       <p>My Queries</p>
+       <a><p>My Queries</p></a>
     </div>
 
     <div class="side-item">
-      <p>Completed policies</p>
+     <a><p>Completed policies</p></a>
     </div>
 
     <div class="side-item">
-     <p>Settings</p>
+    <a><p>Settings</p></a>
     </div>
+</div>
+
+    <form class="detail-box">
+        <div class="detail-item">
+          <p class="label">Name</p>  <input class="input" name="name" value="<%=name%>"></input>
+        </div>
+        <div class="detail-item">
+            <p class="label">Email</p>   <input class="input" name="name" value="<%=email%>"></input>
+        </div>
+        <div class="detail-item">
+            <p class="label">Age</p>   <input class="input" type="number" name="name" value="<%=name%>"></input>
+        </div>
+        <div class="detail-item">
+            <p class="label">Sex</p>   <select class="input" name="name" value="<%=name%>">
+                <option class="option">Sex</option>
+                <option class="option">Male</option>
+                <option class="option">Female</option>
+            </select>
+        </div>
+        <div class="detail-item">
+            <p class="label">Address</p>   <textarea class="input address" name="name" value="<%=name%>"></textarea>
+        </div>
+        <div class="detail-item">
+            <p class="label">Phone</p>   <input class="input" type="number" name="name" value="<%=name%>"></input>
+        </div>
+        <div class="detail-item buttons">
+            <button class="btn1" type="submit">
+                Save
+            </button>
+            <button class="btn2">
+               <a href="/"> Change Password</a>
+            </button>
+        </div>
+    </form>
+
+<div class="heading">
+    <p style="padding: 5px">Your Profile</p>
+
 </div>

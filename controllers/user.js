@@ -19,5 +19,9 @@ exports.getVehiclePolicies=(req,res,next)=>{
 }
 
 exports.getDetails=(req,res,next)=>{
-    res.render('details',{})
+    res.render('details',{name:'Sandeep',email:'ishidoshuji@gmail.com'})
+}
+
+exports.getMyDetails=(req,res,next)=>{
+    res.render('my-details')
 }

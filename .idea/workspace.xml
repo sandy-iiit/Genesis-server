@@ -2,11 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3be042da-4e68-4c26-9a6a-7034ea0b4519" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/public/css/Invite-cuate.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/detailsbg.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/my-details.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/healthpolicies.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/healthpolicies.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/transportpolicies.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/transportpolicies.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/details.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/details.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/userRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/userRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/details.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/details.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/healthpolicies.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/healthpolicies.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/transportpolicies.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/transportpolicies.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/my-details.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/my-details.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,20 +43,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "javascript.nodejs.core.library.configured.version": "18.14.0",
-    "javascript.nodejs.core.library.typings.version": "18.14.0",
-    "last_opened_file_path": "/Users/dattasandeepchoragudi/html/WebstormProjects/Genesis/public/css",
-    "list.type.of.created.stylesheet": "CSS",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.14.0&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.14.0&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/dattasandeepchoragudi/html/WebstormProjects/Genesis/public/css&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public/css" />
@@ -82,7 +87,8 @@
       <workItem from="1678713808901" duration="1432000" />
       <workItem from="1678719276394" duration="13518000" />
       <workItem from="1678791436585" duration="2116000" />
-      <workItem from="1678793984739" duration="12757000" />
+      <workItem from="1678793984739" duration="14937000" />
+      <workItem from="1678870083035" duration="12245000" />
     </task>
     <servers />
   </component>
