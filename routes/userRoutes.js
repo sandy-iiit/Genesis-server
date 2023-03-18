@@ -11,4 +11,6 @@ router.get('/healthpolicies',userController.getHealthPolicies)
 router.get('/transportpolicies',userController.getVehiclePolicies)
 router.get('/details',userController.getDetails)
 router.get('/my-details',userController.getMyDetails)
+router.get('/change-password',userController.getPasswordChange)
+router.get('/my-policies',userController.getMyPolicies)
 module.exports = router

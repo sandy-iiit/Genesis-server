@@ -5,7 +5,7 @@
 <%- include('navbar.ejs') %>
 
 <div class="side-container">
-    <div class="side-item">
+    <div class="side-item" >
      <a href="/my-details"><p>Details</p></a>
     </div>
 
@@ -18,13 +18,35 @@
     </div>
 
     <div class="side-item">
-     <a><p>Completed policies</p></a>
+     <a href="/my-policies"><p>Completed policies</p></a>
     </div>
 
     <div class="side-item">
     <a><p>Settings</p></a>
     </div>
 </div>
+
+<!--<div  id="side-container" style="display: none">-->
+<!--    <div class="side-item2" >-->
+<!--        <a href="/my-details"><p>Details</p></a>-->
+<!--    </div>-->
+
+<!--    <div class="side-item"2>-->
+<!--        <a><p> Current policies</p></a>-->
+<!--    </div>-->
+
+<!--    <div class="side-item2">-->
+<!--        <a><p>My Queries</p></a>-->
+<!--    </div>-->
+
+<!--    <div class="side-item2">-->
+<!--        <a href="/my-policies"><p>Completed policies</p></a>-->
+<!--    </div>-->
+
+<!--    <div class="side-item2">-->
+<!--        <a><p>Settings</p></a>-->
+<!--    </div>-->
+<!--</div>-->
 
     <form class="detail-box">
         <div class="detail-item">
@@ -54,12 +76,63 @@
                 Save
             </button>
             <button class="btn2">
-               <a href="/"> Change Password</a>
+               <a href="/change-password"> Change Password</a>
             </button>
         </div>
     </form>
 
+<form class="small-box" style="display: none">
+    <div class="detail-item">
+        <p class="label">Name</p>  <input class="input" name="name" value="<%=name%>"></input>
+    </div>
+    <div class="detail-item">
+        <p class="label">Email</p>   <input class="input" name="name" value="<%=email%>"></input>
+    </div>
+    <div class="detail-item">
+        <p class="label">Age</p>   <input class="input" type="number" name="name" value="<%=name%>"></input>
+    </div>
+    <div class="detail-item">
+        <p class="label">Sex</p>   <select class="input" name="name" value="<%=name%>">
+            <option class="option">Sex</option>
+            <option class="option">Male</option>
+            <option class="option">Female</option>
+        </select>
+    </div>
+    <div class="detail-item">
+        <p class="label">Address</p>   <textarea class="input address" name="name" value="<%=name%>"></textarea>
+    </div>
+    <div class="detail-item">
+        <p class="label">Phone</p>   <input class="input" type="number" name="name" value="<%=name%>"></input>
+    </div>
+    <div class="detail-item buttons">
+        <button class="btn1" type="submit">
+            Save
+        </button>
+        <button class="btn2">
+            <a href="/change-password"> Change Password</a>
+        </button>
+    </div>
+</form>
+<button id="menu-but" class="menu-but" onclick="func()">Menu</button>
 <div class="heading">
     <p style="padding: 5px">Your Profile</p>
 
 </div>
+
+<script>
+    let box = document.getElementById('side-container');
+    let but=document.getElementById('menu-but')
+    let flag=0
+    const func= ()=> {
+        if(flag===0){
+            flag=1
+            but.style.backgroundColor='red'
+            box.style.display='block'
+            box.style.zIndex=999;
+        }
+        else if(flag===1){
+            box.style.display='none'
+            flag=0;
+        }
+    }
+</script>

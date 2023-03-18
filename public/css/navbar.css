@@ -31,9 +31,9 @@ a{
     justify-content: space-between;
     align-items: center;
     background-position: top;
-    /*border-radius: 100px;*/
     position: sticky;
     z-index: 1;
+    overflow: hidden;
 
 }
 .innernav{
@@ -159,4 +159,213 @@ a{
     }
 }
 
+
+.navburger{
+    display:flex-end;
+    margin: 10px;
+    padding: 0px;
+    border-radius: 20%;
+    background-color:#3E54AC;
+    color: white;
+    box-shadow: none;
+    border-style: none;
+}
+.navburger img{
+    object-fit: cover;
+    width:35px;
+
+    height:35px;
+
+}
+
+
+.res_menu{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #3E54AC;
+    visibility: hidden;
+    position: relative;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.res_menu .navbut{
+    text-align: center;
+    vertical-align: center;
+    margin: 0;
+    border-color: rgba(62,84,172,0.4);
+    width: 270px;
+    height: 50px;
+
+}
+.res_menu .closebutt{
+    position: absolute;
+    top: 0px;
+    right: 20px;
+    background: #3E54AC;
+    color: white;
+    z-index: 2;
+    font-weight: bolder;
+    border-style: none;
+    font: 500;
+}
+.closebutt:hover{
+    font:900;
+}
+
+@media screen and (max-width:700px) {
+    .main-buttons{
+        visibility: hidden;
+        width:0px;
+
+    }
+    .nav{
+        display: flex;
+        flex-direction: row;
+    }
+    .nav1{
+        display: flex-end;
+        margin-right: 10px;
+    }
+    .navburger{
+        visibility: visible;
+    }
+}
+
+/* For screens smaller than 768px (mobile devices) */
+@media only screen and (max-width: 1250px) {
+
+    .logo {
+        text-align: center;
+    }
+
+
+    .main-buttons {
+        display: none;
+    }
+
+    #menu-button {
+        display: block;
+    }
+
+
+    #menu {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+
+
+    #menu-item {
+        text-align: center;
+        padding: 10px;
+        border-top: 1px solid gray;
+    }
+
+}
+
+@media(max-width: 700px){
+    .nav {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        object-fit: cover;
+    }
+
+    .logo {
+        margin-bottom: 10px;
+        margin-left: 0px;
+    }
+
+    .main-buttons {
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+
+    .nav1 {
+        flex-direction: row;
+        object-fit: cover;
+        margin-top: 0px;
+        justify-content:  flex-end;
+        margin-left: 5px;;
+    }
+
+    .profile {
+        margin-top: 10px;
+    }
+
+    .menu {
+        display: block;
+    }
+
+}
+@media only screen and (min-width: 1080px) and (max-width: 1243px){
+    .nav {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .main-buttons {
+        margin-right: 20px;
+    }
+
+    .nav1 {
+        margin-left: 20px;
+    }
+
+    .profile {
+        margin-left: 20px;
+    }
+
+    .menu {
+        display: none;
+    }
+    .navburger{
+
+        visibility: visible;
+    }
+}
+@media(min-width: 1224px){
+    .nav {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .main-buttons {
+        margin-right: 50px;
+    }
+
+    .nav1 {
+        margin-left: 50px;
+    }
+
+    .profile {
+        margin-left: 50px;
+    }
+
+    .menu {
+        display: none;
+    }
+    .navburger{
+
+        visibility: hidden;
+    }
+
+}
+
+@media (max-width: 1228px) {
+    .show-menu {
+        display: block;
+    }
+    .main-buttons {
+        display: none;
+    }
+}
 
