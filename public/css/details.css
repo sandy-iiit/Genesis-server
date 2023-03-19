@@ -81,6 +81,7 @@ a{
     border-style: none;
     font-size: 18px;
     color: #3E54AC;
+    padding-left: 10px;
 }
 
 .label{
@@ -177,7 +178,7 @@ body {
     margin-top: -88vh;
 }
 .detail-box{
-    margin-left: 42vh;
+    margin-left: 43vh;
     margin-top: -89vh;
     width: 43vh;
     height:75vh;
@@ -211,7 +212,7 @@ body {
     body {
         background-image: url("invite-cuate.svg");
         background-repeat: no-repeat;
-        background-size: 110vh 130vh;
+        background-size: 110vh 140vh;
         height: 100vh;
     }
     .heading{
@@ -219,24 +220,29 @@ body {
         margin-top: -76vh;
     }
     .detail-box{
-        margin-left: 35vh;
-        margin-top: -94vh;
-        width: 38vh;
-        height:64vh;
+        margin-left: 37vh;
+        margin-top: -90vh;
+        width: 36vh;
+        height:66vh;
+        border-radius: 30px;
+        justify-content: space-evenly;
 
     }
     .input{
         width: 24vh;
-        height: 5vh;
+        height: 3vh;
     }
     .btn1{
-        height: 5vh;
+        height: 4vh;
         width: 8vh;
         font-size: 15px;
+        margin-bottom: 5px;
+
     }
     .btn2{
-        height: 5vh;
+        height: 4vh;
         width: 20vh;
+        margin-bottom: 5px;
 
     }
     .btn2>a{
@@ -257,37 +263,25 @@ body {
         display: block;
     }
     .side-container{
-        background-color: white;
+        width: 30vh;
     }
-    .side-item{
-        display: none;
-    }
-    .menu-but{
-        display: block;
-        width: 10vh;
-        height: 5vh;
-        border-style: none;
-        background-color: #3E54AC;
-        border-radius: 30px;
-       margin-left: 80%;
-        margin-top: -89vh;
-        color: white;
-    }
+
     .detail-box{
-        margin-left: 20vh;
+        margin-left: 40vh;
         margin-top: -100vh;
         width: 43vh;
         height:75vh;
     }
     .heading{
-        margin-left: 20vh;
-        margin-top: -100vh;
+        margin-left: 50vh;
+        margin-top: -90vh;
         background-color: #3E54AC;
-        color: #3E54AC;
+        color: white;
     }
+
 }
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 620px){
     body{
         background-image: none;
         height: 80vh;
@@ -296,73 +290,22 @@ body {
         display: block;
     }
     .side-container{
-        background-color: white;
-    }
-    .side-item{
-        display: none;
-    }
-    .menu-but{
-        display: block;
-        width: 10vh;
-        height: 5vh;
-        border-style: none;
-        background-color: #3E54AC;
-        border-radius: 30px;
-        margin-left: 80%;
-        margin-top: -89vh;
-        color: white;
-    }
-    .menu-but:hover{
-background-color: white;
-        color: #3E54AC;
-        cursor: pointer;
-    }
+width: 20vh;    }
     .detail-box{
-        margin-left: 10vh;
+        margin-left: 24vh;
         margin-top: -100vh;
         width: 43vh;
         height:75vh;
     }
     .heading{
-        margin-left: 20vh;
-        margin-top: -100vh;
+        margin-left: 35vh;
+        margin-top: -90vh;
         background-color: #3E54AC;
-        color: #3E54AC;
-    }
-    #side-container{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width:34vh;
-        height: 150vh;
-        background-color: rgba(236,242,255,0.9);
-        z-index: -1;
+        color: white;
     }
 
 
-    .side-item2{
-        height: 120vh;
-        width: 28vh;
-        color: #3E54AC;
-        padding-left:20px;
-        display: block;
-    }
 
-    .side-item2>p{
-        font-size: 130%;
-        width: 90%;
-        height: 6%;
-        border-color: #3E54AC;
-
-    }
-
-    .side-item2:hover{
-
-        border-style: solid;
-        border-width: 2px;
-        width:90% ;
-        height: 8%;
-    }
 }
 
 

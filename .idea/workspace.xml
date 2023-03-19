@@ -2,23 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3be042da-4e68-4c26-9a6a-7034ea0b4519" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/public/css/my-policies.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/policies.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/settings.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/change-password.ejs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/my-policies.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/green-tick.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/my-queries.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/payment.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/payment.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/query.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/transport-form.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/write-query.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/my-queries.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/payment.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/transport-form.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/write-query.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/database.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/details.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/details.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/my-details.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/change-password.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/my-policies.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/my-policies.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/navbar.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/userRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/userRoutes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/details.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/details.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/sign.ejs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/my-policies.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/my-policies.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/navbar.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/navbar.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,13 +49,16 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2MPDfvpT1vggK6QvWwWW7euM2ka" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -100,7 +107,8 @@
       <workItem from="1678870083035" duration="16044000" />
       <workItem from="1678944592298" duration="18399000" />
       <workItem from="1679070322721" duration="8104000" />
-      <workItem from="1679120224778" duration="8241000" />
+      <workItem from="1679120224778" duration="32436000" />
+      <workItem from="1679218620751" duration="17607000" />
     </task>
     <servers />
   </component>
@@ -117,5 +125,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

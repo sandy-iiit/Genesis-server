@@ -1,0 +1,144 @@
+<head>
+    <link rel="stylesheet" href="/css/payment.css">
+</head>
+<%- include('navbar.ejs')%>
+<body>
+
+<div class="wrap" id="wrap">
+
+
+</div>
+
+    <form class="detail-box2" id="form2">
+            <div class="detail-item2">
+                <p class="label2">CustomerId</p>  <input class="input2" name="customerid"></input>
+            </div>
+            <div class="detail-item2">
+                <p class="label2">InsuranceId</p>   <input class="input2" name="insuranceid" ></input>
+            </div>
+            <div class="detail-item2">
+                <p class="label2">Card number</p>   <input class="input2" type="number" name="cardnumber" ></input>
+            </div>
+            <div class="detail-item2">
+                <p class="label2">Amount</p>  <input class="input2" type="number" name="amount"></input>
+            </div>
+        <button id="btn3" class="btn3" type="submit" >
+            Confirm Payment
+        </button>
+    </form>
+<form class="detail-box" id="form">
+    <div class="detail-item">
+        <p class="label">CustomerId</p>  <input class="input" name="customerid"></input>
+    </div>
+    <div class="detail-item">
+        <p class="label">InsuranceId</p>   <input class="input" name="insuranceid" ></input>
+    </div>
+    <div class="detail-item">
+        <p class="label">Card number</p>   <input class="input" type="number" name="cardnumber" ></input>
+    </div>
+    <div class="detail-item">
+        <p class="label">Amount</p>  <input class="input" type="number" name="amount"></input>
+    </div>
+
+    <button id="btn" class="btn2" type="submit" >
+     Confirm Payment
+    </button>
+</form>
+
+<div class="white">
+
+<!--    <div class="loader">-->
+<!--        <div class="inner one"></div>-->
+<!--        <div class="inner two"></div>-->
+<!--        <div class="inner three"></div>-->
+<!--    </div>-->
+    <div id="loader" class="loadingio-spinner-eclipse-de1c3j8todo" style="display: none"><div class="ldio-biyyklphs79">
+            <div>
+            </div>
+        </div></div>
+
+    <img src="/css/green-tick.png" id="green-tick" style="display: none">
+</div>
+<p id="success" style="display: none">Payment Successfull</p>
+
+<a href="/" id="home"><button id="but-home">Back to Home</button></a>
+
+</body>
+
+<script>
+    const loader=document.getElementById('loader');
+
+    const form=document.getElementById('form')
+    const form2=document.getElementById('form2')
+
+    const tick=document.getElementById('green-tick')
+
+    const text=document.getElementById('success')
+    const body=document.getElementById('wrap')
+    const input=document.getElementsByClassName('input')
+    const input2=document.getElementsByClassName('input2')
+    const btn=document.getElementById('btn')
+    const btn3=document.getElementById('btn3')
+    const label=document.getElementsByClassName('label')
+    const label2=document.getElementsByClassName('label2')
+    form.addEventListener('submit',(event)=>{
+        event.preventDefault();
+        loader.style.display='block'
+        form.style.backgroundColor='#F0EEED'
+        for (let i = 0; i < input.length; i++) {
+
+                input[i].style.borderStyle='solid'
+
+                input[i].disabled = true;
+
+            }
+        for (let i = 0; i < label.length; i++) {
+
+            label[i].style.color='#cccccc'
+
+        }
+        btn.disabled='true'
+        btn.style.color='#cccccc'
+        btn.style.boxShadow='none'
+        btn.style.borderStyle='solid'
+        setTimeout(()=>{
+            loader.style.display='none'
+            tick.style.display='block'
+            text.style.display='block'
+
+
+        },4000)
+    })
+
+    form2.addEventListener('submit',(event)=>{
+        event.preventDefault();
+        loader.style.display='block'
+        form2.style.backgroundColor='#F0EEED'
+        for (let i = 0; i < input2.length; i++) {
+
+            input2[i].style.borderStyle='solid'
+
+            input2[i].disabled = true;
+
+        }
+        for (let i = 0; i < label.length; i++) {
+
+            label2[i].style.color='#cccccc'
+
+        }
+        btn3.disabled='true'
+        btn3.style.color='#cccccc'
+        btn3.style.boxShadow='none'
+        btn3.style.borderStyle='solid'
+        btn3.style.backgroundColor='white';
+        setTimeout(()=>{
+            loader.style.display='none'
+            tick.style.display='block'
+            text.style.display='block'
+
+
+        },4000)
+    })
+
+
+</script>

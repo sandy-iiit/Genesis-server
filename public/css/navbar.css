@@ -1,4 +1,6 @@
-
+body{
+    margin: 0;
+}
 button{
     font-size: larger;
 }
@@ -34,6 +36,7 @@ a{
     position: sticky;
     z-index: 1;
     overflow: hidden;
+
 
 }
 .innernav{

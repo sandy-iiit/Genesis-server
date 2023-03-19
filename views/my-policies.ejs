@@ -24,9 +24,11 @@
                 <%=arr[i].Duration%>        </div>
             <div class="inner-item">
                 <%=arr[i].Installment%>  </div>
-            <button class="but">
-                Explore Plan
-            </button>
+            <%let c='';let d=''%>
+            <%if(str=='Explore Plan'){c='Explore Plan';b='/'} else if(str=='Pay Installments'){c='Pay Now',d='/payment'}%>
+           <a href=<%=d%>><button class="but">
+                   <%=c%>
+               </button></a>
         </div>
         </div>
 
