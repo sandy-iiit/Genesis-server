@@ -55,3 +55,16 @@ We welcome contributions to the Genesis Insurance Website. If you would like to 
 •	Wait for a reviewer to approve your changes before they are merged into the main repository.
 Contact Information:
 If you have any questions or feedback about the Genesis Insurance Website, please feel free to contact us at  manumanohar62405@gmail.com and +919618293860.
+
+Contribution to the website:
+Ch V S Datta Sandeep:
+Login page,Sign up page,Payments page,Details page,All the forms regarding the insurances and their UI Pages related to the policies of particular user and their backend,Pages related to queries and backend,routing framework,Backend related to the login and signup and navbar for desktop.
+G Manohar:
+Home page ,About Us,Services,policies,contact us,footer and their responsiveness,respective routing ,and also contributed to the responsiveness of the payment,login,signup,change-password pages. 
+K Pranav:
+Transport policies,Life insurance policies,Buy-policy pages,respective routing and their responsiveness.
+V Aditya Chakravarthy:
+Health policies,buy-health policy page,respective routing and their responsiveness.
+V Praneeth:
+Contributed to some of the forms related to the policies and their UI.
+
