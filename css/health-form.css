@@ -1,0 +1,167 @@
+
+.car{
+    width: 40%;
+    height: 60%;
+    margin-top: 10%;
+    animation: slide 2s ;
+    animation-timing-function: linear;
+
+}
+
+.form{
+    width: 45%;
+    height: 110%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    background-color: rgba(192,212,250,0.9);
+    justify-content: space-evenly;
+    border-radius: 30px;
+    overflow-x: hidden;
+    margin-left: auto;
+    margin-right: 10%;
+    margin-top: -30%;
+    padding: 30px;
+}
+
+.row1{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.row2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.row13{
+    border-radius: 30px;
+    border-style: none;
+    width: 30%;
+    height: 30px;
+    padding-left: 10px;
+
+}
+
+.subrow{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.inner-row1{
+    border-radius: 30px;
+    border-style: none;
+    width: 40%;
+    height: 30px;
+    padding-left: 10px;
+
+
+}
+
+.inner-row2{
+    border-radius: 30px;
+    border-style: none;
+    width: 120px;
+    height: 30px;
+    padding-left: 10px;
+
+}
+
+select > .inner-row2{
+    width: 80px;
+}
+
+.label{
+    font-size: 20px;
+    color: #3E54AC;
+    padding-right: 20px;
+    padding-left: 10px;
+}
+
+.button{
+    width: 20%;
+    margin-left: 40%;
+    height: 40px;
+    border-radius: 30px;
+    border-style: none;
+    background-color: #3E54AC;
+    color: white;
+}
+input[type=file]::file-selector-button{
+    border-radius: 30px;
+    border-style: none;
+    width: 80px;
+    height: 30px;
+    background-color: white;
+}
+
+.health_{
+    width: 90%;
+    height: 40px;
+    border-style: none;
+    border-radius: 30px;
+    background-color: white;
+    padding-left: 55px;
+    margin-left: 5%;
+}
+
+
+
+::placeholder{
+    color: #3E54AC;
+    font-size: 14px;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: none;
+    height: 100%;
+
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    height: 5px;
+    border-radius: 3px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: none;
+}
+
+@keyframes slide {
+    0%{
+        margin-left: -100%;
+    }
+    20% { margin-left: -80%; }
+
+    40%{
+        margin-left: -60%;
+    }
+    60%{
+        margin-left: -40%;
+    }
+    80%{
+        margin-left: -20%;
+    }
+    100%{
+        margin-left: 0%;
+    }
+
+
+
+}
+
+
+
+
+
