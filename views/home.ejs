@@ -1,9 +1,349 @@
 <head>
-    <link rel="stylesheet" href="/css/login.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+          crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<!--  <link rel="stylesheet" href="/css/login.css">-->
+  <link rel="stylesheet" href="/css/home.css">
+
 </head>
 <%- include('navbar.ejs') %>
-<div class="home" >
-    <img class="loginimg" src="css/okoklogo-transformed.ico">
+
+<div class="topcontainer">
+
+
+  <div class="carousel">
+    <div class="slides">
+      <div class="slide">
+        <img
+                src="photos/images_pexels_com-pexels-photo-7688374.png"
+                alt="Slide 1">
+        <div class="caption">
+          <h2>HAPPY LIFE</h2>
+          <p>insurance is not just a product, it's a promise. A promise that in your time of need, you won't have to
+            face it alone</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="https://images.pexels.com/photos/268941/pexels-photo-268941.jpeg?auto=compress&cs=tinysrgb&w=600"
+             alt="Slide 2">
+        <div class="caption">
+          <h2>Protect Yourself</h2>
+          <p>Take Insurance,Do Nothing</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img
+                src="https://images.pexels.com/photos/7163953/pexels-photo-7163953.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                alt="Slide 3">
+        <div class="caption">
+          <h2> Fun Fact</h2>
+          <p>Fun is like life insurance,the older you get the more it costs</p>
+        </div>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="prev">&#10094;</button>
+      <button class="next">&#10095;</button>
+    </div>
+
+  </div>
 
 </div>
 
+<div class="fullwidth-block" data-bg-color="#f1f1f1">
+  <div class="container">
+    <h2 class="section-title">GENESIS OFFERS</h2>
+    <small class="section-subtitle">enjoy the Safety and Happiness</small>
+
+    <div class="row">
+      <div class="col-md-3">
+        <div class="offer caption-top">
+          <img src="photos/images_pexels_com-pexels-photo-799443.png"
+               alt="offer 1">
+          <div class="caption">
+            <h3 class="offer-title">Happy Life</h3>
+            <small>insurance make you beautiful</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="offer caption-bottom">
+              <img src="photos/images_pexels_com-pexels-photo-7163953.png"
+                   alt="offer 2">
+              <div class="caption">
+                <h3 class="offer-title">Be Happy</h3>
+                <small>life is beautiful</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="offer caption-bottom">
+              <img src="photos/offer-wide@2x.jpg"
+                   alt="offer 3">
+              <div class="caption">
+                <h3 class="offer-title">Claim life insurance</h3>
+                <small> make yourself beautiful and better</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="offer caption-bottom">
+              <img src="photos/offer-2@2x.jpg"
+                   alt="offer 2">
+              <div class="caption">
+                <h3 class="offer-title">Happy Future</h3>
+                <small>protect your dears one's</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="offer caption-bottom">
+              <img src="photos/offer-3@2x.jpg"
+                   alt="offer 2">
+              <div class="caption">
+                <h3 class="offer-title">Curabitur vehicula</h3>
+                <small>Conubia nostra per inceptos</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="offer caption-bottom">
+              <img src="photos/images_pexels_com-pexels-photo-725255.png"
+                   alt="offer 2">
+              <div class="caption">
+                <h3 class="offer-title">Curabitur vehicula</h3>
+                <small>Conubia nostra per inceptos</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div c>
+
+</div>
+
+
+<div class="carousel1 carousel">
+  <div class="slides slides1">
+    <div class="slide">
+      <img style="height:450px;width: 100%;object-fit: cover;"src="photos/media_istockphoto_com-survey-with-question-insured-yes-or-no-message-at-notepad-at-yellow-and-blue-table-insurance.png"
+           alt="Slide 1">
+      <div class="ager">
+        <div class="captionagent caption" style="  background-color: #000000c4;">
+          <h2 style="text-align: center;">Find An Agent</h2><br>
+          <!-- <p>insurance is not just a product, it's a promise. A promise that in your time of need, you won't have to
+          face it alone</p> -->
+          <form class="agentform">
+
+            <input type="text" id="name" class="aget" placeholder="Name" name="name" required><br>
+
+            <input type="email" id="email" class="aget" placeholder="Email" name="email" required><br>
+
+            <button type="submit">submit</button>
+          </form>
+
+        </div>
+        <!-- <div class="captionagent caption">
+          <h2 style="text-align: center;">Find An Agent</h2><br>
+          <p>insurance is not just a product, it's a promise. A promise that in your time of need, you won't have to
+          face it alone</p> -->
+        <!-- <form class="agentform">
+
+          <input type="text" id="name" class="aget" placeholder="Name" name="name" required><br>
+
+          <input type="email" id="email" class="aget" placeholder="Email" name="email" required><br>
+
+          <button type="submit">submit</button>
+        </form> -->
+        <!--
+                </div>   -->
+      </div>
+    </div>
+    <div class="slide">
+      <img src="https://images.pexels.com/photos/268941/pexels-photo-268941.jpeg?auto=compress&cs=tinysrgb&w=600"
+           alt="Slide 2">
+      <div class="caption">
+        <h2>Starry Night</h2>
+        <p>A breathtaking view of the stars on a clear night.</p>
+      </div>
+    </div>
+    <div class="slide">
+      <img
+              src="https://images.pexels.com/photos/7163953/pexels-photo-7163953.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              alt="Slide 3">
+      <div class="captions">
+        <h2>Cityscape</h2>
+        <p>A panoramic view of the city skyline at sunset.</p>
+      </div>
+    </div>
+
+  </div>
+  <!-- <div class="controls">
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+  </div> -->
+
+</div>
+</div>
+
+
+
+<div class="maincardrr">
+  <h2 style="text-align:center" style="color:#3E54AC">Insurane starting at ... <span class="rupee">&#8377;</span>2/day</h2>
+  <div class="cardsinsideme">
+
+
+
+    <div class="card1">
+      <img src="https://staticimg.insurancedekho.com/seo/common/seoicon_save.svg">
+      <h4 style="color:#3E54AC">Tax benefits</h4>
+      <span>up to 1,50,000</span><br>
+      <span>tax-free death benefits</span>
+    </div>
+    <div class="card1">
+      <img src="https://staticimg.insurancedekho.com/seo/common/seoicon_HealthInsSupport.svg">
+      <h4 style="color:#3E54AC">claim support</h4>
+      <span>Everyday Everyminute</span><br>
+      <span>providing best resources</span>
+    </div>
+    <div class="card1">
+      <img src=" https://staticimg.insurancedekho.com/seo/common/seoicon_healthSmile.svg">
+      <h4 style="color:#3E54AC">45 Lac+</h4>
+      <span>Happy Customers</span>
+    </div>
+    <div class="card1">
+      <img src="https://staticimg.insurancedekho.com/seo/common/seoicon_save.svg">
+      <h4 style="color:#3E54AC">Coverage limits</h4>
+      <span>High Coverage Limits</span><br>
+      <span>Limit of liability</span>
+    </div>
+
+    <div class="card1image">
+      <img src="https://www.insurewinsure.com/assets/images/life-insurance-1.png">
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+<div class="fullwidth-block">
+  <div class="container">
+    <h2 class="section-title">Latest news</h2>
+    <div class="row news-list">
+      <div class="col-md-4">
+        <div class="news">
+          <figure><img
+                    src="photos/featured-image-1@2x.jpg"
+                    alt=""></figure>
+
+          <h2 class="entry-title"><a href="#">Life Insurers' business growth muted in February</a></h2>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="news">
+          <figure><img
+                    src="photos/featured-image-2@2x.jpg"
+                    alt=""></figure>
+
+          <h2 class="entry-title"><a href="#">Refuse fuel to uninsured vehicles, suggest insurers
+              Mar 10, 2023</a></h2>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="news">
+          <figure><img
+                    src="photos/featured-image-3@2x.jpg"
+                    alt=""></figure>
+
+          <h2 class="entry-title"><a href="#">Govt unlikely to roll back tax plan on high-value life insurance</a></h2>
+        </div>
+      </div>
+    </div> <!-- .row -->
+  </div> <!-- .container -->
+</div> <!-- .latest-news-section -->
+<%- include('footer.ejs') %>
+<script>
+
+  const carousel = document.querySelector('.carousel');
+
+  const slides = carousel.querySelector('.slides');
+  const prevBtn = carousel.querySelector('.prev');
+  const nextBtn = carousel.querySelector('.next');
+
+  let currentSlide = 0;
+
+  function nextSlide() {
+    currentSlide++;
+    if (currentSlide >= slides.children.length) {
+      currentSlide = 0;
+    }
+    moveSlides();
+  }
+
+  function prevSlide() {
+    currentSlide--;
+    if (currentSlide < 0) {
+      currentSlide = slides.children.length - 1;
+    }
+    moveSlides();
+  }
+
+
+  function moveSlides() {
+    slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+  }
+  prevBtn.addEventListener('click', prevSlide);
+  nextBtn.addEventListener('click', nextSlide);
+
+
+  // Get the carousel elements
+  const carousel1 = document.querySelector('.carousel1');
+  const slides1 = carousel1.querySelector('.slides1');
+  const slide1 = slides1.querySelectorAll('.slide')[0];
+
+  // Set the initial slide index
+  let currentSlide1 = 0;
+
+  // Function to move to the next slide
+  function nextSlide1() {
+    if (currentSlide1 === slide1.length - 1) {
+      currentSlide1 = 0;
+    } else {
+      currentSlide1++;
+    }
+    moveSlide1();
+  }
+  function prevSlide1() {
+    if (currentSlide1 === 0) {
+      currentSlide1 = slide1.length - 1;
+    } else {
+      currentSlide1--;
+    }
+    moveSlide1();
+  }
+
+  function moveSlide1() {
+    slides1.style.transform = `translateX(-${currentSlide1 * slide1[0].offsetWidth}px)`;
+  }
+
+  carousel1.querySelector('.next1').addEventListener('click', nextSlide1);
+  carousel1.querySelector('.prev1').addEventListener('click', prevSlide1);
+
+
+</script>

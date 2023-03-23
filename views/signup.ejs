@@ -1,26 +1,27 @@
-
-
 <head>
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/signup.css">
 </head>
-<body >
+<body class="bodyclass">
 <%- include('navbar.ejs') %>
 <div class='signupdiv'>
-    <form class="signup-form" action="/">
+    <form id="form" class="signup-form" action="/signup" method="post">
         <img class="loginimg" src="css/okoklogo-transformed.ico">
+        <p style="color: red"><%=text%></p>
         <div>
-            <input id="name" type="text" class="signup-input" placeholder="Name">
+            <input name="name" id="name" type="text" class="signup-input" placeholder="Name">
         </div>
         <div>
-            <input id="email" type="text" class="signup-input" placeholder="Email">
+            <input name="email" id="email" type="text" class="signup-input" placeholder="Email">
         </div>
 
         <div class="agesex">
             <div>
-                <input id="age" type="number" class="signup-age" min="18" placeholder="Age">
+                <input name="age" id="age" type="number" class="signup-age" min="18" placeholder="Age">
             </div>
             <div>
-                <select>
+                <select name="sex">
                     <option>Sex</option>
                     <option>Male</option>
                     <option>Female</option>
@@ -31,28 +32,57 @@
 
 
         <div>
-            <input id="address" type="text" class="signup-input" placeholder="Address">
+            <input name="address" id="address" type="text" class="signup-input" placeholder="Address">
         </div>
         <div>
-            <input id="password" type="password" class="signup-input" placeholder="Password">
+            <input name="password" id="password" type="password" class="signup-input" placeholder="Password">
         </div>
         <div class="phone">
             <div>
                 <input id="country-code" type="number" class="country-code" placeholder="+91">
             </div>
             <div>
-                <input id="phone" type="number" class="signup-phn" placeholder="Phone Number">
-
+                <input name="phone" id="phone" type="number" class="signup-phn" placeholder="Phone Number">
             </div>
         </div>
 
-        <button class="submit" type="submit">
+        <button class="submit" type="submit" >
             Submit
         </button>
         <div style="display: flex;justify-content: space-around;padding-bottom: 5px"><a >Already have an account?</a><a href="/login">Login</a></div>
     </form>
 
-    <button style="background-color: white;border-style: none"></button>
+<!--    <button style="background-color: white;border-style: none"></button>-->
 
 </div>
+<%- include('footer.ejs') %>
 </body>
+
+<script>
+
+        const passwordInput = document.getElementById('password');
+        const submitButton = document.querySelector('button[type="submit"]');
+        const form=document.getElementById('form')
+        // Add an event listener to the password input field to validate on input
+        form.addEventListener('onsubmit', () => {
+        const passwordValue = passwordInput.value;
+            console.log(passwordValue)
+            const regex =" /^(?=.[a-z])(?=.[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/";
+
+            const isValid = regex.test(passwordValue); // Check if password matches regex pattern
+            console.log(isValid)
+        // If password is valid, remove any error messages and enable submit button
+        if (isValid) {
+        passwordInput.setCustomValidity('');
+    } else {
+            alert('Password must contain at least one uppercase letter, one lowercase letter, and one number, and be at least 8 characters long.')
+        // If password is invalid, display error message and disable submit button
+        passwordInput.setCustomValidity('Password must contain at least one uppercase letter, one lowercase letter, and one number, and be at least 8 characters long.');
+    }})
+
+
+        // Add a minimum length requirement to the password input field
+        passwordInput.setAttribute('minlength', '8');
+
+</script>
+

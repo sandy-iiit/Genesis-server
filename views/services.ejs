@@ -1,0 +1,155 @@
+<head>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/services.css">
+</head>
+<%- include('navbar.ejs') %>
+    <div class="querygen">
+        <div class="imaw">
+
+            <img src="photos/Insurance-bro.svg" alt="qutt">
+        </div>
+        <div class="qrygen">
+            <h2>Grab a Quote</h2>
+            <form class="quoteform">
+                <input type="text" placeholder="Name" name="quotnam" id="quotnam">
+                <input type="email" placeholder="Email" name="quotnam" id="quotnam">
+
+                <input type="text" placeholder="Insurancet type" name="quotnam" id="quotnam">
+                <input type="text" placeholder="Zip Code" name="quotnam" id="quotnam">
+                <input type="text" placeholder="age" name="quotnam" id="quotnam">
+                <input type="date" style="color:#3E54AC;  font-size: 20px;" placeholder="Date of Birth" name="quotnam"
+                    id="quotnam">
+                <input type="text" placeholder="coverage limit" name="quotnam" id="quotnam">
+                <button type="submit">submit</button>
+            </form>
+        </div>
+    </div>
+    <div class="writequery">
+        <div class="qrygen qrygen1">
+            <h2>Drop a Review</h2>
+            <h2></h2>
+            <form class="quoteform">
+                <input type="text" placeholder="Name" name="quotnam" id="quotnam">
+                <input type="text" placeholder="Email" name="quotnam" id="quotnam">
+                <textarea name="queryy" id="" cols="3" rows="4" placeholder="Write your review"></textarea>
+                <button type="submit">submit</button>
+            </form>
+        </div>
+        <div class="queryman">
+            <img src="photos/Man thinking-rafiki.svg" alt="">
+        </div>
+    </div>
+
+    <div class="faqs">
+        <div class="faqdeesc">
+
+            <img src="photos/FAQs-amico.svg">
+        </div>
+        <div class="questr">
+            <br><br>
+            <div class="layout">
+                <div class="accordion">
+                    <div class="accordion__question">
+                        <p> What is insurance? </p>
+
+                    </div>
+                    <div class="accordion__answer">
+                        <p>Answer1</p>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion__question">
+                        <p> Why do I need insurance?</p>
+                    </div>
+                    <div class="accordion__answer">
+                        <p>
+                            Answer 2
+                        </p>
+                    </div>
+                </div>
+                <div class="accordion">
+                    <div class="accordion__question">
+                        <p> How does insurance work?</p>
+                    </div>
+                    <div class="accordion__answer">
+                        <p>
+                            Answer 3
+                        </p>
+                    </div>
+                </div>
+                <div class="accordion">
+                    <div class="accordion__question">
+                        <p> How do I choose the right insurance coverage for me? </p>
+                    </div>
+                    <div class="accordion__answer">
+                        <p>
+                            Answer 4
+                        </p>
+                    </div>
+                </div>
+                <div class="accordion">
+                    <div class="accordion__question">
+                        <p> What factors affect the cost of insurance? </p>
+                    </div>
+                    <div class="accordion__answer">
+                        <p>
+                            Answer 5
+                        </p>
+                    </div>
+                </div>
+                <div class="accordion">
+                    <div class="accordion__question">
+                        <p> How long does it take to process an insurance claim?</p>
+                    </div>
+                    <div class="accordion__answer">
+                        <p>
+                            Answer 6
+                        </p>
+                    </div>
+                </div>
+                <div class="accordion">
+                    <div class="accordion__question">
+                        <p> What is the difference between comprehensive and collision coverage?</p>
+                    </div>
+                    <div class="accordion__answer">
+                        <p>
+                            Answer 7
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="social-icons">
+                <div>
+                    <h3>follow us on :</h3>
+                </div>
+                <a href="#" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook-f"></i></a>
+                <a href="#" class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>
+                <a href="#" class="btn btn-social-icon btn-instagram"><i class="fa fa-instagram"></i></a>
+                <a href="#" class="btn btn-social-icon btn-youtube"><i class="fa fa-youtube"></i></a>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+    
+
+    <%- include('footer.ejs') %>
+        <script>
+            let answers = document.querySelectorAll(".accordion");
+            answers.forEach((event) => {
+                event.addEventListener("click", () => {
+                    if (event.classList.contains("active")) {
+                        event.classList.remove("active");
+                    } else {
+                        event.classList.add("active");
+                    }
+                });
+            });
+        </script>

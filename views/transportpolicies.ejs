@@ -1,52 +1,105 @@
 <html>
 <head>
-    <link rel="stylesheet" href="/css/transportpolicies.css">
-    <link rel="stylesheet" href="/css/navbar.css">
-
+    <link rel="stylesheet" href="/css/trans2.css">
+<!--    <link rel="stylesheet" href="/css/navbar.css">-->
 </head>
 <body>
 <%- include('navbar.ejs') %>
-<div><br>
+<div class="intro"><br>
     <br>
-    <h1 id="heading" class="heading">Our Health Insurance Policies: Protecting Your Health and Finances</h1>
-    <p class="matter">
+    <h1 class="heading">Motor Insurance</h1>
+    <h2 id = "subheading" class="subheading">Buy/Renew Motor Insurance Policy Online Instantly</h2>
+    <h3 class="qno" ><strong> What is Motor Insurance ? </strong> </h3>
+    <div class="introflex">
+        <p class="matter" style="background-color: rgba(192,212,250,0.7);">
+            Motor Insurance, also known as auto insurance, is a type of vehicle insurance policy that protects you and your car / bike from any risks and damages caused
+            from accidents, thefts or natural disasters. So, you will be financially secure in case of any losses that may be incurred because of any such unforeseen
+            circumstances. In addition to that, you will also be protected from third-party liabilities.
+        </p>
+        <img class="introimg" src="/images/Vehicle Sale-cuate.png" alt="Motor Insurance">
+    </div>
+    </div>
+<h2 class="subheading">Types of Insurances We Offer :</h2>
 
-        At Genesis Insurances Pvt Ltd, we understand that your health and well-being are among your top priorities. However, we also know that unexpected medical expenses can take a toll on your finances and cause undue stress. That's why we offer a range of health insurance policies that are designed to provide comprehensive coverage and financial security in the face of unforeseen health issues.
-
-        Our health insurance policies are tailored to meet the unique needs of individuals, families, and businesses. Whether you're looking for basic coverage or a comprehensive plan that includes additional benefits such as dental and vision coverage, we have a policy that will suit your requirements. Our policies provide coverage for hospitalization, surgery, diagnostic tests, ambulance services, and more.
-
-        At Genesis Insurances, we believe in transparency and simplicity. That's why our policies are easy to understand, and we provide clear information on the coverage, benefits, and exclusions. We also offer a range of customization options so that you can choose the coverage that best fits your needs and budget.
-
-        In addition to our comprehensive health insurance policies, we also offer a range of other insurance products, including life insurance, travel insurance, and home insurance. Our team of experienced professionals is always available to help you choose the right policy and answer any questions you may have.
-
-        At Genesis Insurances, we are committed to providing our customers with the best possible service and support. We understand that health insurance can be a complex topic, and we are here to guide you every step of the way. Contact us today to learn more about our health insurance policies and how we can help protect your health and finances.</p>
+<h3 class="qno"><strong>Third-Party Liability</strong></h3>
+<div class="type five">
+    <p class="matter5">
+        <strong>Third-party Car Insurance</strong> in motor insurance refers to the legal and financial responsibility of the policyholder for any damage, injury or loss caused to a third-party in an
+        accident involving the policyholder's vehicle. In other words, if you are at fault in an accident, your insurance policy will cover the damages and compensation
+        to the other party involved in the accident.<br>
+        <i><strong>Mandatory for every vehicle by law of Govt</strong></i>
+    </p>
+    <img src="/images/tpl.png" class="tplimg">
 </div>
-<div class="container">
+
+<h3 class="qno"> <strong> Own Damage Stand Alone Cover</strong></h3>
+<div class="type one">
+    <p class="matter1">
+        <strong>Own Damage Stand Alone Cover</strong> is a type of motor insurance policy that covers the damage to your own vehicle, regardless of who is at fault for the accident. With an Own Damage Stand Alone Cover, you can purchase coverage that specifically
+    protects your vehicle from damages caused by <i><strong> accidents, natural disasters, theft, fire </strong></i>  and other perils.
+    This policy can be beneficial for those who own an old or used vehicle or who have a low-value car,as it may be less expensive than other policies.
+    </p>
+<!--    <img class="standaloneimg1" src="/images/Car-standalone.png" alt="car crash ">-->
+    <img class="standaloneimg2" src="/images/care-got-fire.png" alt="car on fire">
+</div>
+<h3 class="qno"><strong>  Personal Injury Protection (PIP)</strong></h3>
+<div class="type two">
+<P class="matter2">
+    <strong>Personal Injury Protection (PIP)</strong> is a type of car insurance coverage that pays for medical expenses, lost wages, and other expenses related to injuries sustained in a car accident.<br>
+
+    1)<strong> Medical expenses</strong>: PIP can pay for medical expenses related to injuries sustained in a car accident, including hospitalization, surgery, rehabilitation, and other medical treatments.<br>
+
+    2)<strong>Lost wages</strong> : PIP can provide compensation for lost wages if you are unable to work due to injuries sustained in a car accident.<br>
+
+    3)<strong>Funeral expenses</strong>: PIP may cover the cost of funeral expenses if someone is killed in a car accident.<br>
+
+    <strong>  Other benefits</strong> : PIP may cover other expenses related to injuries sustained in a car accident, such as childcare or housekeeping services.
+</P>
+    <img class="pipimg" src="/images/injured-man.png" alt="injured man">
+</div>
+
+<h3 class="qno">Comprehensive Motor Insurance</h3>
+<div class="type four">
+    <p class="matter4">
+        <strong>Comprehensive motor insurance</strong>, also known as "fully comprehensive insurance," is a type of car insurance policy that provides the widest range of
+        coverage for your vehicle. This policy not only covers third-party liabilities but also covers damage to your own vehicle from various causes.
+        Comprehensive motor insurance typically covers:<br>
+
+       <strong>1) Third-party liabilities: </strong>  This includes damage to other vehicles, property, or injuries to other people in an accident caused by you.<br>
+       <strong>2)Own damage: </strong>  This includes damage to your own vehicle, whether it's caused by an accident, theft, fire, natural disasters, or other perils.<br>
+        <strong>3)Personal accident cover:</strong>   This includes coverage for injuries sustained by you or your passengers in an accident.<br>
+        <strong>4)Add-on covers:</strong> You can purchase additional coverage such as engine protection, zero depreciation cover, roadside assistance, and more.<br>
+        <i> Comprehensive motor insurance provides the most extensive protection for your vehicle and can give you peace of mind while driving.</i>
+    </p>
+    <img src="/images/compinc.png" alt="comping" class="compimg">
+</div>
+
+<div class="container12">
     <%for(let i=0;i<array.length-1;i++){%>
 
-    <div class="card">
-       <div class="item">
+    <div class="card12">
+       <div class="item12">
           <h1><%=array[i].name%></h1>
        </div>
-       <div class="item">
+       <div class="item12">
            <h2><%=array[i].term%></h2>
        </div>
-       <div class="item">
+       <div class="item12">
           <h2><%=array[i].percentage%></h2>
        </div>
-       <div class="item">
-           <h2><%=array[i].cost%></h2>
+       <div class="item12">
+           <h2><%=array[i].IDV%></h2>
        </div>
-        <div class="item">
-            <button class="button"> Select </button>
+        <div class="item12">
+            <a href="/buy-policy"><button class="button">Select</button></a>
         </div>
-
    </div>
 <%}%>
 </div>
 <div>
     <a href="#nav"><button class="below">Back To Top</button></a>
-
 </div>
+<%- include('footer.ejs') %>
+
 </body>
 </html>

@@ -4,23 +4,42 @@
 </head>
 
 
-<div class="nav" id="nav">
+<div class="nav navstick" id="nav">
     <div class="innernav">
-    <div class="logo" >
-        <img class="logotop" src="css/okoklogo-transformed.ico">
-    </div>
-    <div class="main-buttons">
-        <a href="/"><button id="navbut" class="navbut">Home</button></a>
-        <a><button id="navbut" class="navbut">About Us</button></a>
-        <a><button id="navbut" class="navbut">Services</button></a>
-        <a href="/"><button id="navbut" class="navbut">Policies</button></a>
-    </div>
+        <div class="logo" >
+            <img class="logotop" src="css/okoklogo-transformed.ico">
+        </div>
+        <div class="main-buttons">
+            <a href="/"> <button style="font-size: larger;"id="navbut" class="navbut">Home</button></a>
+            <a href="/aboutus"><button style="font-size: larger;"id="navbut" class="navbut">About Us</button></a>
+            <a href="/services"><button style="font-size: larger;"id="navbut" class="navbut">Services</button></a>
+            <a href="/policies"><button style="font-size: larger;"id="navbut" class="navbut">Policies</button></a>
+        </div>
     </div>
 
     <div class="nav1">
-       <a href="/login"> <button id="navbut" class="navbut">Login</button></a>
-       <a href="/signup"> <button id="navbut" class="navbut" href="/signup">Signup</button></a>
-        <img id="profile" class="profile" src="/css/profile.gif">
+        <a><button id="burger" class="navburger "><img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/hamburger-menu-1667904-2039427.png?f=avif&w=512"></button></a>
+<!--        <a href="/login"><button style="font-size: larger;"id="navbut" class="navbut">Login</button></a>-->
+<!--        <a href="/signup"><button style="font-size: larger;"id="navbut" class="navbut">Signup</button></a>-->
+<!--        <img id="profile" class="profile" src="/css/profile.gif">-->
+        <%if(!login){%>
+            <a href="/login"> <button id="navbut" class="navbut">Login</button></a>
+            <a href="/signup"> <button id="navbut" class="navbut" href="/signup">Signup</button></a>
+            <img style="background-color: #3E54AC" id="profile" class="profile" src="/css/saver.png">
+
+        <%}%>
+        <%if(login){%>
+            <a href="/logout"> <button id="navbut" class="navbut">Logout</button></a>
+
+            <a href="/details"> <img id="profile" class="profile" src="/css/profile.gif"></a>
+        <%}%>    </div>
+    <div class="res_menu">
+        <button style="font-size: larger;"id="closemebutt" class="closebutt">&times;</button>
+       <a href="/"> <button style="font-size: larger;"id="navbut" class="navbut">Home</button></a>
+       <a href="/aboutus"> <button style="font-size: larger;"id="navbut" class="navbut">About Us</button></a>
+        <a href="/services"><button style="font-size: larger;"id="navbut" class="navbut">Services</button></a>
+       <a href="/policies"> <button style="font-size: larger;"id="navbut" class="navbut">Policies</button></a>
+
     </div>
 
 </div>
@@ -48,9 +67,9 @@
     <button id="menuitem" class="menuitem">
         <p>Info</p>
     </button>
-    <button id="menuitem" class="menuitem">
-        <p>Logout</p>
-    </button>
+    <a href="/logout"> <button id="menuitem" class="menuitem">
+       <p>Logout</p>
+    </button></a>
 </div>
 <script>
     let image = document.getElementById('profile');
@@ -58,16 +77,32 @@
     let div = document.getElementById('menu');
     let nav=document.getElementById('nav');
     let flag=0
-    image.addEventListener('click', function() {
-        if(flag===0){
-            flag=1
-            div.style.display = 'flex';
-            nav.style.position='relative'
-            div.style.position='absolute';
-            div.style.zIndex=9999
-        }else if(flag===1){
-            div.style.display = 'none'
-            flag=0;
-        }
-       })
+    // image.addEventListener('click', function() {
+    //     if(flag===0){
+    //         flag=1
+    //         div.style.display = 'flex';
+    //         // nav.style.position='relative'
+    //         div.style.position='absolute';
+    //         div.style.zIndex=9999
+    //     }else if(flag===1){
+    //         div.style.display = 'none'
+    //         flag=0;
+    //     }
+    // })
+
+    const burgerBtn = document.querySelector("#burger");
+    const menuOptions = document.querySelector(".res_menu");
+    const closeit = document.querySelector('.closebutt')
+    burgerBtn.addEventListener('click',()=>
+    {
+        menuOptions.style.visibility='visible';
+        menuOptions.style.zIndex='9900';
+
+    })
+
+    closeit.addEventListener('click',()=>{
+        menuOptions.style.visibility='hidden';
+    })
 </script>
+
+

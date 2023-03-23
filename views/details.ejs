@@ -1,68 +1,73 @@
-
 <head>
     <link rel="stylesheet" href="/css/details.css">
 </head>
 <%- include('navbar.ejs') %>
+<div class="resdivv">
+    <div class="side-container">
+        <div class="side-item" >
+            <a href="/my-details"><button class="det">Details</button></a>
+        </div>
 
-<div class="side-container">
-    <div class="side-item" >
-     <a href="/my-details"><p>Details</p></a>
+        <div class="side-item">
+            <a href="/current-policies"><button  class="det"> Current policies</button></a>
+        </div>
+
+        <div class="side-item">
+            <a href="/my-queries"><button  class="det">My Queries</button></a>
+        </div>
+
+        <div class="side-item">
+            <a href="/my-policies"><button  class="det">Completed policies</button></a>
+        </div>
+        <div class="side-item">
+            <a href="/write-query"><button  class="det">Ask query</button></a>
+        </div>
+
+        <div class="side-item">
+            <a><button  class="det">Settings</button></a>
+        </div>
     </div>
 
-    <div class="side-item">
-     <a href="/current-policies"><p> Current policies</p></a>
-    </div>
+    <div class="divdetailbox">
+        <form class="detail-box" >
+            <p style="text-align:center"><h3 class="hidemeok">YOUR PROFILE</h3></p><br>
+            <div class="detail-item">
+                <p class="label">Name</p>  <input class="input" name="name" value="<%=name%>"></input>
+            </div>
+            <div class="detail-item">
+                <p class="label">Email</p>   <input class="input" name="name" value="<%=email%>" disabled></input>
+            </div>
+            <div class="detail-item">
+                <p class="label">Age</p>   <input class="input" type="number" name="name" value="<%=age%>"></input>
+            </div>
+            <div class="detail-item">
+                <p class="label">Sex</p>   <select class="input" name="name" value="<%=sex%>">
+                    <option class="option">Sex</option>
+                    <option class="option">Male</option>
+                    <option class="option">Female</option>
+                </select>
+            </div>
+            <div class="detail-item">
+                <p class="label">Address</p>   <input class="input address" name="name" value="<%=address%>"></input>
+            </div>
+            <div class="detail-item">
+                <p class="label">Phone</p>   <input class="input" type="number" name="name" value="<%=phone%>"></input>
+            </div>
+            <div class="detail-item buttons">
+                <button class="btn1">
+                    Save
+                </button>
 
-    <div class="side-item">
-       <a href="/my-queries"><p>My Queries</p></a>
-    </div>
+                    <a href="/change-password">Change Password</a>
 
-    <div class="side-item">
-     <a href="/my-policies"><p>Completed policies</p></a>
-    </div>
 
-    <div class="side-item">
-    <a><p>Settings</p></a>
+            </div>
+        </form>
     </div>
 </div>
-
-
-    <form class="detail-box">
-        <div class="detail-item">
-          <p class="label">Name</p>  <input class="input" name="name" value="<%=name%>"></input>
-        </div>
-        <div class="detail-item">
-            <p class="label">Email</p>   <input class="input" name="name" value="<%=email%>"></input>
-        </div>
-        <div class="detail-item">
-            <p class="label">Age</p>   <input class="input" type="number" name="name" value="<%=name%>"></input>
-        </div>
-        <div class="detail-item">
-            <p class="label">Sex</p>   <select class="input" name="name" value="<%=name%>">
-                <option class="option">Sex</option>
-                <option class="option">Male</option>
-                <option class="option">Female</option>
-            </select>
-        </div>
-        <div class="detail-item">
-            <p class="label">Address</p>   <textarea class="input address" name="name" value="<%=name%>"></textarea>
-        </div>
-        <div class="detail-item">
-            <p class="label">Phone</p>   <input class="input" type="number" name="name" value="<%=name%>"></input>
-        </div>
-        <div class="detail-item buttons">
-            <button class="btn1" type="submit">
-                Save
-            </button>
-            <button class="btn2">
-               <a href="/change-password"> Change Password</a>
-            </button>
-        </div>
-    </form>
-
 <div class="heading">
     <p style="padding: 5px">Your Profile</p>
 
 </div>
-
-
+<div style="margin-top: 80%"></div>
+<%- include('footer.ejs') %>

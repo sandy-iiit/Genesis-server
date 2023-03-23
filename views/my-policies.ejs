@@ -5,12 +5,12 @@
 
 <%- include('navbar.ejs') %>
 <!--<div class="wrap">-->
-<div class="container">
+<div class="container2">
     <div class="heading-wrap"><p class="heading">Your Completed Policies</p></div>
 
     <% for(let i=0;i<arr.length;i++){%>
     <%let a='';let b='img'%>
-<%if(arr[i].type==='motor'){a='css/car.svg';b='car-img'} else if(arr[i].type==='life'){a='css/life-insurance.png'} else if(arr[i].type==='health'){a='css/health-insurance.png'}%>
+<%if(arr[i].type==='motor'){a='images/car.svg';b='car-img'} else if(arr[i].type==='life'){a='images/life-insurance.png'} else if(arr[i].type==='health'){a='images/health-insurance.png'}%>
     <div class="items">
 
         <img class=<%=b%> src= <%=a%>>
@@ -38,4 +38,4 @@
 </div>
 
 <!--</div>-->
-
+<%-include('footer.ejs')%>

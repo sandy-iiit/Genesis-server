@@ -1,0 +1,491 @@
+body{
+    background-color: white;
+    font-family: sans-serif;
+    overflow-x: hidden;
+}
+.heading{
+
+
+    background-color: dodgerblue;
+    color: white;
+    border-radius: 20px;
+    text-align: center;
+    margin: auto 5% auto 5%;
+    z-index: -1;
+     font-size: 1.5em;
+
+
+}
+
+.subheads
+{
+    
+margin-left: 100px;
+
+
+}
+
+.Image1
+{
+    margin-top: 5vh;
+    position: relative;
+    width: 45vh;
+    height: 30vh;
+    border-radius: 50vh;
+}
+
+.Image2
+{
+    position: relative; 
+    margin: 20vh 15vh 15vh 15vh;
+    width: 10%;
+   
+}
+
+.img2
+{
+    border-radius: 10vh;
+}
+
+
+.matterbox
+{
+    height: auto;
+    margin: 1vh 10vh 10vh 10vh;
+    background-color:whitesmoke;
+    border:2px solid maroon ;
+    border-radius: 50px;
+    display: flex;
+    
+}
+
+.matter
+{
+    /* width: 75%; */
+    position: relative;
+    /* margin-right: 30px; */
+    margin:100px 100px 75px 100px;
+    font-size: 20px;
+    padding: 1.5%;
+    line-height: 50px;
+    background-color: rgba(255,0,0,0.3);
+    border-radius: 3vh;
+}
+
+
+.matterbox2
+{
+  height: auto;
+    margin: 1vh 10vh 10vh 10vh;
+    background-color:whitesmoke;
+    border:2px solid purple ;
+    border-radius: 50px;
+
+
+}
+.disclaimer
+{
+    font-size: 2.5vh;
+    margin: 10vh;
+    color:black;
+    border-radius: 6vh;
+    background-color: rgba(0,255,0,0.3);
+    text-align: center;
+    /* margin: 100px 125px 100px 125px; */
+    padding: 5px;
+}
+
+.factors
+{
+    font-size: 2.5vh;
+    margin: 10vh 10vh 10vh 10vh;
+    color:black;
+    border-radius: 6vh;
+    background-color: rgba(0,100,255,0.3);
+    text-align: center;
+    /* margin: 100px 125px 100px 125px; */
+    padding: 5px;
+
+
+}
+
+.detailmatter
+{
+    text-align: center;
+    padding: 5vh;
+
+}
+
+.keyfeatures
+{
+    padding:5vh;
+    font-size: 1.2em;
+}
+
+.keyterms
+{
+    padding: 5vh;
+
+}
+.conditionhead
+{
+    background-color: aquamarine;
+    text-align: center;
+    font-size: x-large;
+    margin: 5vh 2px 5vh 2px;
+
+
+}
+.conditionbody
+{
+    padding: 5vh;
+}
+
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.3s;
+    cursor: pointer;
+    border-radius: 2vh;
+}
+
+.button1 {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.button2 {
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+}
+
+.button2:hover {
+    background-color: #008CBA;
+    color: white;
+}
+
+.button3 {
+    background-color: white;
+    color: black;
+    border: 2px solid #f44336;
+}
+
+.button3:hover {
+    background-color: #f44336;
+    color: white;
+}
+
+.button5 {
+    background-color: white;
+    color: black;
+    border: 2px solid  rgb(182, 36, 255);
+}
+
+.button5:hover {
+    background-color:  rgb(182, 36, 255);
+    color: white;
+}
+.info{
+    margin: 5vh 5vh 5vh 5vh ;
+    border-style: solid;
+    border-width: 2px;
+    border-color: maroon;
+    border-radius: 20px;
+}
+
+.accordion {
+    margin: 10vh;
+    width: 130vh;
+  }
+
+.otherben
+{
+    margin: 10vh;
+    width: 130vh;
+  
+
+}
+  .accordion input {
+    display: none;
+  }
+  .box {
+    position: relative;
+    background: white;
+      height: 70px;
+
+      transition: all .15s ease-in-out;
+  }
+  .box::before {
+      content: '';
+      position: absolute;
+      display: block;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      pointer-events: none;
+      box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+  }
+  header.box1 {
+    background: royalblue;
+    z-index: 100;
+    cursor: initial;
+    box-shadow: 0 -1px 0 #e5e5e5,0 0 2px -2px rgba(0,0,0,.12),0 2px 4px -4px rgba(0,0,0,.24);
+  }
+  header.box2 {
+    background: darkmagenta;
+    z-index: 100;
+    cursor: initial;
+    box-shadow: 0 -1px 0 #e5e5e5,0 0 2px -2px rgba(0,0,0,.12),0 2px 4px -4px rgba(0,0,0,.24);
+  }
+  header.box3 {
+    background: darkgreen;
+    z-index: 100;
+    cursor: initial;
+    box-shadow: 0 -1px 0 #e5e5e5,0 0 2px -2px rgba(0,0,0,.12),0 2px 4px -4px rgba(0,0,0,.24);
+  }
+  header .box-title {
+    margin: 0;
+    /* font-weight: 2px; */
+    font-style:oblique;
+    font-size: 16pt;
+    color: white;
+    cursor: initial;
+  }
+
+  .coveragetitle
+  {
+    font-style: italic; 
+  }
+
+  .benefittitle
+  {
+    font-style: italic;
+
+  }
+  
+  .box-title {
+    font-size:large;
+    /* width: calc(100% - 40px); */
+    height: 64px;
+    line-height: 64px;
+    padding: 0 20px;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;
+  }
+  .box-content {
+    width: calc(100% - 45px);
+    padding: 30px 20px;
+    font-size: 11pt;
+    color: rgba(0,0,0,.54);
+    display: none;
+  }
+  .box-close {
+    position: absolute;
+    height: 64px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    display: none;
+  }
+  input:checked + .box {
+    height: auto;
+    margin: 16px 0;
+      box-shadow: 0 0 6px rgba(0,0,0,.16),0 6px 12px rgba(0,0,0,.32);
+  }
+  input:checked + .box .box-title {
+    border-bottom: 1px solid rgba(0,0,0,.18);
+  }
+  input:checked + .box .box-content,
+  input:checked + .box .box-close {
+    display: inline-block;
+  }
+  .arrows section .box-title {
+    padding-left: 44px;
+    width: calc(100% - 64px);
+  }
+  .arrows section .box-title:before {
+    position: absolute;
+    display: block;
+    content: '\203a';
+    font-size: 18pt;
+    left: 20px;
+    top: -2px;
+    transition: transform .15s ease-in-out;
+    color: rgba(0,0,0,.54);
+  }
+  input:checked + section.box .box-title:before {
+    transform: rotate(90deg);
+  }
+
+  .benefits
+  {
+    margin: 5vh;
+    padding:1vh
+  }
+
+  .backtohealth
+  {
+    border:0.2vh solid red;
+    border-radius: 40vh;
+    /* border-style: groove; */
+    background-color: orange;
+    padding: 2vh;
+  }
+
+
+  
+@media screen and (max-width: 1200px) 
+{
+    .heading .subheads
+    {
+        padding: 5%;
+        min-height: 0.2vh;
+        text-align: center;
+    }
+    .Image1
+    {
+        display: none;
+    }
+    .Image2
+    {
+        display: none;
+    }
+    .matterbox
+    {
+        height: auto;
+        display: block;
+        padding: 1vh;
+        max-width: 88%;
+        margin: auto;
+        display: block;
+        flex-direction:column;
+        /* max-height: 20vh; */
+    }
+    h1{
+        font-size: xxx-large;
+    }
+    h2{
+        font-size: xx-large;
+    }
+  
+    .matter{
+        padding: 4%;
+        margin: 0%;
+        font-size: xx-large;
+ 
+      }y
+
+      .matterbox2
+      {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .disclaimer
+      {
+
+        margin: 3vh;
+
+      }
+
+      .factors
+      {
+        margin: 3vh;
+      }
+
+
+      .box
+      {
+        width: 65vh;
+        height: 10vh;
+
+      }
+
+      .accordion,.otherben{
+        width: auto;
+      }
+
+      .box-title,
+      .box-content,
+      .otherben,
+      .accordion
+      {
+        margin: 1vh;
+      }
+      .box-content
+      {
+        margin: 2vh;
+      }
+
+      .box,.box-content,.box-title,.box-title:before,.box::before,.box-close
+      {
+        width:auto;
+      }
+      .box,.box-title,.box-content
+      {
+        height: auto;
+        line-height: 30px;
+        padding: 0%;
+      }
+      .backtohealth
+      {
+        display: none;
+      }
+}
+
+
+@media screen and (max-width:500px){
+    
+  body,p,h2,h1{
+      font-size: small;
+      line-height: 15px;
+  }
+  .subheads{
+      font-size: large;
+      text-align: center;
+      margin: 0;
+  }
+  .genimage{display: none;
+  }
+  .matter{
+      border-radius: 15%;
+  }
+  .backtohealth{
+    display: none;
+  }
+  .matterbox2{
+    margin: 2%;
+    }
+    .accordion,.otherben{
+      width: auto;
+    }
+
+    .box,.box-content,.box-title,.box-title:before,.box::before,.box-close
+    {
+      width:auto;
+    }
+    .box,.box-title,.box-content
+    {
+      height: auto;
+      line-height: 30px;
+      padding: 0%;
+      font-size: 0.9em;
+    }
+}

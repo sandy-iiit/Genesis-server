@@ -1,31 +1,33 @@
 <head>
     <link rel="stylesheet" href="/css/payment.css">
 </head>
-<%- include('navbar.ejs')%>
 <body>
-
+<div style=" background-color: #3E54AC;
+    height: 90px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-position: top;
+    /*border-radius: 100px;*/
+    position: sticky;
+    z-index: 1;">
+    <div style=" background-color: white;
+    border-radius: 100px;
+    margin-left: 20px;
+    text-align: center;
+    height: 70px;
+    width: 70px;" class="logo" >
+        <img style=" width: 3.75rem;
+    height: 3.75rem;
+    margin: auto auto auto auto ;" class="logotop" src="css/okoklogo-transformed.ico">
+    </div>
+</div>
 <div class="wrap" id="wrap">
-
 
 </div>
 
-    <form class="detail-box2" id="form2">
-            <div class="detail-item2">
-                <p class="label2">CustomerId</p>  <input class="input2" name="customerid"></input>
-            </div>
-            <div class="detail-item2">
-                <p class="label2">InsuranceId</p>   <input class="input2" name="insuranceid" ></input>
-            </div>
-            <div class="detail-item2">
-                <p class="label2">Card number</p>   <input class="input2" type="number" name="cardnumber" ></input>
-            </div>
-            <div class="detail-item2">
-                <p class="label2">Amount</p>  <input class="input2" type="number" name="amount"></input>
-            </div>
-        <button id="btn3" class="btn3" type="submit" >
-            Confirm Payment
-        </button>
-    </form>
+
 <form class="detail-box" id="form">
     <div class="detail-item">
         <p class="label">CustomerId</p>  <input class="input" name="customerid"></input>
@@ -39,25 +41,28 @@
     <div class="detail-item">
         <p class="label">Amount</p>  <input class="input" type="number" name="amount"></input>
     </div>
+    <div class="detail-item">
+        <p class="label">Password</p>  <input class="input" type="password" name="password"></input>
+    </div>
 
     <button id="btn" class="btn2" type="submit" >
-     Confirm Payment
+        Confirm Payment
     </button>
 </form>
 
 <div class="white">
 
-<!--    <div class="loader">-->
-<!--        <div class="inner one"></div>-->
-<!--        <div class="inner two"></div>-->
-<!--        <div class="inner three"></div>-->
-<!--    </div>-->
+    <!--    <div class="loader">-->
+    <!--        <div class="inner one"></div>-->
+    <!--        <div class="inner two"></div>-->
+    <!--        <div class="inner three"></div>-->
+    <!--    </div>-->
     <div id="loader" class="loadingio-spinner-eclipse-de1c3j8todo" style="display: none"><div class="ldio-biyyklphs79">
             <div>
             </div>
         </div></div>
 
-    <img src="/css/green-tick.png" id="green-tick" style="display: none">
+    <img src="/images/green-tick.png" id="green-tick" style="display: none">
 </div>
 <p id="success" style="display: none">Payment Successfull</p>
 
@@ -87,11 +92,11 @@
         form.style.backgroundColor='#F0EEED'
         for (let i = 0; i < input.length; i++) {
 
-                input[i].style.borderStyle='solid'
+            input[i].style.borderStyle='solid'
 
-                input[i].disabled = true;
+            input[i].disabled = true;
 
-            }
+        }
         for (let i = 0; i < label.length; i++) {
 
             label[i].style.color='#cccccc'
