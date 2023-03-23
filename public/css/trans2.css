@@ -1,0 +1,267 @@
+body{
+    background-color: white;
+    margin: 0;
+    overflow-x: hidden;
+    width: 100%;
+}
+a{
+    text-decoration: none;
+}
+.heading{
+     font-family: "Apple Chancery";
+     background-color: #3e54ac;
+     color: white;
+     border-radius: 100px;
+     text-align: center;
+     margin: auto 5% auto 5%;
+     z-index: -1;
+     font-size: xxx-large;
+ }
+.subheading{
+    text-align: center;
+    font-size: xx-large;
+}
+.qno{
+    font-size: x-large;
+    margin: auto 5% auto 10%;
+    text-align: left;
+}
+.matter{
+    margin:5% auto 5% 5%;
+    font-size: 30px;
+    width: 90%;
+    line-height: 50px;
+    font-family: Avenir;
+    background-color: #F9F9F9;
+    z-index: -1;
+    border-radius: 20px;
+    padding: 2%;
+}
+.container12{
+    justify-content: space-between;
+    border-radius: 20px;
+    background-color: rgba(192,212,250,0.7);
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 87%;
+    margin: auto;
+    /*text-align: center;*/
+
+}
+
+.card12{
+    border-radius: 20px;
+    border-style: solid;
+    flex: 0 1 23%;
+    border-color: #3E54AC;
+    background-color: white;
+    text-align: center;
+    width:23% ;
+    display: flex;
+    margin: 50px 50px 50px 65px;
+    height: 400px;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.card12:hover{
+    height: 450px;
+    width: 28%;
+    margin: 2%;box-shadow: 13px 16px 21px 5px rgba(62,84,172,0.84);
+
+
+}
+
+.below{
+margin-left: 50%;
+    border-radius: 40px;
+    margin-top: 20px;
+    background-color: #3E54AC;
+    color: white;
+    width: 150px;
+    height: 40px;
+    border-style: none;
+}
+
+.below:hover{
+    width: 200px;
+    height: 50px;
+}
+.button{
+    width: 150px;
+    height: 40px;
+    background-color: #3E54AC;
+    border-radius: 100px;
+    border-style: none;
+    color: whitesmoke;
+    font-size: larger;
+}
+
+.button:hover{
+    width: 50%;
+    height: 50px;
+}
+
+
+.introflex{
+    display: flex;
+    border-style: solid;
+    border-color: #3E54AC;
+    border-width: 2px;
+    margin: 1% 5% 3% 10%;
+    border-radius: 40px;
+}
+.introimg{
+    height: 25%;
+    width: 25%;
+}
+.type{
+    border-style: solid;
+    border-width: 2px;
+    display: flex;
+    margin: 0% 4% 2% 4%;
+    border-radius: 40px;
+    align-items: center;
+}
+.standaloneimg2{
+    height: 27%;
+    position: relative;
+    width: 27%;
+}
+.standaloneimg1{
+    position: relative;
+    top:15%;
+    left: 40%;
+    height: 27%;
+    width: 27%;
+}
+.matter1{
+    margin:5% auto 5% 5%;
+    font-size: x-large;
+    line-height: 50px;
+    font-family: Avenir;
+    background-color: peachpuff;
+    z-index: -1;
+    border-radius: 20px;
+    padding: 2%;
+}
+
+.matter2{
+    margin:5% auto 5% 5%;
+    font-size: 30px;
+    line-height: 50px;
+    font-family: "Source Code Pro";
+    background-color: lightpink;
+    z-index: -1;
+    border-radius: 20px;
+    padding: 2%;
+}
+.pipimg{
+    position: relative;
+    width: 35%;
+    height: 35%;
+}
+
+.compimg{
+    width: 25%;
+    height: 35%;
+}
+.matter4{
+    margin:5% auto 5% 5%;
+    font-size: 30px;
+    font-size: 30px;
+    line-height: 50px;
+    font-family: "Source Code Pro";
+    background-color: rgba(0,255,0,0.4);
+    z-index: -1;
+    border-radius: 20px;
+    padding: 2%;
+}
+.one{
+    border-color: orange;
+}
+.two{
+    border-color: #FF4081;
+}
+.four{
+    border-color: green;
+}
+.five{
+    border-color: crimson;
+}
+.tplimg{
+    width: 25%;
+    height: 35%;
+}
+.matter5{
+    margin:5% auto 5% 5%;
+    font-size: 30px;
+    line-height: 50px;
+    font-family: "Source Code Pro";
+    background-color: rgba(255,0,0,0.5);
+    z-index: -1;
+    border-radius: 20px;
+    padding: 2%;
+}
+
+@media screen and (max-width: 1200px){
+    .container12{
+        justify-content: space-evenly;
+    }
+    .card12{
+        width: 60%;
+        flex: 0 0 30%;
+    }
+    .matter4{
+        margin:5% 5% 5% 5%;
+    }
+    .compimg{
+        display: none;
+    }
+    .introimg{
+        display: none;
+    }
+    .card12:hover{
+        display: none;
+    }
+    .below{
+        display: none;
+    }
+}
+
+@media  screen and (max-width: 1000px){
+
+    .container12{
+        justify-content: center;
+    }
+    .card12{
+        flex:0 0 80%;
+    }
+    .card12:hover{
+        display: none;
+    }
+    .below{
+        display: none;
+    }
+
+    .tplimg{
+        display: none;
+    }
+    .compimg{
+        display: none;
+    }
+    .pipimg{
+        display: none;
+    }
+    .standaloneimg2{
+        display: none;
+    }
+
+    .profile{
+        display: none;
+    }
+    .navbut{
+        margin-left: -22px;
+    }
+}

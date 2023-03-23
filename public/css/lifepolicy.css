@@ -1,0 +1,176 @@
+.container1{
+    justify-content: space-between;
+    border-radius: 20px;
+    background-color: rgba(192,212,250,0.7);
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 87%;
+    margin: auto;
+    /*text-align: center;*/
+
+}
+a{
+    text-decoration: none;
+}
+
+.card1{
+    border-radius: 20px;
+    border-style: solid;
+    flex: 0 1 23%;
+    border-color: #3E54AC;
+    background-color: white;
+    text-align: center;
+    width:23% ;
+    display: flex;
+    margin: 50px 50px 50px 65px;
+    height: 400px;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.card1:hover{
+    height: 450px;
+    width: 28%;
+    margin: 2%;box-shadow: 13px 16px 21px 5px rgba(62,84,172,0.84);
+
+}
+
+.heading{
+    font-family: "Apple Chancery";
+    background-color: lightcoral;
+    color: white;
+    border-radius: 100px;
+    text-align: center;
+    margin: 3% 5% 3% 5%;
+    z-index: -1;
+    font-size: xxx-large;
+}
+.qno{
+    font-size: xx-large;
+    margin: auto 5% auto 10%;
+    text-align: left;
+}
+.matter{
+    margin:5% auto 5% 5%;
+    font-size: 27px;
+    width: 90%;
+    line-height: 50px;
+    font-family: "Microsoft JhengHei UI";
+    z-index: -1;
+    border-radius: 20px;
+    padding: 2%;
+}
+.introflex{
+    display: flex;
+    border-style: solid;
+    border-color: yellowgreen;
+    border-width: 2px;
+    margin: 1% 5% 3% 10%;
+    border-radius: 40px;
+}
+.introimg{
+    position: relative;
+    height: 23%;
+    width: 23%;
+    top: 5vh;
+    border-radius: 3vh;
+}
+.subheading{
+    text-align: center;
+    font-size: xx-large;
+}
+.type{
+    border-style: solid;
+    border-width: 2px;
+    display: flex;
+    margin: 1% 5% 3% 10%;
+    border-radius: 40px;
+    align-items: center;
+}
+.tlimg{
+    width: 25%;
+    height: 25%;
+}
+.whlimg{
+    width: 25%;
+    height: 25%;
+}
+.below{
+    margin: 1% 45% 1% 45%;
+    border-radius: 40px;
+    background-color: #3E54AC;
+    color: white;
+    width: 150px;
+    height: 40px;
+    border-style: none;
+}
+.below:hover{
+    width: 200px;
+    height: 50px;
+}
+
+.card1:hover{
+    height: 43vh;
+    margin: 2%;
+rgba(0, 191, 255, 1);
+}
+.button{
+    width: 150px;
+    height: 40px;
+    background-color: #3E54AC;
+    border-radius: 100px;
+    border-style: none;
+    color: whitesmoke;
+    font-size: larger;
+}
+
+.button:hover{
+    width: 50%;
+    height: 50px;
+}
+
+@media screen and (max-width: 1200px){
+    .container1{
+        justify-content: space-evenly;
+    }
+    .card1{
+        width: 60%;
+        flex: 0 0 30%;
+    }
+    .below{
+        display: none;
+    }
+    .card1:hover{
+        display: none;
+    }
+}
+
+@media  screen and (max-width: 1000px){
+
+    .container1{
+        justify-content: center;
+    }
+    .card1{
+        flex:0 0 80%;
+    }
+    .below{
+        display: none;
+    }
+    .card1:hover{
+        display: none;
+    }
+
+    .introimg{
+        display: none;
+    }
+
+    .tlimg{
+        display: none;
+    }
+    .whlimg{
+        display: none;
+    }
+
+
+}
