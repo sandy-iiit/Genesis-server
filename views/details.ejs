@@ -24,34 +24,30 @@
         </div>
 
         <div class="side-item">
-            <a><button  class="det">Settings</button></a>
+            <a href="/settings"><button  class="det">Settings</button></a>
         </div>
     </div>
 
-    <div class="divdetailbox">
-        <form class="detail-box" >
+    <div class="divdetailbox" >
+        <form class="detail-box" action="/updatedetails" method="post">
             <p style="text-align:center"><h3 class="hidemeok">YOUR PROFILE</h3></p><br>
             <div class="detail-item">
                 <p class="label">Name</p>  <input class="input" name="name" value="<%=name%>"></input>
             </div>
             <div class="detail-item">
-                <p class="label">Email</p>   <input class="input" name="name" value="<%=email%>" disabled></input>
+                <p class="label">Email</p>   <input class="input" name="email" value="<%=email%>"></input>
             </div>
             <div class="detail-item">
-                <p class="label">Age</p>   <input class="input" type="number" name="name" value="<%=age%>"></input>
+                <p class="label">Age</p>   <input class="input" type="number" name="age" value="<%=age%>"></input>
             </div>
             <div class="detail-item">
-                <p class="label">Sex</p>   <select class="input" name="name" value="<%=sex%>">
-                    <option class="option">Sex</option>
-                    <option class="option">Male</option>
-                    <option class="option">Female</option>
-                </select>
+                <p class="label">Sex</p>  <input class="input" value="<%=sex%>" disabled>
             </div>
             <div class="detail-item">
-                <p class="label">Address</p>   <input class="input address" name="name" value="<%=address%>"></input>
+                <p class="label">Address</p>   <input class="input address" name="address" value="<%=address%>"></input>
             </div>
             <div class="detail-item">
-                <p class="label">Phone</p>   <input class="input" type="number" name="name" value="<%=phone%>"></input>
+                <p class="label">Phone</p>   <input class="input" type="number" name="phone" value="<%=phone%>"></input>
             </div>
             <div class="detail-item buttons">
                 <button class="btn1">

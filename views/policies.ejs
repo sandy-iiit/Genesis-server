@@ -22,8 +22,11 @@
                 needs and budget. Explore our website to learn more and
                 don't hesitate to contact us if you have any questions or concerns. Your health and well-being ar
                 e our top priorities.</p>
-            <a href="/healthpolicies"><button id="explore1" name="explore1" class="explore">Explore More</button></a>
-        </div>
+            <%if(login){%>
+                <a href="/healthpolicies"> <button id="explore1" name="explore1" class="explore">Explore More</button></a>
+            <%}else{%>
+                <a href="/login"> <button id="explore1" name="explore1" class="explore">Explore More</button></a>
+            <%}%>        </div>
     </div>
     <div class="carinsur">
         <div class="disclmr">
@@ -39,7 +42,11 @@
                 support you every step of the way in finding the right health insurance plan that fits your needs and
                 budget. Explore our website to learn more and don't hesitate to contact us if you have any questions or
                 concerns. Your health and well-being ar e our top priorities.</p>
+            <%if(login){%>
             <a href="/transportpolicies"> <button id="explore1" name="explore1" class="explore">Explore More</button></a>
+       <%}else{%>
+            <a href="/login"> <button id="explore1" name="explore1" class="explore">Explore More</button></a>
+<%}%>
         </div>
 
 
@@ -68,8 +75,11 @@
                 needs and budget. Explore our website to learn more and
                 don't hesitate to contact us if you have any questions or concerns. Your health and well-being ar
                 e our top priorities.</p>
-            <a href="/lifepolicies"><button id="explore1" name="explore1" class="explore">Explore More</button></a>
-        </div>
+            <%if(login){%>
+                <a href="/lifepolicies"> <button id="explore1" name="explore1" class="explore">Explore More</button></a>
+            <%}else{%>
+                <a href="/login"> <button id="explore1" name="explore1" class="explore">Explore More</button></a>
+            <%}%>
     </div>
     </div>
     <%- include('footer.ejs') %>
