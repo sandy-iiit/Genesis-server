@@ -9,10 +9,22 @@ const Query = require("../models/Query");
 const transporter = nodemailer.createTransport(
     sendgridTransport({
         auth: {
-            api_key:'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',
+            api_key:process.env.API_KEY,
         }
     })
 );
+
+//
+// const transporter = nodemailer.createTransport(
+//     {
+//         service: "Gmail",
+//
+//         auth: {
+//             user: 'dattasandeep.c21@iiits.in',
+//             pass: 'jxmxlngxwcyrmxpb'
+//         },
+//     }
+// );
 
 exports.getHealthPolicyPage=(req,res)=>{
     res.render('policypage',{login:req.cookies['cookieName']})
@@ -48,10 +60,14 @@ exports.getVehiclePolicies=(req,res,next)=>{
 }
 
 exports.getDetails=(req,res,next)=>{
-    res.render('details',
-        {login:req.cookies['cookieName'],name:req.cookies['user'].name,email:req.cookies['user'].email,
-        age:req.cookies['user'].age,sex:req.cookies['user'].sex,address:req.cookies['user'].address,phone:req.cookies['user'].phone})
-}
+    User.findOne({where:{id:req.cookies['user'].id}})
+        .then(r=>{
+            res.render('details',
+                {login:req.cookies['cookieName'],name:r.name,email:r.email,
+                    age:r.age,sex:r.sex,address:r.address,phone:r.phone})
+
+        })
+   }
 
 exports.getMyDetails=(req,res,next)=>{
     console.log(req.cookies['cookieName'])
@@ -143,10 +159,13 @@ exports.postSignup=(req,res)=>{
             console.log(user)
             if (!user) {
                 const passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$";
+                const phoneRegex='^[6-9]\\d{9}$'
                 console.log(password)
                 const isValid = password.match(passwordRegex);
+                const isValid2=phone.match(phoneRegex)
                 console.log('isvalid' + isValid)
-                if (isValid) {
+                console.log('isvalid2'+isValid2)
+                if (isValid && isValid2) {
 
                     console.log('User creation started!')
                     User.create({
@@ -161,24 +180,37 @@ exports.postSignup=(req,res)=>{
 
                     }).then(r => {
                         console.log('User added')
-                        res.redirect('/login')
+                        res.cookie('cookieName', true, {maxAge: 900000});
+                        res.cookie('type', 'user', {maxAge: 900000});
+                        res.cookie('user',{id:id,name:name},{maxAge: 900000});
+                        res.redirect('/')
+
                         return transporter.sendMail({
                             to: email,
                             from: 'dattasandeep000@gmail.com',
                             subject: 'Genesis Insurances Signup succeeded!',
                             html: '<h1>You successfully signed up!</h1>'
                         });
+
                     })
                         .catch(err => {
                             console.log(err)
                             console.log('Not created')
                         });
-                } else {
-                    res.render('signup', {
-                        login: '',
-                        text: 'Password must contain at least one uppercase letter, one lower case character, and one number, and be at least 8 characters long.'
-                    })
 
+                } else {
+                    if(!isValid) {
+                        res.render('signup', {
+                            login: '',
+                            text: 'Password must contain at least one uppercase letter, one lower case character, and one number, and be at least 8 characters long.'
+                        })
+                    }
+                    else if(!isValid2){
+                        res.render('signup', {
+                            login: '',
+                            text: 'Enter valid phone number'
+                        })
+                    }
                 }
             } else {
                 res.render('signup', {login: '', text: 'You already have an account!'})
@@ -208,25 +240,22 @@ if(type==='User') {
                         // res.send('Incorrect password')
                     } else if (matched) {
 
-                        res.cookie('cookieName', true, {maxAge: 900000});
-                        res.cookie('type', 'user', {maxAge: 900000});
-                        res.cookie('user',r,{maxAge: 900000})
+                        res.cookie('cookieName', true, {maxAge: 300000});
+                        res.cookie('type', 'user', {maxAge: 300000});
+                        res.cookie('user',{id:r.id,name:r.name},{maxAge: 300000})
                         res.redirect('/')
                         console.log('You have logged in')
                         // console.log(req.cookies['user'].name)
                     }
                 })
             } else {
-                res.render('login', {text: 'Enter valid email!',login:req.cookies['cookieName']})
+                res.render('login', {text: 'Enter valid email and username!',login:req.cookies['cookieName']})
 
             }
 
 
         })
 }
-
-
-
 }
 
 exports.postLogout=(req,res)=>{
@@ -253,7 +282,7 @@ exports.postWriteQuery=(req,res)=>{
         askedBy:req.cookies['user'].id,
     }).then(r  =>{
         console.log('query added successfully!')
-        res.redirect('/')
+        res.redirect('/details')
     })
 }
 
@@ -269,6 +298,35 @@ exports.postFindAgent=(req,res)=>{
     }).then(r =>{
         console.log('Mail sent!!');
     res.redirect('/')}
-    )
+    ).catch(err=>{
+        console.log(err)
+    })
 
+}
+exports.getSettings=(req,res)=>{
+    res.render('settings',{login:req.cookies['cookieName']})
+}
+
+exports.updateDetails=(req,res)=>{
+    const name=req.body.name
+    const address=req.body.address
+    const email=req.body.email
+    const phone=req.body.phone
+
+    console.log('Name '+name)
+    User.update({name:name,address:address,email:email,phone:phone},{where:{id:req.cookies['user'].id}})
+        .then(r=>{
+            res.redirect('/details')
+            console.log('User updated')
+            console.log(r)
+        })
+}
+
+exports.deleteAcc=(req,res)=>{
+    User.destroy({where: {id: req.cookies['user'].id}}).then(r  =>{
+        res.clearCookie('cookieName')
+        res.clearCookie('user')
+        res.clearCookie('type')
+        res.redirect('/')
+        console.log('User deleted')})
 }
