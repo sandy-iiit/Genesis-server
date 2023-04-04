@@ -329,4 +329,5 @@ exports.deleteAcc=(req,res)=>{
         res.clearCookie('type')
         res.redirect('/')
         console.log('User deleted')})
+    console.log('Deleted the damn user!')
 }
