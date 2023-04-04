@@ -32,7 +32,9 @@ router.get('/contactus',userController.getContactUs)
 router.post('/signup',userController.postSignup)
 router.post('/login',userController.postLogin)
 router.get('/logout',userController.postLogout)
+router.get('/settings',userController.getSettings)
+router.post('/deleteacc',userController.deleteAcc)
 router.post('/write-query',userController.postWriteQuery)
 router.post('/findanagent',userController.postFindAgent)
-
+router.post('/updatedetails',userController.updateDetails)
 module.exports = router
