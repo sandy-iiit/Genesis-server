@@ -48,14 +48,14 @@
     <div class="qrygen qrygen1">
         <h2>Drop a Review</h2>
         <h2></h2>
-        <form class="quoteform" onsubmit="return validateForm()">
-            <input type="text" placeholder="Name" name="quotnam1" id="quotnam1" required>
+        <form class="quoteform" action="/drop-review" method="post" onsubmit="return validateForm()">
+            <input type="text" placeholder="Name" name="name" id="quotnam1" required>
             <span class="error" id="nameError" style="text-align: center;color: #3E54AC;"></span>
-            <input type="text" placeholder="Email" name="quotnam1" id="quotnam1" required>
+            <input type="text" placeholder="Email" name="email" id="quotnam1" required>
             <span class="error" id="emailError" style="text-align: center;color: #3E54AC;"></span>
-            <textarea name="queryy" id="queryy" cols="3" rows="4" placeholder="Write your review"></textarea>
+            <textarea name="review" id="queryy" cols="3" rows="4" placeholder="Write your review"></textarea>
             <span class="error" id="queryError" style="text-align: center;color: #3E54AC;"></span>
-            <button type="submit">submit</button>
+            <button type="submit">Submit</button>
         </form>
 
     </div>

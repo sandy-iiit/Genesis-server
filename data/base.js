@@ -8,3 +8,4 @@ const sequelize = new Sequelize('database','sandy','13072003',{
 })
 
 module.exports=sequelize
+

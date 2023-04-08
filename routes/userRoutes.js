@@ -2,9 +2,9 @@ const express=require('express')
 
 const router = express.Router()
 const userController=require('../controllers/user.js')
+const adminController=require('../controllers/admin.js')
 
 router.get('/',userController.getHome)
-
 router.get('/login',userController.getLogin)
 router.get('/signup',userController.getSignup)
 router.get('/healthpolicies',userController.getHealthPolicies)
@@ -37,4 +37,12 @@ router.post('/deleteacc',userController.deleteAcc)
 router.post('/write-query',userController.postWriteQuery)
 router.post('/findanagent',userController.postFindAgent)
 router.post('/updatedetails',userController.updateDetails)
+router.post('/drop-review',userController.dropReview)
+
+// Admin
+
+router.get('/answer-queries',adminController.getAnswerQueries)
+router.get('/answered-queries',adminController.getAlreadyAnsweredQueries)
+router.get('/reviews',adminController.getReviews)
+router.post('/queries/:queryId',adminController.postAnswer)
 module.exports = router

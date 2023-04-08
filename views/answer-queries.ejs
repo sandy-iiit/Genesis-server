@@ -1,0 +1,36 @@
+
+<head>
+    <link rel="stylesheet" href="/css/my-queries.css">
+</head>
+
+<%- include('navbar.ejs') %>
+<!--<div class="wrap">-->
+<div class="heading-wrap"><p class="heading">Your Queries</p></div>
+
+<div class="container2">
+
+    <% for(let i=0;i<arr.length;i++){%>
+    <div class="items2">
+
+        <div class="inner-item Q">
+            Q  <%=i+1%>). <%=arr[i].question%>
+         </div>
+            <form class="ansblock"  action="/queries/<%=arr[i]._id%>" method="post">
+                <% if(arr[i].status==='Answered'){%>
+                <span class="inner-item A">
+                    <%=arr[i].answer%>
+                </span>
+                <%}else{%>
+                <textarea class="ansss" name="answer"></textarea>
+                    <button class="submitterrr" type="submit">Answer</button>
+            </form>
+<%}%>
+    </div>
+
+    <%}%>
+
+
+</div>
+
+<%-include('footer.ejs')%>
+

@@ -1,47 +1,56 @@
-// import {Model, Sequelize} from "sequelize";
-const seq=require('../data/base')
-const Sequelize=require('sequelize')
+const mongoose = require('mongoose');
 
-// class User extends Model{}
+const Schema = mongoose.Schema;
 
-const User= seq.define('user1.2',{
-    id:{
-        type:Sequelize.STRING,
-        allowNull:false,
-        primaryKey:true,
-    },
+const Policy=require('./Policy')
+
+const userSchema= new Schema({
+
     name:{
-        type:Sequelize.STRING,
-        allowNull: false,
+        type:String,
+        required:true
     },
     email:{
-        type:Sequelize.STRING,
-        allowNull: false,
+        type:String,
+        required:true
     },
     age:{
-        type:Sequelize.STRING,
-        allowNull:false,
+        type:String,
+        required:true
     },
     sex:{
-        type:Sequelize.STRING,
-        allowNull:false,
+        type:String,
+        required:true
     },
     address:{
-        type:Sequelize.STRING,
-        allowNull:false
+        type:String,
+        required:true
     },
     phone:{
-        type:Sequelize.STRING,
-        allowNull:false
+        type:String,
+        required:true
 
     },
     password:{
-        type:Sequelize.STRING,
-        allowNull:false
-    }
+        type:String,
+        required:true
+    },
+    dob:{
+        type:Date,
+        required:false
+    },
+    currentPolicies:[
+        {
+            policy:Policy.policySchema
+        }
+    ],
+    policyHistory:[
+        {
+            policy:Policy.policySchema
 
-
+        }
+    ],
 })
 
 
-module.exports=User
+module.exports=mongoose.model('User',userSchema)

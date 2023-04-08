@@ -22,13 +22,13 @@
 <!--        <a href="/login"><button style="font-size: larger;"id="navbut" class="navbut">Login</button></a>-->
 <!--        <a href="/signup"><button style="font-size: larger;"id="navbut" class="navbut">Signup</button></a>-->
 <!--        <img id="profile" class="profile" src="/css/profile.gif">-->
-        <%if(!login){%>
+        <%if(!isAuthenticated){%>
             <a href="/login"> <button id="navbut" class="navbut">Login</button></a>
             <a href="/signup"> <button id="navbut" class="navbut" href="/signup">Signup</button></a>
             <img style="background-color: #3E54AC" id="profile" class="profile" src="/css/saver.png">
 
         <%}%>
-        <%if(login){%>
+        <%if(isAuthenticated){%>
             <a href="/logout"> <button id="navbut" class="navbut">Logout</button></a>
 
             <a href="/details"> <img id="profile" class="profile" src="/css/profile.gif"></a>
