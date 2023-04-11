@@ -1,3 +1,5 @@
+@import "//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css";
+
 body{
     height: 100vh;
 
@@ -13,6 +15,43 @@ button{
     border-radius: 50px;
     flex-wrap: wrap;
     /*z-index: -1;*/
+}
+.bar {
+    display: flex;
+    width: 90%;
+    height: 5%;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 3%;
+}
+.img{
+    height: 2px;
+    width: 2px;
+}
+.search{
+    border-radius: 10px;
+    width: 80%;
+    height: 200%;
+    color: #3e54ac;
+}
+
+.search:focus{
+border-color: green;
+    border-width: 3px;
+}
+
+.search-submit{
+    width: 10%;
+    border-radius: 10px;
+    background-color: white;
+    color: #3e54ac;
+    border-style: none;
+    height: 200%;
+}
+
+.search-submit:hover{
+    background-color: rgba(192,205,255,1);
+    color: #3e54ac;
 }
 
 .ansblock{
@@ -51,7 +90,7 @@ button{
 
     display: flex;
     width: 94%;
-    height: 60%;
+    height: 80%;
     flex-wrap: wrap;
     /*background-color: #3E54AC;*/
     margin-left: 5vh;

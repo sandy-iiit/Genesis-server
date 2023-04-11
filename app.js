@@ -21,11 +21,8 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
 
-const MONGODB_URI1 =
-    'mongodb+srv://dattasandeep000:13072003@sandy.p06ijgx.mongodb.net/G1?retryWrites=true&w=majority\n'
-const MONGODB_URI2='mongodb+srv://dattasandeep000:13072003@sandy.p06ijgx.mongodb.net/G1'
 const store = new MongoDBStore({
-    uri: MONGODB_URI2,
+    uri: process.env.MONGODB_URI2,
     collection: 'sessions',
 
 });
@@ -74,7 +71,7 @@ app.use(userRoutes)
 app.get('*',(req,res)=>{
     res.render('404')
 })
-mongoose.connect(MONGODB_URI1)
+mongoose.connect(process.env.MONGODB_URI1)
     .then(result => {
         app.listen(3000);
         console.log('Server running in the port 3000')

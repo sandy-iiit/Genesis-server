@@ -351,12 +351,24 @@ exports.postSignup=(req,res)=> {
         const phone = req.body.phone
 
         console.log('Name ' + name)
-        User.findByIdAndUpdate(req.user._id,{name: name, address: address, email: email, phone: phone})
-            .then(r => {
-                res.redirect('/details')
-                console.log('User updated')
-                // console.log(r)
-            })
+        if(req.session.type==='User'){
+
+            User.findByIdAndUpdate(req.user._id,{name: name, address: address, email: email, phone: phone})
+                .then(r => {
+                    res.redirect('/details')
+                    console.log('User updated')
+                    // console.log(r)
+                })
+        }
+        else{
+
+            Admin.findByIdAndUpdate(req.user._id,{name: name, address: address, email: email, phone: phone})
+                .then(r => {
+                    res.redirect('/details')
+                    console.log('Admin updated')
+                    // console.log(r)
+                })
+        }
     }
 
     exports.deleteAcc = (req, res) => {
