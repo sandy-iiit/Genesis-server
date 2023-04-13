@@ -1,30 +1,32 @@
 
 
-const seq=require('../data/base')
-const Sequelize=require('sequelize')
-const {QueryError} = require("sequelize");
+const mongoose = require('mongoose');
+
+const Schema = mongoose.Schema;
 
 
-const Query=seq.define('query1.2',{
+const querySchema=new Schema({
 
-    id:{
-        type:Sequelize.STRING,
-        allowNull:false,
-        primaryKey:true
-    },
     askedBy:{
-      type:Sequelize.STRING,
-        allowNull:true
+      type:Schema.Types.ObjectId,
+       required:true
     },
     question:{
-        type:Sequelize.STRING,
-        allowNull: false
+        type:String,
+        required: true
     },
     answer:{
-        type:Sequelize.STRING,
-        allowNull:true
+        type:String,
+        required:true
+    },
+    status:{
+        type:String,
+
+    },
+    answeredBy:{
+        type:String,
     }
 
 })
 
-module.exports=Query
+module.exports=mongoose.model('Query',querySchema)

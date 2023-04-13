@@ -2,9 +2,43 @@ const express=require('express')
 
 const router = express.Router()
 const userController=require('../controllers/user.js')
+const adminController=require('../controllers/admin.js')
+const filesController=require('../controllers/files.js')
+
+//file related
+
+const multer = require('multer');
+const {GridFsStorage} = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
+const mongoose = require('mongoose');
+
+const conn = mongoose.connection;
+
+let gfs;
+conn.once('open', function() {
+    gfs = Grid(conn.db, mongoose.mongo);
+    gfs.collection('files');
+});
+
+const storage = new GridFsStorage({
+    url: process.env.MONGODB_URI2,
+    file: function(req, file) {
+        return {
+            filename: file.originalname,
+            metadata: {
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+            }
+        };
+    }
+});
+
+const upload = multer({ storage: storage });
+
+
+
 
 router.get('/',userController.getHome)
-
 router.get('/login',userController.getLogin)
 router.get('/signup',userController.getSignup)
 router.get('/healthpolicies',userController.getHealthPolicies)
@@ -37,4 +71,21 @@ router.post('/deleteacc',userController.deleteAcc)
 router.post('/write-query',userController.postWriteQuery)
 router.post('/findanagent',userController.postFindAgent)
 router.post('/updatedetails',userController.updateDetails)
+router.post('/drop-review',userController.dropReview)
+router.post('/health-form', upload.fields([
+    { name: 'aadhar', maxCount: 1 },
+    { name: 'pan', maxCount: 1 },
+    {name:'dobProof',maxCount:1},
+    {name:'healthCertificate',maxCount:1}
+]),filesController.uploader)
+// Admin
+
+router.get('/answer-queries',adminController.getAnswerQueries)
+router.get('/answered-queries',adminController.getAlreadyAnsweredQueries)
+router.get('/health-applications',adminController.getHealthApplications)
+router.get('/health-applications/:appId',adminController.getIndividualHealthApplication)
+router.post('/search-health-applications',adminController.getHealthApplicationsSearch)
+router.get('/reviews',adminController.getReviews)
+router.post('/queries/:queryId',adminController.postAnswer)
+router.get('/files/:fileId',filesController.getFile)
 module.exports = router

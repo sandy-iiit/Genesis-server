@@ -265,7 +265,8 @@ margin-left: 100px;
 .card:hover{
     height: 450px;
     width: 28%;
-    margin: 2%;box-shadow: 13px 16px 21px 5px rgba(62,84,172,0.84);
+    margin: 2%;
+    box-shadow: 13px 16px 21px 5px rgba(62,84,172,0.84);
 }
 
 .ITEM1{

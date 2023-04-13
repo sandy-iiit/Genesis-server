@@ -1,47 +1,44 @@
-// import {Model, Sequelize} from "sequelize";
-const seq=require('../data/base')
-const Sequelize=require('sequelize')
+const mongoose = require('mongoose');
+const Policy = require("./Policy");
 
-// class User extends Model{}
+const Schema = mongoose.Schema;
 
-const Admin= seq.define('admin',{
-    id:{
-        type:Sequelize.STRING,
-        allowNull:false,
-        primaryKey:true,
-    },
+const adminSchema= new Schema({
     name:{
-        type:Sequelize.STRING,
-        allowNull: false,
+        type:String,
+        required:true
     },
+
     email:{
-        type:Sequelize.STRING,
-        allowNull: false,
+        type:String,
+        required:true
     },
     age:{
-        type:Sequelize.STRING,
-        allowNull:false,
+        type:String,
+        required:true
     },
     sex:{
-        type:Sequelize.STRING,
-        allowNull:false,
+        type:String,
+        required:true
     },
     address:{
-        type:Sequelize.STRING,
-        allowNull:false
+        type:String,
+        required:true
     },
     phone:{
-        type:Sequelize.STRING,
-        allowNull:false
+        type:String,
+        required:true
 
     },
     password:{
-        type:Sequelize.STRING,
-        allowNull:false
-    }
-
-
+        type:String,
+        required:true
+    },
+    dob:{
+        type:Date,
+        required:false
+    },
 })
 
 
-module.exports=Admin
+module.exports=mongoose.model('Admin',adminSchema)
