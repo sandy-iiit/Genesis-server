@@ -17,7 +17,7 @@ exports.getAnswerQueries=(req,res,next)=>{
 
 exports.getAlreadyAnsweredQueries=(req,res,next)=>{
     queries.find({status:'Answered',answeredBy:req.user._id}).then(arr=>{
-        // console.log(arr)
+        console.log(arr)
 
         res.render('answer-queries',{arr:arr})
     })
