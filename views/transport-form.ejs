@@ -4,26 +4,27 @@
 
 <%- include('navbar.ejs')%>
 <img class="car" src="/images/car.svg">
-<form class="form" action="#" method="post">
-<div class="row1"><p class="label">Name</p> <input  name="first-name" type="text" class="row13" placeholder="First name">
-    <input name="last-name" type="text" class="row13" placeholder="Last name"></div>
+<form class="form" action="/transport-form" method="post" enctype="multipart/form-data">
+<div class="row1"><p class="label">Name</p> <input  name="firstName" type="text" class="row13" placeholder="firstName">
+    <input name="lastName" type="text" class="row13" placeholder="lastName"></div>
 
-<div class="row1">
-    <p class="label">Vehicle Registration number</p> <input name="reg-num" class="inner-row1" placeholder="Registation number">
-</div>
-    <div class="row1">
-        <p class="label">
-            Vehicle class
-        </p>
-        <select name="vehicle" class="inner-row1">
-            <option>Select</option>
-            <option>Motor Car</option>
-            <option>Motor Bike</option>
-        </select>
+    <div class="row2">
+        <div class="subrow"><p class="label">AADHAR</p> <input type="file" class="inner-row2" name="aadhar"></div>
+        <div class="subrow"><p class="label">C Book</p> <input type="file" class="inner-row2" name="c_book"></div>
     </div>
+<div class="row1">
+    <p class="label">Vehicle Registration number</p> <input name="regNum" class="inner-row1" placeholder="Registation number">
+</div>
+
+    <div class="row2">
+        <div class="subrow"><p class="label">Vehicle company</p> <input class="inner-row2" name="company"></div>
+
+        <div class="subrow"><p class="label">Vehicle model</p> <input class="inner-row2" name="model"></div>
+    </div>
+
 <div class="row2">
-    <div class="subrow"><p class="label">Vehicle model</p> <input class="inner-row2" name="model"></div>
-    <div class="subrow"><p class="label">Year of manufacture</p> <input class="inner-row2" name="year-of-mfg"></div>
+    <div class="subrow"><p class="label">Vehicle type</p> <input class="inner-row2" name="vehicleType"></div>
+    <div class="subrow"><p class="label">Year of manufacture</p> <input class="inner-row2" name="yearOfMfg"></div>
 </div>
  <div class="row2">
      <div class="subrow"><p class="label">Engine</p><input  name="engine" class="inner-row2"></div>
@@ -40,27 +41,27 @@
     <div class="row2">
         <div class="subrow">
             <p class="label">Nominee Age</p>
-            <input class="inner-row2" name="nominee-age">
+            <input class="inner-row2" name="nomineeAge">
         </div>
         <div class="subrow">
             <p class="label">Nominee Relation</p>
-            <input class="inner-row2" name="nominee-relation">
+            <input class="inner-row2" name="nomineeRelation">
         </div>
     </div>
 
     <div class="row1">
         <p class="label">Policy Number</p>
-        <input class="inner-row1" name="policy-num">
+        <input class="inner-row1" name="policyNum">
     </div>
 
     <div class="row1">
         <p class="label">Policy Id</p>
-        <input class="inner-row1" name="policy-id" value="policy id">
+        <input class="inner-row1" name="policyId" value="policy id">
     </div>
 
     <div class="row2">
         <div class="subrow"> <p class="label">Amount</p><input class="inner-row2" type="number" name="amount" ></div>
-        <div class="subrow"> <p class="label">Type</p><select class="inner-row2">
+        <div class="subrow"> <p class="label">Type</p><select name="type" class="inner-row2">
                 <option>Annually</option>
                 <option>Monthly</option>
             </select></div>

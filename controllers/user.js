@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const user22 = require("../models/user2");
 const bcrypt = require('bcryptjs');
 
 const nodemailer = require('nodemailer');
@@ -6,6 +7,7 @@ const sendgridTransport = require('nodemailer-sendgrid-transport');
 const Query = require("../models/Query");
 const Admin=require('../models/Admin')
 const Review=require('../models/Review')
+const Sequelize=require('sequelize')
 //
 // const transporter = nodemailer.createTransport(
 //     sendgridTransport({
@@ -33,6 +35,9 @@ exports.getHealthPolicyPage=(req,res)=>{
 
 exports.getBuyPolicy=(req,res,next)=>{
     res.render('buypolicy')
+}
+exports.getBuyPolicy2=(req,res,next)=>{
+    res.render('buy-policy2')
 }
 exports.getLifePolicy=(req,res,next)=>{
     res.render('lifepolicy',{arr:arr})
@@ -105,7 +110,7 @@ const arr3=[{Q:"Cant I Pay my installments collectively for my plan id of Motor3
 exports.getMyQueries=async (req, res) => {
     console.log(req.user._id)
     const arrr = await Query.find( {askedBy: req.user._id})
-
+    console.log(arrr[0].askDate)
     res.render('my-queries', {arr: arrr})
 }
 
@@ -185,7 +190,9 @@ exports.postSignup=(req,res)=> {
                     password: hashedPassword,
 
                 });
+
                 return user2.save()
+
 
             } else {
                 if (!isValid) {
@@ -312,7 +319,8 @@ exports.postSignup=(req,res)=> {
             question: query,
             answer: answer,
             askedBy: req.user._id,
-            status:'Not Answered'
+            status:'Not Answered',
+           askDate:new Date().toDateString(),
         });
            Q.save().then(r => {
             console.log('query added successfully!')

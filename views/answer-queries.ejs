@@ -15,7 +15,13 @@
         <div class="inner-item Q">
             Q  <%=i+1%>). <%=arr[i].question%>
          </div>
-            <form class="ansblock"  action="/queries/<%=arr[i]._id%>" method="post">
+        <div style="display: flex;width: 100%;justify-content: space-evenly">
+            <p style="font-size: 15px;color: #3e54ac;">Asked on: <%=arr[i].askDate%></p>
+            <p style="font-size: 15px;color: #3e54ac;">Answered on: <%=arr[i].answerDate%></p>
+
+        </div>
+
+        <form class="ansblock"  action="/queries/<%=arr[i]._id%>" method="post">
                 <% if(arr[i].status==='Answered'){%>
                 <span class="inner-item A">
                     <%=arr[i].answer%>

@@ -3,36 +3,24 @@
 </head>
 
 <%- include('navbar.ejs')%>
-<img class="car" src="/images/life-insurance.png">
-<form class="form" action="#" method="post">
-    <div class="row1"><p class="label">Name</p> <input  name="first-name" type="text" class="row13" placeholder="First name">
-        <input name="last-name" type="text" class="row13" placeholder="Last name"></div>
+<!--<img class="car" src="/images/life-insurance.png">-->
+<form class="form" action="/life-form" method="post" enctype="multipart/form-data">
+    <div class="row1"><p class="label">Name</p> <input  name="firstName" type="text" class="row13" placeholder="First name">
+        <input name="lastName" type="text" class="row13" placeholder="Last name"></div>
 
-    <div class="row1">
-        <p class="label">Vehicle Registration number</p> <input name="reg-num" class="inner-row1" placeholder="Registation number">
-    </div>
-    <div class="row1">
-        <p class="label">
-            Vehicle class
-        </p>
-        <select name="vehicle" class="inner-row1">
-            <option>Select</option>
-            <option>Motor Car</option>
-            <option>Motor Bike</option>
-        </select>
-    </div>
+
     <div class="row2">
         <div class="subrow"><p class="label">AADHAR</p> <input type="file" class="inner-row2" name="aadhar"></div>
         <div class="subrow"><p class="label">PAN</p> <input type="file" class="inner-row2" name="pan"></div>
     </div>
     <div class="row2">
-        <div class="subrow"><p class="label">DOB Proof</p><input  name="dob-proof" type="file" class="inner-row2"></div>
-        <div class="subrow"><p class="label">Health Certificate</p><input type="file" name="health_certificate" class="inner-row2"></div>
+        <div class="subrow"><p class="label">DOB Proof</p><input  name="dobProof" type="file" class="inner-row2"></div>
+        <div class="subrow"><p class="label">Health Certificate</p><input type="file" name="healthCertificate" class="inner-row2"></div>
 
     </div>
 
     <div class="row1">
-        <input class="health_" name="health-condition" placeholder="Any health defects you have suffered previously or are suffering currently">
+        <input class="health_" name="healthCondition" placeholder="Any health defects you have suffered previously or are suffering currently">
     </div>
 
     <div class="row1">
@@ -44,27 +32,27 @@
     <div class="row2">
         <div class="subrow">
             <p class="label">Beneficiary Age</p>
-            <input class="inner-row2" name="nominee-age">
+            <input class="inner-row2" name="nomineeAge">
         </div>
         <div class="subrow">
             <p class="label">Beneficiary Relation</p>
-            <input class="inner-row2" name="nominee-relation">
+            <input class="inner-row2" name="nomineeRelation">
         </div>
     </div>
 
     <div class="row1">
         <p class="label">Policy Number</p>
-        <input class="inner-row1" name="policy-num">
+        <input class="inner-row1" name="policyNum">
     </div>
 
     <div class="row1">
         <p class="label">Policy Id</p>
-        <input class="inner-row1" name="policy-id" value="policy id">
+        <input class="inner-row1" name="policyId" value="policy id">
     </div>
 
     <div class="row2">
-        <div class="subrow"> <p class="label">Cover Amount</p><input class="inner-row2" type="number" name="amount" ></div>
-        <div class="subrow"> <p class="label">Type</p><select class="inner-row2">
+        <div class="subrow"> <p class="label">Cover Amount</p><input class="inner-row2" type="number" name="amount" value="10000000"></div>
+        <div class="subrow"> <p class="label">Type</p><select name="payType" class="inner-row2" value="Monthly">
                 <option>Annually</option>
                 <option>Monthly</option>
             </select></div>
