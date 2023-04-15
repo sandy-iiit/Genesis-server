@@ -1,0 +1,75 @@
+<head>
+    <link rel="stylesheet" href="/css/transport-form.css">
+</head>
+
+<%- include('navbar.ejs')%>
+<img class="car" src="/images/car.svg">
+<form class="form" action="#" method="post">
+<div class="row1"><p class="label">Name</p> <input  name="first-name" type="text" class="row13" placeholder="First name">
+    <input name="last-name" type="text" class="row13" placeholder="Last name"></div>
+
+<div class="row1">
+    <p class="label">Vehicle Registration number</p> <input name="reg-num" class="inner-row1" placeholder="Registation number">
+</div>
+    <div class="row1">
+        <p class="label">
+            Vehicle class
+        </p>
+        <select name="vehicle" class="inner-row1">
+            <option>Select</option>
+            <option>Motor Car</option>
+            <option>Motor Bike</option>
+        </select>
+    </div>
+<div class="row2">
+    <div class="subrow"><p class="label">Vehicle model</p> <input class="inner-row2" name="model"></div>
+    <div class="subrow"><p class="label">Year of manufacture</p> <input class="inner-row2" name="year-of-mfg"></div>
+</div>
+ <div class="row2">
+     <div class="subrow"><p class="label">Engine</p><input  name="engine" class="inner-row2"></div>
+     <div class="subrow"><p class="label">Chassis</p><input name="chassis" class="inner-row2"></div>
+
+ </div>
+
+    <div class="row1">
+        <p class="label">Nominee Name</p>
+        <input name="nominee" class="inner-row1">
+
+    </div>
+
+    <div class="row2">
+        <div class="subrow">
+            <p class="label">Nominee Age</p>
+            <input class="inner-row2" name="nominee-age">
+        </div>
+        <div class="subrow">
+            <p class="label">Nominee Relation</p>
+            <input class="inner-row2" name="nominee-relation">
+        </div>
+    </div>
+
+    <div class="row1">
+        <p class="label">Policy Number</p>
+        <input class="inner-row1" name="policy-num">
+    </div>
+
+    <div class="row1">
+        <p class="label">Policy Id</p>
+        <input class="inner-row1" name="policy-id" value="policy id">
+    </div>
+
+    <div class="row2">
+        <div class="subrow"> <p class="label">Amount</p><input class="inner-row2" type="number" name="amount" ></div>
+        <div class="subrow"> <p class="label">Type</p><select class="inner-row2">
+                <option>Annually</option>
+                <option>Monthly</option>
+            </select></div>
+
+    </div>
+
+    <button class="button" type="submit">Submit</button>
+
+
+</form>
+
+<%-include('footer')%>

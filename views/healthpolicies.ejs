@@ -1,0 +1,168 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/healthpolicies.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    
+<title>Health Insurance Policies By Genesis</title>
+
+</head>
+<%- include('navbar.ejs') %>
+
+    <br>
+    <div class="heading">  <h1>Our Health Insurance Policies:<h2> Protecting Your Health and Finances</h2></h1>
+    </div>
+
+    <img class="Image1" src='https://thumbs.dreamstime.com/b/health-insurance-concept-big-clipboard-document-under-umbrella-healthcare-finance-medical-service-isolated-148814786.jpg' height="25%" width="23%" style="position:absolute; top:60px; right:5px;">
+
+    <h2 class="subheads"> WHAT IS HEALTH INSURANCE?</h2>
+   
+   
+<div class="matterbox">
+
+    <div class="Image2">
+        <img class='img2' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNhjI9v5x7eHwAOgsqHIDFVXPQRRVDuhc48Q&usqp=CAU" >
+    </div>
+    <div class="matter">
+       <p >Health insurance is a type of insurance that helps individuals and families pay for medical expenses. 
+        This provides Financial protection against the cost of medical and surgical expenses .Health insurance policies can cover a wide range of medical expenses, including hospitalization, doctor visits, prescription drugs, and medical procedures.
+         There are several types of health insurance plans, including HMOs, PPOs, and high-deductible health plans (HDHPs).</p>
+        </div>
+ </div>
+
+    <h2 class="subheads"> WHY YOU NEED IT?</h2>
+
+<div class="needoutline">
+ 
+    <div class="need">
+<p>
+↪   Medical expenses when required which quickly becomes expensive.Health insurance can 
+    help to protect you from financial hardship providing you expenses<br>
+
+↪   Covers preventive care services like annual check-ups, vaccinations, and screenings, 
+    which can help detect and prevent health problems early on.<br>
+
+↪   Having health insurance can give you access to high-quality healthcare providers, 
+    hospitals, and medical facilities, which may not be available to those without insurance.<br>
+
+↪   Having health insurance can provide peace of mind covered under unexpected medical expenses.
+    It can also help to reduce stress and anxiety related to medical issues<br>
+</p>
+</div>
+<div id="HIP1">
+    <img class="img2" src="\photos\stethoscope-magnifier-over-calculator-symbol-health-care-costs-medical-insurance-188920709.jpg" alt="Nonono" width='235vh' height='250vh'>
+</div>
+
+</div>
+</div>
+
+
+<h2 class="subheads"> WHAT YOU NEED TO KNOW?</h2>
+   
+<div class="prereq" id="Prereq">
+
+<div class="prereqhead" id="prereqhead" >
+
+    <h3>TYPES OF INSURANCE PLANS THAT TOUR POLICIES PROVIDE</h3>
+</div>
+
+
+<div class="prereqbodyleft">
+
+   <strong><h1 style="text-align: center;">Indemnity Plans</h1></strong>
+    <p>These plans allow you to choose any doctor or hospital,and they will reimburse a portion of the cost of the medical services you receive</p>
+
+
+</div>
+
+
+<div class="prereqbodyright">
+
+    <strong><h1 style="text-align: center;">Health maintainance org.</h1></strong>
+        <p>These plans require you to choose a primary care physician and receive all of your medical care through the HMO's network of doctors and hospitals.</p>
+    
+    
+</div>
+
+<div class="prereqbodyleft">
+
+    <strong><h1 style="text-align: center;">Preferred Provider Org.</h1></strong>
+        <p>These plans allow you to see any doctor or hospital, but you will pay less if you choose a provider within the PPO's network.</p>
+    
+    
+</div>
+
+    
+<div class="prereqbodyright">
+
+    <strong><h1 style="text-align: center;">Point of service</h1></strong>
+        <p>These plans combine elements of both HMOs and PPOs, giving you more
+             flexibility in choosing doctors and hospitals while still providing
+             cost savings for using providers within the network.</p>
+</div>
+</div>
+
+
+<h2 class="subheads"> WHY GENESIS? HOW GENESIS HELP YOU?</h2>
+<div class="genesis">
+    <div>
+        <img class='genimage' src="https://prod-sitefinity-library.kappro.com/images/default-source/career-corner/starting-career/insurance-producer_16.jpg?sfvrsn=d94c9803_5">
+    </div>
+    
+    <div class="genesisbody">
+
+        <p>
+            
+        At Genesis Insurances Pvt Ltd, we understand that your health and well-being are among your top priorities. However, we also know that unexpected medical expenses can take a toll on your finances and cause undue stress. That's why we offer a range of health insurance policies that are designed to provide comprehensive coverage and financial security in the face of unforeseen health issues.
+
+        Our health insurance policies are tailored to meet the unique needs of individuals, families, and businesses. Whether you're looking for basic coverage or a comprehensive plan that includes additional benefits such as dental and vision coverage, we have a policy that will suit your requirements. Our policies provide coverage for hospitalization, surgery, diagnostic tests, ambulance services, and more.
+
+        At Genesis Insurances, we believe in transparency and simplicity. That's why our policies are easy to understand, and we provide clear information on the coverage, benefits, and exclusions. We also offer a range of customization options so that you can choose the coverage that best fits your needs and budget.
+
+        In addition to our comprehensive health insurance policies, we also offer a range of other insurance products, including life insurance, travel insurance, and home insurance. Our team of experienced professionals is always available to help you choose the right policy and answer any questions you may have.
+
+        At Genesis Insurances, we are committed to providing our customers with the best possible service and support. We understand that health insurance can be a complex topic, and we are here to guide you every step of the way. Contact us today to learn more about our health insurance policies and how we can help protect your health and finances.
+
+        </p>
+    </div>
+</div>
+<!--     
+<div class="quotehealthcard" id="quotehealthcard">
+
+    PURSUE YOUR BEST FOR <strong>SURE</strong> BECAUSE YOUR HEALTH SHOULD BE <strong>SECURE</strong>
+
+</div> -->
+
+
+<div class="containerone">
+    <%for(let i=0;i<array.length;i++){%>
+
+    <div class="cardone">
+       <div class="ITEM1">
+          <h1 style="font-size: x-large;">Policy:<%=array[i].name%></h1>
+       </div>
+       <div class="ITEM1">
+           <h2 style="font-size: x-large;">Cover:<%=array[i].Cover%></h2>
+       </div>
+       <div class="ITEM1">
+          <h2 style="font-size: x-large;">Preimum:<%=array[i].Premium%></h2>
+       </div>
+       <div class="ITEM1">
+           <h2 style="font-size: x-large;">Term:<%=array[i].term%></h2>
+       </div>
+        <div class="ITEM1">
+            <a href="/policypage" class="viewpol" target="_blank"><button class="button">View Policy</button></a>
+        </div>
+
+   </div>
+<%}%>
+</div>
+<div>
+    <a href="#nav"><button class="below">Back To Top</button></a>
+</div>
+
+
+
+    <%- include('footer.ejs') %>
+ 

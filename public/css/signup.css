@@ -1,0 +1,316 @@
+.bodyclass{
+    width: 100%;
+    background-image: url("/photos/login.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+
+
+}
+.signup-input{
+    width: 130%;
+    height: 40px;
+    border-radius: 30px;
+    border-style: none;
+    border-color: #3E54AC;
+    font-size: 20px;
+    color: #3E54AC;
+    margin: 4% auto 4% -12%;
+    animation: inputer 3s;
+}
+
+input:focus{
+    box-shadow: 0 0 10px deepskyblue;
+
+}
+
+
+.signup-age{
+    width: 35%;
+    height: 40px;
+    border-radius: 30px;
+    border-style: none;
+    font-size: 20px;
+    color: #3E54AC;
+    animation: lilbtn 3s;
+    margin-left: 33%;
+    margin-top: 4%;
+    margin-bottom: 4%;
+
+}
+
+.country-code{
+    width: 40%;
+    height: 40px;
+    border-radius: 30px;
+    border-style: none;
+    font-size: 20px;
+    color: #3E54AC;
+    animation: lilbtn 3s;
+    margin-left: 35%;
+    margin-top: 4%;
+}
+
+select{
+    width: 80%;
+    height: 40px;
+    font-size: 20px;
+    color: #3E54AC;
+    border-radius: 30px;
+    border-style: none;
+    margin-right: 50px;
+    margin-top: 4%;
+    margin-bottom: 4%;
+}
+
+.loginimg{
+    width: 40%;
+    height: 40%;
+    animation: logo 3s;
+    margin:5% auto 5% auto;
+    animation: logo 3s;
+
+}
+/* .logo{
+   background-color: white;
+   border-radius: 30px;
+   margin-left: 20px;
+   text-align: center;
+   height: 70px;
+   width: 70px;
+
+} */
+.signup-form{
+    height: 100%;
+    width: 82%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(192,212,250,0.9);
+    border-radius: 40px;
+    margin-top: 55px;
+    margin-bottom: 80%;
+
+}
+
+.signupdiv{
+    margin: 5% auto 0 14%;
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+    height:100%;
+    align-items: center;
+}
+
+input::placeholder{
+    color: #3E54AC;
+    font-size: 20px;
+}
+
+.agesex{
+    width: 400px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.signup-phn{
+    width: 90%;
+    border-radius: 30px;
+    height: 40px;
+    border-color: #3E54AC;
+    border-style: none;
+    border-width: 0.5px;
+    animation: lilbtn 3s;
+    color: #3E54AC;
+    font-size: 20px;
+    margin-left: -17%;
+    margin-top: 4%;
+}
+
+.phone{
+    width: 400px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+::placeholder{
+    padding-left: 5px;
+}
+
+.submit {
+    background-color: #3E54AC;
+    color: white;
+    width: 180px;
+    height: 60px;
+    border-radius: 30px;
+    border-style: none;
+    margin: 20px auto 20px auto;
+    animation: btn 3s;
+}
+
+.submit:hover{
+    box-shadow: 0 0 20px deepskyblue;
+
+}
+
+button:active{
+    animation: click 1s;
+}
+
+body{
+    background-image: url("/photos/login.png");
+}
+
+/* Mobile devices */
+@media only screen and (max-width: 600px) {
+    .signupdiv {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .signup-form {
+        width: 100%;
+        margin: 0;
+        padding: 10px;
+    }
+
+    .signup-input, .signup-age, .signup-phn, .country-code {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .agesex {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        justify-content:space-around;
+
+    }
+
+    .agesex > div {
+        width: 70%;
+        margin: 8px;
+    }
+
+    .phone {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+    }
+
+    .phone > div {
+        width: 100%;
+    }
+
+    .submit {
+        width: 60%;
+        margin-top: 10px;
+    }
+}
+
+/* Tablet devices */
+@media only screen and (min-width: 601px) and (max-width: 992px) {
+    .signupdiv {
+        width: 80%;
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    .signup-form {
+        width: 100%;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .signup-input, .signup-age, .signup-phn, .country-code {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .agesex {
+        display: flex;
+        flex-direction: row;
+        margin-left: 10px;
+    }
+
+    .agesex > div {
+        width: 50%;
+        margin-right: 10px;
+    }
+    #age{
+        justify-content: center;
+        position: relative;
+        right: 20px;
+    }
+    .phone {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .phone > div {
+        width: 30%;
+        margin-right: 10px;
+    }
+
+    .submit {
+        width: 60%;
+        margin-top: 10px;
+    }
+}
+
+/* Desktop devices */
+/* @media only screen and (min-width: 1200px) {
+  .signupdiv {
+    width: 70%;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .signup-form {
+    width: 100%;
+    margin: 0;
+    padding: 30px;
+  }
+
+  .signup-input, .signup-age, .signup-phn, .country-code {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .agesex {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .agesex > div {
+    width: 50%;
+    margin-right: 10px;
+  }
+
+  .phone {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .phone > div {
+    width: 30%;
+    margin-right: 10px;
+  }
+
+  .submit {
+    width: 100%;
+    margin-top: 10px;
+  } */
+
+body img{
+    object-fit: cover;
+}
+
+@media only screen and (max-width:580px) {
+    .signupdiv{
+        margin-top: 0px;
+        margin:20px;
+    }
+}

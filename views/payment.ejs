@@ -1,0 +1,149 @@
+<head>
+    <link rel="stylesheet" href="/css/payment.css">
+</head>
+<body>
+<div style=" background-color: #3E54AC;
+    height: 90px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-position: top;
+    /*border-radius: 100px;*/
+    position: sticky;
+    z-index: 1;">
+    <div style=" background-color: white;
+    border-radius: 100px;
+    margin-left: 20px;
+    text-align: center;
+    height: 70px;
+    width: 70px;" class="logo" >
+        <img style=" width: 3.75rem;
+    height: 3.75rem;
+    margin: auto auto auto auto ;" class="logotop" src="css/okoklogo-transformed.ico">
+    </div>
+</div>
+<div class="wrap" id="wrap">
+
+</div>
+
+
+<form class="detail-box" id="form">
+    <div class="detail-item">
+        <p class="label">CustomerId</p>  <input class="input" name="customerid"></input>
+    </div>
+    <div class="detail-item">
+        <p class="label">InsuranceId</p>   <input class="input" name="insuranceid" ></input>
+    </div>
+    <div class="detail-item">
+        <p class="label">Card number</p>   <input class="input" type="number" name="cardnumber" ></input>
+    </div>
+    <div class="detail-item">
+        <p class="label">Amount</p>  <input class="input" type="number" name="amount"></input>
+    </div>
+    <div class="detail-item">
+        <p class="label">Password</p>  <input class="input" type="password" name="password"></input>
+    </div>
+
+    <button id="btn" class="btn2" type="submit" >
+        Confirm Payment
+    </button>
+</form>
+
+<div class="white">
+
+    <!--    <div class="loader">-->
+    <!--        <div class="inner one"></div>-->
+    <!--        <div class="inner two"></div>-->
+    <!--        <div class="inner three"></div>-->
+    <!--    </div>-->
+    <div id="loader" class="loadingio-spinner-eclipse-de1c3j8todo" style="display: none"><div class="ldio-biyyklphs79">
+            <div>
+            </div>
+        </div></div>
+
+    <img src="/images/green-tick.png" id="green-tick" style="display: none">
+</div>
+<p id="success" style="display: none">Payment Successfull</p>
+
+<a href="/" id="home"><button id="but-home">Back to Home</button></a>
+<%-include('footer.ejs')%>
+</body>
+
+<script>
+    const loader=document.getElementById('loader');
+
+    const form=document.getElementById('form')
+    const form2=document.getElementById('form2')
+
+    const tick=document.getElementById('green-tick')
+
+    const text=document.getElementById('success')
+    const body=document.getElementById('wrap')
+    const input=document.getElementsByClassName('input')
+    const input2=document.getElementsByClassName('input2')
+    const btn=document.getElementById('btn')
+    const btn3=document.getElementById('btn3')
+    const label=document.getElementsByClassName('label')
+    const label2=document.getElementsByClassName('label2')
+    form.addEventListener('submit',(event)=>{
+        event.preventDefault();
+        loader.style.display='block'
+        form.style.backgroundColor='#F0EEED'
+        for (let i = 0; i < input.length; i++) {
+
+            input[i].style.borderStyle='solid'
+
+            input[i].disabled = true;
+
+        }
+        for (let i = 0; i < label.length; i++) {
+
+            label[i].style.color='#cccccc'
+
+        }
+        btn.disabled='true'
+        btn.style.color='#cccccc'
+        btn.style.boxShadow='none'
+        btn.style.borderStyle='solid'
+        setTimeout(()=>{
+            loader.style.display='none'
+            tick.style.display='block'
+            text.style.display='block'
+
+
+        },4000)
+    })
+
+    form2.addEventListener('submit',(event)=>{
+        event.preventDefault();
+        loader.style.display='block'
+        form2.style.backgroundColor='#F0EEED'
+        for (let i = 0; i < input2.length; i++) {
+
+            input2[i].style.borderStyle='solid'
+
+            input2[i].disabled = true;
+
+        }
+        for (let i = 0; i < label.length; i++) {
+
+            label2[i].style.color='#cccccc'
+
+        }
+        btn3.disabled='true'
+        btn3.style.color='#cccccc'
+        btn3.style.boxShadow='none'
+        btn3.style.borderStyle='solid'
+        btn3.style.backgroundColor='white';
+        setTimeout(()=>{
+            loader.style.display='none'
+            tick.style.display='block'
+            text.style.display='block'
+
+
+        },4000)
+    })
+
+
+</script>

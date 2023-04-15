@@ -1,0 +1,669 @@
+
+.bodyclass {
+    text-align: center;
+    vertical-align: middle;
+    background-color: white;
+    background-size: cover;
+    background-position: top;
+}
+button{
+    font-size: larger;
+}
+.logo{
+    background-color: white;
+    border-radius: 100px;
+    margin-left: 20px;
+    text-align: center;
+    height: 70px;
+    width: 70px;
+
+}
+.nav{
+    background-color: #3E54AC;
+    height: 90px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-position: top;
+    /*border-radius: 100px;*/
+    position: sticky;
+    z-index: 1;
+
+}
+.innernav{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.main-buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+}
+
+.logotop{
+    width: 3.75rem;
+    height: 3.75rem;
+    margin: auto auto auto auto ;
+}
+.nav1{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+}
+
+.theform{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-content: space-between;
+
+
+}
+.profile{
+    width: 45px;
+    height: 45px;
+    margin: auto 10px auto auto ;
+    border-radius: 25px;
+    cursor: pointer;
+}
+.profile:active{
+    animation: click 0.5s;
+}
+
+
+.login-form{
+    margin-left: 35%;
+    margin-top: 12%;
+    border-radius: 50px;
+
+    width: 30%;
+    height: 60vh;
+    background-color: #eeefff;
+    /* opacity: 1; */
+    /* z-index: 1; */
+
+}
+
+/* input{
+
+    width: 350px;
+    height: 35px;
+    border-style: solid;
+    border-color: #EA047E;
+    border-width: 2px;
+    border-radius: 100px;
+    margin: 10px;
+    animation: inputer 3s;
+    font-size: 20px;
+
+    
+
+}     */
+
+
+input,select{
+    font-size: 20px;
+
+}
+
+/* input:focus { 
+    outline: none !important;
+    border-color: chartreuse;
+    box-shadow: 0 0 5px chartreuse;
+    font-size: 20px;
+
+} */
+/* 
+::placeholder{
+
+    color: #EA047E;
+    font-size: large;
+    text-align: center;
+
+} */
+
+.logbut{
+
+    width: 200px;
+    height: 35px;
+    background-color: #EA047E;
+    border-radius: 100px;
+    font-size: large;
+    color: whitesmoke;
+    margin-right: 5px;
+    border-style: none;
+    animation: btn 3s;
+}
+
+.loginimg{
+    width: 150px;
+    height: 150px;
+    margin-top: 50px;
+    animation: logo 3s;
+}
+
+.navbut{
+    width: 120px;
+    height: 40px;
+    background-color: #3E54AC;
+    margin-right: 15px;
+    border-style: none;
+    cursor: pointer;
+    color: white;
+}
+
+.navbut:hover{
+    border-radius: 100px;
+    background-color: white;
+    color: black;
+
+
+}
+
+.logbut,.navbut:active{
+
+    animation: click 0.5s;
+}
+
+.logbut:hover{
+    width: 250px;
+    height: 40px;
+    background-color:#f6f2f4;
+    color: black;
+
+}
+
+.menu{
+    width: 270px;
+    height: 800px;
+    flex-direction: column;
+    z-index: 1;
+    margin-left: 80%;
+    border-radius: 20%;
+}
+.menuitem{
+    text-align: center;
+    vertical-align: center;
+    margin: 0;
+    width: 270px;
+    height: 50px;
+    background-color: rgba(236,242,255,0.9);
+    border-style: none;
+}
+.menuitem:hover{
+    height: 65px;
+    border-color: #3E54AC;
+    border-style: solid;
+    cursor: pointer;
+}
+.menuitem>p{
+    width: 100%;
+    height: 100%;
+    color: black;
+    font-size: x-large;
+    text-align: center;
+    vertical-align: center;
+}
+
+.menuitem>p:hover{
+    color: #3E54AC;
+    font-size: 25px;
+
+}
+/* 
+@keyframes logo{
+
+    0%{width: 0;height: 0;}
+    100% {width: 150px;height: 150px;}
+}
+
+@keyframes inputer{
+    0%{width: 0;height: 0;}
+    80% {
+        width: 450px;
+        height: 45px;}
+        100%{
+            width: 350px;
+            height: 35px;
+        }
+}
+
+@keyframes btn{
+    0%{width: 0;height: 0;}
+    50% {
+        width: 250px;
+        height: 40px;}
+
+80%{
+    width: 150px;
+    height: 30px;
+}
+
+        100%{
+
+            width: 200px;
+            height: 35px;
+        }
+} */
+
+@keyframes click{
+
+    50%{
+
+        transform: translateY(10px);
+    }
+
+}
+
+.bodyclass {
+    width: 100%;
+    background-image: url("/photos/login.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+}
+button{
+    font-size: larger;
+}
+
+.logo{
+    /* background-color: white;
+    border-radius: 100px;
+    margin-left: 20px;
+    text-align: center;
+    height: 50%;
+    width: 50%; */
+
+}
+
+.theform{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-content: space-between;
+    width: 100%;
+    position: relative;
+
+
+}
+
+
+.login-form{
+
+    margin-left: 18%;
+    margin-top: 9%;
+
+    border-radius: 40px;
+
+    width: 25%;
+    height: 60%;
+    background-color: rgba(192,212,250,0.9);
+    opacity: 1;
+    margin-bottom: 35%;
+    position: sticky;
+}
+
+input{
+
+    width: 75%;
+    height: 40px;
+    border-style: none;
+    border-color: #3E54AC;
+    border-width: 2px;
+    border-radius: 100px;
+    margin: 3%;
+    animation: inputer 3s;
+    font-size: 20px;
+    margin: 10px;
+
+
+}
+
+a{
+    text-decoration: none;
+}
+input,select{
+    font-size: 20px;
+
+}
+
+input:focus {
+    outline: none !important;
+    border-color: #3E54AC;
+    /* box-shadow: 0 0 5px deepskyblue; */
+    font-size: 20px;
+    border-style: solid;
+    padding-left: 6px;
+}
+
+::placeholder{
+
+    color: #3E54AC;
+    font-size: 20px;
+    padding-left: 5px;
+}
+
+.logbut{
+
+    width: 45%;
+    height: 40px;
+    background-color: #3E54AC;
+    border-radius: 100px;
+    font-size: large;
+    color: whitesmoke;
+    margin-right: 5px;
+    border-style: none;
+    animation: btn 3s;
+    margin-bottom: 20px;
+}
+
+.loginimg{
+    width: 50%;
+    height: 60%;
+    margin-top: 10%;
+    margin-bottom: 7%;
+}
+
+.logbut:active{
+
+    animation: click 1s;
+}
+
+.logbut:hover{
+
+    box-shadow: 0 0 20px deepskyblue;
+
+}
+
+.navburger{
+    display:flex-end;
+    margin: 10px;
+    padding: 0px;
+    border-radius: 20%;
+    background-color:#3E54AC;
+    color: white;
+    box-shadow: none;
+    border-style: none;
+}
+.navburger img{
+    object-fit: cover;
+    width:35px;
+
+    height:35px;
+
+}
+
+
+.res_menu{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #3E54AC;
+    visibility: hidden;
+    position: relative;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.res_menu .navbut{
+    text-align: center;
+    vertical-align: center;
+    margin: 0;
+    border-color: rgba(62,84,172,0.4);
+    width: 270px;
+    height: 50px;
+
+}
+.res_menu .closebutt{
+    position: absolute;
+    top: 0px;
+    right: 20px;
+    background: #3E54AC;
+    color: white;
+    z-index: 2;
+    font-weight: bolder;
+    border-style: none;
+    font: 500;
+}
+.closebutt:hover{
+    font:900;
+}
+
+@media screen and (max-width:700px) {
+    .menu{
+        display: none;
+    }
+    .main-buttons{
+        visibility: hidden;
+        width:0px;
+
+    }
+    .nav{
+        display: flex;
+        flex-direction: row;
+    }
+    .nav1{
+        display: flex-end;
+        margin-right: 10px;
+    }
+    .navburger{
+        visibility: visible;
+    }
+}
+
+/* For screens smaller than 768px (mobile devices) */
+@media only screen and (max-width: 1250px) {
+
+    .logo {
+        text-align: center;
+    }
+
+
+    .main-buttons {
+        display: none;
+    }
+
+    #menu-button {
+        display: block;
+    }
+
+
+    #menu {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+
+
+    #menu-item {
+        text-align: center;
+        padding: 10px;
+        /*border-top: 1px solid gray;*/
+    }
+
+}
+
+@media(max-width: 700px){
+    .nav {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        object-fit: cover;
+    }
+
+    .logo {
+        margin-bottom: 10px;
+        margin-left: 0px;
+    }
+
+    .main-buttons {
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+
+    .nav1 {
+        flex-direction: row;
+        object-fit: cover;
+        margin-top: 0px;
+        justify-content:  flex-end;
+        margin-left: 5px;;
+    }
+
+    .profile {
+        margin-top: 10px;
+    }
+
+    .menu {
+        display: block;
+    }
+
+}
+@media only screen and (min-width: 1080px) and (max-width: 1243px){
+    .nav {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .main-buttons {
+        margin-right: 20px;
+    }
+
+    .nav1 {
+        margin-left: 20px;
+    }
+
+    .profile {
+        margin-left: 20px;
+    }
+
+    .menu {
+        display: none;
+    }
+    .navburger{
+
+        visibility: visible;
+    }
+}
+@media(min-width: 1224px){
+    .nav {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .main-buttons {
+        margin-right: 50px;
+    }
+
+    .nav1 {
+        margin-left: 50px;
+    }
+
+    .profile {
+        margin-left: 50px;
+    }
+
+    .menu {
+        display: none;
+    }
+    .navburger{
+
+        visibility: hidden;
+    }
+
+}
+
+@media (max-width: 1228px) {
+    .show-menu {
+        display: block;
+    }
+    .main-buttons {
+        display: none;
+    }
+}
+
+/* CSS for mobile devices */
+@media only screen and (max-width: 600px) {
+    /* Adjust the width and margin of the login form */
+    .login-form {
+        width: 100%;
+        margin: 0;
+    }
+
+    /* Adjust the width and margin of the form input elements */
+    .theform input {
+        width: 90%;
+        margin: 10px auto;
+    }
+
+    /* Adjust the font size and margin of the submit button */
+    .logbut {
+        font-size: 18px;
+        margin-top: 20px;
+    }
+
+    /* Center the "Don't have an account?" link */
+    .login-form div {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+/* CSS for tablet devices */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+    /* Adjust the width and margin of the login form */
+    .login-form {
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    /* Adjust the width and margin of the form input elements */
+    .theform input {
+        width: 80%;
+        margin: 10px auto;
+    }
+
+    /* Adjust the font size and margin of the submit button */
+    .logbut {
+        font-size: 24px;
+        margin-top: 30px;
+    }
+}
+
+
+.namt ::placeholder{
+    color: black !important;
+}
+@media only screen and (max-width:450px){
+    .nav{
+        height: 150px;
+    }
+}
+
+button{
+    font-size: larger;
+}
+
+.menu-item{
+    border-style: none;
+}
+
+@media screen and (max-width: 800px){
+    .menu{
+        width: 0;
+        display: none;
+    }
+}

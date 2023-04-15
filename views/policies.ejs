@@ -1,0 +1,85 @@
+<head>
+    <link rel="stylesheet" href="/css/policies.css">
+</head>
+<%- include('navbar.ejs') %>
+    <div class="healinsur">
+        <div>
+            <video autoplay muted loop src="photos/Insurancehealth.mp4"></video>
+        </div>
+        <div class="disclmr">
+            <BR>
+            <h2>CLAIM HEALTH INSURANCE</h2><BR>
+
+            <p>Our goal is to provide you with valuable information
+                and resources on health insurance to help you make
+                informed decisions about your healthcare needs.
+                We understand that choosing the right health insurance
+                plan can be overwhelming, which is why we've created
+                a user-friendly platform that provides you with
+                easy-to-understand information and expert guidance.
+                We're here to support you every step of the way in
+                finding the right health insurance plan that fits your
+                needs and budget. Explore our website to learn more and
+                don't hesitate to contact us if you have any questions or concerns. Your health and well-being ar
+                e our top priorities.</p>
+            <%if(isAuthenticated){%>
+                <a href="/healthpolicies"> <button id="explore1" name="explore1" class="explore">Explore More</button></a>
+            <%}else{%>
+                <a href="/login"> <button id="explore1" name="explore1" class="explore">Explore More</button></a>
+            <%}%>        </div>
+    </div>
+    <div class="carinsur">
+        <div class="disclmr">
+
+
+            <br>
+            <h2>PROTECT YOUR CAR</h2>
+            <br>
+            <p>insurance policy that protects you financially in case of accidents or other incidents involving your
+                car. In exchange for a regular premium payment, your insurance company will cover the cost of damages,
+                injuries, or other losses that result from such incidents.which is why we've created a user-friendly
+                platform that provides you with easy-to-understand information and expert guidance. We're here to
+                support you every step of the way in finding the right health insurance plan that fits your needs and
+                budget. Explore our website to learn more and don't hesitate to contact us if you have any questions or
+                concerns. Your health and well-being ar e our top priorities.</p>
+            <%if(isAuthenticated){%>
+            <a href="/transportpolicies"> <button id="explore1" name="explore1" class="explore">Explore More</button></a>
+       <%}else{%>
+            <a href="/login"> <button id="explore1" name="explore1" class="explore">Explore More</button></a>
+<%}%>
+        </div>
+
+
+        <div class="borde">
+
+            <img src="photos/CoronavirusBorderClosure.gif" alt="cae">
+        </div>
+    </div>
+    <div class="lifeinsur">
+        <div>
+            <video autoplay muted loop src="photos/Insurance.mp4"></video>
+        </div>
+        <div class="disclmr">
+            <BR>
+            <h2>CLAIM LIFE INSURANCE</h2><BR>
+
+            <p>Our goal is to provide you with valuable information
+                and resources on life insurance to help you make
+                informed decisions about your healthcare needs.
+                We understand that choosing the right life insurance
+                plan can be overwhelming, which is why we've created
+                a user-friendly platform that provides you with
+                easy-to-understand information and expert guidance.
+                We're here to support you every step of the way in
+                finding the right health insurance plan that fits your
+                needs and budget. Explore our website to learn more and
+                don't hesitate to contact us if you have any questions or concerns. Your health and well-being ar
+                e our top priorities.</p>
+            <%if(isAuthenticated){%>
+                <a href="/lifepolicies"> <button id="explore1" name="explore1" class="explore">Explore More</button></a>
+            <%}else{%>
+                <a href="/login"> <button id="explore1" name="explore1" class="explore">Explore More</button></a>
+            <%}%>
+    </div>
+    </div>
+    <%- include('footer.ejs') %>

@@ -1,0 +1,129 @@
+<head>
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/signup.css">
+</head>
+<body class="bodyclass">
+<%- include('navbar.ejs') %>
+<marquee style="background-color: #3e54ac;color: white;margin-top: 40px;font-size: 20px">Password must contain at least one uppercase letter, one lowercase letter, and one number, and be at least 8 characters long.</marquee>
+
+<div class='signupdiv'>
+
+    <form id="form" class="signup-form" action="/signup" method="post">
+        <img class="loginimg" src="css/okoklogo-transformed.ico">
+        <p style="color: red"><%=text%></p>
+        <div>
+            <input name="name" id="name" type="text" class="signup-input" placeholder="Name" required>
+        </div>
+        <div>
+            <input name="email" id="email" type="text" class="signup-input" placeholder="Email" required>
+        </div>
+
+        <div class="agesex">
+            <div>
+                <input name="age" id="age" type="number" class="signup-age" min="18"  placeholder="Age" required>
+            </div>
+            <div>
+                <select name="sex" required>
+                    <option>Sex</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
+            </div>
+        </div>
+
+
+
+        <div>
+            <input name="address" id="address" type="text" class="signup-input" placeholder="Address" required>
+        </div>
+        <div>
+            <input name="password" id="password" type="password" class="signup-input" placeholder="Password" required>
+        </div>
+        <div class="phone">
+            <div>
+                <input id="country-code" type="number" class="country-code" placeholder="+91">
+            </div>
+            <div>
+                <input name="phone" id="phone" type="number" class="signup-phn" placeholder="Phone Number" required>
+            </div>
+        </div>
+
+        <button style="background-color: gray" class="submit" type="submit" disabled>
+            Submit
+        </button>
+        <div style="display: flex;justify-content: space-around;padding-bottom: 5px"><a >Already have an account?</a><a href="/login">Login</a></div>
+    </form>
+
+<!--    <button style="background-color: white;border-style: none"></button>-->
+
+</div>
+<%- include('footer.ejs') %>
+</body>
+
+<script>
+
+        const passwordInput = document.getElementById('password');
+        const phoneInput=document.getElementById('phone')
+        const submitButton = document.querySelector('button[type="submit"]');
+        const form=document.getElementById('form')
+
+        const passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$";
+            const passwordValue = passwordInput.value;
+        const phoneRegex='^[6-9]\\d{9}$'
+
+        passwordInput.addEventListener('input', function() {
+            console.log(passwordInput.value)
+            console.log(passwordInput.value.match(passwordRegex))
+
+            if (passwordInput.value.match(passwordRegex)){
+                submitButton.disabled = false;
+                submitButton.style.backgroundColor='#3e54ac'
+            } else {
+                submitButton.disabled = true;
+            }
+        });
+        form.addEventListener('onsubmit', function(e) {
+            console.log(phoneInput.value)
+            console.log(phoneInput.value.match(phoneRegex))
+
+            if (!phoneInput.value.match(phoneRegex)){
+                e.preventDefault()
+                alert('Phone number isn\'t valid')
+            }
+        });
+
+
+
+
+
+
+        // Add an event listener to the password input field to validate on input
+    //     submitButton.addEventListener('click', (e) => {
+    //     const passwordValue = passwordInput.value;
+    //     const phoneInputValue=phoneInput.value
+    //         console.log(passwordValue)
+    //         const regex =" /^(?=.[a-z])(?=.[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/";
+    //         const regex2='^[6-9]\d{9}$'
+    //
+    //         const isValid = regex.test(passwordValue);// Check if password matches regex pattern
+    //         const isValid2=regex2.test(phoneInputValue)
+    //         console.log(isValid)
+    //         console.log(isValid2)
+    //     // If password is valid, remove any error messages and enable submit button
+    //     if (isValid) {
+    //     passwordInput.setCustomValidity('');
+    //     phoneInputValue.setCustomValidity('')
+    // } else {
+    //         e.preventDefault()
+    //         alert('Password must contain at least one uppercase letter, one lowercase letter, and one number, and be at least 8 characters long.')
+    //      If password is invalid, display error message and disable submit button
+    //     passwordInput.setCustomValidity('Password must contain at least one uppercase letter, one lowercase letter, and one number, and be at least 8 characters long.');
+    // }})
+    //
+    //
+    //      Add a minimum length requirement to the password input field
+    //     passwordInput.setAttribute('minlength', '8');
+
+</script>
+

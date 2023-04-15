@@ -1,0 +1,41 @@
+
+<head>
+    <link rel="stylesheet" href="/css/my-policies.css">
+</head>
+
+<%- include('navbar.ejs') %>
+<!--<div class="wrap">-->
+<div class="container2">
+    <div class="heading-wrap"><p class="heading">Your Completed Policies</p></div>
+
+    <% for(let i=0;i<arr.length;i++){%>
+    <%let a='';let b='img'%>
+<%if(arr[i].type==='motor'){a='images/car.svg';b='car-img'} else if(arr[i].type==='life'){a='images/life-insurance.png'} else if(arr[i].type==='health'){a='images/health-insurance.png'}%>
+    <div class="items">
+
+        <img class=<%=b%> src= <%=a%>>
+        <div class="inner-items">
+            <div class="inner-item">
+                <%=arr[i].id%>
+            </div><div class="inner-item">
+                <%=arr[i].name%>
+            </div>
+            <div class="inner-item">
+                <%=arr[i].Duration%>        </div>
+            <div class="inner-item">
+                <%=arr[i].Installment%>  </div>
+            <%let c='';let d=''%>
+            <%if(str=='Explore Plan'){c='Explore Plan';b='/'} else if(str=='Pay Installments'){c='Pay Now',d='/payment'}%>
+           <a href=<%=d%>><button class="but">
+                   <%=c%>
+               </button></a>
+        </div>
+        </div>
+
+
+    <%}%>
+
+</div>
+
+<!--</div>-->
+<%-include('footer.ejs')%>

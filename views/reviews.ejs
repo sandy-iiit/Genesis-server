@@ -1,0 +1,34 @@
+
+<head>
+    <link rel="stylesheet" href="/css/reviews.css">
+</head>
+
+<%- include('navbar.ejs') %>
+<!--<div class="wrap">-->
+<div class="heading-wrap"><p class="heading">Your Queries</p></div>
+
+<div class="container2">
+
+    <% for(let i=0;i<arr.length;i++){%>
+    <div class="items2">
+
+        <div class="inner-item Q">
+           <div> Q  <%=i+1%>). Name: <%=arr[i].name%></div>   <div> Email: <%=arr[i].email%></div>
+        </div>
+        <br>
+        <br>
+        <div class="inner-item A">
+           Review:   <%=arr[i].review%>
+        </div>
+
+
+    </div>
+
+
+    <%}%>
+
+</div>
+
+<%-include('footer.ejs')%>
+<!--</div>-->
+

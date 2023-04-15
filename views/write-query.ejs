@@ -1,0 +1,16 @@
+<head>
+
+    <title>Write Query</title>
+    <link rel="stylesheet" href="/css/write-query.css">
+</head>
+
+<%- include('navbar.ejs')%>
+<img class="wrap" src="/images/query.svg">
+<form action="/write-query" method="post" class="form">
+
+    <div class="text">
+        Write your query in the given text box.
+    </div>
+    <textarea name="question" class="query"></textarea>
+    <button class="btn" type="submit">Post Query</button>
+</form>

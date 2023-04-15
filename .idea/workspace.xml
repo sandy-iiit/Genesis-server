@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3be042da-4e68-4c26-9a6a-7034ea0b4519" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/public/css/healthpolicies.css" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/views/navbar.ejs" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2MPDfvpT1vggK6QvWwWW7euM2ka" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "javascript.nodejs.core.library.configured.version": "18.14.0",
+    "javascript.nodejs.core.library.typings.version": "18.14.0",
+    "last_opened_file_path": "/Users/dattasandeepchoragudi/html/WebstormProjects/Genesis/public/images",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/images" />
+      <recent name="$PROJECT_DIR$/public/css" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/routes" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3be042da-4e68-4c26-9a6a-7034ea0b4519" name="Changes" comment="" />
+      <created>1677660430388</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1677660430388</updated>
+      <workItem from="1677660431599" duration="506000" />
+      <workItem from="1677660963847" duration="3982000" />
+      <workItem from="1677730611196" duration="1207000" />
+      <workItem from="1677733827771" duration="24716000" />
+      <workItem from="1677791970439" duration="6000" />
+      <workItem from="1677791999579" duration="1091000" />
+      <workItem from="1677826689207" duration="894000" />
+      <workItem from="1678027178810" duration="2011000" />
+      <workItem from="1678206936506" duration="406000" />
+      <workItem from="1678284078204" duration="611000" />
+      <workItem from="1678689095427" duration="668000" />
+      <workItem from="1678713808901" duration="1432000" />
+      <workItem from="1678719276394" duration="13518000" />
+      <workItem from="1678791436585" duration="2116000" />
+      <workItem from="1678793984739" duration="14937000" />
+      <workItem from="1678870083035" duration="16044000" />
+      <workItem from="1678944592298" duration="18399000" />
+      <workItem from="1679070322721" duration="8104000" />
+      <workItem from="1679120224778" duration="32436000" />
+      <workItem from="1679218620751" duration="17607000" />
+      <workItem from="1680630478278" duration="2000" />
+      <workItem from="1680684133093" duration="1375000" />
+      <workItem from="1680771983452" duration="5712000" />
+      <workItem from="1680806658829" duration="53000" />
+      <workItem from="1680943978741" duration="26583000" />
+      <workItem from="1681034535898" duration="18208000" />
+      <workItem from="1681158013454" duration="285000" />
+      <workItem from="1681216328418" duration="4359000" />
+      <workItem from="1681221460901" duration="602000" />
+      <workItem from="1681222067955" duration="25000" />
+      <workItem from="1681222102907" duration="89000" />
+      <workItem from="1681222342901" duration="725000" />
+      <workItem from="1681295002262" duration="1433000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>

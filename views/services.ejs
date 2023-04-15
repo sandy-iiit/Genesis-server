@@ -1,0 +1,319 @@
+<head>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/services.css">
+</head>
+<%- include('navbar.ejs') %>
+<div class="querygen">
+    <div class="imaw">
+
+        <img src="photos/Insurance-bro.svg" alt="qutt">
+    </div>
+    <div class="qrygen">
+        <h2>Grab a Quote</h2>
+        <form class="quoteform" onsubmit="submitForm(event)">
+
+            <input type="text" placeholder="name" name="quotnam" id="quotnam">
+            <span id="quotnamError" class="error" style="text-align: center;color: #3E54AC;"></span>
+
+
+            <input type="email" placeholder="email" name="quotemail" id="quotemail">
+            <span id="quotemailError" class="error" style="text-align: center;color: #3E54AC;"></span>
+
+
+            <input type="text" placeholder="insurance type" name="quotinsurance" id="quotinsurance">
+            <span id="quotinsuranceError" class="error" style="text-align: center;color: #3E54AC;"></span>
+
+
+            <input type="text" placeholder="zip code" name="quotzip" id="quotzip">
+            <span id="quotzipError" class="error" style="text-align: center;color: #3E54AC;"></span>
+
+            <input type="text" placeholder="age" name="quotage" id="quotage">
+            <span id="quotageError" class="error" style="text-align: center;color: #3E54AC;"></span>
+
+
+            <input type="date" placeholder=" date of birth" name="quotdob" id="quotdob">
+            <span id="quotdobError" class="error" style="text-align: center;color: #3E54AC;"></span>
+
+
+            <input type="text" placeholder="coverage limit" name="quotcoverage" id="quotcoverage">
+            <span id="quotcoverageError" class="error" style="text-align: center;color: #3E54AC;"></span>
+
+            <button type="submit">Submit</button>
+        </form>
+
+    </div>
+</div>
+<div class="writequery">
+    <div class="qrygen qrygen1">
+        <h2>Drop a Review</h2>
+        <h2></h2>
+        <form class="quoteform" action="/drop-review" method="post" onsubmit="return validateForm()">
+            <input type="text" placeholder="Name" name="name" id="quotnam1" required>
+            <span class="error" id="nameError" style="text-align: center;color: #3E54AC;"></span>
+            <input type="text" placeholder="Email" name="email" id="quotnam1" required>
+            <span class="error" id="emailError" style="text-align: center;color: #3E54AC;"></span>
+            <textarea name="review" id="queryy" cols="3" rows="4" placeholder="Write your review"></textarea>
+            <span class="error" id="queryError" style="text-align: center;color: #3E54AC;"></span>
+            <button type="submit">Submit</button>
+        </form>
+
+    </div>
+    <div class="queryman">
+        <img src="photos/Man thinking-rafiki.svg" alt="">
+    </div>
+</div>
+
+<div class="faqs">
+    <div class="faqdeesc">
+
+        <img src="photos/FAQs-amico.svg">
+    </div>
+    <div class="questr">
+        <br><br>
+        <div class="layout">
+            <div class="accordion">
+                <div class="accordion__question">
+                    <p> What is insurance? </p>
+
+                </div>
+                <div class="accordion__answer">
+                    <p> Insurance is a contractual agreement between an individual and an insurance company, whereby
+                        the individual pays premiums in exchange for the promise of compensation for specified
+                        losses, damages, or liabilities.</p>
+                </div>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion__question">
+                    <p> Why do I need insurance?</p>
+                </div>
+                <div class="accordion__answer">
+                    <p>
+                        Insurance helps to protect you against unexpected events and provides financial security in
+                        case of accidents, illnesses, or other covered losses. It can also help you meet legal
+                        requirements and protect your assets.
+                    </p>
+                </div>
+            </div>
+            <div class="accordion">
+                <div class="accordion__question">
+                    <p> How does insurance work?</p>
+                </div>
+                <div class="accordion__answer">
+                    <p>
+                        When you purchase insurance, you pay premiums to an insurance company, which pools your
+                        premiums with those of other policyholders. If a covered loss occurs, the insurance company
+                        uses the pooled funds to pay for the losses of the affected policyholders.
+                    </p>
+                </div>
+            </div>
+            <div class="accordion">
+                <div class="accordion__question">
+                    <p> How do I choose the right insurance coverage for me? </p>
+                </div>
+                <div class="accordion__answer">
+                    <p>
+                        Choosing the right insurance coverage depends on your individual needs, budget, and risk
+                        tolerance. Consider your assets, potential risks, and the likelihood of experiencing a loss
+                        when selecting coverage.
+                    </p>
+                </div>
+            </div>
+            <div class="accordion">
+                <div class="accordion__question">
+                    <p> What factors affect the cost of insurance? </p>
+                </div>
+                <div class="accordion__answer">
+                    <p>
+                        The cost of insurance is influenced by various factors, such as the type and amount of
+                        coverage, your age, driving record, credit history, and the likelihood of experiencing a
+                        loss
+                    </p>
+                </div>
+            </div>
+            <div class="accordion">
+                <div class="accordion__question">
+                    <p> How long does it take to process an insurance claim?</p>
+                </div>
+                <div class="accordion__answer">
+                    <p>
+                        The length of time it takes to process an insurance claim varies depending on the type of
+                        claim, the insurance company, and the complexity of the claim. Simple claims can be
+                        processed quickly, while more complex claims can take longer.
+                    </p>
+                </div>
+            </div>
+            <div class="accordion">
+                <div class="accordion__question">
+                    <p> What is the difference between comprehensive and collision coverage?</p>
+                </div>
+                <div class="accordion__answer">
+                    <p>
+                        answer 7
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="social-icons">
+            <div>
+                <h3>follow us on :</h3>
+            </div>
+            <a href="#" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook-f"></i></a>
+            <a href="#" class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>
+            <a href="#" class="btn btn-social-icon btn-instagram"><i class="fa fa-instagram"></i></a>
+            <a href="#" class="btn btn-social-icon btn-youtube"><i class="fa fa-youtube"></i></a>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+
+<%- include('footer.ejs') %>
+<script>
+    let answers = document.querySelectorAll(".accordion");
+    answers.forEach((event) => {
+        event.addEventListener("click", () => {
+            if (event.classList.contains("active")) {
+                event.classList.remove("active");
+            } else {
+                event.classList.add("active");
+            }
+        });
+    });
+
+    function submitForm(event) {
+        event.preventDefault();
+
+
+        const nameField = document.getElementById('quotnam');
+        const emailField = document.getElementById('quotemail');
+        const insuranceField = document.getElementById('quotinsurance');
+        const zipField = document.getElementById('quotzip');
+        const ageField = document.getElementById('quotage');
+        const dobField = document.getElementById('quotdob');
+        const coverageField = document.getElementById('quotcoverage');
+
+        const nameError = document.getElementById('quotnamError');
+        const emailError = document.getElementById('quotemailError');
+        const insuranceError = document.getElementById('quotinsuranceError');
+        const zipError = document.getElementById('quotzipError');
+        const ageError = document.getElementById('quotageError');
+        const dobError = document.getElementById('quotdobError');
+        const coverageError = document.getElementById('quotcoverageError');
+
+
+        nameError.textContent = '';
+        emailError.textContent = '';
+        insuranceError.textContent = '';
+        zipError.textContent = '';
+        ageError.textContent = '';
+        dobError.textContent = '';
+        coverageError.textContent = '';
+
+
+        const namePattern = /^[A-Za-z\s]+$/;
+
+        const insurancePattern = /^[A-Za-z\s]+$/;
+        const zipPattern = /^\d{5}$/;
+        const agePattern = /^\d{1,2}$/;
+
+        const coveragePattern = /^\d+$/;
+
+
+        if (!namePattern.test(nameField.value.trim())) {
+            nameError.textContent = '\u2757 Name must contain only letters and spaces';
+            nameField.focus();
+            return false;
+        }
+
+        if (emailField.value.trim() === '') {
+            emailError.textContent = '\u2757 email is required';
+            emailField.focus();
+            return false;
+        }
+
+
+        if (!insurancePattern.test(insuranceField.value.trim())) {
+            insuranceError.textContent = '\u2757 Insurance type must contain only letters and spaces';
+            insuranceField.focus();
+            return false;
+        }
+
+        if (!zipPattern.test(zipField.value.trim())) {
+            zipError.textContent = '\u2757 Invalid zip code';
+            zipField.focus();
+            return false;
+        }
+
+        if (!agePattern.test(ageField.value.trim())) {
+            ageError.textContent = '\u2757 Invalid age';
+            ageField.focus();
+            return false;
+        }
+
+
+
+        if (!coveragePattern.test(coverageField.value.trim())) {
+            coverageError.textContent = '\u2757 Coverage limit must be a positive integer';
+            coverageField.focus();
+            return false;
+        }
+
+
+        return true;
+    }
+
+
+
+    function validateForm() {
+        const nameField = document.getElementById('quotnam1');
+        const emailField = document.getElementById('quotemail1');
+        const queryField = document.getElementById('queryy');
+        const nameError = document.getElementById('nameError');
+        const emailError = document.getElementById('emailError');
+        const queryError = document.getElementById('queryError');
+
+        const namePattern = /^[A-Za-z\s]+$/;
+
+
+        nameError.textContent = '';
+        emailError.textContent = '';
+        queryError.textContent = '';
+
+        if (nameField.value.trim() === '') {
+            nameError.textContent = '\u2757 Name is required';
+            nameField.focus();
+            return false;
+        } else if (!namePattern.test(nameField.value.trim())) {
+            nameError.textContent = '\u2757 Name must only contain letters and spaces';
+            nameField.focus();
+            return false;
+        }
+
+        if (emailField.value.trim() === '') {
+            emailError.textContent = '\u2757 email is required';
+            emailError.focus();
+            return false;
+        }
+
+
+        if (queryField.value.trim() === '') {
+            queryError.textContent = '\u2757 Review is required';
+            queryField.focus();
+            return false;
+        }
+
+
+        return true;
+    }
+
+
+
+</script>

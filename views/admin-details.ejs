@@ -1,0 +1,72 @@
+<head>
+    <link rel="stylesheet" href="/css/admin-details.css">
+</head>
+<%- include('navbar.ejs') %>
+<div class="resdivv">
+    <div class="side-container">
+        <div class="side-item" >
+            <a href="/my-details"><button class="det">Details</button></a>
+        </div>
+
+        <div class="side-item">
+            <a href="/answer-queries"><button  class="det">Answer Queries</button></a>
+        </div>
+        <div class="side-item">
+            <a href="/answered-queries"><button  class="det">Your Answers</button></a>
+        </div>
+        <div class="side-item">
+            <a href="/health-applications"><button  class="det">View Health Applications</button></a>
+        </div>
+        <div class="side-item">
+            <a href="/reviews"><button  class="det">View Reviews</button></a>
+        </div>
+
+        <div class="side-item">
+            <a href="/update-policies"><button  class="det">Update Policies</button></a>
+        </div>
+
+
+        <div class="side-item">
+            <a href="/settings"><button  class="det">Settings</button></a>
+        </div>
+    </div>
+
+    <div class="divdetailbox" >
+        <form class="detail-box" action="/updatedetails" method="post">
+            <p style="text-align:center"><h3 class="hidemeok">YOUR PROFILE</h3></p><br>
+            <div class="detail-item">
+                <p class="label">Name</p>  <input class="input" name="name" value="<%=name%>"></input>
+            </div>
+            <div class="detail-item">
+                <p class="label">Email</p>   <input class="input" name="email" value="<%=email%>"></input>
+            </div>
+            <div class="detail-item">
+                <p class="label">Age</p>   <input class="input" type="number" name="age" value="<%=age%>"></input>
+            </div>
+            <div class="detail-item">
+                <p class="label">Sex</p>  <input class="input" value="<%=sex%>" disabled>
+            </div>
+            <div class="detail-item">
+                <p class="label">Address</p>   <input class="input address" name="address" value="<%=address%>"></input>
+            </div>
+            <div class="detail-item">
+                <p class="label">Phone</p>   <input class="input" type="number" name="phone" value="<%=phone%>"></input>
+            </div>
+            <div class="detail-item buttons">
+                <button class="btn1">
+                    Save
+                </button>
+
+                <a href="/change-password">Change Password</a>
+
+
+            </div>
+        </form>
+    </div>
+</div>
+<div class="heading">
+    <p style="padding: 5px">Your Profile</p>
+
+</div>
+<div style="margin-top: 80%"></div>
+<%- include('footer.ejs') %>
