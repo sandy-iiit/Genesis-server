@@ -6,6 +6,7 @@ const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
 const Query = require("../models/Query");
 const Admin=require('../models/Admin')
+const transportPolicy=require('../models/transportpolicy-details')
 const Review=require('../models/Review')
 const Sequelize=require('sequelize')
 //
@@ -32,19 +33,19 @@ const transporter = nodemailer.createTransport(
 exports.getHealthPolicyPage=(req,res)=>{
     res.render('policypage')
 }
-
-exports.getBuyPolicy=(req,res,next)=>{
-    res.render('buypolicy')
+exports.getVehiclePolicies=async (req, res, next) => {
+    await transportPolicy.find().then((arrr)=>{
+        res.render('transportpolicies', {array: arrr})
+    })
 }
+
 exports.getBuyPolicy2=(req,res,next)=>{
     res.render('buy-policy2')
 }
 exports.getLifePolicy=(req,res,next)=>{
     res.render('lifepolicy',{arr:arr})
 }
-exports.getVehiclePolicies=(req,res,next)=>{
-    res.render('transportpolicies',{array:arr})
-}
+
 exports.getLogin =(req,res,next)=>{
     res.render('login',{text:''})
 }
@@ -61,8 +62,12 @@ exports.getHealthPolicies=(req,res,next)=>{
 
     res.render('healthpolicies',{array:arr})
 }
-exports.getVehiclePolicies=(req,res,next)=>{
-    res.render('transportpolicies',{array:arr})
+exports.getBuyPolicy=(req,res,next)=>{
+    console.log(req.params.id)
+    transportPolicy.findById(req.params.id).then((policy)=>{
+        res.render('buypolicy',{arr:policy})
+    })
+
 }
 
 exports.getDetails=(req,res,next)=>{
@@ -98,7 +103,10 @@ exports.getMyPolicies=(req,res)=>{
     res.render('my-policies',{arr:array2,str:'Explore Plan'})
 }
 exports.getCurrentPolicies=(req,res)=>{
-    res.render('my-policies',{arr:array2,str:'Pay Installments'})
+    User.findById(req.user.id).then(r=>{
+        res.render('my-policies',{arr:r.currentPolicies,str:'Pay Installments'})
+
+    })
 }
 exports.getPayment=(req,res)=>{
     res.render('payment')
@@ -118,8 +126,11 @@ exports.getWriteQuery=(req,res)=>{
     res.render('write-query')
 }
 
-exports.getTransportForm=(req,res)=>{
-    res.render('transport-form')
+exports.getTransportForm=async (req, res) => {
+    await transportPolicy.findById(req.params.id).then((r) => {
+        res.render('transport-form', {r: r,applier:req.user._id})
+
+    })
 }
 exports.getLifeForm=(req,res)=>{
     res.render('life-form')

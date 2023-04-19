@@ -24,7 +24,7 @@
 
 <div class="row2">
     <div class="subrow"><p class="label">Vehicle type</p> <input class="inner-row2" name="vehicleType"></div>
-    <div class="subrow"><p class="label">Year of manufacture</p> <input class="inner-row2" name="yearOfMfg"></div>
+    <div class="subrow"><p class="label">Year of manufacture</p> <input class="inner-row2" name="yearOfMfg" type="number"></div>
 </div>
  <div class="row2">
      <div class="subrow"><p class="label">Engine</p><input  name="engine" class="inner-row2"></div>
@@ -49,25 +49,27 @@
         </div>
     </div>
 
-    <div class="row1">
-        <p class="label">Policy Number</p>
-        <input class="inner-row1" name="policyNum">
+    <div class="row2">
+        <div class="subrow"><p class="label">Nominee AADHAR</p> <input type="file" class="inner-row2" name="nomineeAadhar"></div>
+        <div class="subrow"><p class="label">Nominee AddressProof </p> <input type="file" class="inner-row2" name="nomineeAddressProof"></div>
     </div>
-
     <div class="row1">
         <p class="label">Policy Id</p>
-        <input class="inner-row1" name="policyId" value="policy id">
+        <input class="inner-row1" name="policyId" value="<%=r._id%>">
+    </div>
+    <div class="row1">
+        <p class="label">Policy Name</p>
+        <input class="inner-row1" name="policyName" value="<%=r.name%>">
     </div>
 
     <div class="row2">
-        <div class="subrow"> <p class="label">Amount</p><input class="inner-row2" type="number" name="amount" ></div>
-        <div class="subrow"> <p class="label">Type</p><select name="type" class="inner-row2">
-                <option>Annually</option>
-                <option>Monthly</option>
-            </select></div>
+        <div class="subrow"> <p class="label">Amount</p><input class="inner-row2" type="number" name="amount" value="<%=r.amount%>"></div>
+        <div class="subrow"> <p class="label">Policy Term</p><input name="policyTerm" class="inner-row2" value="<%=r.term%>">
+        </div>
 
     </div>
-
+    <input value="<%=applier%>" name="applier" style="display: none"/>
+    <input value="<%=r.type%>" name="policyType" style="display: none"/>
     <button class="button" type="submit">Submit</button>
 
 

@@ -10,24 +10,27 @@
 
     <% for(let i=0;i<arr.length;i++){%>
     <%let a='';let b='img'%>
-<%if(arr[i].type==='motor'){a='images/car.svg';b='car-img'} else if(arr[i].type==='life'){a='images/life-insurance.png'} else if(arr[i].type==='health'){a='images/health-insurance.png'}%>
+<%if(arr[i].type.trim()==='TRANSPORT'){a='images/car.svg';b='car-img'} else if(arr[i].type==='life'){a='images/life-insurance.png'} else if(arr[i].type==='health'){a='images/health-insurance.png'}%>
     <div class="items">
 
         <img class=<%=b%> src= <%=a%>>
         <div class="inner-items">
             <div class="inner-item">
+                <%=arr[i].type%>
+            </div> <div style="font-size: 10px" class="inner-item">
                 <%=arr[i].id%>
             </div><div class="inner-item">
                 <%=arr[i].name%>
             </div>
             <div class="inner-item">
-                <%=arr[i].Duration%>        </div>
+                <%=arr[i].term%>        </div>
             <div class="inner-item">
-                <%=arr[i].Installment%>  </div>
-            <%let c='';let d=''%>
-            <%if(str=='Explore Plan'){c='Explore Plan';b='/'} else if(str=='Pay Installments'){c='Pay Now',d='/payment'}%>
-           <a href=<%=d%>><button class="but">
-                   <%=c%>
+               Amount <%=arr[i].amount%>  </div>
+
+           <a href='/buy-policy/<%=arr[i].policyId%>'><button class="but">
+              Explore Plan
+               </button></a><a href='/payment'><button class="but">
+              Pay installment
                </button></a>
         </div>
         </div>

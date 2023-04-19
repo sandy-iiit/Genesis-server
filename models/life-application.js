@@ -8,6 +8,8 @@ const lifeSchema=new Schema({
     lastName:String,
     aadhar:String,
     pan:String,
+    nomineeAadhar:String,
+    nomineeAddressProof:String,
     dobProof:String,
     healthCertificate:String,
     healthCondition:String,
@@ -19,6 +21,7 @@ const lifeSchema=new Schema({
     amount:String,
     payType:String,
     applier:String,
+    duration:Number,
 
 
 })

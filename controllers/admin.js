@@ -1,9 +1,28 @@
 
 const queries=require('../models/Query')
 const reviews=require('../models/Review')
+const User=require('../models/User')
+const Policy=require('../models/Policy')
 const healthApplications=require('../models/health-application')
 const lifeApplications=require('../models/life-application')
 const transportApplications=require('../models/transport-application')
+const nodemailer = require("nodemailer");
+
+
+const transporter = nodemailer.createTransport(
+    {
+        service: "Gmail",
+
+        auth: {
+            user: 'dattasandeep000@gmail.com',
+            pass: 'akkkheqzgiwbscmz'
+        },
+    }
+);
+
+
+
+
 exports.getAnswerQueries=(req,res,next)=>{
 
     queries.find({status:'Not Answered'}).then(arr=>{
@@ -78,6 +97,8 @@ exports.getIndividualHealthApplication=(req,res,next)=>{
             aadhar: zrr.aadhar,
             pan:zrr.pan,
             dobProof:zrr.dobProof,
+            nomineeAadhar:zrr.nomineeAadhar,
+            nomineeAddressProof:zrr.nomineeAddressProof,
             healthCertificate:zrr.healthCertificate,
             healthCondition:zrr.healthCondition,
             nominee:zrr.nominee,
@@ -96,12 +117,13 @@ exports.getIndividualLifeApplication=(req,res,next)=>{
     console.log('Entered individual life application')
 
     lifeApplications.findById(req.params.appId).then(zrr=>{
-
         res.render('individualLifeApplication',{
             firstName: zrr.firstName,
             lastName: zrr.lastName,
             aadhar: zrr.aadhar,
             pan:zrr.pan,
+            nomineeAadhar:zrr.nomineeAadhar,
+            nomineeAddressProof:zrr.nomineeAddressProof,
             dobProof:zrr.dobProof,
             healthCertificate:zrr.healthCertificate,
             healthCondition:zrr.healthCondition,
@@ -122,12 +144,15 @@ exports.getIndividualTransportApplication=(req,res,next)=>{
     transportApplications.findById(req.params.appId).then(zrr=>{
 
         res.render('individualTransportApplication',{
+            appId:req.params.appId,
             firstName:zrr.firstName,
             lastName:zrr.lastName,
             regNum:zrr.regNum,
 
             aadhar:zrr.aadhar,
             c_book:zrr.c_book,
+            nomineeAadhar:zrr.nomineeAadhar,
+            nomineeAddressProof:zrr.nomineeAddressProof,
             vehicleCompany:zrr.vehicleCompany,
             model:zrr.model,
             yearOfMfg:zrr.yearOfMfg,
@@ -139,7 +164,9 @@ exports.getIndividualTransportApplication=(req,res,next)=>{
             nomineeAge:zrr.nomineeAge,
             nomineeRelation:zrr.nomineeRelation,
             policyId:zrr.policyId,
-            policyNum:zrr.policyNum,
+            policyName:zrr.policyName,
+            policyType:zrr.policyType,
+            policyTerm:zrr.policyTerm,
             amount:zrr.amount,
             payType:zrr.payType,
             applier:zrr.applier,
@@ -208,4 +235,63 @@ exports.getTransportApplicationsSearch=(req,res,next)=>{
         .catch(err=>{
             console.log('err')
         })
+}
+
+exports.verifyTransport=async (req, res, next) => {
+    const gender= req.user.sex==='Male'?'Mr':'Mrs'
+
+
+    console.log('Entered verifyTransport')
+    transportApplications.updateOne({_id: req.params.id}, {verificationStatus: req.body.Status})
+    const policy = new Policy.model({
+
+        type: req.body.policyType,
+        name: req.body.name,
+        applier: req.body.applier,
+        amount: req.body.amount,
+        policyId: req.body.policyId,
+        appId: req.body.appId,
+        term: req.body.policyTerm,
+        beneficiaryDetails: {
+            name: req.body.nominee,
+            age: req.body.nomineeAge,
+            relation: req.body.nomineeRelation,
+
+        },
+        status: 'Ongoing'
+
+
+    })
+    const applier = await User.findById(req.body.applier)
+
+    const email = applier.email
+    const name = applier.name
+    if (req.body.verificationStatus === 'verified')
+    {
+    policy.save();
+
+
+    User.updateOne({_id: req.body.applier}, {$push: {currentPolicies: policy}}).then((r) => {
+
+        console.log('Policy added to user!!! hooray')
+        transporter.sendMail({
+            to: email,
+            from: 'dattasandeep000@gmail.com',
+            subject: 'Genesis Insurances Application verified and accepted!',
+            html: `<h1>Congratulations ${gender} ${name} your motor insurance application with id ${req.body.applier} has been verified and accepted! </h1>`
+        });
+        res.redirect('/details')
+
+    })
+}
+    else{
+
+        transporter.sendMail({
+            to: email,
+            from: 'dattasandeep000@gmail.com',
+            subject: 'Genesis Insurances Application verified and accepted!',
+            html: `<h2>Sorry ${gender} ${name} your motor insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
+        });
+        res.redirect('/details')
+    }
 }

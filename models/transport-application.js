@@ -10,9 +10,11 @@ const transportSchema=new Schema({
 
     aadhar:String,
     c_book:String,
+    nomineeAadhar:String,
+    nomineeAddressProof:String,
     vehicleCompany:String,
     model:String,
-    yearOfMfg:String,
+    yearOfMfg:Number,
     vehicleType:String,
     engine:String,
     chassis:String,
@@ -21,10 +23,13 @@ const transportSchema=new Schema({
     nomineeAge:String,
     nomineeRelation:String,
     policyId:String,
-    policyNum:String,
+    policyName:String,
+    policyType:String,
+    policyTerm:String,
     amount:String,
     payType:String,
     applier:String,
+    verificationStatus:String,
 
 
 })

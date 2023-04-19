@@ -47,6 +47,17 @@
     color: white;
 }
 
+.button4 {
+    background-color: white;
+    color: black;
+    border: 2px solid deeppink;
+}
+
+.button4:hover {
+    background-color: hotpink;
+    color: white;
+}
+
 .button5 {
     background-color: white;
     color: black;

@@ -25,6 +25,8 @@ exports.healthUploader= async function(req, res, next) {
         age: req.body.age,
         aadhar: req.files['aadhar'][0].id,
         pan:req.files['pan'][0].id,
+        nomineeAadhar:req.files['nomineeAadhar'][0].id,
+        nomineeAddressProof:req.files['nomineeAddressProof'][0].id,
         dobProof:req.files['dobProof'][0].id,
         healthCertificate:req.files['healthCertificate'][0].id,
         healthCondition:req.body.healthCondition,
@@ -36,6 +38,7 @@ exports.healthUploader= async function(req, res, next) {
         amount:req.body.amount,
         payType:req.body.payType,
         applier:req.user._id,
+        duration:req.body.duration
 
 
     });
@@ -52,6 +55,8 @@ exports.lifeUploader= async function(req, res, next) {
         age: req.body.age,
         aadhar: req.files['aadhar'][0].id,
         pan:req.files['pan'][0].id,
+        nomineeAadhar:req.files['nomineeAadhar'][0].id,
+        nomineeAddressProof:req.files['nomineeAddressProof'][0].id,
         dobProof:req.files['dobProof'][0].id,
         healthCertificate:req.files['healthCertificate'][0].id,
         healthCondition:req.body.healthCondition,
@@ -63,6 +68,7 @@ exports.lifeUploader= async function(req, res, next) {
         amount:req.body.amount,
         payType:req.body.payType,
         applier:req.user._id,
+        duration:req.body.duration,
 
 
     });
@@ -82,7 +88,9 @@ exports.transportUploader= async function(req, res, next) {
 
         aadhar: req.files['aadhar'][0].id,
         c_book:req.files['c_book'][0].id,
-        vehicleCompany:req.body.vehicleCompany,
+        nomineeAadhar:req.files['nomineeAadhar'][0].id,
+        nomineeAddressProof:req.files['nomineeAddressProof'][0].id,
+        vehicleCompany:req.body.company,
         model:req.body.model,
         yearOfMfg:req.body.yearOfMfg,
         vehicleType:req.body.vehicleType,
@@ -94,7 +102,9 @@ exports.transportUploader= async function(req, res, next) {
         nomineeAge:req.body.nomineeAge,
         nomineeRelation:req.body.nomineeRelation,
         policyId:req.body.policyId,
-        policyNum:req.body.policyNum,
+        policyName:req.body.policyName,
+        policyType:req.body.policyType,
+        policyTerm:req.body.policyTerm,
         amount:req.body.amount,
         payType:req.body.payType,
         applier:req.user._id,

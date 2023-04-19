@@ -51,7 +51,7 @@ router.get('/my-queries',userController.getMyQueries)
 router.get('/current-policies',userController.getCurrentPolicies)
 router.get('/payment',userController.getPayment)
 router.get('/write-query',userController.getWriteQuery)
-router.get('/transport-form',userController.getTransportForm)
+router.get('/transport-form/:id',userController.getTransportForm)
 router.get('/life-form',userController.getLifeForm)
 router.get('/health-form',userController.getHealthForm)
 router.get('/admin-queries',userController.getAdminQueries)
@@ -59,7 +59,7 @@ router.get('/services',userController.getServices)
 router.get('/aboutus',userController.getAboutUs)
 router.get('/policies',userController.getPolicies)
 router.get('/transportpolicies',userController.getVehiclePolicies)
-router.get('/buy-policy',userController.getBuyPolicy)
+router.get('/buy-policy/:id',userController.getBuyPolicy)
 router.get('/buy-policy2',userController.getBuyPolicy2)
 router.get('/lifepolicies',userController.getLifePolicy)
 router.get('/policypage',userController.getHealthPolicyPage)
@@ -77,19 +77,23 @@ router.post('/health-form', upload.fields([
     { name: 'aadhar', maxCount: 1 },
     { name: 'pan', maxCount: 1 },
     {name:'dobProof',maxCount:1},
-    {name:'healthCertificate',maxCount:1}
+    {name:'healthCertificate',maxCount:1}, { name: 'nomineeAadhar', maxCount: 1 },
+    { name: 'nomineeAddressProof', maxCount: 1 },
 ]),filesController.healthUploader)
 
 router.post('/life-form', upload.fields([
     { name: 'aadhar', maxCount: 1 },
     { name: 'pan', maxCount: 1 },
     {name:'dobProof',maxCount:1},
-    {name:'healthCertificate',maxCount:1}
+    {name:'healthCertificate',maxCount:1}, { name: 'nomineeAadhar', maxCount: 1 },
+    { name: 'nomineeAddressProof', maxCount: 1 },
 ]),filesController.lifeUploader)
 
 router.post('/transport-form', upload.fields([
     { name: 'aadhar', maxCount: 1 },
     { name: 'c_book', maxCount: 1 },
+    { name: 'nomineeAadhar', maxCount: 1 },
+    { name: 'nomineeAddressProof', maxCount: 1 },
 ]),filesController.transportUploader)
 
 // Admin
@@ -99,7 +103,7 @@ router.get('/answered-queries',adminController.getAlreadyAnsweredQueries)
 router.get('/health-applications',adminController.getHealthApplications)
 router.get('/life-applications',adminController.getLifeApplications)
 router.get('/transport-applications',adminController.getTransportApplications)
-router.get('/health-applications/:appId',adminController.getIndividualTransportApplication)
+router.get('/health-applications/:appId',adminController.getIndividualHealthApplication)
 router.get('/life-applications/:appId',adminController.getIndividualLifeApplication)
 router.get('/transport-applications/:appId',adminController.getIndividualTransportApplication)
 router.post('/search-health-applications',adminController.getHealthApplicationsSearch)
@@ -108,4 +112,5 @@ router.post('/search-transport-applications',adminController.getTransportApplica
 router.get('/reviews',adminController.getReviews)
 router.post('/queries/:queryId',adminController.postAnswer)
 router.get('/files/:fileId',filesController.getFile)
+router.post('/verifyTransport',adminController.verifyTransport)
 module.exports = router

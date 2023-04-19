@@ -75,23 +75,20 @@
 </div>
 
 <div class="container12">
-    <%for(let i=0;i<array.length-1;i++){%>
+    <%for(let i=0;i<array.length;i++){%>
 
     <div class="card12">
        <div class="item12">
-          <h1><%=array[i].name%></h1>
+          <h4><%=array[i].name%></h4>
        </div>
        <div class="item12">
-           <h2><%=array[i].term%></h2>
+          <h4>IDV : <%=array[i].amount%></h4>
        </div>
        <div class="item12">
-          <h2><%=array[i].percentage%></h2>
-       </div>
-       <div class="item12">
-           <h2><%=array[i].IDV%></h2>
+           <h4>TERM:<%=array[i].term%></h4>
        </div>
         <div class="item12">
-            <a href="/buy-policy2"><button class="button">Select</button></a>
+            <a href="/buy-policy/<%= array[i]._id  %>"><button class="button">Select</button></a>
         </div>
    </div>
 <%}%>
