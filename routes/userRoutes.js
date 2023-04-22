@@ -61,6 +61,7 @@ router.get('/policies',userController.getPolicies)
 router.get('/transportpolicies',userController.getVehiclePolicies)
 router.get('/buy-policy/:id',userController.getBuyPolicy)
 router.get('/buy-policy2',userController.getBuyPolicy2)
+router.get('/buypolicy3/:id',userController.getBuyPolicylife)
 router.get('/lifepolicies',userController.getLifePolicy)
 router.get('/policypage',userController.getHealthPolicyPage)
 router.get('/contactus',userController.getContactUs)
@@ -95,7 +96,7 @@ router.post('/transport-form', upload.fields([
     { name: 'nomineeAadhar', maxCount: 1 },
     { name: 'nomineeAddressProof', maxCount: 1 },
 ]),filesController.transportUploader)
-
+router.post('/change-password',userController.changePassword)
 // Admin
 
 router.get('/answer-queries',adminController.getAnswerQueries)

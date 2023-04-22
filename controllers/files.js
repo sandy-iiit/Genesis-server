@@ -108,6 +108,7 @@ exports.transportUploader= async function(req, res, next) {
         amount:req.body.amount,
         payType:req.body.payType,
         applier:req.user._id,
+        appliedDate:new Date().toDateString()
 
 
     });

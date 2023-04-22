@@ -22,6 +22,8 @@ const lifeSchema=new Schema({
     payType:String,
     applier:String,
     duration:Number,
+    appliedDate:String,
+    verificationDate:String,
 
 
 })

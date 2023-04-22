@@ -29,6 +29,8 @@ const transportSchema=new Schema({
     amount:String,
     payType:String,
     applier:String,
+    appliedDate:String,
+    verificationDate:String,
     verificationStatus:String,
 
 

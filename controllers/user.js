@@ -7,8 +7,11 @@ const sendgridTransport = require('nodemailer-sendgrid-transport');
 const Query = require("../models/Query");
 const Admin=require('../models/Admin')
 const transportPolicy=require('../models/transportpolicy-details')
+const lifepPolicy=require('../models/lifepolicy-details')
+const changePassword=require('../models/passwordChange')
 const Review=require('../models/Review')
 const Sequelize=require('sequelize')
+const twilio = require("twilio");
 //
 // const transporter = nodemailer.createTransport(
 //     sendgridTransport({
@@ -43,7 +46,11 @@ exports.getBuyPolicy2=(req,res,next)=>{
     res.render('buy-policy2')
 }
 exports.getLifePolicy=(req,res,next)=>{
-    res.render('lifepolicy',{arr:arr})
+    lifepPolicy.find({}).then(arrr=>{
+
+        res.render('lifepolicy',{array:arrr})
+
+    })
 }
 
 exports.getLogin =(req,res,next)=>{
@@ -156,7 +163,12 @@ exports.getContactUs=(req,res)=>{
 }
 
 
-
+exports.getBuyPolicylife = (req,res,next)=>{
+    console.log(req.params.id)
+    lifepPolicy.findById(req.params.id).then((policy)=>{
+        res.render('buypolicylife',{array:policy})
+    })
+}
 
 
 
@@ -391,6 +403,8 @@ exports.postSignup=(req,res)=> {
     }
 
     exports.deleteAcc = (req, res) => {
+
+
         User.findByIdAndDelete(req.user._id).then(r => {
 
             res.redirect('/')
@@ -424,3 +438,46 @@ exports.postSignup=(req,res)=> {
             })
 
     }
+
+
+    exports.changePassword=async (req, res, next) => {
+
+        const phone = '+91' + req.body.phone
+        const email = req.body.email
+        const OTP = Math.floor(Math.random() * 1000000)
+
+        passchange = new changePassword({
+            userID: req.user,
+            email: email,
+            OTP: OTP,
+            phone: phone,
+            createdAt: new Date()
+        })
+
+        await passchange.save()
+
+       await transporter.sendMail({
+            to: email,
+            from: 'dattasandeep000@gmail.com',
+            subject: 'Genesis Insurances OTP for password change!',
+            html: `Dear user your otp to change your password is ${OTP}`
+        });
+
+
+        const account_sid = process.env.TWILIO_ACCOUNT_SID
+        const auth_token = process.env.TWILIO_AUTH_TOKEN
+        const client = twilio(account_sid, auth_token);
+
+        client.messages.create({
+            body: 'Dear user your OTP to for changing password is '+OTP,
+            from: '+16813346876',
+            to: phone
+        })
+            .then(message => {console.log(message.sid);res.render('otpverifier',{email})})
+            .catch(error => console.error(error));
+}
+
+
+exports.verifyOTP=(req,res,next)=>{
+
+}

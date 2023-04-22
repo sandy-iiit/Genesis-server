@@ -1,4 +1,4 @@
-.container1{
+.container12{
     justify-content: space-between;
     border-radius: 20px;
     background-color: rgba(192,212,250,0.7);
@@ -14,7 +14,7 @@ a{
     text-decoration: none;
 }
 
-.card1{
+.card12{
     border-radius: 20px;
     border-style: solid;
     flex: 0 1 23%;
@@ -29,12 +29,12 @@ a{
     justify-content: space-evenly;
 }
 
-.card1:hover{
-    height: 450px;
-    width: 28%;
-    margin: 2%;box-shadow: 13px 16px 21px 5px rgba(62,84,172,0.84);
+/*.card12:hover{*/
+/*    !*height: 450px;*!*/
+/*    !*width: 28%;*!*/
+/*    margin: 2%;box-shadow: 13px 16px 21px 5px rgba(62,84,172,0.84);*/
 
-}
+/*}*/
 
 .heading{
     font-family: "Apple Chancery";
@@ -110,8 +110,8 @@ a{
     height: 50px;
 }
 
-.card1:hover{
-    height: 43vh;
+.card12:hover{
+    height: 450px;
     margin: 2%;
 rgba(0, 191, 255, 1);
 }
@@ -148,16 +148,16 @@ rgba(0, 191, 255, 1);
 
 @media  screen and (max-width: 1000px){
 
-    .container1{
+    .container12{
         justify-content: center;
     }
-    .card1{
+    .card12{
         flex:0 0 80%;
     }
     .below{
         display: none;
     }
-    .card1:hover{
+    .card12:hover{
         display: none;
     }
 
@@ -171,6 +171,5 @@ rgba(0, 191, 255, 1);
     .whlimg{
         display: none;
     }
-
 
 }

@@ -8,6 +8,9 @@ const lifeApplications=require('../models/life-application')
 const transportApplications=require('../models/transport-application')
 const nodemailer = require("nodemailer");
 
+var TRANSPORTAPPLICATIONS=[]
+var HEALTHAPPLICATIONS=[]
+var LIFEAPPLICATIONS=[]
 
 const transporter = nodemailer.createTransport(
     {
@@ -84,6 +87,9 @@ exports.getTransportApplications=(req,res,next)=>{
 
     transportApplications.find({})
         .then(zrr=>{
+            TRANSPORTAPPLICATIONS=zrr;
+            console.log('Trans')
+            console.log(TRANSPORTAPPLICATIONS)
         res.render('transport-applications',{arr:zrr})
     })
 }
@@ -218,23 +224,28 @@ exports.getLifeApplicationsSearch=(req,res,next)=>{
 exports.getTransportApplicationsSearch=(req,res,next)=>{
     console.log('entered the func')
     console.log(req.body.search)
-    transportApplications.find({})
-        .then(async r=>{
+    // transportApplications.find({})
+    //     .then(async r=>{
+    // console.log('tarns2')
+    // console.log(TRANSPORTAPPLICATIONS)
             const arrr=[]
-             for(let i=0;i<r.length;i++){
-                let name=r[i].firstName+' '+r[i].lastName
-                if(name.includes(req.body.search)){
+             for(let i=0;i<TRANSPORTAPPLICATIONS.length;i++){
+                let name=TRANSPORTAPPLICATIONS[i].firstName+' '+TRANSPORTAPPLICATIONS[i].lastName
+                let Name=TRANSPORTAPPLICATIONS[i].firstName.toLowerCase()+' '+TRANSPORTAPPLICATIONS[i].lastName.toLowerCase()
+                let nAME=TRANSPORTAPPLICATIONS[i].firstName.toUpperCase()+' '+TRANSPORTAPPLICATIONS[i].lastName.toUpperCase()
+                 console.log('Name '+name)
+                if(name.includes(req.body.search) || Name.includes(req.body.search) || nAME.includes(req.body.search)){
                     console.log(name)
-                    arrr.push(r[i])
+                    arrr.push(TRANSPORTAPPLICATIONS[i])
                 }
             }
                 res.render('transport-applications',{arr:arrr})
 
 
-        })
-        .catch(err=>{
-            console.log('err')
-        })
+        // })
+        // .catch(err=>{
+        //     console.log('err')
+        // })
 }
 
 exports.verifyTransport=async (req, res, next) => {
@@ -242,7 +253,7 @@ exports.verifyTransport=async (req, res, next) => {
 
 
     console.log('Entered verifyTransport')
-    transportApplications.updateOne({_id: req.params.id}, {verificationStatus: req.body.Status})
+    transportApplications.updateOne({_id: req.params.id}, {verificationStatus: req.body.Status,verificationDate:new Date().toDateString()})
     const policy = new Policy.model({
 
         type: req.body.policyType,

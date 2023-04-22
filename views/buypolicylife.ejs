@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <link rel="stylesheet" href="/css/buypolicy.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<%- include('navbar.ejs') %>
+<div class="scroll-mobile">
+    <ul class="switchnav">
+        <button  class="button button1" onclick="openInfo('Details')">Policy Details</button>
+        <button  class="button button2" onclick="openInfo('T&C')">Policy Terms and Conditions</button>
+        <button class="button button4" onclick="openInfo('GeneralException')">General Exceptions</button>
+        <button  class="button button3" onclick="openInfo('Benefits')">Benefits</button>
+        <button class="button button5" onclick="openInfo('buyPolicy')">Buy Policy</button>
+    </ul>
+</div>
+<div class="content" id="content">
+    <div class="Details info" id="Details">
+        <div class="info1">
+            <h3> Type of policy :<%= array.name %></h3>
+            <h3> IDV : ₹ <%= array.coverAmount %></h3>
+            <h3> Term : <%= array.term %></h3>
+        </div>
+        <div class="info2" >
+            <p style="white-space: pre-line"> <%= array.details %></p>
+        </div>
+    </div>
+    <div class="T&C info" id="T&C" style="display:none">
+        <h3 style="text-align: center"> <strong>Terms and Conditions</strong></h3>
+        <p style="white-space: pre-line"> <%= array.TC %> </p>
+    </div>
+
+    <div id="Benefits" class="Benefits info" style="display:none">
+        <h3 style="text-align: center"><strong>Benefits</strong></h3>
+
+        <p style="white-space: pre-line"><%= array.benefits%></p>
+
+    </div>
+    <div class="GeneralException info" id="GeneralException" style="display: none">
+        <h3 style="text-align: center"><strong>General Exceptions</strong></h3>
+        <p style="white-space: pre-line"> <%= array.GE%></p>
+
+    </div>
+
+    <div class="buyPolicy info" id="buyPolicy" style="display:none">
+        <a href="/life-form">final payment page</a>
+    </div>
+</div>
+
+<%- include('footer.ejs') %>
+
+</body>
+<script>
+    function openInfo(info){
+        var i;
+        var x = document.getElementsByClassName("info");
+        for(i=0;i<x.length;i++){
+            x[i].style.display="none";
+        }
+        document.getElementById(info).style.display="block";
+    }
+</script>
+</html>

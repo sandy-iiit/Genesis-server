@@ -21,7 +21,9 @@ const healthSchema=new Schema({
     amount:String,
     payType:String,
     applier:String,
-    duration:String
+    duration:String,
+    appliedDate:String,
+    verificationDate:String,
 
 })
 
