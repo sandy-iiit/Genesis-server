@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/policypage.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+
+    <title>Policy Viewing</title>
+</head>
+
+
+<%- include('navbar.ejs') %>
+
+<body>
+    
+    <br>
+    <div class="heading">  <h1>Our Health Insurance Policies:<h2> Protecting Your Health and Finances</h2></h1>
+    </div>
+    <img class='Image1' src='https://thumbs.dreamstime.com/b/health-insurance-concept-big-clipboard-document-under-umbrella-healthcare-finance-medical-service-isolated-148814786.jpg' height="25%" width="23%" style="position:absolute; top:60px; right:5px;">
+    
+    <h2 class="subheads">WHAT IS HEALTH INSURANCE WHICH YOU WANTED TO VIEW?</h2>
+   
+<div class="matterbox2">
+    
+    <div class="disclaimer">
+      <h2>       DISCLAIMER FOR CUSTOMERS
+      </h2>
+    
+      The payable total amount, duration, and premium of a health insurance policy can vary widely depending on several factors, such as your age, health history, location, and the specific plan you choose.
+        You should carefully review the details of each plan you are considering to understand the costs and benefits, as well as any restrictions or limitations. Typically, premiums are paid monthly or annually, and the duration of the policy can range from one year to several years, depending on the plan. The payable total amount will also depend on the specific plan and the amount of coverage provided.</p>
+    </div>
+    <div class="factors">
+    <h2>        FACTORS DETERMINING HEALTH INSURANCE PREMIUM CALCULATION
+    </h2>
+    <div style="text-align: center;">
+<br><br>	<strong>Age:</strong> Generally, older individuals tend to have higher health insurance premiums than younger individuals because they are more likely to have health issues that require medical attention.
+<br><br>	<strong>Gender:</strong> Women may have higher health insurance premiums than men because they tend to use medical services more frequently, especially during their reproductive years.
+<br><br>    <strong>Medical history:</strong> If an individual has a pre-existing medical condition or has a history of serious health issues, they may have higher health insurance premiums.
+<br><br>	<strong>Lifestyle factors:</strong> Health insurance companies may consider an individual's lifestyle factors, such as whether they smoke or drink alcohol, when determining their premiums. Individuals who engage in high-risk behaviors may have higher premiums.
+<br><br>	<strong>Geographic location:</strong> The cost of healthcare can vary depending on the region or state, and health insurance premiums may reflect this.
+<br><br>	<strong>Type of plan:</strong> Different types of health insurance plans, such as HMOs, PPOs, and high-deductible plans, have different premium costs.
+<br><br>	<strong>Deductibles and copayments:</strong> Plans with higher deductibles and copayments typically have lower premiums, while plans with lower deductibles and copayments tend to have higher premiums.
+
+    </div>
+</div>
+
+</div>
+
+<div class="scroll-mobile">
+    <ul class="">
+        <button  class="button button1" onclick="openInfo('Details')">Policy Details</button>
+        <button  class="button button2" onclick="openInfo('T&C')">Policy Terms and Conditions</button>
+        <button  class="button button3" onclick="openInfo('Benefits')">Benefits</button>
+        <button class="button button5" onclick="openInfo('buyPolicy')">Buy Policy</button>
+    </ul>
+</div>
+<div class="content" id="content">
+    <div class="Details info" id="Details">
+
+        <div class="detailmatter" id="detailmatter">
+
+            <h3><strong>Cover Amount:</strong>5,00,000</h3>
+            <h3><strong>Premium:</strong>7111/-</h3>
+            <h3><strong>Term:</strong>Annually</h3>
+            <h3><strong>Type of plan:</strong>Point Of Service(POS)</h3>
+        </div>
+        <div class="keyfeatures" id="keyfeatures">
+            <h3> KEY FEATURES 🩺🛡️</h3>
+            <ul style="list-style:symbols(※);">
+                <li>Provides comprehensive financial protection to your family</li>
+                <li>Get treated on a cashless basis across 10,000 + network hospitals in India</li>
+                <li>Secure Benefit offers additional coverage amount equivalent to 100%/200% of the Base Sum Insured.</li>
+                <li>Get daily hospitalization cash benefit up to ₹ 5000. </li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="T&C info" id="T&C" style="display:none">
+        <div class="keyterms" id="keyterms">  
+        <h3>KEY TERMS:</h3>
+
+            <ul>
+                <li>The health premium is guaranteed for a period of 3 years, post
+                    which it may be reviewed.</li>
+                <li>Please know the associated risks and the applicable charges, from
+                    your Insurance agent or the Intermediary or policy document issued
+                    by insurance company</li>
+                <li>Tax Benefits are subject to change as per Income Tax Act, 1961.
+                    Please check with your financial advisor for more details</li>
+            </ul>
+        </div>
+            <p style="text-align: center">**REFER THE BROCHURE FOR ALL TERMS AND CONDITIONS</p>
+            <div class="conditionhead" id="conditionhead">
+                CONDITIONS UNDER WHICH CLAIM IS NOT APPLICABLE:
+            </div>
+            <div class="conditionbody" id="conditionbody">
+<ol>
+    
+    <li>Pre-existing conditions: Health insurance policies may have a waiting period before covering pre-existing medical conditions. During this period, any medical expenses related to the pre-existing condition may not be covered.</li>
+    <li>Non-covered treatments: Some health insurance policies have limitations on certain treatments or procedures that are not covered. This may include cosmetic surgery, fertility treatments, or experimental treatments.
+    </li>
+    <li>Exceeding policy limits: Health insurance policies often have limits on the amount of coverage they provide for a particular treatment or procedure. If the cost of treatment exceeds this limit, the policyholder may be responsible for paying the difference.
+    </li>
+    <li>Failure to follow policy guidelines: Health insurance policies may have specific guidelines or requirements for accessing certain treatments or services. If the policyholder fails to follow these guidelines, the claim may not be covered.
+    </li>
+    <li>Non-payment of premiums: If the policyholder fails to pay the required premiums, the health insurance policy may be cancelled or suspended. Any claims made during the period when the premiums were not paid may not be covered
+    </li>
+    <li>Out-of-network providers: If the policyholder receives treatment from a healthcare provider who is not in the insurance company's network, the claim may not be covered or may be covered at a lower rate.</li>
+    <li>Experimental treatments: If the policyholder receives an experimental or investigational treatment that has not been approved by the insurance company or the relevant regulatory bodies, the claim may not be covered.</li>
+    <li>Intentional acts: Health insurance policies typically do not cover medical expenses resulting from intentional acts, such as self-harm or criminal activity.
+    </li>
+    <li>Substance abuse: Some health insurance policies have limitations on coverage for substance abuse treatment or may not cover it at all.
+    </li>
+    <li>Non-medical expenses: Health insurance policies generally only cover medical expenses. Any non-medical expenses, such as transportation or lodging, are typically not covered.
+    </li>
+<img src="css/healthclub.jpg" alt="">
+</ol>
+    
+            </div>
+    </div>
+    <div id="Benefits" class="Benefits info" style="display:none">
+        <p></p>
+
+        <nav class="accordion arrows">
+            <header class="box1">
+              <label for="acc-close" class="box-title">Coverages:</label>
+            </header>
+            <input type="radio" name="accordion" id="cb1" />
+            <section class="box">
+              <label class="box-title" for="cb1"><span class="coveragetitle">NO ROOM RENT LIMIT </span>✅</label>
+              <label class="box-close" for="acc-close"></label>
+              <div class="box-content">Room rent limit is the maximum amount per day cost allowed by the insurer. Related expenses, such as doctor consultation etc. are paid in proportion to the room rent limit. Look out for plans with No Room Rent limit</div>
+            </section>
+            <input type="radio" name="accordion" id="cb2" />
+            <section class="box">
+              <label class="box-title" for="cb2"><span class="coveragetitle">RESTORATION COVER : </span>5 Lakh Unlimited times ✅</label>
+              <label class="box-close" for="acc-close"></label>
+              <div class="box-content">
+                Very useful feature, in case the sum Insured gets exhausted in a year due to multiple claims or a large claim. Insurer restores the sum insured to provide continued coverage to policyholders.
+                </div>
+            </section>
+            <input type="radio" name="accordion" id="cb3" />
+            <section class="box">
+              <label class="box-title" for="cb3"><span class="coveragetitle">CASHLESS HOSPITALS : </span>9500 ✅
+                </label>
+              <label class="box-close" for="acc-close"></label>
+              <div class="box-content"> Hospitals that have a direct tie-up with the insurance company, where insured can avail cashless treatment. Larger the network in your area, better it is.</div>
+            </section>
+            <input type="radio" name="accordion" id="cb4" />
+            <section class="box">
+              <label class="box-title" for="cb4"><span class="coveragetitle">COPAY : </span>100% paid by insurer ✅
+                </label>
+              <label class="box-close" for="acc-close"></label>
+              <div class="box-content">Co-pay is the share of claim to be paid by the policyholder, while the rest is paid by the insurer. Always look out for plan with 0% co-pay or minimum co-payment.</div>
+            </section>
+
+            <input type="radio" name="accordion" id="cb5" />
+            <section class="box">
+              <label class="box-title" for="cb5"><span class="coveragetitle">MATERNITY COVER : </span>YES ✅
+                </label>
+              <label class="box-close" for="acc-close"></label>
+              <div class="box-content"></div>
+            </section>
+            <input type="radio" name="accordion" id="cb6" />
+            <section class="box">
+              <label class="box-title" for="cb6"><span class="coveragetitle">PRE-HOSPITALISATION COVERAGE : </span>60 days ✅
+                </label>
+              <label class="box-close" for="acc-close"></label>
+              <div class="box-content">Expenses incurred <strong>BEFORE</strong> hospitalization, such as doctor visits, diagnostic tests etc. Insurance company pays for such expenses upto a certain number of days prior to hospitalization.</div>
+            </section>
+
+            <input type="radio" name="accordion" id="cb7" />
+            <section class="box">
+              <label class="box-title" for="cb7"><span class="coveragetitle">PRE-HOSPITALISATION COVERAGE : </span>180 days ✅
+                </label>
+              <label class="box-close" for="acc-close"></label>
+              <div class="box-content">Expenses incurred <strong>AFTER</strong> hospitalization, such as doctor visits, diagnostic tests etc. Insurance company pays for such expenses upto a certain number of days after the hospitalization.</div>
+            </section>
+   
+            
+            <input type="radio" name="accordion" id="cb8" />
+            <section class="box">
+              <label class="box-title" for="cb8"><span class="coveragetitle">EXISTING-ILLNESS WAITING PERIOD: </span> 4 Years
+                </label>
+              <label class="box-close" for="acc-close"></label>
+              <div class="box-content">The minimum period policyholder needs to wait before filing a claim. In case of pre-exisitng illnesses such as diabetes, thyroid etc., look for plans with less waiting periods.
+               </div>
+            </section>
+        
+            <input type="radio" name="accordion" id="acc-close" />
+          </nav>
+
+        <nav class="accordion arrows">
+            <header class="box2">
+              <label for="acc-close" class="box-title">Benefits</label>
+            </header>
+            <input type="radio" name="accordion" id="cb9" />
+            <section class="box">
+              <label class="box-title" for="cb9"><span class="benefittitle">NO CLAIM BONUS</span>: 2.5 Lakh Annually</label>
+              <label class="box-close" for="acc-close"></label>
+              <div class="box-content">No Claim Bonus is the reward for not making a claim. Depending on plan, Insurer adds a 5%-100% bonus to the Sum Insured at no extra premium.</div>
+            </section>
+
+            <input type="radio" name="accordion" id="cb10" />
+            <section class="box">
+              <label class="box-title" for="cb10"><span class="benefittitle">HOME HOSPITALISATION:</span>:  upto 5 lakh</label>
+              <label class="box-close" for="acc-close"></label>
+              <div class="box-content">This feature covers for scenarios where hospital bed is not available AND the doctor has recommended treatment at home.
+            </div>
+            </section>
+
+            <input type="radio" name="accordion" id="cb11" />
+            <section class="box">
+              <label class="box-title" for="cb11"><span class="benefittitle">AMBULANCE CHARGES:</span>:  Upto 10000</label>
+              <label class="box-close" for="acc-close"></label>
+              <div class="box-content">Covers for ambulance charges before or after the hospitalization.
+
+            </div>
+            </section>
+            
+
+            <input type="radio" name="accordion" id="acc-close" />
+        </nav>
+
+        <div class="otherben" id="otherben">
+            <header class="box3">
+                <label class="box-title">Other Benefits</label>
+              </header>
+
+              <section class="box">
+                    <ul style=" padding: 2vh;">
+                        <li style="padding: 2vh ;">25% Raise on Cover amount for Policy Holders Over 65 years and holding the policy for 75% of the duration of the policy</li>
+                        
+                      </ul>
+                    </section>
+                    
+                        <section class="box"> <ul style="padding: 2vh;">
+                          <li style="padding: 2vh;">10% discount on annual claims due to major chronic illness like cancer,diabetes etc.</li>
+                        </ul>
+                          </section>
+                        
+                        
+    </section>
+    
+        </div>
+
+    </div>
+
+    <div class="buyPolicy info" id="buyPolicy" style="display:none">
+        <a href="/health-form"><p>Go to application</p></a>
+    </div>
+</div>
+
+<a href="./healthpolicies"><button class="backtohealth" id="backtohealth"> Back to view policies</button></a>
+
+<script>
+    function openInfo(info){
+        var i;
+        var x = document.getElementsByClassName("info");
+        for(i=0;i<x.length;i++){
+            x[i].style.display="none";
+        }
+        document.getElementById(info).style.display="block";
+    }
+</script>
+    
+</body>
+
+
+<%- include('footer.ejs') %>
+</html>

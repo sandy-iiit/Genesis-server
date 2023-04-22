@@ -1,0 +1,390 @@
+.contactin {
+  width: 100%;
+  height: auto;
+  background-image: url("images/Online world-pana.png");
+  position: relative;
+  display: flex;
+}
+
+.contactin img {
+  height: auto;
+  width: 100%;
+  position: absolute;
+
+}
+
+.company-card,
+.company-card1 {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.company-details {
+  text-align: center;
+}
+
+.company-details h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.company-details p {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.container {
+  position: relative;
+}
+
+img {
+  max-width: 100%;
+}
+
+.company-card {
+  position: relative;
+  top: 0;
+  left: 0;
+
+  margin: 0 auto;
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  max-width: 100%;
+}
+
+.company-details {
+  text-align: center;
+}
+
+.company-details h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.company-details p {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.adresscards {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+  max-width: 800px;
+  background-color: rgba(232, 234, 241, 0.521);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.company-details p a {
+  text-decoration: none;
+  color: auto;
+}
+
+.agentform12 {
+  position: absolute;
+  top: 550px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: transparent;
+}
+
+.agentform12 form input,
+textarea {
+  /* background-color: #3e54acb1; */
+  color: rgb(12, 12, 12);
+  padding: 10px;
+  width: 100%;
+  font-size: small;
+  border-radius: 25px;
+
+}
+
+.submitme button {
+  background-color: #0234fc;
+  color: black;
+  font-weight: bolder;
+}
+
+.connectio {
+  position: absolute;
+  bottom: 100px;
+  justify-content: end;
+  align-items: end;
+  right: 60px;
+}
+
+.socialmedia-icons {
+  display: flex;
+  flex-direction: row;
+}
+
+.socialmedia-icons img {
+  display: flex;
+  height: 20px;
+  width: 10px;
+}
+
+.connect {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 50px;
+
+  justify-content: end;
+  align-items: end;
+  right: 60px;
+}
+
+.connect h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.social-icons {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.social-icons li {
+  margin: 0 10px;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #333;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+  background-color: #666;
+}
+
+@media(max-width: 1050px) {
+  .adresscards {
+    top: 370px;
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+  }
+
+  .company-card {
+    margin: 15px;
+
+  }
+
+  /* .agentform1{
+    position: absolute;
+   bottom: 20px;
+  } */
+  .agentform12 {
+    top: 250px;
+    background-color:#bbc4eb92;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 25px;
+  }
+
+  .container img {
+    position: relative;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.page {
+  padding: 50px 0;
+}
+
+.page .entry-title {
+  font-size: 48px;
+  font-size: 3em;
+  font-weight: 300;
+}
+
+.page p {
+  line-height: 2;
+}
+
+.page .row {
+  margin: 25px -15px;
+}
+
+.features {
+  *zoom: 1;
+  margin: 0 -15px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+}
+
+.features:after {
+  content: " ";
+  clear: both;
+  display: block;
+  overflow: hidden;
+  height: 0;
+}
+
+.features:after {
+  content: " ";
+  height: 50px;
+  top: 50px;
+  left: 15px;
+  right: 15px;
+  position: absolute;
+  background: url() repeat-x;
+  z-index: -1;
+}
+
+@media screen and (max-width: 768px) {
+  .features:after {
+    display: none;
+  }
+}
+
+.features .feature-numbered {
+  width: 25%;
+  float: left;
+  padding: 15px;
+  text-align: center;
+ 
+}
+
+@media screen and (max-width: 768px) {
+  .features .feature-numbered {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .features .feature-numbered {
+    width: 100%;
+  }
+
+}
+.container{
+  margin-top: 30px;
+}
+.features .feature-numbered .num {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 2px solid #0f75bd;
+  color: #0f75bd;
+  text-align: center;
+  font-size: 36px;
+  font-size: 2.25em;
+  line-height: 1.8;
+  font-weight: 400;
+  margin: 0 auto 20px;
+  background-color: white;
+  box-shadow: 0 0 0 10px white;
+}
+
+.features .feature-numbered .feature-title {
+  font-size: 20px;
+  font-size: 1.25em;
+  color: #0f75bd;
+  font-weight: 400;
+}
+
+.team {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.team .team-image {
+  overflow: hidden;
+  border-radius: 50%;
+  width: 230px;
+  height: 230px;
+  margin: 0 auto 30px;
+}
+
+.team .team-image img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+.team .team-name,
+.team .team-title {
+  font-size: 16px;
+  font-size: 1em;
+}
+
+.team .team-name {
+  margin-bottom: 0;
+}
+
+.team .team-title {
+  font-style: italic;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.team .social-links {
+  float: none;
+  display: inline-block;
+}
+
+.team .social-links a {
+  background: #0f75bd;
+  border: none;
+  font-size: 14px;
+  font-size: 0.875em;
+  line-height: 2;
+}
+
+.breadcrumbs {
+  background-color: #f1f1f1;
+  padding: 10px 0;
+  font-size: 14px;
+  font-size: 0.875em;
+}
+
+.breadcrumbs a {
+  margin-right: 10px;
+}
+
+.breadcrumbs a:after {
+  content: " ";
+  width: 7px;
+  height: 5px;
+  background: url(images/arrow.png) no-repeat;
+  display: inline-block;
+  margin-left: 10px;
+}
+::placeholder{
+  color:  #3E54AC;
+}

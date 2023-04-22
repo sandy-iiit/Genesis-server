@@ -1,0 +1,36 @@
+<head>
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body class="bodyclass">
+<%- include('navbar.ejs') %>
+<div class="login-form" >
+
+    <form id="form1" action="/login" class="theform" name="form1" method="post" >
+        <img class="loginimg" src="css/okoklogo-transformed.ico">
+        <!-- <input name="name" type="text" placeholder="Name">
+        <input name="email" type="email" placeholder="Email">
+        <input type="password" placeholder="Password" > -->
+        <%if(text){%>
+        <p style="color: red;font-size: 20px"><%=text%></p>
+        <%}%>
+        <select name="type">
+            <option>User</option>
+            <option>Admin</option>
+        </select>
+
+        <input style="margin: 10px; "class="namt" name="name" type="text" placeholder="Name" >
+        <input style="margin: 10px; "class="namt" name="email" type="email" placeholder="Email">
+        <input style="margin: 10px; "class="namt" name="password" type="password" placeholder="Password"><br>
+
+        <button id="but" class="logbut"  type="submit" >Submit</button>
+        <div style="display: flex;flex-direction: column;justify-content: space-evenly;padding-bottom: 5px"><div style="display: flex"><a >Don't have an account? </a><pre> </pre><a style="font-size: 15px" href="/signup">Sign Up</a></div><a style="font-size: 15px" href="/change-password">Forgot password</a></div>
+
+    </form>
+<!--    <button style="background-color: white;border-style: none"></button>-->
+
+</div>
+<%- include('footer.ejs') %>
+</body>
+<script>
+</script>

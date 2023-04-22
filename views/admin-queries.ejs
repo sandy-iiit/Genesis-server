@@ -1,0 +1,28 @@
+
+<head>
+    <link rel="stylesheet" href="/css/my-queries.css">
+</head>
+
+<%- include('navbar.ejs') %>
+<!--<div class="wrap">-->
+<div class="container">
+    <div class="heading-wrap"><p class="heading">Your Queries</p></div>
+
+    <% for(let i=0;i<arr.length;i++){%>
+        <form class="items" action="/admin-queries" method="post" >
+
+                <div name="" class="inner-item Q">
+                 Q  <%=i+1%>). <%=arr[i].Q%>
+                </div>
+            <textarea name="answer" class="inner-item W"></textarea>
+
+                <button class="B" type="submit">Post Answer</button>
+        </form>
+
+
+    <%}%>
+
+</div>
+
+<!--</div>-->
+

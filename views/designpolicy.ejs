@@ -1,0 +1,115 @@
+<head>
+
+    <style>
+    
+    body {
+	background-color: #f2f2f2;
+	font-family: Arial, sans-serif;
+}
+
+h1 {
+	text-align: center;
+	margin-top: 50px;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 50px;
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin-bottom: 10px;
+    width: 75%;
+}
+
+.form-group label {
+	margin-bottom: 10px;
+    font-size: large;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group textarea {
+	padding: 10px;
+	border-radius: 10px;
+	 
+	width: 100%;
+    border:2px solid #3E54AC;
+}
+
+button[type="submit"] {
+	background-color: #3E54AC;
+	color: #fff;
+	padding: 10px 20px;
+	border-radius: 5px;
+	border: none;
+	text-decoration: none;
+	transition: all 0.3s ease;
+	cursor: pointer;
+}
+
+button[type="submit"]:hover {
+	background-color: #0062cc;
+	color: #fff;
+}
+.form-group select {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+  max-width: 400px;
+  background-color: #fff;
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+}
+    </style>
+</head>
+<%- include('navbar.ejs') %>
+<h1>Design a Policy</h1>
+<form method="POST" action="/policies">
+    <div class="form-group">
+      <label for="type">Type:</label>
+      <select id="type" name="type">
+        <option value="life">Life Insurance</option>
+        <option value="car">Car Insurance</option>
+        <option value="health">Health Insurance</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    <div class="form-group">
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" name="amount" required>
+    </div>
+    <div class="form-group">
+      <label for="duration">Duration:</label>
+      <input type="number" id="duration" name="duration" placeholder="enter in years"required>
+    </div>
+    <div class="form-group">
+      <label for="details">Details:</label>
+      <textarea id="details" name="details"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="tc">Terms and Conditions:</label>
+      <textarea id="tc" name="tc"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="ge">GE:</label>
+      <textarea type="text" id="ge" name="ge"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="benefits">Benefits:</label>
+      <textarea id="benefits" name="benefits"></textarea>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+  
+<%- include('footer.ejs') %>

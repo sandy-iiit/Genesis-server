@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Animation</title>
+    <style>
+        /* Define the keyframes and apply the animation to the element */
+        @keyframes circle {
+            0% {
+                transform: rotate(0deg) scale(1) translateX(0) translateY(0);
+                opacity: 1;
+            }
+            50% {
+                transform: rotate(180deg) scale(0.5) translateX(100px) translateY(0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: rotate(360deg) scale(1) translateX(0) translateY(0);
+                opacity: 1;
+            }
+        }
+        .element {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            background-color: #FF4081;
+            animation: circle 5s linear infinite;
+        }
+    </style>
+</head>
+<body>
+<div class="element"></div>
+</body>
+</html>

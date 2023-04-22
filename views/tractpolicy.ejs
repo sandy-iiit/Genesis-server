@@ -1,0 +1,95 @@
+<head>
+
+    <style>
+    
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  background-color: #f2f2f2;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  padding: 0.5rem;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+h1 {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+form {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+label {
+  margin-right: 1rem;
+}
+
+input[type="text"] {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+  margin-right: 1rem;
+}
+
+button[type="submit"] {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+ 
+}
+</style>
+</head>
+<%- include('navbar.ejs') %>
+ 
+<h1>Track a Policy</h1>
+<form action="/policy" method="GET"><br>
+  <label for="userId">  Enter User ID:</label>
+  <input type="text" id="userId" name="userId" placeholder="User ID">
+  <button type="submit">Search</button>
+</form>
+ 
+
+<%- include('footer.ejs') %>

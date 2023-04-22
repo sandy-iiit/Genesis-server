@@ -1,0 +1,134 @@
+.healinsur,.carinsur,.lifeinsur{
+    width: 100%;
+    height:fit-content;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  
+}
+.healinsur div img,video{
+    height: 400px;
+    width: 400px;
+    position: relative;
+    object-fit: cover;
+}
+.disclmr{
+    background-color: #3e54ac82;
+    margin: 14px;
+    border-radius: 25px;
+    height: fit-content;
+    padding: 10px;
+}
+.disclmr p{
+    font-size:large ;
+    font-weight: 450;
+    color: rgb(255, 255, 255);
+   
+}
+.disclmr h2{
+    color:#3e54ac;
+    letter-spacing: 1.2px;
+    margin: 5px;
+     
+}
+.explore{
+    background-color: #3e54ac;
+    color: white;
+    border-radius: 25px;
+    border-style: none;
+    padding: 5px;
+    margin: 5px;
+    margin-left: 2px;
+    float: right;
+    cursor: pointer;
+}
+.carinsur  div img{
+    height: 400px;
+    width: 400px;
+    position:   relative;
+    object-fit: cover;
+    
+    
+}
+.carinsur  .disclmr{
+ width: 100%;
+
+}
+.lifeinsur div video{
+    height: 400px;
+    width: 400px;
+   
+    object-fit: cover;
+}
+ 
+/* Media queries for tablet screens */
+@media screen and (max-width: 1024px) {
+    .healinsur,.lifeinsur,.carinsur {
+      flex-direction: column;
+      padding: 20px;
+    }
+    .healinsur video, .lifeinsur video {
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+    .disclmr {
+      max-width: none;
+    }
+    .explore {
+      font-size: 16px;
+      padding: 10px 20px;
+    }
+    .healinsur,.carinsur,.lifeinsur{
+        display: flex;
+        flex-direction: column;
+    }
+    .healinsur,.carinsur,.lifeinsur div{
+        justify-content: center;
+        align-items: center;
+        object-fit: cover;
+    }
+    .disclmr{
+        order: 2;
+    }
+    .borde{
+        order: 1;
+    }
+    .lifeinsur div{
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+  }
+  
+  /* Media queries for mobile screens */
+  @media screen and (max-width: 480px) {
+    .disclmr h2 {
+      font-size: 24px;
+    }
+    .disclmr p {
+      font-size: 16px;
+    }
+    .explore {
+      font-size: 14px;
+      padding: 5px 10px;
+    }
+    .healinsur,.carinsur,.lifeinsur{
+        display: flex;
+        flex-direction: column;
+        
+    }
+    .healinsur,.carinsur,.lifeinsur div{
+        justify-content: center;
+        align-items: center;
+        object-fit: cover;
+    }
+
+    .disclmr{
+        order: 2;
+    }
+    .borde{
+        order: 1;
+    }
+      }
+
+      
