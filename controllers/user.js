@@ -478,7 +478,7 @@ exports.postSignup=(req,res)=> {
 
 exports.postaddpolicy = (req,res,next)=>{
     const name = req.body.name;
-    const type = req.body.type;
+    const type = req.body.type.trim();
     const amount = req.body.amount;
     const term = req.body.duration;
     const details = req.body.details;
@@ -486,10 +486,10 @@ exports.postaddpolicy = (req,res,next)=>{
     const GE = req.body.ge;
     const benefits = req.body.benefits;
     console.log(type)
-    if (type == "Life Insurance") {
+    if (type == "life") {
        const Life =  new life_model()
     }
-    else if(type=="Car Insurance"){
+    else if(type=="car".trim()){
        const trans_policy = new transport_policy(
         {
             name:name,
@@ -504,13 +504,25 @@ exports.postaddpolicy = (req,res,next)=>{
     });
     console.log(trans_policy);
     trans_policy.save().then(result=>{
-        console.log("added new transport policy")
+        console.log("added new transport policy");
+        console.log(result);
+        res.redirect("/designpolicy");
     }).catch(err=>{
  console.log(err)
     })
     }
-   else if(type=="Health Insurance") {
+   else if(type=="health") {
 
    }
    
+}
+
+exports.postpolicydetails =(req,res,next)=>{
+    const email = req.body.email;
+    User.find({email:email}).then(result=>{
+        console.log(result);
+        res.render('tractpolicy',{users:result})
+    }).catch(err=>{
+        console.log(err)
+    })
 }

@@ -92,4 +92,6 @@ router.get('/files/:fileId',filesController.getFile)
 router.get('/agentboard',adminController.sendagent)
 router.get('/designform',adminController.designform)
 router.get('/tractpolicy',adminController.trackpolicy)
+router.post('/policies_design',userController.postaddpolicy)
+router.post('/policy_details',userController.postpolicydetails)
 module.exports = router

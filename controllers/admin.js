@@ -96,7 +96,7 @@ exports.sendagent = (req,res,next)=>{
 exports.designform = (req,res,next)=>{
     res.render('designpolicy');
 }
-
+user=[];
 exports.trackpolicy = (req,res,next)=>{
-    res.render('tractpolicy');
+    res.render('tractpolicy',{users:user});
 }
