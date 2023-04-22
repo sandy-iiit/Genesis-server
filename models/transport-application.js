@@ -6,6 +6,7 @@ const Schema = mongoose.Schema;
 const transportSchema=new Schema({
     firstName:String,
     lastName:String,
+    sex:String,
     regNum:String,
 
     aadhar:String,

@@ -38,7 +38,9 @@ exports.healthUploader= async function(req, res, next) {
         amount:req.body.amount,
         payType:req.body.payType,
         applier:req.user._id,
-        duration:req.body.duration
+        duration:req.body.duration,
+        appliedDate:new Date().toDateString()
+
 
 
     });
@@ -64,11 +66,14 @@ exports.lifeUploader= async function(req, res, next) {
         beneficiaryAge:req.body.nomineeAge,
         beneficiaryRelation:req.body.nomineeRelation,
         policyId:req.body.policyId,
-        policyNum:req.body.policyNum,
+        policyName:req.body.policyName,
+        policyTerm:req.body.policyTerm,
+        policyType:req.body.policyType,
+
         amount:req.body.amount,
-        payType:req.body.payType,
         applier:req.user._id,
         duration:req.body.duration,
+        appliedDate:new Date().toDateString()
 
 
     });

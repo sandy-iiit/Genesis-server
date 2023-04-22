@@ -26,10 +26,16 @@
                 <%=arr[i].term%>        </div>
             <div class="inner-item">
                Amount <%=arr[i].amount%>  </div>
-
+<%if(arr[i].type=='TRANSPORT'){%>
            <a href='/buy-policy/<%=arr[i].policyId%>'><button class="but">
               Explore Plan
-               </button></a><a href='/payment'><button class="but">
+               </button></a>
+            <%}else if(arr[i].type=='LIFE'){%>
+            <a href='/buypolicy3/<%=arr[i].policyId%>'><button class="but">
+                    Explore Plan
+                </button></a>
+            <%}%>
+            <a href='/payment'><button class="but">
               Pay installment
                </button></a>
         </div>

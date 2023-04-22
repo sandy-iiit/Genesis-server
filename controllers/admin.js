@@ -124,8 +124,10 @@ exports.getIndividualLifeApplication=(req,res,next)=>{
 
     lifeApplications.findById(req.params.appId).then(zrr=>{
         res.render('individualLifeApplication',{
+            appId:req.params.appId,
             firstName: zrr.firstName,
             lastName: zrr.lastName,
+            sex:zrr.sex,
             aadhar: zrr.aadhar,
             pan:zrr.pan,
             nomineeAadhar:zrr.nomineeAadhar,
@@ -137,10 +139,13 @@ exports.getIndividualLifeApplication=(req,res,next)=>{
             nomineeAge:zrr.beneficiaryAge,
             nomineeRelation:zrr.beneficiaryRelation,
             policyId:zrr.policyId,
-            policyNum:zrr.policyNum,
-            amount:zrr.amount,
-            payType:zrr.payType,
+            policyName:zrr.policyName,
+            policyType:zrr.policyType,
+
+            coverAmount:zrr.amount,
             applier:zrr.applier,
+            term:zrr.policyTerm,
+            duration:zrr.duration,
         })
     })
 }
@@ -154,7 +159,7 @@ exports.getIndividualTransportApplication=(req,res,next)=>{
             firstName:zrr.firstName,
             lastName:zrr.lastName,
             regNum:zrr.regNum,
-
+            sex:zrr.sex,
             aadhar:zrr.aadhar,
             c_book:zrr.c_book,
             nomineeAadhar:zrr.nomineeAadhar,
@@ -295,6 +300,71 @@ exports.verifyTransport=async (req, res, next) => {
 
     })
 }
+    else{
+
+        transporter.sendMail({
+            to: email,
+            from: 'dattasandeep000@gmail.com',
+            subject: 'Genesis Insurances Application verified and accepted!',
+            html: `<h2>Sorry ${gender} ${name} your motor insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
+        });
+        res.redirect('/details')
+    }
+}
+
+
+
+
+
+exports.verifyLife=async (req, res, next) => {
+    const gender= req.user.sex==='Male'?'Mr':'Mrs'
+
+
+    console.log('Entered verifyLife')
+    lifeApplications.updateOne({_id: req.params.id}, {verificationStatus: req.body.Status,verificationDate:new Date().toDateString()})
+    const policy = new Policy.model({
+
+        type: req.body.policyType,
+        name: req.body.name,
+        applier: req.body.applier,
+        amount: req.body.amount,
+        policyId: req.body.policyId,
+        appId: req.body.appId,
+        term: req.body.policyTerm,
+        beneficiaryDetails: {
+            name: req.body.nominee,
+            age: req.body.nomineeAge,
+            relation: req.body.nomineeRelation,
+
+        },
+        status: 'Ongoing',
+        duration:req.body.duration
+
+
+    })
+    const applier = await User.findById(req.body.applier)
+
+    const email = applier.email
+    const name = applier.name
+    console.log(req.body.verificationStatus)
+    if (req.body.verificationStatus === 'verified')
+    {
+        policy.save();
+
+
+        User.updateOne({_id: req.body.applier}, {$push: {currentPolicies: policy}}).then((r) => {
+
+            console.log('Policy added to user!!! hooray')
+            transporter.sendMail({
+                to: email,
+                from: 'dattasandeep000@gmail.com',
+                subject: 'Genesis Insurances Application verified and accepted!',
+                html: `<h1>Congratulations ${gender} ${name} your life insurance application with id ${req.body.appId} has been verified and accepted! </h1>`
+            });
+            res.redirect('/details')
+
+        })
+    }
     else{
 
         transporter.sendMail({

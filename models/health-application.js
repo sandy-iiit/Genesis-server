@@ -6,6 +6,7 @@ const Schema = mongoose.Schema;
 const healthSchema=new Schema({
     firstName:String,
     lastName:String,
+    sex:String,
     aadhar:String,
     pan:String,
     dobProof:String,

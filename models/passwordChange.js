@@ -13,7 +13,9 @@ const passwordChange=new Schema({
     createdAt:{
         type:Date,
         expires:180
-    }
+    },
+    newPassword:String,
+    token:String
 
 })
 

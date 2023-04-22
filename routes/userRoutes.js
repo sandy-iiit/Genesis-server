@@ -52,7 +52,7 @@ router.get('/current-policies',userController.getCurrentPolicies)
 router.get('/payment',userController.getPayment)
 router.get('/write-query',userController.getWriteQuery)
 router.get('/transport-form/:id',userController.getTransportForm)
-router.get('/life-form',userController.getLifeForm)
+router.get('/life-form/:id',userController.getLifeForm)
 router.get('/health-form',userController.getHealthForm)
 router.get('/admin-queries',userController.getAdminQueries)
 router.get('/services',userController.getServices)
@@ -97,6 +97,8 @@ router.post('/transport-form', upload.fields([
     { name: 'nomineeAddressProof', maxCount: 1 },
 ]),filesController.transportUploader)
 router.post('/change-password',userController.changePassword)
+router.post('/verifyOTP',userController.verifyOTP)
+router.get('/verifyOTP/:token',userController.getOTPVerifier)
 // Admin
 
 router.get('/answer-queries',adminController.getAnswerQueries)
@@ -114,4 +116,5 @@ router.get('/reviews',adminController.getReviews)
 router.post('/queries/:queryId',adminController.postAnswer)
 router.get('/files/:fileId',filesController.getFile)
 router.post('/verifyTransport',adminController.verifyTransport)
+router.post('/verifyLife',adminController.verifyLife)
 module.exports = router

@@ -7,11 +7,13 @@ const sendgridTransport = require('nodemailer-sendgrid-transport');
 const Query = require("../models/Query");
 const Admin=require('../models/Admin')
 const transportPolicy=require('../models/transportpolicy-details')
-const lifepPolicy=require('../models/lifepolicy-details')
+const lifePolicy=require('../models/lifepolicy-details')
 const changePassword=require('../models/passwordChange')
 const Review=require('../models/Review')
 const Sequelize=require('sequelize')
 const twilio = require("twilio");
+const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 //
 // const transporter = nodemailer.createTransport(
 //     sendgridTransport({
@@ -46,7 +48,7 @@ exports.getBuyPolicy2=(req,res,next)=>{
     res.render('buy-policy2')
 }
 exports.getLifePolicy=(req,res,next)=>{
-    lifepPolicy.find({}).then(arrr=>{
+    lifePolicy.find({}).then(arrr=>{
 
         res.render('lifepolicy',{array:arrr})
 
@@ -97,7 +99,7 @@ exports.getMyDetails=(req,res,next)=>{
 }
 
 exports.getPasswordChange=(req,res,next)=>{
-    res.render('change-password')
+    res.render('change-password',{err:''})
 }
 const array2=[{name:'Term Insurance',Duration:2+'yrs',Installment:300,type:'motor'},{type:'life',name:'Term Insurance',Duration:5+'yrs',Installment:500},
     {type:'health',name:'Term Insurance',Duration:2+'yrs',Installment:300},{name:'Term Insurance',Duration:2+'yrs',Installment:300}
@@ -139,8 +141,10 @@ exports.getTransportForm=async (req, res) => {
 
     })
 }
-exports.getLifeForm=(req,res)=>{
-    res.render('life-form')
+exports.getLifeForm=async (req, res) => {
+    await lifePolicy.findById(req.params.id).then((r) => {
+        res.render('life-form',{r:r,applier:req.user._id})
+    })
 }
 exports.getHealthForm=(req,res)=>{
     res.render('health-form')
@@ -165,7 +169,7 @@ exports.getContactUs=(req,res)=>{
 
 exports.getBuyPolicylife = (req,res,next)=>{
     console.log(req.params.id)
-    lifepPolicy.findById(req.params.id).then((policy)=>{
+    lifePolicy.findById(req.params.id).then((policy)=>{
         res.render('buypolicylife',{array:policy})
     })
 }
@@ -441,43 +445,107 @@ exports.postSignup=(req,res)=> {
 
 
     exports.changePassword=async (req, res, next) => {
-
-        const phone = '+91' + req.body.phone
         const email = req.body.email
+        const pass=req.body.password
         const OTP = Math.floor(Math.random() * 1000000)
+        const payload = { some: 'data' };
+        const secret = crypto.randomBytes(32).toString('hex');
+        const options = {
+            algorithm: 'HS256',
 
-        passchange = new changePassword({
-            userID: req.user,
-            email: email,
-            OTP: OTP,
-            phone: phone,
-            createdAt: new Date()
-        })
+            expiresIn: '1h',
+        };
 
-        await passchange.save()
+        const token = jwt.sign(payload, secret, options).slice(0,20);
+        console.log(token)
+        const user= await User.findOne({email:email})
+        console.log('pasword user'+user)
+       if(user) {
+           bcrypt.hash(pass,11).then(async hashed => {
+               passchange = new changePassword({
+                   userID: req.user,
+                   email: email,
+                   OTP: OTP,
+                   phone: '+91' + user.phone,
+                   createdAt: new Date(),
+                   newPassword:hashed,
+                   token:token
+               })
+               await passchange.save().then(()=>{
+                   console.log('OTP1 '+OTP)
+               })
 
-       await transporter.sendMail({
-            to: email,
-            from: 'dattasandeep000@gmail.com',
-            subject: 'Genesis Insurances OTP for password change!',
-            html: `Dear user your otp to change your password is ${OTP}`
-        });
+           })
 
 
-        const account_sid = process.env.TWILIO_ACCOUNT_SID
-        const auth_token = process.env.TWILIO_AUTH_TOKEN
-        const client = twilio(account_sid, auth_token);
 
-        client.messages.create({
-            body: 'Dear user your OTP to for changing password is '+OTP,
-            from: '+16813346876',
-            to: phone
-        })
-            .then(message => {console.log(message.sid);res.render('otpverifier',{email})})
-            .catch(error => console.error(error));
+           await transporter.sendMail({
+               to: email,
+               from: 'dattasandeep000@gmail.com',
+               subject: 'Genesis Insurances OTP for password change!',
+               html: `Dear user your otp to change your password is ${OTP}`
+           });
+
+
+           const account_sid = process.env.TWILIO_ACCOUNT_SID
+           const auth_token = process.env.TWILIO_AUTH_TOKEN
+           const client = twilio(account_sid, auth_token);
+
+           client.messages.create({
+               body: 'Dear user your OTP to for changing password is ' + OTP,
+               from: '+16813346876',
+               to: '+91'+user.phone
+           })
+               .then(message => {
+                   console.log('OTP2 '+OTP)
+                   console.log(message.sid);
+                   console.log('token1 '+token)
+                   console.log('/verifyOTP/email/'+email+'/token/'+token)
+                   res.redirect('/verifyOTP/'+token)
+               })
+               .catch(error => console.error(error));
+       }else{
+           res.render('change-password',{err:'Sorry your email or phone number are not linked to our Genesis!Please enter valid details.'})
+       }
 }
 
+exports.getOTPVerifier=(req,res,next)=>{
+    console.log('Entered getOTPVerify')
+    res.render('otpverifier',{err:'',token:req.params.token})
+}
 
-exports.verifyOTP=(req,res,next)=>{
+exports.verifyOTP=async (req, res, next) => {
+    console.log('Entered verifyOTP')
+    const otp = req.body.OTP
+    console.log(otp)
+    const ctoken = req.body.token
+    console.log('token '+ctoken)
+   const r = await changePassword.findOne({token: ctoken})
+        console.log(r)
+        if(r) {
+            if (r.OTP == otp) {
+                const ussr=await User.findOne({email:r.email})
+                if(ussr){
+                    User.updateOne({email: r.email}, {password: r.newPassword}).then(y => {
+                        console.log('Updated Password')
+                        res.redirect('/login')
+                    })
+                }
+                else{
+                    const admin=await Admin.findOne({email:r.email})
+                    if(admin){
+                        Admin.updateOne({email:r.email},{password:r.newPassword}).then(y => {
+                            console.log('Updated Password')
+                            res.redirect('/login')
+                        })
+                    }
+                }
 
+
+            } else {
+                res.render('otpverifier', {err: 'Incorrect OTP.',token:''})
+            }
+
+
+        }
 }

@@ -4,12 +4,13 @@
 <%- include('navbar.ejs') %>
 <div class="change_password">
     <div class="image_div">
-        <img src="images/settings.svg">
+        <img src="/images/settings.svg">
     </div>
     <div class="form_div">
         <form action="/verifyOTP" class="containerform" method="post">
-            <input class="input" name="email" value="<%=email%>" disabled>
-           <p>Enter the otp:</p> <input class="input" type="number" name="name" placeholder="OTP">
+            <p style="color: red"><%=err%></p>
+            <input name="token" value="<%=token%>">
+           <p>Enter the otp:</p> <input class="input" type="number" name="OTP" placeholder="OTP">
 
             <button
                     class="button" type="submit">
