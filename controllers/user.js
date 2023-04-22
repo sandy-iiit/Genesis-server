@@ -219,6 +219,9 @@ exports.postSignup=(req,res)=> {
     })
 }
 
+
+exports.postemployeesignup
+
     exports.postLogin = async (req, res) => {
         const name = req.body.name
         const email = req.body.email

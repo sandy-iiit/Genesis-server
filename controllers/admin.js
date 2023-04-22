@@ -100,3 +100,6 @@ user=[];
 exports.trackpolicy = (req,res,next)=>{
     res.render('tractpolicy',{users:user});
 }
+exports.employeesignuppage = (req,res,next)=>{
+    res.render('employeesignup');
+}

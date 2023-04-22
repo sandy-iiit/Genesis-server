@@ -94,4 +94,5 @@ router.get('/designform',adminController.designform)
 router.get('/tractpolicy',adminController.trackpolicy)
 router.post('/policies_design',userController.postaddpolicy)
 router.post('/policy_details',userController.postpolicydetails)
+router.get('/employeesignup',adminController.employeesignuppage)
 module.exports = router
