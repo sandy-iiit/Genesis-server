@@ -596,7 +596,7 @@ exports.searchMyApps=async (req, res, next) => {
 
     const search = req.body.search
     let arrr = []
-    const arr1 = await transportApplications.find({applier: req.user._id})
+    const arr1 = await transportApplications.find({_id: req.user._id})
     const arr2 = await lifeApplications.find({applier: req.user._id})
     const arr3 = await healthApplications.find({applier: req.user._id})
     arrr = arrr.concat(arr1, arr2, arr3)
