@@ -11,10 +11,10 @@
     <% for(let i=0;i<arr.length;i++){%>
     <%let a='';let b='img'%>
 <%if(arr[i].type.trim()==='TRANSPORT'){a='images/car.svg';b='car-img'} else if(arr[i].type==='LIFE'){a='images/life-insurance.png'} else if(arr[i].type==='Health'){a='images/health-insurance.png'}%>
-    <div class="items">
-
-        <img class=<%=b%> src= <%=a%>>
-        <div class="inner-items">
+        <div class="items">
+            <form action="pay" >
+          <img class=<%=b%> src= <%=a%>>
+          <div class="inner-items">
             <div class="inner-item1">
                 <div class="inner-item">
                     <%=arr[i].type%>
@@ -50,9 +50,8 @@
                     </button></a>
             </div>
         </div>
-
-
-    </div>
+    </form>
+        </div>
 
 
     <%}%>

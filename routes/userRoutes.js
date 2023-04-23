@@ -101,7 +101,7 @@ router.get('/healthpolicies',userController.gethealthPolicy)
 router.get('/policypage/:id',userController.getPolicyPage)
 router.get('/myApplications',userController.getMyApps)
 router.post('/search-my-applications',userController.searchMyApps)
-
+router.get('/data',adminController.getData)
 // Admin
 
 router.get('/answer-queries',adminController.getAnswerQueries)
@@ -133,10 +133,15 @@ router.get('/transport-applications/:appId',adminController.getIndividualTranspo
 router.post('/search-health-applications',adminController.getHealthApplicationsSearch)
 router.post('/search-life-applications',adminController.getLifeApplicationsSearch)
 router.post('/search-transport-applications',adminController.getTransportApplicationsSearch)
+router.post('/search-agent-applications',adminController.getAgentApplicationsSearch)
 router.get('/reviews',adminController.getReviews)
 router.post('/queries/:queryId',adminController.postAnswer)
 router.get('/files/:fileId',filesController.getFile)
 router.post('/verifyTransport',adminController.verifyTransport)
 router.post('/verifyLife',adminController.verifyLife)
 router.post('/verifyHealth',adminController.verifyHealth)
+router.post('/verifyAgent/:id',adminController.verifyAgent)
+router.get('/agentboard',adminController.getAgentBoard)
+router.get('/agent-applications',adminController.getAgentApplications)
+router.get('/agent-application/:id',adminController.getIndividualAgentApplication)
 module.exports = router

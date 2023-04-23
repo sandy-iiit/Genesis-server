@@ -21,17 +21,9 @@ const Employee = require('./models/employee');
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
-const data = {
-	total_users: 10000,
-	transport_policy_users: 5000,
-	life_policy_users: 3000,
-	health_policy_users: 2000
-};
 
-// Send data to client
-app.get('/data', (req, res) => {
-	res.json(data);
-});
+
+
 const store = new MongoDBStore({
     uri: process.env.MONGODB_URI2,
     collection: 'sessions',

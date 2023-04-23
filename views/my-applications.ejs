@@ -1,6 +1,6 @@
 
 <head>
-    <link rel="stylesheet" href="/css/reviews.css">
+    <link rel="stylesheet" href="/css/my-applications.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 
 </head>
@@ -20,6 +20,9 @@
     <div class="items2">
 
         <div class="inner-item Q">
+               <div style="font-size: 16px"> Application id: <%=arr[i]._id%></div>
+        </div>
+        <div class="inner-item Q">
             <div>    First Name: <%=arr[i].firstName%></div>   <div> Last Name: <%=arr[i].lastName%></div>
         </div>
         <br>
@@ -27,15 +30,23 @@
             <div>  Applied on: <%=arr[i].appliedDate%></div>   <div> Verified on: <%=arr[i].verificationDate%></div>
         </div>
         <br>
+        <div class="inner-item Q">
+            <%if(arr[i].verificationStatus==='verified'){%>
+            <div>  Status : Verified</div><div>  Type : <%=arr[i].policyType%></div>
+            <%} else{%>
+                <div>  Status : Not Verified Yet</div>
+
+<%}%>
+        </div>
         <%if(arr[i].policyType=='Health'){%>
         <div class="inner-item A">
             <a href="/health-applications/<%=arr[i]._id%>">Open application</a>
         </div>
-        <%}%>  <%if(arr[i].policyType=='LIFE'){%>
+        <%}else if(arr[i].policyType=='LIFE'){%>
         <div class="inner-item A">
             <a href="/life-applications/<%=arr[i]._id%>">Open application</a>
         </div>
-        <%}%>  <%if(arr[i].policyType=='TRANSPORT)'){%>
+        <%}else if(arr[i].policyType=='TRANSPORT)'){%>
         <div class="inner-item A">
             <a href="/transport-applications/<%=arr[i]._id%>">Open application</a>
         </div>

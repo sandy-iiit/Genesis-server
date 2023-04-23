@@ -1,0 +1,54 @@
+.divdetailbox{
+
+    width: 80%;
+    height: 90%;
+    background-color: rgba(236,242,255,0.9);
+    margin-left: 10%;
+
+}
+
+.detail-box{
+    width: 80%;
+    height: 90%;
+}
+
+
+.detail-item{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+    padding: 5px;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.btn1{
+    width: 11vh;
+    height:7vh ;
+    border-radius: 30px;
+    border-style: none;
+    background-color: white;
+    color: #3E54AC;
+
+}
+.label{
+    width: 7vh;
+    color: #3E54AC;
+    font-size: 20px;
+}
+
+
+.btn1:hover,.btn2:hover{
+    cursor: pointer;
+    box-shadow: 0 0 30px deepskyblue;
+
+}
+
+.input:focus{
+    box-shadow: 0 0 30px deepskyblue;
+
+}

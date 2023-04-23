@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Agent = require("../models/employee");
 const bcrypt = require('bcryptjs');
 
 const healthApplications=require('../models/health-application')
@@ -34,7 +35,7 @@ const transporter = nodemailer.createTransport(
 
         auth: {
             user: 'dattasandeep000@gmail.com',
-            pass: 'akkkheqzgiwbscmz'
+            pass: process.env.PASSKEY
         },
     }
 );
@@ -108,11 +109,10 @@ exports.getDetails=(req,res,next)=>{
                 age:req.user.age,sex:req.user.sex,address:req.user.address,phone:req.user.phone})
     }
     else if(req.session.type==='Agent'){
-        
-        res.render('agentboard',{
-            
-            name:req.user.name
-        })
+
+        res.render('admin-details', {name:req.user.name,email:req.user.email,
+            age:req.user.age,sex:req.user.sex,address:req.user.address,phone:req.user.phone}
+    )
     }
 
 }
@@ -534,12 +534,20 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
                     // console.log(r)
                 })
         }
-        else{
+        else if(req.session.type==='Admin'){
 
             Admin.findByIdAndUpdate(req.user._id,{name: name, address: address, email: email, phone: phone})
                 .then(r => {
                     res.redirect('/details')
                     console.log('Admin updated')
+                    // console.log(r)
+                })
+        }
+        else{
+            Agent.findByIdAndUpdate(req.user._id,{name: name, address: address, email: email, phone: phone})
+                .then(r => {
+                    res.redirect('/details')
+                    console.log('Agent updated')
                     // console.log(r)
                 })
         }
@@ -795,6 +803,7 @@ exports.postsendemail=(req,res,next)=>{
     exports.changePassword=async (req, res, next) => {
         const email = req.body.email
         const pass=req.body.password
+        const Type=req.body.Type
         const OTP = Math.floor(Math.random() * 1000000)
         const payload = { some: 'data' };
         const secret = crypto.randomBytes(32).toString('hex');
@@ -806,9 +815,21 @@ exports.postsendemail=(req,res,next)=>{
 
         const token = jwt.sign(payload, secret, options).slice(0,20);
         console.log(token)
-        const user= await User.findOne({email:email})
+        let user
+        const usr= await User.findOne({email:email})
+        const admin=await Admin.findOne({email:email})
+        const agent=await Agent.findOne({email:email})
+        if(Type==='User'){
+            user=usr
+        }else if(Type==='Admin'){
+            user=admin
+        }
+        else if(Type==='Agent'){
+            user=agent
+        }
         console.log('pasword user'+user)
        if(user) {
+           console.log(user)
            bcrypt.hash(pass,11).then(async hashed => {
                passchange = new changePassword({
                    userID: req.user,
@@ -873,13 +894,14 @@ exports.verifyOTP=async (req, res, next) => {
         if(r) {
             if (r.OTP == otp) {
                 const ussr=await User.findOne({email:r.email})
+                const admn=await Admin.findOne({email:r.email})
                 if(ussr){
                     User.updateOne({email: r.email}, {password: r.newPassword}).then(y => {
                         console.log('Updated Password')
                         res.redirect('/login')
                     })
                 }
-                else{
+                else if(admn){
                     const admin=await Admin.findOne({email:r.email})
                     if(admin){
                         Admin.updateOne({email:r.email},{password:r.newPassword}).then(y => {
@@ -888,6 +910,16 @@ exports.verifyOTP=async (req, res, next) => {
                         })
                     }
                 }
+                else{
+                    const admin=await Agent.findOne({email:r.email})
+                    if(admin){
+                        Agent.updateOne({email:r.email},{password:r.newPassword}).then(y => {
+                            console.log('Updated Password')
+                            res.redirect('/login')
+                        })
+                    }
+                }
+
 
 
             } else {
@@ -905,7 +937,7 @@ exports.getMyApps=async (req, res, next) => {
     const arr2 = await lifeApplications.find({applier:req.user._id})
     const arr3 = await healthApplications.find({applier:req.user._id})
      arrr=arrr.concat(arr1,arr2,arr3)
-
+    console.log(arrr[1].policyType)
     res.render('my-applications',{arr:arrr})
 }
 
@@ -913,12 +945,29 @@ exports.searchMyApps=async (req, res, next) => {
 
     const search = req.body.search
     let arrr = []
-    const arr1 = await transportApplications.find({_id: req.user._id})
-    const arr2 = await lifeApplications.find({applier: req.user._id})
-    const arr3 = await healthApplications.find({applier: req.user._id})
-    arrr = arrr.concat(arr1, arr2, arr3)
 
-    res.render('my-applications', {arr: arrr})
+    if(search==='life'){
+        const arr2 = await lifeApplications.find({applier: req.user._id})
+        res.render('my-applications', {arr: arr2})
 
+    }else if(search==='motor'){
+        const arr1 = await transportApplications.find({applier: req.user._id})
+        res.render('my-applications', {arr: arr1})
+
+    }else if(search==='health'){
+        const arr3 = await healthApplications.find({applier: req.user._id})
+        res.render('my-applications', {arr: arr3})
+
+    }else {
+
+
+        const arr1 = await transportApplications.find({_id: search})
+        const arr2 = await lifeApplications.find({_id: search})
+        const arr3 = await healthApplications.find({_id: search})
+        arrr = arrr.concat(arr1, arr2, arr3)
+
+
+        res.render('my-applications', {arr: arrr})
+    }
 
 }

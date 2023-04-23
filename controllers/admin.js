@@ -5,15 +5,19 @@ const reviews=require('../models/Review')
 const healthApplications=require('../models/health-application')
  
 const User=require('../models/User')
+const Agent=require('../models/employee')
 const Policy=require('../models/Policy')
  
 const lifeApplications=require('../models/life-application')
 const transportApplications=require('../models/transport-application')
 const nodemailer = require("nodemailer");
+const mongoose = require("mongoose");
 
 var TRANSPORTAPPLICATIONS=[]
 var HEALTHAPPLICATIONS=[]
 var LIFEAPPLICATIONS=[]
+
+
 
 const transporter = nodemailer.createTransport(
     {
@@ -21,14 +25,27 @@ const transporter = nodemailer.createTransport(
 
         auth: {
             user: 'dattasandeep000@gmail.com',
-            pass: 'akkkheqzgiwbscmz'
+            pass: process.env.PASSKEY
         },
     }
 );
 
 
+exports.getData=async (req, res) => {
 
+    const a = await Policy.model.countDocuments({})
+    const b = await Policy.model.countDocuments({type:'TRANSPORT'})
+    const c = await Policy.model.countDocuments({type:'LIFE'})
+    const d = await Policy.model.countDocuments({type:'Health'})
 
+    const data = {
+        total_users:a,
+        transport_policy_users: b,
+        life_policy_users: c,
+        health_policy_users: d,
+    };
+    res.json(data);
+}
  
 exports.getAnswerQueries=(req,res,next)=>{
 
@@ -200,291 +217,421 @@ exports.getIndividualTransportApplication=(req,res,next)=>{
     })
 }
 
-exports.getHealthApplicationsSearch=(req,res,next)=>{
+exports.getHealthApplicationsSearch=async (req, res, next) => {
     console.log('entered the func')
     console.log(req.body.search)
-    healthApplications.find({})
-        .then(r=>{
-            const arrr=[]
-            for(let i=0;i<r.length;i++){
-                let name=r[i].firstName+' '+r[i].lastName
-                let Name=r[i].firstName.toLowerCase()+' '+r[i].lastName.toLowerCase()
-                let nAME=r[i].firstName.toUpperCase()+' '+r[i].lastName.toUpperCase()
-                if(name.includes(req.body.search) || Name.includes(req.body.search) || nAME.includes(req.body.search)){
-                    console.log(name)
-                    console.log(r[i])
-                    arrr.push(r[i])
-                }
-            }
-            res.render('health-applications',{arr:arrr})
-
-
-        })
-        .catch(err=>{
-            console.log('err')
-        })
-}
- 
-exports.designform = (req,res,next)=>{
-    res.render('designpolicy');
-}
-user=[];
-exports.trackpolicy = (req,res,next)=>{
-    res.render('tractpolicy',{users:user});
-}
-exports.employeesignuppage = (req,res,next)=>{
-    res.render('employeesignup');
-}
-
-exports.getemailform = (req,res,next)=>{
-    res.render('emailform');
-}
-
-exports.getcompanystats = (req,res,next)=>{
-    res.render('companystats');
-}
-
-exports.getLifeApplicationsSearch=(req,res,next)=>{
-    console.log('entered the func')
     console.log(req.body.search)
-    lifeApplications.find({})
-        .then(r=>{
-            const arrr=[]
-            for(let i=0;i<r.length;i++){
-                let name=r[i].firstName+' '+r[i].lastName
-                let Name=r[i].firstName.toLowerCase()+' '+r[i].lastName.toLowerCase()
-                let nAME=r[i].firstName.toUpperCase()+' '+r[i].lastName.toUpperCase()
-                if(name.includes(req.body.search) || Name.includes(req.body.search) || nAME.includes(req.body.search)){
-                    console.log(name)
-                    arrr.push(r[i])
-                }
-            }
-            res.render('life-applications',{arr:arrr})
-        })
-        .catch(err=>{
-            console.log('err')
-        })
-}
-exports.getTransportApplicationsSearch=(req,res,next)=>{
-    console.log('entered the func')
-    console.log(req.body.search)
-     transportApplications.find({})
-         .then(async r=>{
-     console.log('tarns2')
-            const arrr=[]
-             for(let i=0;i<r.length;i++){
-                let name=r[i].firstName+' '+r[i].lastName
-                let Name=r[i].firstName.toLowerCase()+' '+r[i].lastName.toLowerCase()
-                let nAME=r[i].firstName.toUpperCase()+' '+r[i].lastName.toUpperCase()
-                 console.log('Name '+name)
-                if(name.includes(req.body.search) || Name.includes(req.body.search) || nAME.includes(req.body.search)){
-                    console.log(name)
-                    arrr.push(r[i])
-                }
-            }
-                res.render('transport-applications',{arr:arrr})
+    if(req.body.searchType==='Name') {
+        if (req.body.search !== 'verified') {
+            healthApplications.find({})
+                .then(async r => {
+                        console.log('tarns2')
+                        const arrr = []
+                        for (let i = 0; i < r.length; i++) {
+                            let name = r[i].firstName + ' ' + r[i].lastName
+                            let Name = r[i].firstName.toLowerCase() + ' ' + r[i].lastName.toLowerCase()
+                            let nAME = r[i].firstName.toUpperCase() + ' ' + r[i].lastName.toUpperCase()
+                            console.log('Name ' + name)
+                            if (name.includes(req.body.search) || Name.includes(req.body.search) || nAME.includes(req.body.search)) {
+                                console.log(name)
+                                arrr.push(r[i])
+                            }
+                        }
+                        res.render('health-applications', {arr: arrr})
 
 
-        // })
-        // .catch(err=>{
-        //     console.log('err')
-        // })
-}
-         )
-}
-exports.verifyTransport=async (req, res, next) => {
-    const gender= req.user.sex==='Male'?'Mr':'Mrs'
-
-
-    console.log('Entered verifyTransport')
-    transportApplications.updateOne({_id: req.body.appId}, {verificationStatus: req.body.Status,verificationDate:new Date().toDateString()})
-    const policy = new Policy.model({
-
-        type: req.body.policyType,
-        name: req.body.name,
-        applier: req.body.applier,
-        amount: req.body.amount,
-        policyId: req.body.policyId,
-        appId: req.body.appId,
-        term: req.body.policyTerm,
-        beneficiaryDetails: {
-            name: req.body.nominee,
-            age: req.body.nomineeAge,
-            relation: req.body.nomineeRelation,
-
-        },
-        status: 'Ongoing'
-
-
-    })
-    const applier = await User.findById(req.body.applier)
-
-    const email = applier.email
-    const name = applier.name
-    if (req.body.verificationStatus === 'verified')
-    {
-    policy.save();
-
-
-    User.updateOne({_id: req.body.applier}, {$push: {currentPolicies: policy}}).then((r) => {
-
-        console.log('Policy added to user!!! hooray')
-        transporter.sendMail({
-            to: email,
-            from: 'dattasandeep000@gmail.com',
-            subject: 'Genesis Insurances Application verified and accepted!',
-            html: `<h1>Congratulations ${gender} ${name} your motor insurance application with id ${req.body.applier} has been verified and accepted! </h1>`
-        });
-        res.redirect('/details')
-
-    })
-}
-    else{
-        await transportApplications.findByIdAndDelete(req.params.id).then(() => {
-            transporter.sendMail({
-                to: email,
-                from: 'dattasandeep000@gmail.com',
-                subject: 'Genesis Insurances Application verified and accepted!',
-                html: `<h2>Sorry ${gender} ${name} your motor insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
-            });
-            res.redirect('/details')
-        })
-
-    }
-}
-
-
-
-
-
-exports.verifyLife=async (req, res, next) => {
-    const gender = req.user.sex === 'Male' ? 'Mr' : 'Mrs'
-
-
-    console.log('Entered verifyLife')
-    console.log('ver sta '+req.body.verificationStatus)
-    lifeApplications.updateOne({_id: req.body.appId}, {
-        verificationStatus: req.body.verificationStatus,
-        verificationDate: new Date().toDateString()
-    })
-    const policy = new Policy.model({
-
-        type: req.body.policyType,
-        name: req.body.name,
-        applier: req.body.applier,
-        amount: req.body.amount,
-        policyId: req.body.policyId,
-        appId: req.body.appId,
-        term: req.body.policyTerm,
-        beneficiaryDetails: {
-            name: req.body.nominee,
-            age: req.body.nomineeAge,
-            relation: req.body.nomineeRelation,
-
-        },
-        status: 'Ongoing',
-        duration: req.body.duration
-
-
-    })
-    const applier = await User.findById(req.body.applier)
-
-    const email = applier.email
-    const name = applier.name
-    console.log(req.body.verificationStatus)
-    if (req.body.verificationStatus === 'verified') {
-        policy.save();
-
-
-        User.updateOne({_id: req.body.applier}, {$push: {currentPolicies: policy}}).then((r) => {
-
-            console.log('Policy added to user!!! hooray')
-            transporter.sendMail({
-                to: email,
-                from: 'dattasandeep000@gmail.com',
-                subject: 'Genesis Insurances Application verified and accepted!',
-                html: `<h1>Congratulations ${gender} ${name} your life insurance application with id ${req.body.appId} has been verified and accepted! </h1>`
-            });
-            res.redirect('/details')
-
-        })
-    } else {
-        await lifeApplications.findByIdAndDelete(req.params.id).then(() => {
-            transporter.sendMail({
-                to: email,
-                from: 'dattasandeep000@gmail.com',
-                subject: 'Genesis Insurances Application verified and accepted!',
-                html: `<h2>Sorry ${gender} ${name} your life insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
-            });
-            res.redirect('/details')
-
-        })
-    }
-}
-    exports.verifyHealth = async (req, res, next) => {
-        const gender = req.user.sex === 'Male' ? 'Mr' : 'Mrs'
-
-
-        console.log('Entered verifyHealth')
-        console.log('ver sta '+req.body.verificationStatus)
-
-
-        const policy = new Policy.model({
-
-            type: req.body.policyType,
-            name: req.body.name,
-            applier: req.body.applier,
-            amount: req.body.amount,
-            policyId: req.body.policyId,
-            appId: req.body.appId,
-            term: req.body.policyTerm,
-            beneficiaryDetails: {
-                name: req.body.nominee,
-                age: req.body.nomineeAge,
-                relation: req.body.nomineeRelation,
-
-            },
-            status: 'Ongoing',
-            duration: req.body.duration
-
-
-        })
-        const applier = await User.findById(req.body.applier)
-
-        const email = applier.email
-        const name = applier.name
-        console.log(req.body.verificationStatus)
-        if (req.body.verificationStatus === 'verified') {
-            policy.save();
-            await healthApplications.updateOne({_id: req.body.appId}, {
-                verificationStatus: req.body.verificationStatus,
-                verificationDate: new Date().toDateString()
-            }).then(()=>{
-                console.log('Updated application')
-            })
-
-            User.updateOne({_id: req.body.applier}, {$push: {currentPolicies: policy}}).then((r) => {
-
-                console.log('Policy added to user!!! hooray')
-                transporter.sendMail({
-                    to: email,
-                    from: 'dattasandeep000@gmail.com',
-                    subject: 'Genesis Insurances Application verified and accepted!',
-                    html: `<h1>Congratulations ${gender} ${name} your health insurance application with id ${req.body.appId} has been verified and accepted! </h1>`
-                });
-                res.redirect('/details')
-
-            })
+                        // })
+                        // .catch(err=>{
+                        //     console.log('err')
+                        // })
+                    }
+                )
         } else {
-            await healthApplications.findByIdAndDelete(req.params.id).then(() => {
-                transporter.sendMail({
-                    to: email,
-                    from: 'dattasandeep000@gmail.com',
-                    subject: 'Genesis Insurances Application verified and accepted!',
-                    html: `<h2>Sorry ${gender} ${name} your health insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
-                });
-                res.redirect('/details')
-            })
+            healthApplications.find({verificationStatus: 'verified'}).then(arrr => {
+                res.render('health-applications', {arr: arrr})
 
+            })
+        }
+    }else if(req.body.searchType==='Id'){
+        const arr = []
+        const application = await healthApplications.findById(req.body.search)
+        console.log(application)
+        arr.push(application)
+        res.render('health-applications', {arr: arr})
+    }
+    }
+
+    exports.designform = (req, res, next) => {
+        res.render('designpolicy');
+    }
+    user = [];
+    exports.trackpolicy = (req, res, next) => {
+        res.render('tractpolicy', {users: user});
+    }
+    exports.employeesignuppage = (req, res, next) => {
+        res.render('employeesignup');
+    }
+
+    exports.getemailform = (req, res, next) => {
+        res.render('emailform');
+    }
+
+    exports.getcompanystats = (req, res, next) => {
+        res.render('companystats');
+    }
+
+    exports.getLifeApplicationsSearch = async (req, res, next) => {
+        console.log('entered the func')
+        console.log(req.body.search)
+        if(req.body.searchType==='Name') {
+            if (req.body.search !== 'verified') {
+                lifeApplications.find({})
+                    .then(async r => {
+                            console.log('tarns2')
+                            const arrr = []
+                            for (let i = 0; i < r.length; i++) {
+                                let name = r[i].firstName + ' ' + r[i].lastName
+                                let Name = r[i].firstName.toLowerCase() + ' ' + r[i].lastName.toLowerCase()
+                                let nAME = r[i].firstName.toUpperCase() + ' ' + r[i].lastName.toUpperCase()
+                                console.log('Name ' + name)
+                                if (name.includes(req.body.search) || Name.includes(req.body.search) || nAME.includes(req.body.search)) {
+                                    console.log(name)
+                                    arrr.push(r[i])
+                                }
+                            }
+                            res.render('life-applications', {arr: arrr})
+
+
+                            // })
+                            // .catch(err=>{
+                            //     console.log('err')
+                            // })
+                        }
+                    )
+            } else {
+                lifeApplications.find({verificationStatus: 'verified'}).then(arrr => {
+                    res.render('life-applications', {arr: arrr})
+
+                })
+            }
+        }else if(req.body.searchType==='Id'){
+            const arr = []
+            const application = await lifeApplications.findById(req.body.search)
+            console.log(application)
+            arr.push(application)
+            res.render('life-applications', {arr: arr})
         }
     }
+    exports.getAgentApplicationsSearch = async (req, res, next) => {
+        console.log('entered the func')
+        console.log(req.body.search)
+if(req.body.searchType==='Name') {
+    if (req.body.search !== 'verified') {
+        console.log('entered if')
+        const r = await Agent.find({})
+        if (r) {
+            const arrr = []
+            for (let i = 0; i < r.length; i++) {
+                let name = r[i].name
+                let Name = r[i].name.toLowerCase()
+                let nAME = r[i].name.toUpperCase()
+                if (name.includes(req.body.search) || Name.includes(req.body.search) || nAME.includes(req.body.search)) {
+                    console.log(name)
+                    arrr.push(r[i])
+                }
+            }
+            res.render('agent-applications', {arr: arrr})
+        }
+    } else {
+        console.log('entered else')
+        const agents1 = await Agent.find({isActive: true})
+        res.render('agent-applications', {arr: agents1})
+
+
+    }
+}else if(req.body.searchType==='Id'){
+    const arr = []
+    const application = await Agent.findById(req.body.search)
+    arr.push(application)
+    res.render('agent-applications', {arr: arr})
+}
+    }
+    exports.getTransportApplicationsSearch = async (req, res, next) => {
+            console.log('entered the func')
+            console.log(req.body.search)
+            if(req.body.searchType==='Name') {
+                if (req.body.search !== 'verified') {
+                    transportApplications.find({})
+                        .then(async r => {
+                                console.log('tarns2')
+                                const arrr = []
+                                for (let i = 0; i < r.length; i++) {
+                                    let name = r[i].firstName + ' ' + r[i].lastName
+                                    let Name = r[i].firstName.toLowerCase() + ' ' + r[i].lastName.toLowerCase()
+                                    let nAME = r[i].firstName.toUpperCase() + ' ' + r[i].lastName.toUpperCase()
+                                    console.log('Name ' + name)
+                                    if (name.includes(req.body.search) || Name.includes(req.body.search) || nAME.includes(req.body.search)) {
+                                        console.log(name)
+                                        arrr.push(r[i])
+                                    }
+                                }
+                                res.render('transport-applications', {arr: arrr})
+
+
+                                // })
+                                // .catch(err=>{
+                                //     console.log('err')
+                                // })
+                            }
+                        )
+                } else {
+                    transportApplications.find({verificationStatus: 'verified'}).then(arrr => {
+                        res.render('transport-applications', {arr: arrr})
+
+                    })
+                }
+            }else if(req.body.searchType==='Id'){
+                const arr = []
+                const application = await transportApplications.findById(req.body.search)
+
+                arr.push(application)
+                res.render('transport-applications', {arr: arr})
+            }
+            // } else {
+
+
+            // }
+        }
+        exports.verifyTransport = async (req, res, next) => {
+            const gender = req.user.sex === 'Male' ? 'Mr' : 'Mrs'
+
+
+            console.log('Entered verifyTransport')
+            transportApplications.updateOne({_id: req.body.appId}, {
+                verificationStatus: req.body.Status,
+                verificationDate: new Date().toDateString()
+            })
+            const policy = new Policy.model({
+
+                type: req.body.policyType,
+                name: req.body.name,
+                applier: req.body.applier,
+                amount: req.body.amount,
+                policyId: req.body.policyId,
+                appId: req.body.appId,
+                term: req.body.policyTerm,
+                beneficiaryDetails: {
+                    name: req.body.nominee,
+                    age: req.body.nomineeAge,
+                    relation: req.body.nomineeRelation,
+
+                },
+                status: 'Ongoing'
+
+
+            })
+            const applier = await User.findById(req.body.applier)
+
+            const email = applier.email
+            const name = applier.name
+            if (req.body.verificationStatus === 'verified') {
+                policy.save();
+
+
+                User.updateOne({_id: req.body.applier}, {$push: {currentPolicies: policy}}).then((r) => {
+
+                    console.log('Policy added to user!!! hooray')
+                    transporter.sendMail({
+                        to: email,
+                        from: 'dattasandeep000@gmail.com',
+                        subject: 'Genesis Insurances Application verified and accepted!',
+                        html: `<h1>Congratulations ${gender} ${name} your motor insurance application with id ${req.body.applier} has been verified and accepted! </h1>`
+                    });
+                    res.redirect('/details')
+
+                })
+            } else {
+                await transportApplications.findByIdAndDelete(req.params.id).then(() => {
+                    transporter.sendMail({
+                        to: email,
+                        from: 'dattasandeep000@gmail.com',
+                        subject: 'Genesis Insurances Application verified and accepted!',
+                        html: `<h2>Sorry ${gender} ${name} your motor insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
+                    });
+                    res.redirect('/details')
+                })
+
+            }
+        }
+
+
+        exports.verifyLife = async (req, res, next) => {
+            const gender = req.user.sex === 'Male' ? 'Mr' : 'Mrs'
+
+
+            console.log('Entered verifyLife')
+            console.log('ver sta ' + req.body.verificationStatus)
+            lifeApplications.updateOne({_id: req.body.appId}, {
+                verificationStatus: req.body.verificationStatus,
+                verificationDate: new Date().toDateString()
+            })
+            const policy = new Policy.model({
+
+                type: req.body.policyType,
+                name: req.body.name,
+                applier: req.body.applier,
+                amount: req.body.amount,
+                policyId: req.body.policyId,
+                appId: req.body.appId,
+                term: req.body.policyTerm,
+                beneficiaryDetails: {
+                    name: req.body.nominee,
+                    age: req.body.nomineeAge,
+                    relation: req.body.nomineeRelation,
+
+                },
+                status: 'Ongoing',
+                duration: req.body.duration
+
+
+            })
+            const applier = await User.findById(req.body.applier)
+
+            const email = applier.email
+            const name = applier.name
+            console.log(req.body.verificationStatus)
+            if (req.body.verificationStatus === 'verified') {
+                policy.save();
+
+
+                User.updateOne({_id: req.body.applier}, {$push: {currentPolicies: policy}}).then((r) => {
+
+                    console.log('Policy added to user!!! hooray')
+                    transporter.sendMail({
+                        to: email,
+                        from: 'dattasandeep000@gmail.com',
+                        subject: 'Genesis Insurances Application verified and accepted!',
+                        html: `<h1>Congratulations ${gender} ${name} your life insurance application with id ${req.body.appId} has been verified and accepted! </h1>`
+                    });
+                    res.redirect('/details')
+
+                })
+            } else {
+                await lifeApplications.findByIdAndDelete(req.params.id).then(() => {
+                    transporter.sendMail({
+                        to: email,
+                        from: 'dattasandeep000@gmail.com',
+                        subject: 'Genesis Insurances Application verified and accepted!',
+                        html: `<h2>Sorry ${gender} ${name} your life insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
+                    });
+                    res.redirect('/details')
+
+                })
+            }
+        }
+        exports.verifyHealth = async (req, res, next) => {
+            const gender = req.user.sex === 'Male' ? 'Mr' : 'Mrs'
+
+
+            console.log('Entered verifyHealth')
+            console.log('ver sta ' + req.body.verificationStatus)
+
+
+            const policy = new Policy.model({
+
+                type: req.body.policyType,
+                name: req.body.name,
+                applier: req.body.applier,
+                amount: req.body.amount,
+                policyId: req.body.policyId,
+                appId: req.body.appId,
+                term: req.body.policyTerm,
+                beneficiaryDetails: {
+                    name: req.body.nominee,
+                    age: req.body.nomineeAge,
+                    relation: req.body.nomineeRelation,
+
+                },
+                status: 'Ongoing',
+                duration: req.body.duration
+
+
+            })
+            const applier = await User.findById(req.body.applier)
+
+            const email = applier.email
+            const name = applier.name
+            console.log(req.body.verificationStatus)
+            if (req.body.verificationStatus === 'verified') {
+                policy.save();
+                await healthApplications.updateOne({_id: req.body.appId}, {
+                    verificationStatus: req.body.verificationStatus,
+                    verificationDate: new Date().toDateString()
+                }).then(() => {
+                    console.log('Updated application')
+                })
+
+                User.updateOne({_id: req.body.applier}, {$push: {currentPolicies: policy}}).then((r) => {
+
+                    console.log('Policy added to user!!! hooray')
+                    transporter.sendMail({
+                        to: email,
+                        from: 'dattasandeep000@gmail.com',
+                        subject: 'Genesis Insurances Application verified and accepted!',
+                        html: `<h1>Congratulations ${gender} ${name} your health insurance application with id ${req.body.appId} has been verified and accepted! </h1>`
+                    });
+                    res.redirect('/details')
+
+                })
+            } else {
+                await healthApplications.findByIdAndDelete(req.params.id).then(() => {
+                    transporter.sendMail({
+                        to: email,
+                        from: 'dattasandeep000@gmail.com',
+                        subject: 'Genesis Insurances Application verified and rejected!',
+                        html: `<h2>Sorry ${gender} ${name} your health insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
+                    });
+                    res.redirect('/details')
+                })
+
+            }
+        }
+
+
+        exports.getAgentBoard = (req, res, next) => {
+            console.log(req.session.type)
+            res.render('agentboard', {userType: req.session.type, name: req.user.name})
+        }
+
+
+        exports.getAgentApplications = async (req, res, next) => {
+            const arrr = await Agent.find({isActive: false})
+            res.render('agent-applications', {arr: arrr})
+        }
+
+        exports.getIndividualAgentApplication = async (req, res, next) => {
+            const id = req.params.id
+            const agent = await Agent.findById(id)
+            console.log(agent)
+            res.render('individual-agent-application', {r: agent})
+        }
+
+        exports.verifyAgent = async (req, res, next) => {
+            const id = req.params.id
+            await Agent.updateOne({_id: id}, {isActive: true})
+                await Agent.findById(id).then(r => {
+                console.log('Agent activated')
+                    console.log(r)
+                const gender=r.sex==='Male'?'Mr':'Mrs'
+                console.log(r.email)
+                transporter.sendMail({
+                    to: r.email,
+                    from: 'dattasandeep000@gmail.com',
+                    subject: 'Genesis Insurances Application for Agent verified and accepted!',
+                    html: `<h2>Dear ${gender} ${r.name} your application for becoming our agent with id ${r._id} has been accepted! </h2><p>Please contact our agents for more details!</p>`
+                });
+                res.redirect('/agent-applications')
+            })
+        }
+
+
