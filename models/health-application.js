@@ -9,6 +9,8 @@ const healthSchema=new Schema({
     aadhar:String,
     pan:String,
     dobProof:String,
+    nomineeAadhar:String,
+    nomineeAddressProof:String,
     healthCertificate:String,
     healthCondition:String,
     nominee:String,
@@ -19,7 +21,9 @@ const healthSchema=new Schema({
     amount:String,
     payType:String,
     applier:String,
-
+    duration:String,
+    appliedDate:String,
+    verificationDate:String,
 
 })
 

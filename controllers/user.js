@@ -1,13 +1,18 @@
 const User = require("../models/User");
+const user22 = require("../models/user2");
 const bcrypt = require('bcryptjs');
-
+const employee = require('../models/employee');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
 const Query = require("../models/Query");
-const Admin=require('../models/Admin')
+const Admin=require('../models/Admin');
+const transportPolicy=require('../models/transportpolicy-details');
+const lifepPolicy=require('../models/lifepolicy-details');
+const changePassword=require('../models/passwordChange');
 const Review=require('../models/Review');
-
-const transport_policy = require('../models/transportpolicy-details');
+const Sequelize=require('sequelize')
+const twilio = require("twilio");
+const user = require("../models/user2");
 //
 // const transporter = nodemailer.createTransport(
 //     sendgridTransport({
@@ -32,16 +37,23 @@ const transporter = nodemailer.createTransport(
 exports.getHealthPolicyPage=(req,res)=>{
     res.render('policypage')
 }
+exports.getVehiclePolicies=async (req, res, next) => {
+    await transportPolicy.find().then((arrr)=>{
+        res.render('transportpolicies', {array: arrr})
+    })
+}
 
-exports.getBuyPolicy=(req,res,next)=>{
-    res.render('buypolicy')
+exports.getBuyPolicy2=(req,res,next)=>{
+    res.render('buy-policy2')
 }
 exports.getLifePolicy=(req,res,next)=>{
-    res.render('lifepolicy',{arr:arr})
+    lifepPolicy.find({}).then(arrr=>{
+
+        res.render('lifepolicy',{array:arrr})
+
+    })
 }
-exports.getVehiclePolicies=(req,res,next)=>{
-    res.render('transportpolicies',{array:arr})
-}
+
 exports.getLogin =(req,res,next)=>{
     res.render('login',{text:''})
 }
@@ -58,12 +70,16 @@ exports.getHealthPolicies=(req,res,next)=>{
 
     res.render('healthpolicies',{array:arr})
 }
-exports.getVehiclePolicies=(req,res,next)=>{
-    res.render('transportpolicies',{array:arr})
+exports.getBuyPolicy=(req,res,next)=>{
+    console.log(req.params.id)
+    transportPolicy.findById(req.params.id).then((policy)=>{
+        res.render('buypolicy',{arr:policy})
+    })
+
 }
 
 exports.getDetails=(req,res,next)=>{
-    console.log(req.session.type+' Details : '+req.user._id)
+    // console.log(req.session.type+' Details : '+req.user._id)
     if(req.session.type==='User'){
         res.render('details',
             {name:req.user.name,email:req.user.email,
@@ -73,6 +89,13 @@ exports.getDetails=(req,res,next)=>{
         res.render('admin-details',
             {name:req.user.name,email:req.user.email,
                 age:req.user.age,sex:req.user.sex,address:req.user.address,phone:req.user.phone})
+    }
+    else if(req.session.type==='Agent'){
+        
+        res.render('agentboard',{
+            
+            name:req.user.name
+        })
     }
 
 }
@@ -95,7 +118,10 @@ exports.getMyPolicies=(req,res)=>{
     res.render('my-policies',{arr:array2,str:'Explore Plan'})
 }
 exports.getCurrentPolicies=(req,res)=>{
-    res.render('my-policies',{arr:array2,str:'Pay Installments'})
+    User.findById(req.user.id).then(r=>{
+        res.render('my-policies',{arr:r.currentPolicies,str:'Pay Installments'})
+
+    })
 }
 exports.getPayment=(req,res)=>{
     res.render('payment')
@@ -107,7 +133,7 @@ const arr3=[{Q:"Cant I Pay my installments collectively for my plan id of Motor3
 exports.getMyQueries=async (req, res) => {
     console.log(req.user._id)
     const arrr = await Query.find( {askedBy: req.user._id})
-
+    console.log(arrr[0])
     res.render('my-queries', {arr: arrr})
 }
 
@@ -115,8 +141,11 @@ exports.getWriteQuery=(req,res)=>{
     res.render('write-query')
 }
 
-exports.getTransportForm=(req,res)=>{
-    res.render('transport-form')
+exports.getTransportForm=async (req, res) => {
+    await transportPolicy.findById(req.params.id).then((r) => {
+        res.render('transport-form', {r: r,applier:req.user._id})
+
+    })
 }
 exports.getLifeForm=(req,res)=>{
     res.render('life-form')
@@ -142,7 +171,12 @@ exports.getContactUs=(req,res)=>{
 }
 
 
-
+exports.getBuyPolicylife = (req,res,next)=>{
+    console.log(req.params.id)
+    lifepPolicy.findById(req.params.id).then((policy)=>{
+        res.render('buypolicylife',{array:policy})
+    })
+}
 
 
 
@@ -187,7 +221,9 @@ exports.postSignup=(req,res)=> {
                     password: hashedPassword,
 
                 });
+
                 return user2.save()
+
 
             } else {
                 if (!isValid) {
@@ -219,9 +255,70 @@ exports.postSignup=(req,res)=> {
     })
 }
 
+exports.postemployeesignup = (req,res,next)=>{
+  const name = req.body.name;
+ const  email =  req.body.email;
+ const   age = req.body.age;
+ const   sex = req.body.sex;
+ const   aadhar =req.body.aadhar;
+  const  address = req.body.address;
+  const  phone =  req.body.phone;
+  const  password = req.body.password;
+  const  dob=req.body.dob
+console.log(name,email,age,sex,aadhar,address,phone,password,dob);
+ 
+bcrypt.hash(password,12).then(async hashedpassword=>{
+    const employ = await employee.findOne({email:email})
+    console.log('employ')
+    console.log(employ)
+    if (!employ) {
+        const passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$";
+        const phoneRegex = '^[6-9]\\d{9}$'
+        console.log(password)
+        const isValid = password.match(passwordRegex);
+        const isValid2 = phone.match(phoneRegex)
+        console.log('isvalid' + isValid)
+        console.log('isvalid2' + isValid2)
+        if (isValid && isValid2) {
 
-exports.postemployeesignup
+            console.log('Employee creation started!')
+           
+            const Employee = new employee({name:name,
+                email:email,
+                age:age,
+               sex:sex,
+            aadhar:aadhar,
+            address:address,phone:phone,password:hashedpassword,dob:dob})
+            console.log(Employee)
+             return Employee.save()
 
+
+        } else {
+            if (!isValid) {
+                res.render('signup', {
+                    login: '',
+                    text: 'Password must contain at least one uppercase letter, one lower case character, and one number, and be at least 8 characters long.'
+                })
+            } else if (!isValid2) {
+                res.render('signup', {
+                    login: '',
+                    text: 'Enter valid phone number'
+                })
+            }
+        }
+    }
+}).then(result=>{
+    res.redirect('/login')
+    console.log(result)
+    return transporter.sendMail({
+        to: email,
+        from: 'dattasandeep000@gmail.com',
+        subject: 'Thanks for enrolling',
+        html: '<h1>meet you in office</h1>'
+    });
+
+})
+}
     exports.postLogin = async (req, res) => {
         const name = req.body.name
         const email = req.body.email
@@ -277,12 +374,13 @@ exports.postemployeesignup
                         req.session.isLoggedIn = true;
                         req.session.user = admin;
                         console.log('admin session set')
-                        console.log()
+                        
                         req.session.type=type;
                         return req.session.save(err => {
                             console.log(err);
                             res.redirect('/');
                             console.log('You have logged in')
+                            
                             setTimeout(()=>{
                                 console.log('Entered Timeout')
                                 req.session.destroy()},900*1000)
@@ -294,6 +392,44 @@ exports.postemployeesignup
             } else {
                 res.render('login', {text: 'Enter valid email and username!'})
 
+            }
+        }
+
+        else if(type === 'Agent'){
+            const employ = await employee.findOne({email:email})
+            if(employ){
+             bcrypt.compare(password, employ.password, (err, matched) => {
+                    console.log(password)
+                    console.log(employ.password)
+                    if (!matched) {
+                        res.render('login', {text: 'Invalid Password!', login: false})
+                        console.log('Not matched')
+                        // res.send('Incorrect password')
+                    } else if (matched) {
+                        if(employ.isActive == true){
+                        req.session.isLoggedIn = true;
+                        req.session.user = employ;
+                        console.log(req.session.user)
+                        console.log('employee session set')
+                        console.log()
+                        req.session.type=type;
+                        return req.session.save(err => {
+                            console.log(err);
+                            res.redirect('/');
+                            console.log('You have logged in employee')
+                            setTimeout(()=>{
+                                console.log('Entered Timeout')
+                                req.session.destroy()},900*1000)
+                        });
+                      
+                        // console.log(req.cookies['user'].name)
+                    }
+                    else{
+                        res.render('login', {text: 'wait for approval', login: false})
+                        console.log('No aPRROVAL')
+                    }
+                }
+                })
             }
         }
 
@@ -317,7 +453,8 @@ exports.postemployeesignup
             question: query,
             answer: answer,
             askedBy: req.user._id,
-            status:'Not Answered'
+            status:'Not Answered',
+           askDate:new Date().toDateString(),
         });
            Q.save().then(r => {
             console.log('query added successfully!')
@@ -377,6 +514,8 @@ exports.postemployeesignup
     }
 
     exports.deleteAcc = (req, res) => {
+
+
         User.findByIdAndDelete(req.user._id).then(r => {
 
             res.redirect('/')
@@ -489,8 +628,31 @@ exports.postaddpolicy = (req,res,next)=>{
     const GE = req.body.ge;
     const benefits = req.body.benefits;
     console.log(type)
-    if (type == "life") {
-       const Life =  new life_model()
+    if (type == "life".trim()) {
+       const Life =  new lifepPolicy(
+        {
+            name:name,
+            type:type,
+            coverAmount:amount,
+            duration:term,
+            term:req.body.term,
+            premium:req.body.premium,
+            details:details,
+            TC:TC,
+            GE:GE,
+            benefits:benefits
+    
+            
+        }
+       );
+       console.log(Life)
+       Life.save().then(result=>{
+        console.log("added new life policy");
+        console.log(result);
+        res.redirect("/designform");
+    }).catch(err=>{
+ console.log(err)
+    })
     }
     else if(type=="car".trim()){
        const trans_policy = new transport_policy(
@@ -509,7 +671,7 @@ exports.postaddpolicy = (req,res,next)=>{
     trans_policy.save().then(result=>{
         console.log("added new transport policy");
         console.log(result);
-        res.redirect("/designpolicy");
+        res.redirect("/designform");
     }).catch(err=>{
  console.log(err)
     })
@@ -528,4 +690,46 @@ exports.postpolicydetails =(req,res,next)=>{
     }).catch(err=>{
         console.log(err)
     })
+
+}
+    exports.changePassword=async (req, res, next) => {
+
+        const phone = '+91' + req.body.phone
+        const email = req.body.email
+        const OTP = Math.floor(Math.random() * 1000000)
+
+        passchange = new changePassword({
+            userID: req.user,
+            email: email,
+            OTP: OTP,
+            phone: phone,
+            createdAt: new Date()
+        })
+
+        await passchange.save()
+
+       await transporter.sendMail({
+            to: email,
+            from: 'dattasandeep000@gmail.com',
+            subject: 'Genesis Insurances OTP for password change!',
+            html: `Dear user your otp to change your password is ${OTP}`
+        });
+
+
+        const account_sid = process.env.TWILIO_ACCOUNT_SID
+        const auth_token = process.env.TWILIO_AUTH_TOKEN
+        const client = twilio(account_sid, auth_token);
+
+        client.messages.create({
+            body: 'Dear user your OTP to for changing password is '+OTP,
+            from: '+16813346876',
+            to: phone
+        })
+            .then(message => {console.log(message.sid);res.render('otpverifier',{email})})
+            .catch(error => console.error(error));
+}
+
+
+exports.verifyOTP=(req,res,next)=>{
+
 }

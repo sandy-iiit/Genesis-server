@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/html">
 <head>
     <link rel="stylesheet" href="/css/lifepolicy.css">
-    <link rel="stylesheet" href="/css/navbar.css">
+<!--    <link rel="stylesheet" href="/css/navbar.css">-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -40,24 +40,31 @@
     <img src="/images/Public health-pana.png" class="whlimg">
 </div>
 
-<div class="container1">
-    <%for(let i=0;i<arr.length-1;i++){%>
 
-    <div class="card1">
-        <div class="item1">
-            <h1><%=arr[i].name%></h1>
+<div class="container12">
+    <%for(let i=0;i<array.length;i++){%>
+
+    <div class="card12">
+        <div class="item12">
+            <h4><%=array[i].name%></h4>
         </div>
-        <div class="item1">
-            <h2><%=arr[i].term%></h2>
+        <div class="item12">
+            <h4>COVER AMOUNT: ₹ <%=array[i].coverAmount %></h4>
         </div>
-        <div class="item1">
-            <h2><%=arr[i].percentage%></h2>
+        <div class="item12">
+            <h4>DURATION:<%=array[i].duration %> yrs</h4>
         </div>
-        <div class="item1">
-            <h2><%=arr[i].IDV%></h2>
+        <div class="item12">
+
+            <h4>PREMIUM:₹<%=array[i].Premium%></h4>
         </div>
-        <div class="item1">
-           <a href="/buy-policy"><button class="button"> Select </button></a>
+        <div class="item12">
+            <h4>TERM:<%=array[i].term%></h4>
+        </div>
+
+
+        <div class="item12">
+            <a href="/buypolicy3/<%= array[i]._id  %>"><button class="button">Select</button></a>
         </div>
     </div>
     <%}%>

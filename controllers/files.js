@@ -15,7 +15,9 @@ conn.once('open', function() {
 
 
 const HealthApplication=require('../models/health-application')
-exports.uploader= async function(req, res, next) {
+const LifeApplication=require('../models/life-application')
+const TransportApplication=require('../models/transport-application')
+exports.healthUploader= async function(req, res, next) {
 
     const healthApplication = new HealthApplication({
         firstName: req.body.firstName,
@@ -23,6 +25,8 @@ exports.uploader= async function(req, res, next) {
         age: req.body.age,
         aadhar: req.files['aadhar'][0].id,
         pan:req.files['pan'][0].id,
+        nomineeAadhar:req.files['nomineeAadhar'][0].id,
+        nomineeAddressProof:req.files['nomineeAddressProof'][0].id,
         dobProof:req.files['dobProof'][0].id,
         healthCertificate:req.files['healthCertificate'][0].id,
         healthCondition:req.body.healthCondition,
@@ -34,10 +38,81 @@ exports.uploader= async function(req, res, next) {
         amount:req.body.amount,
         payType:req.body.payType,
         applier:req.user._id,
+        duration:req.body.duration
 
 
     });
     await healthApplication.save();
+
+    console.log('File uploaded successfully');
+    res.redirect('/')
+}
+exports.lifeUploader= async function(req, res, next) {
+
+    const lifeApplication = new LifeApplication({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        age: req.body.age,
+        aadhar: req.files['aadhar'][0].id,
+        pan:req.files['pan'][0].id,
+        nomineeAadhar:req.files['nomineeAadhar'][0].id,
+        nomineeAddressProof:req.files['nomineeAddressProof'][0].id,
+        dobProof:req.files['dobProof'][0].id,
+        healthCertificate:req.files['healthCertificate'][0].id,
+        healthCondition:req.body.healthCondition,
+        beneficiary:req.body.nominee,
+        beneficiaryAge:req.body.nomineeAge,
+        beneficiaryRelation:req.body.nomineeRelation,
+        policyId:req.body.policyId,
+        policyNum:req.body.policyNum,
+        amount:req.body.amount,
+        payType:req.body.payType,
+        applier:req.user._id,
+        duration:req.body.duration,
+
+
+    });
+    await lifeApplication.save();
+
+    console.log('File uploaded successfully');
+    res.redirect('/')
+}
+
+exports.transportUploader= async function(req, res, next) {
+
+    const transportApplication = new TransportApplication({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        age: req.body.age,
+        regNum:req.body.regNum,
+
+        aadhar: req.files['aadhar'][0].id,
+        c_book:req.files['c_book'][0].id,
+        nomineeAadhar:req.files['nomineeAadhar'][0].id,
+        nomineeAddressProof:req.files['nomineeAddressProof'][0].id,
+        vehicleCompany:req.body.company,
+        model:req.body.model,
+        yearOfMfg:req.body.yearOfMfg,
+        vehicleType:req.body.vehicleType,
+        engine:req.body.engine,
+        chassis:req.body.chassis,
+
+
+        nominee:req.body.nominee,
+        nomineeAge:req.body.nomineeAge,
+        nomineeRelation:req.body.nomineeRelation,
+        policyId:req.body.policyId,
+        policyName:req.body.policyName,
+        policyType:req.body.policyType,
+        policyTerm:req.body.policyTerm,
+        amount:req.body.amount,
+        payType:req.body.payType,
+        applier:req.user._id,
+        appliedDate:new Date().toDateString()
+
+
+    });
+    await transportApplication.save();
 
     console.log('File uploaded successfully');
     res.redirect('/')

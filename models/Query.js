@@ -25,6 +25,12 @@ const querySchema=new Schema({
     },
     answeredBy:{
         type:String,
+    },
+    askDate:{
+        type:String,
+    },
+    answerDate:{
+        type:String
     }
 
 })

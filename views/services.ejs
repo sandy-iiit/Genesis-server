@@ -11,7 +11,7 @@
     </div>
     <div class="qrygen">
         <h2>Grab a Quote</h2>
-        <form class="quoteform" action="/quotegenerator" method="post">
+        <form class="quoteform" onsubmit="submitForm(event)">
 
             <input type="text" placeholder="name" name="quotnam" id="quotnam">
             <span id="quotnamError" class="error" style="text-align: center;color: #3E54AC;"></span>
@@ -19,17 +19,12 @@
 
             <input type="email" placeholder="email" name="quotemail" id="quotemail">
             <span id="quotemailError" class="error" style="text-align: center;color: #3E54AC;"></span>
-<br>
 
-            <select name="quotinsurance" id="quotinsurance" style="border-color:#3E54AC;width: 50%;text-align: center;justify-content: center;margin-left: 23%;border-radius: 28px;color:#3E54AC;padding: 5px;">
-                <option value="">Select insurance type</option>
-                <option value="life">Life insurance</option>
-                <option value="transportation">Transportation insurance</option>
-                <option value="health">Health insurance</option>
-              </select>
+
+            <input type="text" placeholder="insurance type" name="quotinsurance" id="quotinsurance">
             <span id="quotinsuranceError" class="error" style="text-align: center;color: #3E54AC;"></span>
 
-<br>
+
             <input type="text" placeholder="zip code" name="quotzip" id="quotzip">
             <span id="quotzipError" class="error" style="text-align: center;color: #3E54AC;"></span>
 
@@ -44,7 +39,7 @@
             <input type="text" placeholder="coverage limit" name="quotcoverage" id="quotcoverage">
             <span id="quotcoverageError" class="error" style="text-align: center;color: #3E54AC;"></span>
 
-            <button type="submit" onsubmit="submitForm(event)">Submit</button>
+            <button type="submit">Submit</button>
         </form>
 
     </div>

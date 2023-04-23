@@ -1,0 +1,103 @@
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <link rel="stylesheet" href="/css/buypolicy.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<%- include('navbar.ejs') %>
+<div class="scroll-mobile">
+    <ul class="switchnav">
+        <button  class="button button1" onclick="openInfo('Details')">Policy Details</button>
+        <button  class="button button2" onclick="openInfo('T&C')">Policy Terms and Conditions</button>
+        <button  class="button button3" onclick="openInfo('Benefits')">Benefits</button>
+        <button class="button button5" onclick="openInfo('buyPolicy')">Buy Policy</button>
+    </ul>
+</div>
+<div class="content" id="content">
+    <div class="Details info" id="Details">
+        <div class="info1">
+            <h3> Type of policy : Comprehensive Motor Insurance</h3>
+            <h3> IDV : ₹ 43,234</h3>
+            <h3> Term : annually</h3>
+            <h3> Premium starts: ₹1444</h3>
+        </div>
+        <div class="info2">
+            <h4 style="text-align: center">Factors Determining Car Insurance Premium Calculation </h4>
+            <ul>
+                <li> <strong>Vehicle Type:</strong> Vehicle Type majorly decides your premium. These factors include the Car Make Model, Motor Transmission type, Car Modification & Car's fuel type.</li>
+                <li><strong>Plan Type:</strong> Premium is also determined based on whether you have a Third-Party Car Insurance, a Comprehensive Car Insurance or Standalone Car Insurance.</li>
+                <li><strong>Engine's Capacity:</strong> The car’s Cubic capacity also determines the premium for the Own Damage cover.</li>
+                <li><strong>Car's IDV:</strong> The sum insured of a comprehensive car insurance policy is its current market value which is called Insured Declared Value (IDV). As your car grows older, the IDV decreases.</li>
+                <!--               <li><strong>No Claim Bonus:</strong> NCB discount is availed during policy renewal for zero claims in the previous year. Other factors include Voluntary Deductible, AAI Membership Concessions & Installation of Anti-Theft Devices.</li>-->
+                <li><strong>Geographical Location:</strong> Insurance providers also rate the premium according to the place where the insured car will be mostly driven. Urban cities have higher premium rates than rural locations.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="T&C info" id="T&C" style="display:none">
+        <h3>Insurance Claim Not Applicable if :</h3>
+        <ul>
+            <li><strong>Driving without a valid license:</strong> If the driver of the vehicle does not have a valid driving license, then any accident or damage caused by that driver may not be covered by the insurance policy.</li>
+            <li><strong> Driving under the influence:</strong> If the driver of the vehicle was under the influence of alcohol or drugs at the time of the accident, then the insurance policy may not cover the damages.</li>
+            <li><strong>Intentional damage:</strong> If the damage to the vehicle or injury to the third-party was intentionally caused by the policyholder, then the insurance policy may not cover it.</li>
+            <li><strong>Using the vehicle for illegal purposes:</strong> If the vehicle was being used for illegal activities at the time of the accident, then the insurance policy may not cover any damages or injuries.</li>
+            <li><strong>Failure to report the accident:</strong> If the policyholder fails to report the accident to the insurance company within the stipulated time frame, then the claim may not be accepted.</li>
+            <li><strong>Driving outside the policy coverage area:</strong> If the accident or damage occurs outside the geographical limits covered by the insurance policy, then the claim may not be accepted.</li>
+            <li><strong>Using the vehicle for commercial purposes:</strong> If the vehicle is being used for commercial purposes and the insurance policy does not cover commercial use, then the claim may not be accepted.</li>
+            <li><strong>Age limit:</strong>This insurance policies have age restrictions for the policyholder and/or the driver of the vehicle to be of age 18 or above.</li>
+            <li><strong>Excess:</strong> The policyholder may have to pay an excess amount towards the claim, which is the amount that the policyholder has agreed to pay towards any claim. The excess amount can vary based on the policy and can be different for different types of claims.</li>
+            <li><strong>Modifications to the vehicle:</strong> If the vehicle has been modified from its original specifications, the insurance policy will not cover damages caused due to the modification.</li>
+            <li><strong>Timely renewal:</strong> It is essential to renew the insurance policy before the expiry date to ensure that the policy is in force at all times. If the policy has lapsed, then any damages or accidents that occur during that period will not be covered.</li>
+            <li><strong>Unattended vehicle:</strong> Leaving the vehicle unattended with the engine running or with the keys inside can invalidate the insurance policy.</li>
+            <li><strong>Unauthorised repairs:</strong> Getting the vehicle repaired at an unauthorised repair centre results in the insurance policy becoming invalid.</li>
+            <li><strong>Personal belongings:</strong> The insurance policy does not cover personal belongings left in the vehicle at the time of the accident or theft.</li>
+        </ul>
+    </div>
+    <div id="Benefits" class="Benefits info" style="display:none">
+        <h3>Discounts</h3>
+        <h5>The following are the discounts available on the premium payable.</h5>
+        <ul>
+            <li>Vintage Cars - Cars manufactured prior to 31.12.40 and duly certified by the Vintage and Classic Cars Club of India :</li>
+        </ul>
+        <p>A discount of 25% on the OD rates is available. Policies issued covering these vehicles are Agreed Value Policies.</p>
+        <ul>
+            <li>No Claim Bonus :</li>
+        </ul>
+        <p>Ranging from 20% to 50% depending on the number of claim free years.</p>
+        <i><p>Faster claim when repair done garages affiliated with us.</p></i>
+        <ul>
+            <li>Automobile Association Membership Discount :</li>
+        </ul>
+        <p>Discount of 5% on the Own Damage premium subject to a maximum of Rs. 200/- for private cars and Rs. 50/- for Motorised Two wheelers only.</p>
+        <ul>
+            <li>Discount for Anti Theft Devices :</li>
+        </ul>
+        <p>A discount of 2.5% on the OD component of premium subject to a maximum of Rs. 200/-. Device approved by the ARAI Pune - installation of the same in vehicle certified by the Automobile Association of India.</p>
+        <ul>
+            <li>50% discount on the OD premium on the vehicle specialy designed / modified for use of the blind handicapped and mentally challenged persons</li>
+        </ul>
+        <ul>
+            <li>Use of vehicles withing Insured's premises/sites :</li>
+        </ul>
+        <p>A discount of 33 1/1 % on the tariff rates is permissible.</p>
+
+    </div>
+    <div class="buyPolicy info" id="buyPolicy" style="display:none">
+        <a href="/life-form">final payment page</a>
+    </div>
+</div>
+
+<%- include('footer.ejs') %>
+
+</body>
+<script>
+    function openInfo(info){
+        var i;
+        var x = document.getElementsByClassName("info");
+        for(i=0;i<x.length;i++){
+            x[i].style.display="none";
+        }
+        document.getElementById(info).style.display="block";
+    }
+</script>
+</html>

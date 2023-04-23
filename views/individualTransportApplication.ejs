@@ -1,0 +1,82 @@
+<head>
+    <link rel="stylesheet" href="/css/transport-form.css">
+</head>
+
+<%- include('navbar.ejs')%>
+<img class="car" src="/images/car.svg">
+<form class="form" action="/verifyTransport" method="post">
+    <div class="row1"><p class="label">Name</p> <input value="<%=firstName%>"  name="firstName" type="text" class="row13" placeholder="firstName">
+        <input value="<%=lastName%>" name="lastName" type="text" class="row13" placeholder="lastName"></div>
+
+    <div class="row2">
+        <div class="subrow"><p class="label">AADHAR</p> <a href="/files/<%=aadhar%>">Open AADHAR</a></div></div>
+        <div class="subrow"><p class="label">C Book</p> <a href="/files/<%=c_book%>">Open AADHAR</a></div></div>
+    </div>
+    <div class="row1">
+        <p class="label">Vehicle Registration number</p> <input value="<%=regNum%>" name="regNum" class="inner-row1" placeholder="Registation number">
+    </div>
+
+    <div class="row2">
+        <div class="subrow"><p class="label">Vehicle company</p> <input value="<%=vehicleCompany%>" class="inner-row2" name="company"></div>
+
+        <div class="subrow"><p class="label">Vehicle model</p> <input value="<%=model%>" class="inner-row2" name="model"></div>
+    </div>
+
+    <div class="row2">
+        <div class="subrow"><p class="label">Vehicle type</p> <input class="inner-row2" name="vehicleType" value="<%=vehicleType%>"></div>
+        <div class="subrow"><p class="label">Year of manufacture</p> <input value="<%=yearOfMfg%>" class="inner-row2" name="yearOfMfg"></div>
+    </div>
+    <div class="row2">
+        <div class="subrow"><p class="label">Engine</p><input value="<%=engine%>" name="engine" class="inner-row2"></div>
+        <div class="subrow"><p class="label">Chassis</p><input value="<%=chassis%>" name="chassis" class="inner-row2"></div>
+
+    </div>
+
+    <div class="row1">
+        <p class="label">Nominee Name</p>
+        <input value="<%=nominee%>" name="nominee" class="inner-row1">
+
+    </div>
+
+    <div class="row2">
+        <div class="subrow">
+            <p class="label">Nominee Age</p>
+            <input value="<%=nomineeAge%>" class="inner-row2" name="nomineeAge">
+        </div>
+        <div class="subrow">
+            <p class="label">Nominee Relation</p>
+            <input class="inner-row2" name="nomineeRelation">
+        </div>
+    </div>
+    <div class="row2">
+        <div class="subrow"><p class="label">Nominee AADHAR</p> <a href="/files/<%=nomineeAadhar%>">Open nominee AADHAR</a></div>
+    <div class="subrow"><p class="label">Nominee AddressProof</p> <a href="/files/<%=nomineeAddressProof%>">Open Nominee AddressProof</a></div>
+    </div>
+    <div class="row1">
+        <p class="label">Policy Id</p>
+        <input  class="inner-row1" name="policyId" value="<%=policyId%>">
+    </div>
+    <div class="row1">
+        <p class="label">Policy Name</p>
+        <input  class="inner-row1" name="policyName" value="<%=policyName%>">
+    </div>
+
+    <div class="row2">
+        <div class="subrow"> <p class="label">Amount</p><input value="<%=amount%>" class="inner-row2" type="number" name="amount" ></div>
+        <div class="subrow"> <p class="label">Term</p><input value="<%=policyTerm%>" class="inner-row2" type="text" name="policyTerm" ></div>
+    </div>
+    <p>Applied By </p> <input value="<%=applier%>" name="applier" >
+    <input  name="policyType" style="display: none" value="<%=policyType%>">
+    <input  name="appId" style="display: none" value="<%=appId%>">
+
+    <div class="row1"><p class="label">Verification Status</p> <input   name="status" type="text" class="row13" placeholder="Status">
+       </div>
+
+
+    <button class="button" type="submit">Verify</button>
+
+
+
+</form>
+
+<%-include('footer')%>

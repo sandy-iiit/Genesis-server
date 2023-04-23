@@ -64,7 +64,7 @@
 }
 .quoteform input,textarea ::placeholder {
      text-align: center;
-     /* color: white; */
+     color: white;
 }
 .quoteform button{
     color: white;

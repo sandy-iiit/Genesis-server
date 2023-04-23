@@ -40,7 +40,10 @@
             <input class="inner-row2" name="nomineeRelation" value="<%=nomineeRelation%>">
         </div>
     </div>
-
+    <div class="row2">
+        <div class="subrow"><p class="label">Nominee AADHAR</p> <a href="/files/<%=nomineeAadhar%>">Open nominee AADHAR</a></div>
+        <div class="subrow"><p class="label">Nominee AddressProof</p> <a href="/files/<%=nomineeAddressProof%>">Open Nominee AddressProof</a></div>
+    </div>
     <div class="row1">
         <p class="label">Policy Number</p>
         <input class="inner-row1" name="policyNum" value="<%=policyNum%>">
@@ -59,9 +62,14 @@
             </select></div>
 
     </div>
+
+    <div class="row1">
+        <p class="label">Duration</p>
+        <input type="number" class="inner-row1" name="duration" >
+    </div>
     <div class="row1">
         <p class="label">Status</p>
-        <input class="inner-row1" name="status" >
+        <input class="inner-row1" name="duration" >
     </div>
 
     <button class="button" type="submit">Verify</button>

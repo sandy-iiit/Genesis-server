@@ -41,12 +41,12 @@ const userSchema= new Schema({
     },
     currentPolicies:[
         {
-            policy:Policy.policySchema
+            type:Policy.policySchema
         }
     ],
     policyHistory:[
         {
-            policy:Policy.policySchema
+            type:Policy.policySchema
 
         }
     ],

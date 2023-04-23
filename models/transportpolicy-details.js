@@ -11,6 +11,7 @@ const transportPolicy = new Schema(
         type: String,
         amount:Number,
         term:String,
+       
         //buy policy
         details: {type:String,},
         TC:{type:String,},

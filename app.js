@@ -1,4 +1,6 @@
+
 const path = require('path');
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -15,6 +17,7 @@ require('dotenv').config()
 const userRoutes=require('./routes/userRoutes')
 const User = require('./models/User')
 const Admin = require('./models/Admin')
+const Employee = require('./models/employee');
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
@@ -52,6 +55,15 @@ app.use((req, res, next) => {
     }else if(req.session.type==='Admin'){
 
         Admin.findById(req.session.user._id)
+            .then(user => {
+                req.user = user;
+                next();
+            })
+            .catch(err => console.log(err));
+    }
+    else if(req.session.type==='Agent'){
+
+        Employee.findById(req.session.user._id)
             .then(user => {
                 req.user = user;
                 next();
