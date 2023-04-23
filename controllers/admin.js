@@ -1,9 +1,12 @@
 
 const queries=require('../models/Query')
 const reviews=require('../models/Review')
+ 
+const healthApplications=require('../models/health-application')
+ 
 const User=require('../models/User')
 const Policy=require('../models/Policy')
-const healthApplications=require('../models/health-application')
+ 
 const lifeApplications=require('../models/life-application')
 const transportApplications=require('../models/transport-application')
 const nodemailer = require("nodemailer");
@@ -26,6 +29,7 @@ const transporter = nodemailer.createTransport(
 
 
 
+ 
 exports.getAnswerQueries=(req,res,next)=>{
 
     queries.find({status:'Not Answered'}).then(arr=>{
@@ -220,6 +224,26 @@ exports.getHealthApplicationsSearch=(req,res,next)=>{
             console.log('err')
         })
 }
+ 
+exports.designform = (req,res,next)=>{
+    res.render('designpolicy');
+}
+user=[];
+exports.trackpolicy = (req,res,next)=>{
+    res.render('tractpolicy',{users:user});
+}
+exports.employeesignuppage = (req,res,next)=>{
+    res.render('employeesignup');
+}
+
+exports.getemailform = (req,res,next)=>{
+    res.render('emailform');
+}
+
+exports.getcompanystats = (req,res,next)=>{
+    res.render('companystats');
+}
+
 exports.getLifeApplicationsSearch=(req,res,next)=>{
     console.log('entered the func')
     console.log(req.body.search)

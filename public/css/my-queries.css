@@ -31,7 +31,11 @@ button{
 .ansss{
     width: 90%;
     margin: auto;
+<<<<<<< HEAD
+    height: 70%;
+=======
     height: 50%;
+>>>>>>> origin/sandeep
     border-radius: 10px;
     padding: 10px;
     color: #3e54ac;

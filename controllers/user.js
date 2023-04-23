@@ -1,12 +1,9 @@
 const User = require("../models/User");
-const user22 = require("../models/user2");
 const bcrypt = require('bcryptjs');
 
 const healthApplications=require('../models/health-application')
 const lifeApplications=require('../models/life-application')
 const transportApplications=require('../models/transport-application')
-const nodemailer = require('nodemailer');
-const sendgridTransport = require('nodemailer-sendgrid-transport');
 const Query = require("../models/Query");
 const Admin=require('../models/Admin')
 const transportPolicy=require('../models/transportpolicy-details')
@@ -14,11 +11,13 @@ const lifePolicy=require('../models/lifepolicy-details')
 const healthPolicy=require('../models/healthpolicy-details')
 const changePassword=require('../models/passwordChange')
 const Review=require('../models/Review')
-const Sequelize=require('sequelize')
 const twilio = require("twilio");
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const {MongoClient} = require("mongodb");
+const employee = require('../models/employee');
+const nodemailer = require('nodemailer');
+const sendgridTransport = require('nodemailer-sendgrid-transport');
 //
 // const transporter = nodemailer.createTransport(
 //     sendgridTransport({
@@ -97,7 +96,7 @@ exports.gethealthPolicy=async (req,res,next)=>{
 }
 
 exports.getDetails=(req,res,next)=>{
-    console.log(req.session.type+' Details : '+req.user._id)
+    // console.log(req.session.type+' Details : '+req.user._id)
     if(req.session.type==='User'){
         res.render('details',
             {name:req.user.name,email:req.user.email,
@@ -107,6 +106,13 @@ exports.getDetails=(req,res,next)=>{
         res.render('admin-details',
             {name:req.user.name,email:req.user.email,
                 age:req.user.age,sex:req.user.sex,address:req.user.address,phone:req.user.phone})
+    }
+    else if(req.session.type==='Agent'){
+        
+        res.render('agentboard',{
+            
+            name:req.user.name
+        })
     }
 
 }
@@ -144,7 +150,7 @@ const arr3=[{Q:"Cant I Pay my installments collectively for my plan id of Motor3
 exports.getMyQueries=async (req, res) => {
     console.log(req.user._id)
     const arrr = await Query.find( {askedBy: req.user._id})
-    console.log(arrr[0].askDate)
+    console.log(arrr[0])
     res.render('my-queries', {arr: arrr})
 }
 
@@ -278,6 +284,70 @@ exports.postSignup=(req,res)=> {
     })
 }
 
+exports.postemployeesignup = (req,res,next)=>{
+  const name = req.body.name;
+ const  email =  req.body.email;
+ const   age = req.body.age;
+ const   sex = req.body.sex;
+ const   aadhar =req.body.aadhar;
+  const  address = req.body.address;
+  const  phone =  req.body.phone;
+  const  password = req.body.password;
+  const  dob=req.body.dob
+console.log(name,email,age,sex,aadhar,address,phone,password,dob);
+ 
+bcrypt.hash(password,12).then(async hashedpassword=>{
+    const employ = await employee.findOne({email:email})
+    console.log('employ')
+    console.log(employ)
+    if (!employ) {
+        const passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$";
+        const phoneRegex = '^[6-9]\\d{9}$'
+        console.log(password)
+        const isValid = password.match(passwordRegex);
+        const isValid2 = phone.match(phoneRegex)
+        console.log('isvalid' + isValid)
+        console.log('isvalid2' + isValid2)
+        if (isValid && isValid2) {
+
+            console.log('Employee creation started!')
+           
+            const Employee = new employee({name:name,
+                email:email,
+                age:age,
+               sex:sex,
+            aadhar:aadhar,
+            address:address,phone:phone,password:hashedpassword,dob:dob})
+            console.log(Employee)
+             return Employee.save()
+
+
+        } else {
+            if (!isValid) {
+                res.render('signup', {
+                    login: '',
+                    text: 'Password must contain at least one uppercase letter, one lower case character, and one number, and be at least 8 characters long.'
+                })
+            } else if (!isValid2) {
+                res.render('signup', {
+                    login: '',
+                    text: 'Enter valid phone number'
+                })
+            }
+        }
+    }
+}).then(result=>{
+    res.redirect('/login')
+    console.log(result)
+    return transporter.sendMail({
+        to: email,
+        from: 'dattasandeep000@gmail.com',
+        subject: 'Thanks for enrolling',
+        html: '<h1>meet you in office</h1>'
+    });
+
+})
+}
     exports.postLogin = async (req, res) => {
         const client = await MongoClient.connect('mongodb+srv://dattasandeep000:13072003@sandy.p06ijgx.mongodb.net/G1?retryWrites=true&w=majority', { useNewUrlParser: true });
         const db = await client.db();
@@ -336,16 +406,16 @@ exports.postSignup=(req,res)=> {
                         req.session.isLoggedIn = true;
                         req.session.user = admin;
                         console.log('admin session set')
-                        console.log()
+                        
                         req.session.type=type;
                         return req.session.save(err => {
                             console.log(err);
                             res.redirect('/');
                             console.log('You have logged in')
-                            // setTimeout(()=>{
-                            //     console.log('Entered Timeout')
-                            //     req.session.destroy()},900*1000)
-                            // db.collection('sessions')
+                            
+                            setTimeout(()=>{
+                                console.log('Entered Timeout')
+                                req.session.destroy()},900*1000)
                         });
 
                         // console.log(req.cookies['user'].name)
@@ -354,6 +424,44 @@ exports.postSignup=(req,res)=> {
             } else {
                 res.render('login', {text: 'Enter valid email and username!'})
 
+            }
+        }
+
+        else if(type === 'Agent'){
+            const employ = await employee.findOne({email:email})
+            if(employ){
+             bcrypt.compare(password, employ.password, (err, matched) => {
+                    console.log(password)
+                    console.log(employ.password)
+                    if (!matched) {
+                        res.render('login', {text: 'Invalid Password!', login: false})
+                        console.log('Not matched')
+                        // res.send('Incorrect password')
+                    } else if (matched) {
+                        if(employ.isActive == true){
+                        req.session.isLoggedIn = true;
+                        req.session.user = employ;
+                        console.log(req.session.user)
+                        console.log('employee session set')
+                        console.log()
+                        req.session.type=type;
+                        return req.session.save(err => {
+                            console.log(err);
+                            res.redirect('/');
+                            console.log('You have logged in employee')
+                            setTimeout(()=>{
+                                console.log('Entered Timeout')
+                                req.session.destroy()},900*1000)
+                        });
+                      
+                        // console.log(req.cookies['user'].name)
+                    }
+                    else{
+                        res.render('login', {text: 'wait for approval', login: false})
+                        console.log('No aPRROVAL')
+                    }
+                }
+                })
             }
         }
 
@@ -473,8 +581,217 @@ exports.postSignup=(req,res)=> {
             })
 
     }
+    exports.quotegenerator= (req, res) => {
+      
+        const name = req.body.quotnam;
+        const email = req.body.quotemail;
+        const insuranceType = req.body.quotinsurance;
+        const zip = req.body.quotzip;
+        const age = parseInt(req.body.quotage);
+        const dob = new Date(req.body.quotdob);
+        const coverageLimit = parseInt(req.body.quotcoverage);
+      
+       
+        let quote = 0;
+        switch (insuranceType) {
+          case 'life':
+         
+            if (age < 18) {
+              quote = 50;
+            } else if (age >= 18 && age < 35) {
+              quote = 100;
+            } else if (age >= 35 && age < 50) {
+              quote = 200;
+            } else {
+              quote = 500;
+            }
+            break;
+          case 'transportation': 
+            if (zip.startsWith('10') || zip.startsWith('11')) {
+              quote = 100;
+            } else if (zip.startsWith('12') || zip.startsWith('13')) {
+              quote = 200;
+            } else {
+              quote = 500;
+            }
+            break;
+          case 'health':
+         
+            if (age < 18) {
+              quote = 50 + coverageLimit / 1000;
+            } else if (age >= 18 && age < 35) {
+              quote = 100 + coverageLimit / 1000;
+            } else if (age >= 35 && age < 50) {
+              quote = 200 + coverageLimit / 1000;
+            } else {
+              quote = 500 + coverageLimit / 1000;
+            }
+            break;
+          default:
+          
+            res.status(400).send('Invalid insurance type');
+            return;
+        }
+        const message = {
+            from: 'manumanohar62405@gmail.com',
+            to: email,
+            subject: 'Your Insurance Quote',
+            text: `Dear ${name}, your insurance quote is ${quote}.`
+          };
+          transporter.sendMail(message).then(result=>{
+            console.log(result);
+            res.redirect("/services");
+          }).catch(error=>{
+            console.log(error);
+          })
+          
+          
+   
+      };
 
 
+exports.postaddpolicy = (req,res,next)=>{
+    const name = req.body.name;
+    const type = req.body.type.trim();
+    const amount = req.body.amount;
+    const term = req.body.duration;
+    const details = req.body.details;
+    const TC = req.body.tc;
+    const GE = req.body.ge;
+    const benefits = req.body.benefits;
+    console.log(type)
+    if (type == "life".trim()) {
+       const Life =  new lifepPolicy(
+        {
+            name:name,
+            type:type,
+            coverAmount:amount,
+            duration:term,
+            term:req.body.term,
+            premium:req.body.premium,
+            details:details,
+            TC:TC,
+            GE:GE,
+            benefits:benefits
+    
+            
+        }
+       );
+       console.log(Life)
+       Life.save().then(result=>{
+        console.log("added new life policy");
+        console.log(result);
+        res.redirect("/designform");
+    }).catch(err=>{
+ console.log(err)
+    })
+    }
+    else if(type=="car".trim()){
+       const trans_policy = new transport_policy(
+        {
+            name:name,
+            type:type,
+            amount:amount,
+            term:term,
+            details:details,
+            TC:TC,
+            GE:GE,
+            benefits:benefits
+
+    });
+    console.log(trans_policy);
+    trans_policy.save().then(result=>{
+        console.log("added new transport policy");
+        console.log(result);
+        res.redirect("/designform");
+    }).catch(err=>{
+ console.log(err)
+    })
+    }
+   else if(type=="health") {
+
+   }
+   
+}
+
+exports.postpolicydetails =(req,res,next)=>{
+    const email = req.body.email;
+    User.find({email:email}).then(result=>{
+        console.log(result);
+        res.render('tractpolicy',{users:result})
+    }).catch(err=>{
+        console.log(err)
+    })
+
+}
+
+
+exports.postsendemail=(req,res,next)=>{
+    const type = req.body.recipient
+    const subject = req.body.subject
+    const message1 = req.body.message
+    if(type=='particular_user'){
+        const usermail = req.body.useremail
+        const message = {
+            from: req.user.email,
+            to: usermail,
+            subject:  subject,
+            text: message1
+          };
+          transporter.sendMail(message).then(result=>{
+            console.log(result);
+            res.redirect("/details");
+          }).catch(error=>{
+            console.log(error);
+          })
+    }
+    else if(type=='admin'){
+        Admin.find({}).then(mails=>{
+            send_emails = mails.map(mail => mail.email);
+            return send_emails
+        }).then(emails=>{
+                console.log(emails);
+                const message = {
+                    from: req.user.email,
+                    to: emails,
+                    subject:  subject,
+                    text: message1
+                  };
+                  transporter.sendMail(message).then(result=>{
+                    console.log(result);
+                    res.redirect("/details");
+                  }).catch(error=>{
+                    console.log(error);
+                  })
+            })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
+    else if(type=='users'){
+        User.find({}).then(mails=>{
+            send_emails = mails.map(mail => mail.email);
+            return send_emails
+        }).then(emails=>{
+                console.log(emails);
+                const message = {
+                    from: req.user.email,
+                    to: emails,
+                    subject:  subject,
+                    text: message1
+                  };
+                  transporter.sendMail(message).then(result=>{
+                    console.log(result);
+                    res.redirect("/details");
+                  }).catch(error=>{
+                    console.log(error);
+                  })
+            })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
+}
     exports.changePassword=async (req, res, next) => {
         const email = req.body.email
         const pass=req.body.password

@@ -44,9 +44,9 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.15.0&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.15.0&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/dattasandeepchoragudi/html/WebstormProjects/Genesis/views&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.14.0&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.14.0&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/dattasandeepchoragudi/html/WebstormProjects/Genesis/public/images&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;,
@@ -56,10 +56,8 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/views" />
-      <recent name="$PROJECT_DIR$/public/css" />
-      <recent name="$PROJECT_DIR$/models" />
       <recent name="$PROJECT_DIR$/public/images" />
+      <recent name="$PROJECT_DIR$/public/css" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/routes" />
@@ -104,6 +102,7 @@
       <workItem from="1681221460901" duration="602000" />
       <workItem from="1681222067955" duration="25000" />
       <workItem from="1681222102907" duration="89000" />
+      <workItem from="1681222342901" duration="725000" />
       <workItem from="1681222342901" duration="3107000" />
       <workItem from="1681288947687" duration="3754000" />
       <workItem from="1681305627339" duration="1931000" />
@@ -117,6 +116,7 @@
       <workItem from="1682241711189" duration="10109000" />
       <workItem from="1682257392480" duration="82000" />
       <workItem from="1682257495588" duration="4332000" />
+      <workItem from="1682158482944" duration="14668000" />
     </task>
     <servers />
   </component>

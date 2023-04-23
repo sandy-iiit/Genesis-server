@@ -11,17 +11,27 @@ const flash = require('connect-flash');
 const app=express()
 app.set('view engine', 'ejs');
 app.set('views', 'views');
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static("public"));
 require('dotenv').config()
 const userRoutes=require('./routes/userRoutes')
 const User = require('./models/User')
 const Admin = require('./models/Admin')
+const Employee = require('./models/employee');
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
+const data = {
+	total_users: 10000,
+	transport_policy_users: 5000,
+	life_policy_users: 3000,
+	health_policy_users: 2000
+};
 
+// Send data to client
+app.get('/data', (req, res) => {
+	res.json(data);
+});
 const store = new MongoDBStore({
     uri: process.env.MONGODB_URI2,
     collection: 'sessions',
@@ -62,6 +72,15 @@ app.use((req, res, next) => {
             })
             .catch(err => console.log(err));
     }
+    else if(req.session.type==='Agent'){
+
+        Employee.findById(req.session.user._id)
+            .then(user => {
+                req.user = user;
+                next();
+            })
+            .catch(err => console.log(err));
+    }
 });
 app.use((req, res, next) => {
     res.locals.isAuthenticated = req.session.isLoggedIn;
@@ -73,6 +92,7 @@ app.use(userRoutes)
 app.get('*',(req,res)=>{
     res.render('404')
 })
+
 mongoose.connect(process.env.MONGODB_URI1)
     .then(result => {
         app.listen(3000);

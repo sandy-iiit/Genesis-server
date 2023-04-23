@@ -1,0 +1,179 @@
+<head>
+
+    <style>
+    
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  background-color: #f2f2f2;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  padding: 0.5rem;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+h1 {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+h1{
+  text-align: center;
+  color: #3E54AC;
+}
+form {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+label {
+  margin-right: 1rem;
+}
+
+input[type="text"] {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+
+button[type="submit"] {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+ 
+}
+label {
+  display: block; 
+  margin-bottom: 5px;  
+  font-weight: bold;  
+  color: #3E54AC;  
+}
+.user-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.user-card {
+  background-color: #ffffff;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 20px;
+  width: 400px;
+  height: fit-content;
+  text-align: left;
+  border: 1px solid #3E54AC;
+  margin-bottom: 10px;
+}
+
+.user-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.user-card p {
+  font-size: 1.1rem;
+  margin: 5px 0;
+}
+
+.user-card ul {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.user-card ul li {
+  font-size: 1.1rem;
+  margin: 5px 0;
+}
+
+</style>
+</head>
+<%- include('navbar.ejs') %>
+ 
+<h1 style="color:#3E54AC">find the user Policies</h1>
+<form action="/policy_details" method="post"><br>
+  <!-- <label for="userId"> <span>Enter User ID:</span></label> -->
+  <input type="text" id="userId" name="email" placeholder="enter email">
+  <button type="submit">Search</button>
+</form>
+<div class="user-cards">
+  <% if (users.length === 0) { %>
+    <p>try another.</p>
+  <% } else { %>
+    <% users.forEach(function(user) { %>
+      <div class="user-card">
+        <h2><%= user.name %></h2>
+        <p><strong>Email:</strong> <%= user.email %></p>
+        <p><strong>Age:</strong> <%= user.age %></p>
+        <p><strong>Sex:</strong> <%= user.sex %></p>
+        <p><strong>Address:</strong> <%= user.address %></p>
+        <p><strong>Phone:</strong> <%= user.phone %></p> 
+        <p><strong>Current policies:</strong></p>
+        <ul>
+          <% user.currentPolicies.forEach((policy) =>{ %>
+            <% console.log(policy); %>
+            <% console.log(policy['type']); %>
+            <li>type:<%= policy.type %></li>
+            <li>amount:<%= policy.amount %></li>
+            <li>term:<%= policy.term %></li>
+            <li>status:<%= policy.status %></li>
+          <% }); %>
+        </ul>
+        <ul>
+          <!-- <p><strong>completed policies:</strong></p>
+          <% user.policyHistory.forEach(function(policy) { %>
+            <li>type:<%= policy.type %></li>
+            <li>amount:<%= policy.amount %></li>
+            <li>term:<%= policy.term %></li>
+            <li>status:<%= policy.status %></li>
+          <% }); %>
+        </ul> -->
+      </div>
+    <% }); %>
+  <% } %>
+</div>
+
+<%- include('footer.ejs') %>

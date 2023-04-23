@@ -113,7 +113,7 @@ a{
 .card12:hover{
     height: 450px;
     margin: 2%;
-rgba(0, 191, 255, 1);
+   background-color:rgba(0, 191, 255, 1);
 }
 .button{
     width: 150px;
