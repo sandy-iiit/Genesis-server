@@ -692,6 +692,74 @@ exports.postpolicydetails =(req,res,next)=>{
     })
 
 }
+
+
+exports.postsendemail=(req,res,next)=>{
+    const type = req.body.recipient
+    const subject = req.body.subject
+    const message1 = req.body.message
+    if(type=='particular_user'){
+        const usermail = req.body.useremail
+        const message = {
+            from: req.user.email,
+            to: usermail,
+            subject:  subject,
+            text: message1
+          };
+          transporter.sendMail(message).then(result=>{
+            console.log(result);
+            res.redirect("/details");
+          }).catch(error=>{
+            console.log(error);
+          })
+    }
+    else if(type=='admin'){
+        Admin.find({}).then(mails=>{
+            send_emails = mails.map(mail => mail.email);
+            return send_emails
+        }).then(emails=>{
+                console.log(emails);
+                const message = {
+                    from: req.user.email,
+                    to: emails,
+                    subject:  subject,
+                    text: message1
+                  };
+                  transporter.sendMail(message).then(result=>{
+                    console.log(result);
+                    res.redirect("/details");
+                  }).catch(error=>{
+                    console.log(error);
+                  })
+            })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
+    else if(type=='users'){
+        User.find({}).then(mails=>{
+            send_emails = mails.map(mail => mail.email);
+            return send_emails
+        }).then(emails=>{
+                console.log(emails);
+                const message = {
+                    from: req.user.email,
+                    to: emails,
+                    subject:  subject,
+                    text: message1
+                  };
+                  transporter.sendMail(message).then(result=>{
+                    console.log(result);
+                    res.redirect("/details");
+                  }).catch(error=>{
+                    console.log(error);
+                  })
+            })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
+}
     exports.changePassword=async (req, res, next) => {
 
         const phone = '+91' + req.body.phone

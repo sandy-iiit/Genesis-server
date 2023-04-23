@@ -114,8 +114,9 @@ router.post('/policies_design',userController.postaddpolicy)
 router.post('/policy_details',userController.postpolicydetails)
 router.post('/employeesignupposting',userController.postemployeesignup)
 
-
-
+router.get('/sendemail',adminController.getemailform)
+router.post('/send_email',userController.postsendemail)
+router.get('/companystats',adminController.getcompanystats)
 
 
 router.get('/employeesignup',adminController.employeesignuppage)

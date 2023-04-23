@@ -217,6 +217,15 @@ exports.trackpolicy = (req,res,next)=>{
 exports.employeesignuppage = (req,res,next)=>{
     res.render('employeesignup');
 }
+
+exports.getemailform = (req,res,next)=>{
+    res.render('emailform');
+}
+
+exports.getcompanystats = (req,res,next)=>{
+    res.render('companystats');
+}
+
 exports.getLifeApplicationsSearch=(req,res,next)=>{
     console.log('entered the func')
     console.log(req.body.search)
