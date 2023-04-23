@@ -3,12 +3,14 @@
 </head>
 
 <%- include('navbar.ejs')%>
-<img class="car" src="/images/health-insurance.png">
+<!--<img class="car" src="/images/life-insurance.png">-->
 <form class="form" action="/health-form" method="post" enctype="multipart/form-data">
     <div class="row1"><p class="label">Name</p> <input  name="firstName" type="text" class="row13" placeholder="First name">
         <input name="lastName" type="text" class="row13" placeholder="Last name"></div>
 
-
+    <div class="row1">
+        <p class="label">Sex</p> <input name="sex" class="inner-row1" placeholder="Sex">
+    </div>
     <div class="row2">
         <div class="subrow"><p class="label">AADHAR</p> <input type="file" class="inner-row2" name="aadhar"></div>
         <div class="subrow"><p class="label">PAN</p> <input type="file" class="inner-row2" name="pan"></div>
@@ -39,38 +41,38 @@
             <input class="inner-row2" name="nomineeRelation">
         </div>
     </div>
-
     <div class="row2">
-        <div class="subrow"><p class="label">Nominee AADHAR</p> <input type="file" class="inner-row2" name="nomineeAadhar"></div>
-        <div class="subrow"><p class="label">Nominee AddressProof</p> <input type="file" class="inner-row2" name="nomineeAddressProof"></div>
+        <div class="subrow"><p class="label">Beneficiary AADHAR</p> <input type="file" class="inner-row2" name="nomineeAadhar"></div>
+        <div class="subrow"><p class="label">Beneficiary AddressProof</p> <input type="file" class="inner-row2" name="nomineeAddressProof"></div>
     </div>
 
-    <div class="row1">
-        <p class="label">Policy Number</p>
-        <input class="inner-row1" name="policyNum">
-    </div>
 
     <div class="row1">
         <p class="label">Policy Id</p>
-        <input class="inner-row1" name="policyId" value="policy id">
+        <input class="inner-row1" name="policyId" value="<%=r._id%>">
+    </div>
+    <div class="row1">
+        <p class="label">Policy Name</p>
+        <input class="inner-row1" name="policyName" value="<%=r.Name%>">
     </div>
 
+
     <div class="row2">
-        <div class="subrow"> <p class="label">Cover Amount</p><input class="inner-row2" type="number" name="amount" value="10000000"></div>
-        <div class="subrow"> <p class="label">Type</p><select name="payType" class="inner-row2" value="Monthly">
-                <option>Annually</option>
-                <option>Monthly</option>
-            </select></div>
+        <div class="subrow"> <p class="label">Cover Amount</p><input class="inner-row2" type="text" name="amount" value="<%=r.Cover%>"></div>
+        <div class="subrow"> <p class="label">Policy Term</p><input name="policyTerm" class="inner-row2" value="<%=r.Premium.Annual%>">
+        </div>
 
     </div>
 
     <div class="row1">
         <p class="label">Duration</p>
-        <input type="number" class="inner-row1" name="duration" >
+        <input type="text" class="inner-row1" name="duration" value="<%=r.Term%>" >
     </div>
+    <input value="<%=applier%>" name="applier" style="display: none"/>
+    <input value="<%=r.Policytype%>" name="policyType" style="display: none"/>
     <button class="button" type="submit">Submit</button>
 
 
 </form>
 
-<%-include('footer.ejs')%>
+<%-include('footer')%>

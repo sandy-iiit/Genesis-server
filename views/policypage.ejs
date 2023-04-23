@@ -61,21 +61,15 @@
 
         <div class="detailmatter" id="detailmatter">
 
-            <h3><strong>Cover Amount:</strong>5,00,000</h3>
-            <h3><strong>Premium:</strong>7111/-</h3>
-            <h3><strong>Term:</strong>Annually</h3>
-            <h3><strong>Type of plan:</strong>Point Of Service(POS)</h3>
+            <h3><strong>Policy Name:</strong><%= array.Name %></h3>
+            <h3><strong>Cover Amount:</strong><%= array.Cover %> /-</h3>
+            <h3><strong>Term:</strong><%= array.Term %> Years</h3>
+            <h3><strong>Type of plan:</strong><%= array.Type %></h3>
         </div>
         <div class="keyfeatures" id="keyfeatures">
             <h3> KEY FEATURES 🩺🛡️</h3>
-            <ul style="list-style:symbols(※);">
-                <li>Provides comprehensive financial protection to your family</li>
-                <li>Get treated on a cashless basis across 10,000 + network hospitals in India</li>
-                <li>Secure Benefit offers additional coverage amount equivalent to 100%/200% of the Base Sum Insured.</li>
-                <li>Get daily hospitalization cash benefit up to ₹ 5000. </li>
-
-            </ul>
-        </div>
+            <p style="white-space: pre-line"><%= array.keyfeatures %></p>
+         </div>
     </div>
     <div class="T&C info" id="T&C" style="display:none">
         <div class="keyterms" id="keyterms">  
@@ -96,28 +90,7 @@
                 CONDITIONS UNDER WHICH CLAIM IS NOT APPLICABLE:
             </div>
             <div class="conditionbody" id="conditionbody">
-<ol>
-    
-    <li>Pre-existing conditions: Health insurance policies may have a waiting period before covering pre-existing medical conditions. During this period, any medical expenses related to the pre-existing condition may not be covered.</li>
-    <li>Non-covered treatments: Some health insurance policies have limitations on certain treatments or procedures that are not covered. This may include cosmetic surgery, fertility treatments, or experimental treatments.
-    </li>
-    <li>Exceeding policy limits: Health insurance policies often have limits on the amount of coverage they provide for a particular treatment or procedure. If the cost of treatment exceeds this limit, the policyholder may be responsible for paying the difference.
-    </li>
-    <li>Failure to follow policy guidelines: Health insurance policies may have specific guidelines or requirements for accessing certain treatments or services. If the policyholder fails to follow these guidelines, the claim may not be covered.
-    </li>
-    <li>Non-payment of premiums: If the policyholder fails to pay the required premiums, the health insurance policy may be cancelled or suspended. Any claims made during the period when the premiums were not paid may not be covered
-    </li>
-    <li>Out-of-network providers: If the policyholder receives treatment from a healthcare provider who is not in the insurance company's network, the claim may not be covered or may be covered at a lower rate.</li>
-    <li>Experimental treatments: If the policyholder receives an experimental or investigational treatment that has not been approved by the insurance company or the relevant regulatory bodies, the claim may not be covered.</li>
-    <li>Intentional acts: Health insurance policies typically do not cover medical expenses resulting from intentional acts, such as self-harm or criminal activity.
-    </li>
-    <li>Substance abuse: Some health insurance policies have limitations on coverage for substance abuse treatment or may not cover it at all.
-    </li>
-    <li>Non-medical expenses: Health insurance policies generally only cover medical expenses. Any non-medical expenses, such as transportation or lodging, are typically not covered.
-    </li>
-<img src="css/healthclub.jpg" alt="">
-</ol>
-    
+            <%= array.TC %>   
             </div>
     </div>
     <div id="Benefits" class="Benefits info" style="display:none">
@@ -129,64 +102,63 @@
             </header>
             <input type="radio" name="accordion" id="cb1" />
             <section class="box">
-              <label class="box-title" for="cb1"><span class="coveragetitle">NO ROOM RENT LIMIT </span>✅</label>
+              <label class="box-title" for="cb1"><span class="coveragetitle"><%= array.benefits.coverages.nrl.title %></span></label>
               <label class="box-close" for="acc-close"></label>
-              <div class="box-content">Room rent limit is the maximum amount per day cost allowed by the insurer. Related expenses, such as doctor consultation etc. are paid in proportion to the room rent limit. Look out for plans with No Room Rent limit</div>
+              <div class="box-content"><%= array.benefits.coverages.nrl.description %></div>
             </section>
             <input type="radio" name="accordion" id="cb2" />
             <section class="box">
-              <label class="box-title" for="cb2"><span class="coveragetitle">RESTORATION COVER : </span>5 Lakh Unlimited times ✅</label>
+              <label class="box-title" for="cb2"><span class="coveragetitle">RESTORATION COVER : </span><%= array.benefits.coverages.rc.title %></label>
               <label class="box-close" for="acc-close"></label>
               <div class="box-content">
-                Very useful feature, in case the sum Insured gets exhausted in a year due to multiple claims or a large claim. Insurer restores the sum insured to provide continued coverage to policyholders.
+                <%= array.benefits.coverages.rc.description %>
                 </div>
             </section>
             <input type="radio" name="accordion" id="cb3" />
             <section class="box">
-              <label class="box-title" for="cb3"><span class="coveragetitle">CASHLESS HOSPITALS : </span>9500 ✅
+              <label class="box-title" for="cb3"><span class="coveragetitle">CASHLESS HOSPITALS : </span><%= array.benefits.coverages.ch.title %>+
                 </label>
               <label class="box-close" for="acc-close"></label>
-              <div class="box-content"> Hospitals that have a direct tie-up with the insurance company, where insured can avail cashless treatment. Larger the network in your area, better it is.</div>
+              <div class="box-content"><%= array.benefits.coverages.ch.description %></div>
             </section>
             <input type="radio" name="accordion" id="cb4" />
             <section class="box">
-              <label class="box-title" for="cb4"><span class="coveragetitle">COPAY : </span>100% paid by insurer ✅
+              <label class="box-title" for="cb4"><span class="coveragetitle">COPAY : </span><%= array.benefits.coverages.copay.title %>
                 </label>
               <label class="box-close" for="acc-close"></label>
-              <div class="box-content">Co-pay is the share of claim to be paid by the policyholder, while the rest is paid by the insurer. Always look out for plan with 0% co-pay or minimum co-payment.</div>
+              <div class="box-content"><%= array.benefits.coverages.copay.description %></div>
             </section>
 
             <input type="radio" name="accordion" id="cb5" />
             <section class="box">
-              <label class="box-title" for="cb5"><span class="coveragetitle">MATERNITY COVER : </span>YES ✅
+              <label class="box-title" for="cb5"><span class="coveragetitle">MATERNITY COVER : </span><%= array.benefits.coverages.mc.title %>
                 </label>
               <label class="box-close" for="acc-close"></label>
-              <div class="box-content"></div>
+              <div class="box-content"><%= array.benefits.coverages.mc.description %></div>
             </section>
             <input type="radio" name="accordion" id="cb6" />
             <section class="box">
-              <label class="box-title" for="cb6"><span class="coveragetitle">PRE-HOSPITALISATION COVERAGE : </span>60 days ✅
+              <label class="box-title" for="cb6"><span class="coveragetitle">PRE-HOSPITALISATION COVERAGE : </span><%= array.benefits.coverages.pre.title %> days ✅
                 </label>
               <label class="box-close" for="acc-close"></label>
-              <div class="box-content">Expenses incurred <strong>BEFORE</strong> hospitalization, such as doctor visits, diagnostic tests etc. Insurance company pays for such expenses upto a certain number of days prior to hospitalization.</div>
+              <div class="box-content"><%= array.benefits.coverages.pre.description %></div>
             </section>
 
             <input type="radio" name="accordion" id="cb7" />
             <section class="box">
-              <label class="box-title" for="cb7"><span class="coveragetitle">PRE-HOSPITALISATION COVERAGE : </span>180 days ✅
+              <label class="box-title" for="cb7"><span class="coveragetitle">PRE-HOSPITALISATION COVERAGE : </span><%= array.benefits.coverages.post.title %> days ✅
                 </label>
               <label class="box-close" for="acc-close"></label>
-              <div class="box-content">Expenses incurred <strong>AFTER</strong> hospitalization, such as doctor visits, diagnostic tests etc. Insurance company pays for such expenses upto a certain number of days after the hospitalization.</div>
+              <div class="box-content"><%= array.benefits.coverages.post.description %></div>
             </section>
    
             
             <input type="radio" name="accordion" id="cb8" />
             <section class="box">
-              <label class="box-title" for="cb8"><span class="coveragetitle">EXISTING-ILLNESS WAITING PERIOD: </span> 4 Years
+              <label class="box-title" for="cb8"><span class="coveragetitle">EXISTING-ILLNESS WAITING PERIOD: </span> <%= array.benefits.coverages.eiwp.title %> Years
                 </label>
               <label class="box-close" for="acc-close"></label>
-              <div class="box-content">The minimum period policyholder needs to wait before filing a claim. In case of pre-exisitng illnesses such as diabetes, thyroid etc., look for plans with less waiting periods.
-               </div>
+              <div class="box-content"><%= array.benefits.coverages.eiwp.description %>               </div>
             </section>
         
             <input type="radio" name="accordion" id="acc-close" />
@@ -198,24 +170,24 @@
             </header>
             <input type="radio" name="accordion" id="cb9" />
             <section class="box">
-              <label class="box-title" for="cb9"><span class="benefittitle">NO CLAIM BONUS</span>: 2.5 Lakh Annually</label>
+              <label class="box-title" for="cb9"><span class="benefittitle">NO CLAIM BONUS</span>: <%= array.benefits.ben.ncb.title %> Lakh Annually</label>
               <label class="box-close" for="acc-close"></label>
-              <div class="box-content">No Claim Bonus is the reward for not making a claim. Depending on plan, Insurer adds a 5%-100% bonus to the Sum Insured at no extra premium.</div>
+              <div class="box-content"><%= array.benefits.ben.ncb.description %>.</div>
             </section>
 
             <input type="radio" name="accordion" id="cb10" />
             <section class="box">
-              <label class="box-title" for="cb10"><span class="benefittitle">HOME HOSPITALISATION:</span>:  upto 5 lakh</label>
+              <label class="box-title" for="cb10"><span class="benefittitle">HOME HOSPITALISATION:</span>:  <%= array.benefits.ben.hh.title %></label>
               <label class="box-close" for="acc-close"></label>
-              <div class="box-content">This feature covers for scenarios where hospital bed is not available AND the doctor has recommended treatment at home.
+              <div class="box-content"><%= array.benefits.ben.hh.description %>
             </div>
             </section>
 
             <input type="radio" name="accordion" id="cb11" />
             <section class="box">
-              <label class="box-title" for="cb11"><span class="benefittitle">AMBULANCE CHARGES:</span>:  Upto 10000</label>
+              <label class="box-title" for="cb11"><span class="benefittitle">AMBULANCE CHARGES:</span>:<%= array.benefits.ben.ac.title %></label>
               <label class="box-close" for="acc-close"></label>
-              <div class="box-content">Covers for ambulance charges before or after the hospitalization.
+              <div class="box-content"><%= array.benefits.ben.ac.description %>
 
             </div>
             </section>
@@ -229,27 +201,29 @@
                 <label class="box-title">Other Benefits</label>
               </header>
 
-              <section class="box">
+                    <section class="box">
                     <ul style=" padding: 2vh;">
-                        <li style="padding: 2vh ;">25% Raise on Cover amount for Policy Holders Over 65 years and holding the policy for 75% of the duration of the policy</li>
+                        <li style="padding: 2vh ;"><%= array.benefits.otherben.benefit1 %></li>
                         
                       </ul>
-                    </section>
-                    
-                        <section class="box"> <ul style="padding: 2vh;">
-                          <li style="padding: 2vh;">10% discount on annual claims due to major chronic illness like cancer,diabetes etc.</li>
-                        </ul>
-                          </section>
-                        
                         
     </section>
+
+    <section class="box">
+      <ul style=" padding: 2vh;">
+          <li style="padding: 2vh ;"><%= array.benefits.otherben.benefit2 %></li>
+          
+        </ul>
+          
+</section>
+
     
         </div>
 
     </div>
 
     <div class="buyPolicy info" id="buyPolicy" style="display:none">
-        <a href="/health-form"><p>Go to application</p></a>
+        <a href="/health-form/<%=array._id%>"><p>Go to application</p></a>
     </div>
 </div>
 

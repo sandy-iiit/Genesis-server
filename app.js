@@ -25,6 +25,7 @@ app.use(cookieParser());
 const store = new MongoDBStore({
     uri: process.env.MONGODB_URI2,
     collection: 'sessions',
+    // expires: 10*60,
 
 });
 // const csrfProtection = csrf();

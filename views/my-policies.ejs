@@ -10,36 +10,49 @@
 
     <% for(let i=0;i<arr.length;i++){%>
     <%let a='';let b='img'%>
-<%if(arr[i].type.trim()==='TRANSPORT'){a='images/car.svg';b='car-img'} else if(arr[i].type==='life'){a='images/life-insurance.png'} else if(arr[i].type==='health'){a='images/health-insurance.png'}%>
+<%if(arr[i].type.trim()==='TRANSPORT'){a='images/car.svg';b='car-img'} else if(arr[i].type==='LIFE'){a='images/life-insurance.png'} else if(arr[i].type==='Health'){a='images/health-insurance.png'}%>
     <div class="items">
 
         <img class=<%=b%> src= <%=a%>>
         <div class="inner-items">
-            <div class="inner-item">
-                <%=arr[i].type%>
-            </div> <div style="font-size: 10px" class="inner-item">
-                <%=arr[i].id%>
-            </div><div class="inner-item">
-                <%=arr[i].name%>
+            <div class="inner-item1">
+                <div class="inner-item">
+                    <%=arr[i].type%>
+                </div> <div style="font-size: 10px" class="inner-item">
+                    <%=arr[i].id%>
+                </div><div class="inner-item">
+                    <%=arr[i].name%>
+                </div>
+                <div class="inner-item">
+                    <%=arr[i].term%>        </div>
+                <div class="inner-item">
+                    Amount <%=arr[i].amount%>  </div>
             </div>
-            <div class="inner-item">
-                <%=arr[i].term%>        </div>
-            <div class="inner-item">
-               Amount <%=arr[i].amount%>  </div>
-<%if(arr[i].type=='TRANSPORT'){%>
-           <a href='/buy-policy/<%=arr[i].policyId%>'><button class="but">
-              Explore Plan
-               </button></a>
-            <%}else if(arr[i].type=='LIFE'){%>
-            <a href='/buypolicy3/<%=arr[i].policyId%>'><button class="but">
-                    Explore Plan
-                </button></a>
-            <%}%>
-            <a href='/payment'><button class="but">
-              Pay installment
-               </button></a>
+
+            <div class="inner-item2">
+
+                <%if(arr[i].type=='TRANSPORT'){%>
+                <a href='/buy-policy/<%=arr[i].policyId%>'><button class="but">
+                        Explore Plan
+                    </button></a>
+                <%}else if(arr[i].type=='LIFE'){%>
+                <a href='/buypolicy3/<%=arr[i].policyId%>'><button class="but">
+                        Explore Plan
+                    </button></a>
+                <%}else if(arr[i].type=='Health'){%>
+                <a href='/policypage/<%=arr[i].policyId%>'><button class="but">
+                        Explore Plan
+                    </button></a>
+                <%}%>
+
+                <a href='/payment'><button class="but">
+                        Pay installment
+                    </button></a>
+            </div>
         </div>
-        </div>
+
+
+    </div>
 
 
     <%}%>

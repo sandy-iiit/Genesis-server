@@ -27,7 +27,7 @@ const lifeSchema=new Schema({
     duration:Number,
     appliedDate:String,
     verificationDate:String,
-
+    verificationStatus:String,
 
 })
 

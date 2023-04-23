@@ -2,18 +2,23 @@ const User = require("../models/User");
 const user22 = require("../models/user2");
 const bcrypt = require('bcryptjs');
 
+const healthApplications=require('../models/health-application')
+const lifeApplications=require('../models/life-application')
+const transportApplications=require('../models/transport-application')
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
 const Query = require("../models/Query");
 const Admin=require('../models/Admin')
 const transportPolicy=require('../models/transportpolicy-details')
 const lifePolicy=require('../models/lifepolicy-details')
+const healthPolicy=require('../models/healthpolicy-details')
 const changePassword=require('../models/passwordChange')
 const Review=require('../models/Review')
 const Sequelize=require('sequelize')
 const twilio = require("twilio");
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const {MongoClient} = require("mongodb");
 //
 // const transporter = nodemailer.createTransport(
 //     sendgridTransport({
@@ -77,6 +82,18 @@ exports.getBuyPolicy=(req,res,next)=>{
         res.render('buypolicy',{arr:policy})
     })
 
+}
+exports.getPolicyPage=(req,res,next)=>{
+    console.log(req.params.id)
+    healthPolicy.findById(req.params.id).then((policy)=>{
+        res.render('policypage',{array:policy})
+    })}
+exports.gethealthPolicy=async (req,res,next)=>{
+    console.log('entered health policy');
+    await healthPolicy.find({}).then((arrr)=>{
+        console.log(arrr);
+        res.render('healthpolicies',{array:arrr})
+    })
 }
 
 exports.getDetails=(req,res,next)=>{
@@ -144,10 +161,20 @@ exports.getTransportForm=async (req, res) => {
 exports.getLifeForm=async (req, res) => {
     await lifePolicy.findById(req.params.id).then((r) => {
         res.render('life-form',{r:r,applier:req.user._id})
+    }).catch(err=>{
+        console.log('Error')
     })
 }
 exports.getHealthForm=(req,res)=>{
-    res.render('health-form')
+    console.log('Entered health form')
+    const id=req.params.id
+    console.log(id)
+    healthPolicy.findById(id).then((r)=>{
+        res.render('health-form',{r:r,applier:req.user._id})
+
+    }).catch(err=>{
+        console.log('Error')
+    })
 }
 exports.getAdminQueries=(req,res)=>{
     res.render('admin-queries',{arr:arr3})
@@ -252,6 +279,8 @@ exports.postSignup=(req,res)=> {
 }
 
     exports.postLogin = async (req, res) => {
+        const client = await MongoClient.connect('mongodb+srv://dattasandeep000:13072003@sandy.p06ijgx.mongodb.net/G1?retryWrites=true&w=majority', { useNewUrlParser: true });
+        const db = await client.db();
         const name = req.body.name
         const email = req.body.email
         const password = req.body.password
@@ -272,6 +301,7 @@ exports.postSignup=(req,res)=> {
                                 req.session.isLoggedIn = true;
                                 req.session.user = user;
                                 req.session.type=type;
+
                                 return req.session.save(err => {
                                     console.log(err);
                                     res.redirect('/');
@@ -312,9 +342,10 @@ exports.postSignup=(req,res)=> {
                             console.log(err);
                             res.redirect('/');
                             console.log('You have logged in')
-                            setTimeout(()=>{
-                                console.log('Entered Timeout')
-                                req.session.destroy()},900*1000)
+                            // setTimeout(()=>{
+                            //     console.log('Entered Timeout')
+                            //     req.session.destroy()},900*1000)
+                            // db.collection('sessions')
                         });
 
                         // console.log(req.cookies['user'].name)
@@ -548,4 +579,29 @@ exports.verifyOTP=async (req, res, next) => {
 
 
         }
+}
+
+exports.getMyApps=async (req, res, next) => {
+
+    let arrr=[]
+    const arr1 = await transportApplications.find({applier:req.user._id})
+    const arr2 = await lifeApplications.find({applier:req.user._id})
+    const arr3 = await healthApplications.find({applier:req.user._id})
+     arrr=arrr.concat(arr1,arr2,arr3)
+
+    res.render('my-applications',{arr:arrr})
+}
+
+exports.searchMyApps=async (req, res, next) => {
+
+    const search = req.body.search
+    let arrr = []
+    const arr1 = await transportApplications.find({applier: req.user._id})
+    const arr2 = await lifeApplications.find({applier: req.user._id})
+    const arr3 = await healthApplications.find({applier: req.user._id})
+    arrr = arrr.concat(arr1, arr2, arr3)
+
+    res.render('my-applications', {arr: arrr})
+
+
 }

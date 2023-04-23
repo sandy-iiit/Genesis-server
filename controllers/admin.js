@@ -71,21 +71,21 @@ exports.postAnswer=(req,res,next)=>{
 
 exports.getHealthApplications=(req,res,next)=>{
 
-    healthApplications.find({})
+    healthApplications.find({verificationStatus:''})
         .then(zrr=>{
         res.render('health-applications',{arr:zrr})
     })
 }
 exports.getLifeApplications=(req,res,next)=>{
 
-    lifeApplications.find({})
+    lifeApplications.find({verificationStatus:''})
         .then(zrr=>{
         res.render('life-applications',{arr:zrr})
     })
 }
 exports.getTransportApplications=(req,res,next)=>{
 
-    transportApplications.find({})
+    transportApplications.find({verificationStatus:''})
         .then(zrr=>{
             TRANSPORTAPPLICATIONS=zrr;
             console.log('Trans')
@@ -101,6 +101,7 @@ exports.getIndividualHealthApplication=(req,res,next)=>{
             firstName: zrr.firstName,
             lastName: zrr.lastName,
             aadhar: zrr.aadhar,
+            sex:zrr.sex,
             pan:zrr.pan,
             dobProof:zrr.dobProof,
             nomineeAadhar:zrr.nomineeAadhar,
@@ -111,10 +112,16 @@ exports.getIndividualHealthApplication=(req,res,next)=>{
             nomineeAge:zrr.nomineeAge,
             nomineeRelation:zrr.nomineeRelation,
             policyId:zrr.policyId,
-            policyNum:zrr.policyNum,
+            policyName:zrr.policyName,
+            policyType:zrr.policyType,
+            appId:req.params.appId,
+
             amount:zrr.amount,
-            payType:zrr.payType,
             applier:zrr.applier,
+            term:zrr.policyTerm,
+            duration:zrr.duration,
+            Status:zrr.verificationStatus,
+
         })
     })
 }
@@ -146,6 +153,8 @@ exports.getIndividualLifeApplication=(req,res,next)=>{
             applier:zrr.applier,
             term:zrr.policyTerm,
             duration:zrr.duration,
+            Status:zrr.verificationStatus,
+
         })
     })
 }
@@ -181,6 +190,7 @@ exports.getIndividualTransportApplication=(req,res,next)=>{
             amount:zrr.amount,
             payType:zrr.payType,
             applier:zrr.applier,
+            Status:zrr.verificationStatus,
 
         })
     })
@@ -194,8 +204,11 @@ exports.getHealthApplicationsSearch=(req,res,next)=>{
             const arrr=[]
             for(let i=0;i<r.length;i++){
                 let name=r[i].firstName+' '+r[i].lastName
-                if(name.includes(req.body.search)){
+                let Name=r[i].firstName.toLowerCase()+' '+r[i].lastName.toLowerCase()
+                let nAME=r[i].firstName.toUpperCase()+' '+r[i].lastName.toUpperCase()
+                if(name.includes(req.body.search) || Name.includes(req.body.search) || nAME.includes(req.body.search)){
                     console.log(name)
+                    console.log(r[i])
                     arrr.push(r[i])
                 }
             }
@@ -215,7 +228,9 @@ exports.getLifeApplicationsSearch=(req,res,next)=>{
             const arrr=[]
             for(let i=0;i<r.length;i++){
                 let name=r[i].firstName+' '+r[i].lastName
-                if(name.includes(req.body.search)){
+                let Name=r[i].firstName.toLowerCase()+' '+r[i].lastName.toLowerCase()
+                let nAME=r[i].firstName.toUpperCase()+' '+r[i].lastName.toUpperCase()
+                if(name.includes(req.body.search) || Name.includes(req.body.search) || nAME.includes(req.body.search)){
                     console.log(name)
                     arrr.push(r[i])
                 }
@@ -229,19 +244,18 @@ exports.getLifeApplicationsSearch=(req,res,next)=>{
 exports.getTransportApplicationsSearch=(req,res,next)=>{
     console.log('entered the func')
     console.log(req.body.search)
-    // transportApplications.find({})
-    //     .then(async r=>{
-    // console.log('tarns2')
-    // console.log(TRANSPORTAPPLICATIONS)
+     transportApplications.find({})
+         .then(async r=>{
+     console.log('tarns2')
             const arrr=[]
-             for(let i=0;i<TRANSPORTAPPLICATIONS.length;i++){
-                let name=TRANSPORTAPPLICATIONS[i].firstName+' '+TRANSPORTAPPLICATIONS[i].lastName
-                let Name=TRANSPORTAPPLICATIONS[i].firstName.toLowerCase()+' '+TRANSPORTAPPLICATIONS[i].lastName.toLowerCase()
-                let nAME=TRANSPORTAPPLICATIONS[i].firstName.toUpperCase()+' '+TRANSPORTAPPLICATIONS[i].lastName.toUpperCase()
+             for(let i=0;i<r.length;i++){
+                let name=r[i].firstName+' '+r[i].lastName
+                let Name=r[i].firstName.toLowerCase()+' '+r[i].lastName.toLowerCase()
+                let nAME=r[i].firstName.toUpperCase()+' '+r[i].lastName.toUpperCase()
                  console.log('Name '+name)
                 if(name.includes(req.body.search) || Name.includes(req.body.search) || nAME.includes(req.body.search)){
                     console.log(name)
-                    arrr.push(TRANSPORTAPPLICATIONS[i])
+                    arrr.push(r[i])
                 }
             }
                 res.render('transport-applications',{arr:arrr})
@@ -252,13 +266,14 @@ exports.getTransportApplicationsSearch=(req,res,next)=>{
         //     console.log('err')
         // })
 }
-
+         )
+}
 exports.verifyTransport=async (req, res, next) => {
     const gender= req.user.sex==='Male'?'Mr':'Mrs'
 
 
     console.log('Entered verifyTransport')
-    transportApplications.updateOne({_id: req.params.id}, {verificationStatus: req.body.Status,verificationDate:new Date().toDateString()})
+    transportApplications.updateOne({_id: req.body.appId}, {verificationStatus: req.body.Status,verificationDate:new Date().toDateString()})
     const policy = new Policy.model({
 
         type: req.body.policyType,
@@ -301,14 +316,16 @@ exports.verifyTransport=async (req, res, next) => {
     })
 }
     else{
+        await transportApplications.findByIdAndDelete(req.params.id).then(() => {
+            transporter.sendMail({
+                to: email,
+                from: 'dattasandeep000@gmail.com',
+                subject: 'Genesis Insurances Application verified and accepted!',
+                html: `<h2>Sorry ${gender} ${name} your motor insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
+            });
+            res.redirect('/details')
+        })
 
-        transporter.sendMail({
-            to: email,
-            from: 'dattasandeep000@gmail.com',
-            subject: 'Genesis Insurances Application verified and accepted!',
-            html: `<h2>Sorry ${gender} ${name} your motor insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
-        });
-        res.redirect('/details')
     }
 }
 
@@ -317,11 +334,15 @@ exports.verifyTransport=async (req, res, next) => {
 
 
 exports.verifyLife=async (req, res, next) => {
-    const gender= req.user.sex==='Male'?'Mr':'Mrs'
+    const gender = req.user.sex === 'Male' ? 'Mr' : 'Mrs'
 
 
     console.log('Entered verifyLife')
-    lifeApplications.updateOne({_id: req.params.id}, {verificationStatus: req.body.Status,verificationDate:new Date().toDateString()})
+    console.log('ver sta '+req.body.verificationStatus)
+    lifeApplications.updateOne({_id: req.body.appId}, {
+        verificationStatus: req.body.verificationStatus,
+        verificationDate: new Date().toDateString()
+    })
     const policy = new Policy.model({
 
         type: req.body.policyType,
@@ -338,7 +359,7 @@ exports.verifyLife=async (req, res, next) => {
 
         },
         status: 'Ongoing',
-        duration:req.body.duration
+        duration: req.body.duration
 
 
     })
@@ -347,8 +368,7 @@ exports.verifyLife=async (req, res, next) => {
     const email = applier.email
     const name = applier.name
     console.log(req.body.verificationStatus)
-    if (req.body.verificationStatus === 'verified')
-    {
+    if (req.body.verificationStatus === 'verified') {
         policy.save();
 
 
@@ -364,15 +384,83 @@ exports.verifyLife=async (req, res, next) => {
             res.redirect('/details')
 
         })
-    }
-    else{
+    } else {
+        await lifeApplications.findByIdAndDelete(req.params.id).then(() => {
+            transporter.sendMail({
+                to: email,
+                from: 'dattasandeep000@gmail.com',
+                subject: 'Genesis Insurances Application verified and accepted!',
+                html: `<h2>Sorry ${gender} ${name} your life insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
+            });
+            res.redirect('/details')
 
-        transporter.sendMail({
-            to: email,
-            from: 'dattasandeep000@gmail.com',
-            subject: 'Genesis Insurances Application verified and accepted!',
-            html: `<h2>Sorry ${gender} ${name} your motor insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
-        });
-        res.redirect('/details')
+        })
     }
 }
+    exports.verifyHealth = async (req, res, next) => {
+        const gender = req.user.sex === 'Male' ? 'Mr' : 'Mrs'
+
+
+        console.log('Entered verifyHealth')
+        console.log('ver sta '+req.body.verificationStatus)
+
+
+        const policy = new Policy.model({
+
+            type: req.body.policyType,
+            name: req.body.name,
+            applier: req.body.applier,
+            amount: req.body.amount,
+            policyId: req.body.policyId,
+            appId: req.body.appId,
+            term: req.body.policyTerm,
+            beneficiaryDetails: {
+                name: req.body.nominee,
+                age: req.body.nomineeAge,
+                relation: req.body.nomineeRelation,
+
+            },
+            status: 'Ongoing',
+            duration: req.body.duration
+
+
+        })
+        const applier = await User.findById(req.body.applier)
+
+        const email = applier.email
+        const name = applier.name
+        console.log(req.body.verificationStatus)
+        if (req.body.verificationStatus === 'verified') {
+            policy.save();
+            await healthApplications.updateOne({_id: req.body.appId}, {
+                verificationStatus: req.body.verificationStatus,
+                verificationDate: new Date().toDateString()
+            }).then(()=>{
+                console.log('Updated application')
+            })
+
+            User.updateOne({_id: req.body.applier}, {$push: {currentPolicies: policy}}).then((r) => {
+
+                console.log('Policy added to user!!! hooray')
+                transporter.sendMail({
+                    to: email,
+                    from: 'dattasandeep000@gmail.com',
+                    subject: 'Genesis Insurances Application verified and accepted!',
+                    html: `<h1>Congratulations ${gender} ${name} your health insurance application with id ${req.body.appId} has been verified and accepted! </h1>`
+                });
+                res.redirect('/details')
+
+            })
+        } else {
+            await healthApplications.findByIdAndDelete(req.params.id).then(() => {
+                transporter.sendMail({
+                    to: email,
+                    from: 'dattasandeep000@gmail.com',
+                    subject: 'Genesis Insurances Application verified and accepted!',
+                    html: `<h2>Sorry ${gender} ${name} your health insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
+                });
+                res.redirect('/details')
+            })
+
+        }
+    }
