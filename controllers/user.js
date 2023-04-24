@@ -6,6 +6,7 @@ const healthApplications=require('../models/health-application')
 const lifeApplications=require('../models/life-application')
 const transportApplications=require('../models/transport-application')
 const Query = require("../models/Query");
+const Policy = require("../models/Policy");
 const Admin=require('../models/Admin')
 const transportPolicy=require('../models/transportpolicy-details')
 const lifePolicy=require('../models/lifepolicy-details')
@@ -98,22 +99,32 @@ exports.gethealthPolicy=async (req,res,next)=>{
 
 exports.getDetails=(req,res,next)=>{
     // console.log(req.session.type+' Details : '+req.user._id)
-    if(req.session.type==='User'){
-        res.render('details',
-            {name:req.user.name,email:req.user.email,
-                age:req.user.age,sex:req.user.sex,address:req.user.address,phone:req.user.phone})
+if(!req.user){
+        res.render('404')
     }
-    else if(req.session.type==='Admin'){
-        res.render('admin-details',
-            {name:req.user.name,email:req.user.email,
-                age:req.user.age,sex:req.user.sex,address:req.user.address,phone:req.user.phone})
-    }
-    else if(req.session.type==='Agent'){
+    else {
+        if (req.session.type === 'User') {
+            res.render('details',
+                {
+                    name: req.user.name, email: req.user.email,
+                    age: req.user.age, sex: req.user.sex, address: req.user.address, phone: req.user.phone
+                })
+        } else if (req.session.type === 'Admin') {
+            res.render('admin-details',
+                {
+                    name: req.user.name, email: req.user.email,
+                    age: req.user.age, sex: req.user.sex, address: req.user.address, phone: req.user.phone
+                })
+        } else if (req.session.type === 'Agent') {
 
-        res.render('admin-details', {name:req.user.name,email:req.user.email,
-            age:req.user.age,sex:req.user.sex,address:req.user.address,phone:req.user.phone}
-    )
+            res.render('admin-details', {
+                    name: req.user.name, email: req.user.email,
+                    age: req.user.age, sex: req.user.sex, address: req.user.address, phone: req.user.phone
+                }
+            )
+        }
     }
+
 
 }
 
@@ -136,6 +147,7 @@ exports.getMyPolicies=(req,res)=>{
 }
 exports.getCurrentPolicies=(req,res)=>{
     User.findById(req.user.id).then(r=>{
+        console.log(r)
         res.render('my-policies',{arr:r.currentPolicies,str:'Pay Installments'})
 
     })
@@ -451,7 +463,7 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
                             console.log('You have logged in employee')
                             setTimeout(()=>{
                                 console.log('Entered Timeout')
-                                req.session.destroy()},900*1000)
+                                req.session.destroy()},15000*1000)
                         });
                       
                         // console.log(req.cookies['user'].name)
@@ -971,3 +983,39 @@ exports.searchMyApps=async (req, res, next) => {
     }
 
 }
+//
+// exports.postPay=async (req, res, next) => {
+//     const id = req.body.id
+//     const amount = req.body.amount
+//     const duration = req.body.duration
+//     console.log(duration)
+//     const term = req.body.term
+//
+//     if (!duration) {
+//         await transporter.sendMail({
+//             to: req.user.email,
+//             from: 'dattasandeep000@gmail.com',
+//             subject: 'Genesis Insurances Installment!',
+//             html: `Dear ${req.user.name} your payment for policy ${id} is successful`
+//         });
+//        const policy=await Policy.model.findById(id)
+//         User.updateOne({_id:req.user._id},{$pull:{currentPolicies:{_id:id}}},{$push:{policyHistory:policy}}).then(r=>{
+//             console.log('Added to history')
+//             res.redirect('/current-policies')
+//         })
+//     }
+//     else{
+//         await transporter.sendMail({
+//             to: req.user.email,
+//             from: 'dattasandeep000@gmail.com',
+//             subject: 'Genesis Insurances Installment!',
+//             html: `Dear ${req.user.name} your payment for policy ${id} is successful`
+//         });
+//         const policy=await Policy.model.findById(id)
+//
+//         User.updateOne({_id:req.user._id},{currentPolicies:{duration:duration-1}},).then(r=>{
+//             console.log('Added to history')
+//             res.redirect('/current-policies')
+//         })
+//     }
+// }

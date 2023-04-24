@@ -40,8 +40,9 @@ exports.healthUploader= async function(req, res, next) {
         amount:req.body.amount,
         applier:req.user._id,
         duration:req.body.duration,
-        appliedDate:new Date().toDateString()
-
+        appliedDate:new Date().toDateString(),
+        verificationStatus:'',
+        verificationDate:'',
 
 
     });
@@ -74,8 +75,9 @@ exports.lifeUploader= async function(req, res, next) {
         amount:req.body.amount,
         applier:req.user._id,
         duration:req.body.duration,
-        appliedDate:new Date().toDateString()
-
+        appliedDate:new Date().toDateString(),
+        verificationStatus:'',
+        verificationDate:'',
 
     });
     await lifeApplication.save();
@@ -114,7 +116,9 @@ exports.transportUploader= async function(req, res, next) {
         amount:req.body.amount,
         payType:req.body.payType,
         applier:req.user._id,
-        appliedDate:new Date().toDateString()
+        appliedDate:new Date().toDateString(),
+        verificationStatus:'',
+        verificationDate:'',
 
 
     });

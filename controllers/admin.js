@@ -184,6 +184,7 @@ exports.getIndividualTransportApplication=(req,res,next)=>{
 
     transportApplications.findById(req.params.appId).then(zrr=>{
 
+        console.log(zrr.sex)
         res.render('individualTransportApplication',{
             appId:req.params.appId,
             firstName:zrr.firstName,
@@ -402,202 +403,204 @@ if(req.body.searchType==='Name') {
 
             // }
         }
-        exports.verifyTransport = async (req, res, next) => {
-            const gender = req.user.sex === 'Male' ? 'Mr' : 'Mrs'
+
+        exports.verifyTransport=async (req, res, next) => {
+            const gender= req.user.sex==='Male'?'Mr':'Mrs'
 
 
-            console.log('Entered verifyTransport')
-            transportApplications.updateOne({_id: req.body.appId}, {
-                verificationStatus: req.body.Status,
-                verificationDate: new Date().toDateString()
-            })
-            const policy = new Policy.model({
+         console.log('Entered verifyTransport')
+            console.log(req.body.status)
+    await transportApplications.updateOne({_id: req.body.appId}, {verificationStatus: req.body.status,verificationDate:new Date().toDateString()})
+    const policy = new Policy.model({
 
-                type: req.body.policyType,
-                name: req.body.name,
-                applier: req.body.applier,
-                amount: req.body.amount,
-                policyId: req.body.policyId,
-                appId: req.body.appId,
-                term: req.body.policyTerm,
-                beneficiaryDetails: {
-                    name: req.body.nominee,
-                    age: req.body.nomineeAge,
-                    relation: req.body.nomineeRelation,
+        type: req.body.policyType,
+        name: req.body.name,
+        applier: req.body.applier,
+        amount: req.body.amount,
+        policyId: req.body.policyId,
+        appId: req.body.appId,
+        term: req.body.policyTerm,
+        beneficiaryDetails: {
+            name: req.body.nominee,
+            age: req.body.nomineeAge,
+            relation: req.body.nomineeRelation,
 
-                },
-                status: 'Ongoing'
+        },
+        status: 'Ongoing'
 
 
-            })
-            const applier = await User.findById(req.body.applier)
+    })
+    const applier = await User.findById(req.body.applier)
 
-            const email = applier.email
-            const name = applier.name
-            if (req.body.verificationStatus === 'verified') {
-                policy.save();
-
-
-                User.updateOne({_id: req.body.applier}, {$push: {currentPolicies: policy}}).then((r) => {
-
-                    console.log('Policy added to user!!! hooray')
-                    transporter.sendMail({
-                        to: email,
-                        from: 'dattasandeep000@gmail.com',
-                        subject: 'Genesis Insurances Application verified and accepted!',
-                        html: `<h1>Congratulations ${gender} ${name} your motor insurance application with id ${req.body.applier} has been verified and accepted! </h1>`
-                    });
-                    res.redirect('/details')
-
-                })
-            } else {
-                await transportApplications.findByIdAndDelete(req.params.id).then(() => {
-                    transporter.sendMail({
-                        to: email,
-                        from: 'dattasandeep000@gmail.com',
-                        subject: 'Genesis Insurances Application verified and accepted!',
-                        html: `<h2>Sorry ${gender} ${name} your motor insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
-                    });
-                    res.redirect('/details')
-                })
-
-            }
-        }
+    const email = applier.email
+    const name = applier.name
+    if (req.body.verificationStatus === 'verified')
+    {
+        await policy.save();
 
 
-        exports.verifyLife = async (req, res, next) => {
-            const gender = req.user.sex === 'Male' ? 'Mr' : 'Mrs'
+       await User.updateOne({_id: req.body.applier}, {$push: {currentPolicies: policy}}).then((r) => {
+
+            console.log('Policy added to user!!! hooray')
+            transporter.sendMail({
+                to: email,
+                from: 'dattasandeep000@gmail.com',
+                subject: 'Genesis Insurances Application verified and accepted!',
+                html: `<h1>Congratulations ${gender} ${name} your motor insurance application with id ${req.body.applier} has been verified and accepted! </h1>`
+            });
+            res.redirect('/details')
+
+        })
+    }
+    else{
+        await transportApplications.findByIdAndDelete(req.params.id).then(() => {
+            transporter.sendMail({
+                to: email,
+                from: 'dattasandeep000@gmail.com',
+                subject: 'Genesis Insurances Application verified and accepted!',
+                html: `<h2>Sorry ${gender} ${name} your motor insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
+            });
+            res.redirect('/details')
+        })
+
+    }
+}
 
 
-            console.log('Entered verifyLife')
-            console.log('ver sta ' + req.body.verificationStatus)
-            lifeApplications.updateOne({_id: req.body.appId}, {
-                verificationStatus: req.body.verificationStatus,
-                verificationDate: new Date().toDateString()
-            })
-            const policy = new Policy.model({
-
-                type: req.body.policyType,
-                name: req.body.name,
-                applier: req.body.applier,
-                amount: req.body.amount,
-                policyId: req.body.policyId,
-                appId: req.body.appId,
-                term: req.body.policyTerm,
-                beneficiaryDetails: {
-                    name: req.body.nominee,
-                    age: req.body.nomineeAge,
-                    relation: req.body.nomineeRelation,
-
-                },
-                status: 'Ongoing',
-                duration: req.body.duration
 
 
-            })
-            const applier = await User.findById(req.body.applier)
 
-            const email = applier.email
-            const name = applier.name
-            console.log(req.body.verificationStatus)
-            if (req.body.verificationStatus === 'verified') {
-                policy.save();
+exports.verifyLife=async (req, res, next) => {
+    const gender = req.user.sex === 'Male' ? 'Mr' : 'Mrs'
 
 
-                User.updateOne({_id: req.body.applier}, {$push: {currentPolicies: policy}}).then((r) => {
+    console.log('Entered verifyLife')
+    console.log('ver sta '+req.body.verificationStatus)
+    await lifeApplications.updateOne({_id: req.body.appId}, {
+        verificationStatus: req.body.verificationStatus,
+        verificationDate: new Date().toDateString()
+    })
+    const policy = new Policy.model({
 
-                    console.log('Policy added to user!!! hooray')
-                    transporter.sendMail({
-                        to: email,
-                        from: 'dattasandeep000@gmail.com',
-                        subject: 'Genesis Insurances Application verified and accepted!',
-                        html: `<h1>Congratulations ${gender} ${name} your life insurance application with id ${req.body.appId} has been verified and accepted! </h1>`
-                    });
-                    res.redirect('/details')
+        type: req.body.policyType,
+        name: req.body.name,
+        applier: req.body.applier,
+        amount: req.body.amount,
+        policyId: req.body.policyId,
+        appId: req.body.appId,
+        term: req.body.policyTerm,
+        beneficiaryDetails: {
+            name: req.body.nominee,
+            age: req.body.nomineeAge,
+            relation: req.body.nomineeRelation,
 
-                })
-            } else {
-                await lifeApplications.findByIdAndDelete(req.params.id).then(() => {
-                    transporter.sendMail({
-                        to: email,
-                        from: 'dattasandeep000@gmail.com',
-                        subject: 'Genesis Insurances Application verified and accepted!',
-                        html: `<h2>Sorry ${gender} ${name} your life insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
-                    });
-                    res.redirect('/details')
-
-                })
-            }
-        }
-        exports.verifyHealth = async (req, res, next) => {
-            const gender = req.user.sex === 'Male' ? 'Mr' : 'Mrs'
+        },
+        status: 'Ongoing',
+        duration: req.body.duration
 
 
-            console.log('Entered verifyHealth')
-            console.log('ver sta ' + req.body.verificationStatus)
+    })
+    const applier = await User.findById(req.body.applier)
+
+    const email = applier.email
+    const name = applier.name
+    console.log(req.body.verificationStatus)
+    if (req.body.verificationStatus === 'verified') {
+        await policy.save();
 
 
-            const policy = new Policy.model({
+       await User.updateOne({_id: req.body.applier}, {$push: {currentPolicies: policy}}).then((r) => {
 
-                type: req.body.policyType,
-                name: req.body.name,
-                applier: req.body.applier,
-                amount: req.body.amount,
-                policyId: req.body.policyId,
-                appId: req.body.appId,
-                term: req.body.policyTerm,
-                beneficiaryDetails: {
-                    name: req.body.nominee,
-                    age: req.body.nomineeAge,
-                    relation: req.body.nomineeRelation,
+            console.log('Policy added to user!!! hooray')
+            transporter.sendMail({
+                to: email,
+                from: 'dattasandeep000@gmail.com',
+                subject: 'Genesis Insurances Application verified and accepted!',
+                html: `<h1>Congratulations ${gender} ${name} your life insurance application with id ${req.body.appId} has been verified and accepted! </h1>`
+            });
+            res.redirect('/details')
 
-                },
-                status: 'Ongoing',
-                duration: req.body.duration
+        })
+    } else {
+        await lifeApplications.findByIdAndDelete(req.params.id).then(() => {
+            transporter.sendMail({
+                to: email,
+                from: 'dattasandeep000@gmail.com',
+                subject: 'Genesis Insurances Application verified and accepted!',
+                html: `<h2>Sorry ${gender} ${name} your life insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
+            });
+            res.redirect('/details')
 
-
-            })
-            const applier = await User.findById(req.body.applier)
-
-            const email = applier.email
-            const name = applier.name
-            console.log(req.body.verificationStatus)
-            if (req.body.verificationStatus === 'verified') {
-                policy.save();
-                await healthApplications.updateOne({_id: req.body.appId}, {
-                    verificationStatus: req.body.verificationStatus,
-                    verificationDate: new Date().toDateString()
-                }).then(() => {
-                    console.log('Updated application')
-                })
-
-                User.updateOne({_id: req.body.applier}, {$push: {currentPolicies: policy}}).then((r) => {
-
-                    console.log('Policy added to user!!! hooray')
-                    transporter.sendMail({
-                        to: email,
-                        from: 'dattasandeep000@gmail.com',
-                        subject: 'Genesis Insurances Application verified and accepted!',
-                        html: `<h1>Congratulations ${gender} ${name} your health insurance application with id ${req.body.appId} has been verified and accepted! </h1>`
-                    });
-                    res.redirect('/details')
-
-                })
-            } else {
-                await healthApplications.findByIdAndDelete(req.params.id).then(() => {
-                    transporter.sendMail({
-                        to: email,
-                        from: 'dattasandeep000@gmail.com',
-                        subject: 'Genesis Insurances Application verified and rejected!',
-                        html: `<h2>Sorry ${gender} ${name} your health insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
-                    });
-                    res.redirect('/details')
-                })
-
-            }
-        }
+        })
+    }
+}
+exports.verifyHealth = async (req, res, next) => {
+    const gender = req.user.sex === 'Male' ? 'Mr' : 'Mrs'
 
 
+    console.log('Entered verifyHealth')
+    console.log('ver sta '+req.body.verificationStatus)
+
+
+    const policy = new Policy.model({
+
+        type: req.body.policyType,
+        name: req.body.name,
+        applier: req.body.applier,
+        amount: req.body.amount,
+        policyId: req.body.policyId,
+        appId: req.body.appId,
+        term: req.body.policyTerm,
+        beneficiaryDetails: {
+            name: req.body.nominee,
+            age: req.body.nomineeAge,
+            relation: req.body.nomineeRelation,
+
+        },
+        status: 'Ongoing',
+        duration: req.body.duration
+
+
+    })
+    const applier = await User.findById(req.body.applier)
+
+    const email = applier.email
+    const name = applier.name
+    console.log(req.body.verificationStatus)
+    if (req.body.verificationStatus === 'verified') {
+        policy.save();
+        await healthApplications.updateOne({_id: req.body.appId}, {
+            verificationStatus: req.body.verificationStatus,
+            verificationDate: new Date().toDateString()
+        }).then(()=>{
+            console.log('Updated application')
+        })
+
+       await User.updateOne({_id: req.body.applier}, {$push: {currentPolicies: policy}}).then((r) => {
+
+            console.log('Policy added to user!!! hooray')
+            transporter.sendMail({
+                to: email,
+                from: 'dattasandeep000@gmail.com',
+                subject: 'Genesis Insurances Application verified and accepted!',
+                html: `<h1>Congratulations ${gender} ${name} your health insurance application with id ${req.body.appId} has been verified and accepted! </h1>`
+            });
+            res.redirect('/details')
+
+        })
+    } else {
+        await healthApplications.findByIdAndDelete(req.params.id).then(() => {
+            transporter.sendMail({
+                to: email,
+                from: 'dattasandeep000@gmail.com',
+                subject: 'Genesis Insurances Application verified and accepted!',
+                html: `<h2>Sorry ${gender} ${name} your health insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
+            });
+            res.redirect('/details')
+        })
+
+    }
+}
         exports.getAgentBoard = (req, res, next) => {
             console.log(req.session.type)
             res.render('agentboard', {userType: req.session.type, name: req.user.name})
@@ -634,4 +637,53 @@ if(req.body.searchType==='Name') {
             })
         }
 
+exports.getUserList=async (req, res, next) => {
+    const users = await User.find({})
+    res.render('usersList',{arr:users})
+}
 
+exports.searchUsers=async (req, res, next) => {
+    const Type = req.body.searchType
+    const search = req.body.search
+    if (req.body.searchType === 'Name') {
+            User.find({})
+                .then(async r => {
+                        const arrr = []
+                        for (let i = 0; i < r.length; i++) {
+                            let name = r[i].name;
+                            let Name = r[i].name.toLowerCase();
+                            let nAME = r[i].name.toUpperCase();
+                            console.log('Name ' + name)
+                            if (name.includes(req.body.search) || Name.includes(req.body.search) || nAME.includes(req.body.search)) {
+                                console.log(name)
+                                arrr.push(r[i])
+                            }
+                        }
+                        res.render('usersList', {arr: arrr})
+
+
+                    }
+                )
+
+    } else if (req.body.searchType === 'Id') {
+        const arr = []
+        const application = await User.findById(req.body.search)
+
+        arr.push(application)
+        res.render('usersList', {arr: arr})
+    }
+
+}
+
+exports.getIndividualUser=async (req, res, next) => {
+    const id = req.params.id
+    const user = await User.findById(id)
+    res.render('individual-user-profile',{r:user})
+
+}
+
+
+exports.getPolicyDetails=(req,res,next)=>{
+
+     const id=req.params.id;
+}
