@@ -1,0 +1,41 @@
+
+<head>
+    <link rel="stylesheet" href="/css/reviews.css">
+
+</head>
+
+<%- include('navbar.ejs') %>
+<!--<div class="wrap">-->
+<div class="heading-wrap"><p class="heading">Your Queries</p></div>
+
+<div class="container2">
+
+    <form class="bar" action="/search-users" method="post">
+        <select name="searchType"><option>Name</option><option>Id</option></select>
+        <input name="search" type="text"  class="search">
+        <button class="search-submit" type="submit">Search</button>
+    </form>
+
+    <% for(let i=0;i<arr.length;i++){%>
+    <div class="items2">
+
+        <div class="inner-item Q">
+            <div> Name: <%=arr[i].name%></div>   <div> Email: <%=arr[i].email%></div>
+        </div>
+        <br>
+        <br>
+        <div class="inner-item A">
+            <a href="/users/<%=arr[i]._id%>">View Profile</a>
+        </div>
+
+
+    </div>
+
+
+    <%}%>
+
+</div>
+
+<%-include('footer.ejs')%>
+<!--</div>-->
+

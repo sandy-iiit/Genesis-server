@@ -1,0 +1,102 @@
+<head>
+    <style>
+        .signup-form {
+  width: 50%;
+  margin: auto;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.signup-form h2 {
+  text-align: center;
+}
+
+.signup-form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.signup-form input[type="text"],
+.signup-form input[type="email"],
+.signup-form input[type="password"],
+.signup-form input[type="date"],
+.signup-form textarea,
+.signup-form select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.signup-form input[type="submit"] {
+  background-color: #3E54AC;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 20%;
+}
+
+.signup-form input[type="submit"]:hover {
+  background-color: #3E54AC;
+}
+
+.signup-form textarea {
+  height: 100px;
+}
+
+.signup-form select {
+  height: 40px;
+}
+
+.signup-form .error {
+  color: red;
+  margin-top: 5px;
+}
+
+    </style>
+</head>
+<%- include('navbar.ejs') %>
+<div class="signup-form">
+    <h2>Employee Signup</h2>
+    <form method="post" action="/employeesignupposting">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+  
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+  
+      <label for="age">Age:</label>
+      <input type="text" id="age" name="age" required>
+  
+      <label for="sex">Sex:</label>
+      <select id="sex" name="sex" required>
+        <option value="">--Select--</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+  
+      <label for="aadhar">Aadhar Number:</label>
+      <input type="text" id="aadhar" name="aadhar" required>
+  
+      <label for="address">Address:</label>
+      <textarea id="address" name="address" required></textarea>
+  
+      <label for="phone">Phone:</label>
+      <input type="text" id="phone" name="phone" required>
+  
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+  
+      <label for="dob">Date of Birth:</label>
+      <input type="date" id="dob" name="dob">
+  
+      <input type="submit" value="Sign Up">
+    </form>
+  </div>
+<%- include('footer.ejs') %>

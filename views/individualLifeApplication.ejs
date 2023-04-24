@@ -1,0 +1,82 @@
+<head>
+    <link rel="stylesheet" href="/css/transport-form.css">
+</head>
+
+<%- include('navbar.ejs')%>
+<img class="car" src="/images/health-insurance.png">
+
+<form class="form" action="/verifyLife" method="post" >
+    <div class="row1"><p class="label">Name</p> <input name="firstName" type="text" class="row13" placeholder="First name" value="<%=firstName%>">
+        <input name="lastName" type="text" class="row13" placeholder="Last name" value="<%=lastName%>"></div>
+    <div class="row1">
+        <p class="label">Sex</p> <input name="sex" class="inner-row1" value="<%=sex%>" placeholder="Sex">
+    </div>
+
+    <div class="row2">
+        <div class="subrow"><p class="label">AADHAR</p> <a href="/files/<%=aadhar%>">Open AADHAR</a></div>
+        <div class="subrow"><p class="label">PAN</p><a href="/files/<%=pan%>">Open Pan</a></div>
+    </div>
+    <div class="row2">
+        <div class="subrow"><p class="label">DOB Proof</p><a href="/files/<%=dobProof%>">Open Dob proof</a></div>
+        <div class="subrow"><p class="label">Health Certificate</p><a href="/files/<%=healthCertificate%>">Open health certificate</a></div>
+
+    </div>
+
+    <div class="row1">
+        <p class="label">Health Defects</p>  <input class="health_" name="healthCondition" placeholder="Any health defects you have suffered previously or are suffering currently" value="<%=healthCondition%>">
+    </div>
+
+    <div class="row1">
+        <p class="label">Nominee Name</p>
+        <input name="nominee" class="inner-row1" value="<%=nominee%>">
+
+    </div>
+
+    <div class="row2">
+        <div class="subrow">
+            <p class="label">Nominee Age</p>
+            <input class="inner-row2" name="nomineeAge" value="<%=nomineeAge%>">
+        </div>
+        <div class="subrow">
+            <p class="label">Nominee Relation</p>
+            <input class="inner-row2" name="nomineeRelation" value="<%=nomineeRelation%>">
+        </div>
+    </div>
+    <div class="row2">
+        <div class="subrow"><p class="label">Nominee AADHAR</p> <a href="/files/<%=nomineeAadhar%>">Open nominee AADHAR</a></div>
+        <div class="subrow"><p class="label">Nominee AddressProof</p> <a href="/files/<%=nomineeAddressProof%>">Open Nominee AddressProof</a></div>
+    </div>
+    <div class="row1">
+        <p class="label">Policy Id</p>
+        <input class="inner-row1" name="policyId" value="<%=policyId%>">
+    </div>
+    <div class="row1">
+        <p class="label">Policy Name</p>
+        <input class="inner-row1" name="policyName" value="<%=policyName%>">
+    </div>
+
+    <div class="row2">
+        <div class="subrow"> <p class="label">Cover Amount</p><input class="inner-row2" type="text" name="amount" value="<%=coverAmount%>"></div>
+        <div class="subrow"> <p class="label">Policy Term</p><input name="policyTerm" class="inner-row2" value="<%=term%>">
+        </div>
+
+    </div>
+    <div class="row1">
+        <p class="label">Duration</p>
+        <input type="number" class="inner-row1" name="duration" value="<%=duration%>" >
+    </div>
+    <p>Applied By </p> <input value="<%=applier%>" name="applier" >
+    <input  name="policyType" style="display: none" value="<%=policyType%>">
+    <input  name="appId" style="display: none" value="<%=appId%>">
+    <div class="row1">
+        <p class="label">Status</p>
+        <input class="inner-row1" name="verificationStatus" <%=Status%>>
+    </div>
+
+    <button class="button" type="submit">Verify</button>
+
+
+
+</form>
+
+<%-include('footer.ejs')%>

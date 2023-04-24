@@ -1,0 +1,44 @@
+
+<head>
+    <link rel="stylesheet" href="/css/reviews.css">
+
+</head>
+
+<%- include('navbar.ejs') %>
+<!--<div class="wrap">-->
+<div class="heading-wrap"><p class="heading">Your Queries</p></div>
+
+<div class="container2">
+
+    <form class="bar" action="/search-transport-applications" method="post">
+       <select name="searchType"><option>Name</option><option>Id</option></select>
+        <input name="search" type="text"  class="search">
+        <button class="search-submit" type="submit">Search</button>
+    </form>
+
+    <% for(let i=0;i<arr.length;i++){%>
+    <div class="items2">
+
+        <div class="inner-item Q">
+            <div> Q  <%=i+1%>). First Name: <%=arr[i].firstName%></div>   <div> Last Name: <%=arr[i].lastName%></div>
+        </div>
+        <br>
+        <div class="inner-item Q">
+            <div> Q  <%=i+1%>). Applied on: <%=arr[i].appliedDate%></div>   <div> Verified on: <%=arr[i].verificationDate%></div>
+        </div>
+        <br>
+        <div class="inner-item A">
+            <a href="/transport-applications/<%=arr[i]._id%>">Open application</a>
+        </div>
+
+
+    </div>
+
+
+    <%}%>
+
+</div>
+
+<%-include('footer.ejs')%>
+<!--</div>-->
+

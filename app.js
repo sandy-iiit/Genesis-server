@@ -17,13 +17,17 @@ require('dotenv').config()
 const userRoutes=require('./routes/userRoutes')
 const User = require('./models/User')
 const Admin = require('./models/Admin')
+const Employee = require('./models/employee');
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
+
+
 
 
 const store = new MongoDBStore({
     uri: process.env.MONGODB_URI2,
     collection: 'sessions',
+    // expires: 10*60,
 
 });
 // const csrfProtection = csrf();
@@ -60,6 +64,15 @@ app.use((req, res, next) => {
             })
             .catch(err => console.log(err));
     }
+    else if(req.session.type==='Agent'){
+
+        Employee.findById(req.session.user._id)
+            .then(user => {
+                req.user = user;
+                next();
+            })
+            .catch(err => console.log(err));
+    }
 });
 app.use((req, res, next) => {
     res.locals.isAuthenticated = req.session.isLoggedIn;
@@ -71,6 +84,7 @@ app.use(userRoutes)
 app.get('*',(req,res)=>{
     res.render('404')
 })
+
 mongoose.connect(process.env.MONGODB_URI1)
     .then(result => {
         app.listen(3000);

@@ -7,28 +7,37 @@ const Beneficiary=require('./Beneficiary')
 const policySchema=new Schema({
     type:{
         type:String,
-        required:true
     },
-
+    policyId:{
+      type:String,
+    },
     name:{
         type:String,
-        required:true
     },
     amount:{
         type:Number,
-        required:true
     },
-    duration:{
-        type:Number,
-        required:true
+    term:{
+        type:String,
     },
-    beneficiary:Beneficiary.beneficiarySchema,
+    beneficiaryDetails:{
+        name:{
+            type:String,
+        },
+        age:{
+            type:String,
+        },
+        relation:{
+            type:String,
+        }
+    },
+    applier:String,
 
     status:{
+        // this is whether the policy is ongoing or completed
         type:String,
-        required:true
     },
-
+    duration:Number
 
 })
 

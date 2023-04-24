@@ -249,7 +249,7 @@ margin-left: 100px;
 .button{
     width: 150px;
     height: 40px;
-    background-color: slateblue;
+    background-color: #3e54ac;
     border-radius: 100px;
     border-style: none;
     color: whitesmoke;
@@ -284,7 +284,7 @@ margin-left: 100px;
 
 .genesishead
 {
-    color: blue;
+    color: #3e54ac;
     padding: 20px;
     background-color: aqua;
     margin:100px 100px 100px 100px;

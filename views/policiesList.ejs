@@ -1,0 +1,48 @@
+
+<head>
+    <link rel="stylesheet" href="/css/reviews.css">
+
+</head>
+
+<%- include('navbar.ejs') %>
+<!--<div class="wrap">-->
+<div class="heading-wrap"><p class="heading">Your Queries</p></div>
+
+<div class="container2">
+
+    <form class="bar" action="/search-policies" method="post">
+        <select name="searchType"><option>Type</option><option>Id</option></select>
+        <input name="search" type="text"  class="search">
+        <button class="search-submit" type="submit">Search</button>
+    </form>
+
+    <% for(let i=0;i<arr.length;i++){%>
+    <div class="items2">
+
+        <div class="inner-item Q">
+            <div> Type: <%=arr[i].type%></div>
+        </div>
+        <div class="inner-item Q">
+            <div> Name: <%=arr[i].name%></div>
+        </div>
+        <br>
+        <div class="inner-item Q">
+            <div> Applied by: <a href="users/<%=arr[i].applier%>"><%=arr[i].applier%></a></div>
+        </div>
+
+        <br>
+        <div class="inner-item A">
+            <a href="/policy/<%=arr[i]._id%>">View Policy</a>
+        </div>
+
+
+    </div>
+
+
+    <%}%>
+
+</div>
+
+<%-include('footer.ejs')%>
+<!--</div>-->
+

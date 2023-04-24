@@ -41,25 +41,26 @@ const upload = multer({ storage: storage });
 router.get('/',userController.getHome)
 router.get('/login',userController.getLogin)
 router.get('/signup',userController.getSignup)
-router.get('/healthpolicies',userController.getHealthPolicies)
-router.get('/transportpolicies',userController.getVehiclePolicies)
 router.get('/details',userController.getDetails)
 router.get('/my-details',userController.getMyDetails)
 router.get('/change-password',userController.getPasswordChange)
 router.get('/my-policies',userController.getMyPolicies)
 router.get('/my-queries',userController.getMyQueries)
 router.get('/current-policies',userController.getCurrentPolicies)
+// router.get('/policyHistory',userController.getPolicyHistory)
 router.get('/payment',userController.getPayment)
 router.get('/write-query',userController.getWriteQuery)
-router.get('/transport-form',userController.getTransportForm)
-router.get('/life-form',userController.getLifeForm)
-router.get('/health-form',userController.getHealthForm)
+router.get('/transport-form/:id',userController.getTransportForm)
+router.get('/life-form/:id',userController.getLifeForm)
+router.get('/health-form/:id',userController.getHealthForm)
 router.get('/admin-queries',userController.getAdminQueries)
 router.get('/services',userController.getServices)
 router.get('/aboutus',userController.getAboutUs)
 router.get('/policies',userController.getPolicies)
 router.get('/transportpolicies',userController.getVehiclePolicies)
-router.get('/buy-policy',userController.getBuyPolicy)
+router.get('/buy-policy/:id',userController.getBuyPolicy)
+router.get('/buy-policy2',userController.getBuyPolicy2)
+router.get('/buypolicy3/:id',userController.getBuyPolicylife)
 router.get('/lifepolicies',userController.getLifePolicy)
 router.get('/policypage',userController.getHealthPolicyPage)
 router.get('/contactus',userController.getContactUs)
@@ -76,11 +77,38 @@ router.post('/health-form', upload.fields([
     { name: 'aadhar', maxCount: 1 },
     { name: 'pan', maxCount: 1 },
     {name:'dobProof',maxCount:1},
-    {name:'healthCertificate',maxCount:1}
-]),filesController.uploader)
+    {name:'healthCertificate',maxCount:1}, { name: 'nomineeAadhar', maxCount: 1 },
+    { name: 'nomineeAddressProof', maxCount: 1 },
+]),filesController.healthUploader)
+
+router.post('/life-form', upload.fields([
+    { name: 'aadhar', maxCount: 1 },
+    { name: 'pan', maxCount: 1 },
+    {name:'dobProof',maxCount:1},
+    {name:'healthCertificate',maxCount:1}, { name: 'nomineeAadhar', maxCount: 1 },
+    { name: 'nomineeAddressProof', maxCount: 1 },
+]),filesController.lifeUploader)
+
+router.post('/transport-form', upload.fields([
+    { name: 'aadhar', maxCount: 1 },
+    { name: 'c_book', maxCount: 1 },
+    { name: 'nomineeAadhar', maxCount: 1 },
+    { name: 'nomineeAddressProof', maxCount: 1 },
+]),filesController.transportUploader)
+router.post('/change-password',userController.changePassword)
+router.post('/verifyOTP',userController.verifyOTP)
+router.get('/verifyOTP/:token',userController.getOTPVerifier)
+router.get('/healthpolicies',userController.gethealthPolicy)
+router.get('/policypage/:id',userController.getPolicyPage)
+router.get('/myApplications',userController.getMyApps)
+router.post('/search-my-applications',userController.searchMyApps)
+// router.post('/pay',userController.postPay)
+router.get('/data',adminController.getData)
 // Admin
 
 router.get('/answer-queries',adminController.getAnswerQueries)
+router.post('/deleteQuery/:id',adminController.deleteQuery)
+router.post('/deleteReview',adminController.deleteReview)
 router.get('/answered-queries',adminController.getAlreadyAnsweredQueries)
 router.get('/health-applications',adminController.getHealthApplications)
 router.get('/health-applications/:appId',adminController.getIndividualHealthApplication)
@@ -88,4 +116,43 @@ router.post('/search-health-applications',adminController.getHealthApplicationsS
 router.get('/reviews',adminController.getReviews)
 router.post('/queries/:queryId',adminController.postAnswer)
 router.get('/files/:fileId',filesController.getFile)
+ 
+router.get('/designform',adminController.designform)
+router.get('/tractpolicy',adminController.trackpolicy)
+router.post('/policies_design',userController.postaddpolicy)
+router.post('/policy_details',userController.postpolicydetails)
+router.post('/employeesignupposting',userController.postemployeesignup)
+
+router.get('/sendemail',adminController.getemailform)
+router.post('/send_email',userController.postsendemail)
+router.get('/companystats',adminController.getcompanystats)
+
+
+router.get('/employeesignup',adminController.employeesignuppage)
+router.get('/life-applications',adminController.getLifeApplications)
+router.get('/transport-applications',adminController.getTransportApplications)
+router.get('/health-applications/:appId',adminController.getIndividualHealthApplication)
+router.get('/life-applications/:appId',adminController.getIndividualLifeApplication)
+router.get('/transport-applications/:appId',adminController.getIndividualTransportApplication)
+router.post('/search-health-applications',adminController.getHealthApplicationsSearch)
+router.post('/search-life-applications',adminController.getLifeApplicationsSearch)
+router.post('/search-transport-applications',adminController.getTransportApplicationsSearch)
+router.post('/search-agent-applications',adminController.getAgentApplicationsSearch)
+router.get('/reviews',adminController.getReviews)
+router.post('/queries/:queryId',adminController.postAnswer)
+router.get('/files/:fileId',filesController.getFile)
+router.post('/verifyTransport',adminController.verifyTransport)
+router.post('/verifyLife',adminController.verifyLife)
+router.post('/verifyHealth',adminController.verifyHealth)
+router.post('/verifyAgent/:id',adminController.verifyAgent)
+router.get('/agentboard',adminController.getAgentBoard)
+router.get('/agent-applications',adminController.getAgentApplications)
+router.get('/agent-application/:id',adminController.getIndividualAgentApplication)
+router.get('/usersList',adminController.getUserList)
+router.get('/policiesList',adminController.getAllPolicies)
+router.get('/users/:id',adminController.getIndividualUser)
+router.get('/policy/:id',adminController.getPolicyDetails)
+router.post('/search-users',adminController.searchUsers)
+router.post('/search-policies',adminController.searchPolicies)
+
 module.exports = router

@@ -13,7 +13,8 @@ const reviewSchema=new Schema({
     review:{
         type:String,
         required:true
-    }
+    },
+
 })
 
 module.exports=mongoose.model('Review',reviewSchema)

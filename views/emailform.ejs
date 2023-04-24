@@ -1,0 +1,117 @@
+<head>
+
+    <style>
+     .form-group {
+  margin-bottom: 10px;
+}
+
+label {
+  display: inline-block;
+  width: 100px;
+  text-align: right;
+  margin-right: 10px;
+}
+
+input[type="email"],
+input[type="text"],
+textarea {
+  width: 300px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+button[type="submit"] {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #008CBA;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #006B8F;
+}
+ 
+
+ 
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  margin-left: -5%;
+}
+
+ 
+input[type="text"],
+input[type="email"],
+textarea {
+  border: 1px solid #3E54AC;
+  border-radius: 5px;
+  padding: 8px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+ 
+button[type="submit"] {
+  background-color: #3E54AC;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+ 
+#useremail-group {
+  display: none;
+}
+
+ #recipient option[value="particular_user"]:checked ~ #useremail-group {
+  display: block;
+}
+
+    </style>
+</head>
+<%- include('navbar.ejs') %>
+<div style="margin-left: 20%;">
+<form method="post" action="/send_email">
+    <div class="form-group"><br>
+      <label for="recipient">Recipient:</label>
+      <select id="recipient" name="recipient">
+        <option value="users">All Users</option>
+        <option value="admin">Admin</option>
+        <option value="particular_user">Particular User</option>
+      </select>
+    </div>
+    <div class="form-group" id="useremail-group" style="display:none">
+      <label for="useremail">User Email:</label>
+      <input type="email" id="useremail" name="useremail">
+    </div>
+    <div class="form-group">
+      <label for="subject">Subject:</label>
+      <input type="text" id="subject" name="subject" required>
+    </div>
+    <div class="form-group">
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" required></textarea>
+    </div>
+    <button type="submit">Send</button>
+  </form>
+</div>
+  <script>
+    var recipientDropdown = document.getElementById("recipient");
+var useremailGroup = document.getElementById("useremail-group");
+
+ 
+recipientDropdown.addEventListener("change", function() {
+  if (recipientDropdown.value === "particular_user") {
+    useremailGroup.style.display = "block";
+  } else {
+    useremailGroup.style.display = "none";
+  }
+});
+  </script>
+<%- include('footer.ejs') %>
