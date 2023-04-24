@@ -686,4 +686,5 @@ exports.getIndividualUser=async (req, res, next) => {
 exports.getPolicyDetails=(req,res,next)=>{
 
      const id=req.params.id;
+
 }
