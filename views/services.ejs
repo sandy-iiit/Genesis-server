@@ -11,7 +11,7 @@
     </div>
     <div class="qrygen">
         <h2>Grab a Quote</h2>
-        <form class="quoteform" onsubmit="submitForm(event)">
+        <form class="quoteform" action="/generatequote" method="post">
 
             <input type="text" placeholder="name" name="quotnam" id="quotnam">
             <span id="quotnamError" class="error" style="text-align: center;color: #3E54AC;"></span>
@@ -38,7 +38,6 @@
 
             <input type="text" placeholder="coverage limit" name="quotcoverage" id="quotcoverage">
             <span id="quotcoverageError" class="error" style="text-align: center;color: #3E54AC;"></span>
-
             <button type="submit">Submit</button>
         </form>
 

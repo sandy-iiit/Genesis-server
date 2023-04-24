@@ -127,7 +127,6 @@ router.get('/sendemail',adminController.getemailform)
 router.post('/send_email',userController.postsendemail)
 router.get('/companystats',adminController.getcompanystats)
 
-
 router.get('/employeesignup',adminController.employeesignuppage)
 router.get('/life-applications',adminController.getLifeApplications)
 router.get('/transport-applications',adminController.getTransportApplications)
@@ -154,5 +153,5 @@ router.get('/users/:id',adminController.getIndividualUser)
 router.get('/policy/:id',adminController.getPolicyDetails)
 router.post('/search-users',adminController.searchUsers)
 router.post('/search-policies',adminController.searchPolicies)
-
+router.post('/generatequote',userController.quotegenerator)
 module.exports = router

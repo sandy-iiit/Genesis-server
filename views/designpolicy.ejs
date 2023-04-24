@@ -49,7 +49,6 @@ button[type="submit"] {
 	border-radius: 5px;
 	border: none;
 	text-decoration: none;
-	transition: all 0.3s ease;
 	cursor: pointer;
 }
 
@@ -90,19 +89,19 @@ button[type="submit"]:hover {
       <input type="number" id="amount" name="amount" required>
     </div>
     <div class="form-group">
-      <label for="duration">Duration:</label>
-      <input type="number" id="duration" name="duration" placeholder="enter in years"required>
-    </div>
-    <div id="life-fields" style="display:none;width:100%;margin-left:25%;">
-      <div class="form-group">
         <label for="duration">Term:</label>
-        <input type="text" id="duration" name="term" placeholder="annual/monthly"required>
-      </div>
+        <input type="text" id="term" name="term" placeholder="annual/monthly"required>
+    </div>
+        <div class="form-group">
+            <label for="duration">Duration:</label>
+            <input type="number" id="duration" disabled name="duration" placeholder="enter in years"required>
+        </div>
+
       <div class="form-group">
         <label for="premium">Premium:</label>
-        <input type="number" id="premi um" name="premium" required>
+        <input type="number" id="premium" disabled name="premium" required>
       </div>
-    </div>
+
     <div class="form-group">
       <label for="details">Details:</label>
       <textarea id="details" name="details"></textarea>
@@ -119,18 +118,22 @@ button[type="submit"]:hover {
       <label for="benefits">Benefits:</label>
       <textarea id="benefits" name="benefits"></textarea>
     </div>
-
+<br>
     <button type="submit">Submit</button>
   </form>
   <script>
-    var lifeFields = document.getElementById("life-fields");
+    var lifeFields = document.getElementById("duration");
+    var Fields = document.getElementById("premium");
     var type = document.getElementById("type");
   
     type.addEventListener("change", function() {
       if (type.value == "life") {
-        lifeFields.style.display = "block";
-      } else {
-        lifeFields.style.display = "none";
+        lifeFields.disabled= false;
+        Fields.disabled= false;
+      }
+      else{
+          lifeFields.disabled= true;
+          Fields.disabled= true;
       }
     });
   </script>

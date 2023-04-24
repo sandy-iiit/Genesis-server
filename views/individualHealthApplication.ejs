@@ -65,16 +65,19 @@
         <p class="label">Duration</p>
         <input type="number" class="inner-row1" name="duration" value="<%=duration%>" >
     </div>
-    <p>Applied By </p> <input value="<%=applier%>" name="applier" >
+    <div class="row1">
+
+    <p class="label">Applied By </p> <input value="<%=applier%>" name="applier" >
+    </div>
     <input  name="policyType" style="display: none" value="<%=policyType%>">
     <input  name="appId" style="display: none" value="<%=appId%>">
     <div class="row1">
         <p class="label">Status</p>
         <input class="inner-row1" name="verificationStatus" value="<%=Status%>">
     </div>
-
+<%if(userType==='Admin'){%>
     <button class="button" type="submit">Verify</button>
-
+<%}%>
 
 
 </form>
