@@ -4,7 +4,7 @@
 <%- include('navbar.ejs') %>
 <div class="resdivv">
 
-    <div class="divdetailbox" >
+    <div class="divdetailbox" style="height: 90%">
         <!--        <form class="detail-box" action="/verifyAgent/<%=r._id%>" method="post">-->
         <p style="text-align:center"><h3 class="hidemeok">YOUR PROFILE</h3></p><br>
         <div class="detail-item">
@@ -12,15 +12,15 @@
         </div>
         <%if(r.type.trim()==='TRANSPORT'){%>
         <div class="detail-item">
-            <p class="label">View Policy Details</p>  <a href="/buypolicy3/<%=r.policyId%>">">View</a>
+            <p class="label">View Policy Details</p>  <a href="/buy-policy/<%=r.policyId%>">View</a>
         </div>
         <%}else if(r.type==='LIFE'){%>
         <div class="detail-item">
-            <p class="label">View Policy Details</p>  <a href="/buy-policy/<%=r.policyId%>">">View</a>
+            <p class="label">View Policy Details</p>  <a href="/buypolicy3/<%=r.policyId%>">View</a>
         </div>
         <%}else if(r.type==='Health'){%>
         <div class="detail-item">
-            <p class="label">View Policy Details</p>  <a href="/policypage/<%=r.policyId%>">">View</a>
+            <p class="label">View Policy Details</p>  <a href="/policypage/<%=r.policyId%>">View</a>
         </div>
         <%}%>
         <div class="detail-item">

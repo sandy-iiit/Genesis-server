@@ -34,7 +34,7 @@ const transporter = nodemailer.createTransport(
 exports.getData=async (req, res) => {
 
     const a = await Policy.model.countDocuments({})
-    const b = await Policy.model.countDocuments({type:'TRANSPORT'})
+    const b = await Policy.model.countDocuments({type:'TRANSPORT '})
     const c = await Policy.model.countDocuments({type:'LIFE'})
     const d = await Policy.model.countDocuments({type:'Health'})
 
@@ -69,7 +69,7 @@ exports.getAlreadyAnsweredQueries=(req,res,next)=>{
 exports.getReviews=async (req, res, next) => {
 
     reviews.find({}).then(arrr=>{
-        res.render('reviews',{arr:arrr})
+        res.render('reviews',{arr:arrr,type:req.session.type})
     })
 
 }
@@ -410,11 +410,11 @@ if(req.body.searchType==='Name') {
 
          console.log('Entered verifyTransport')
             console.log(req.body.status)
-    await transportApplications.updateOne({_id: req.body.appId}, {verificationStatus: req.body.status,verificationDate:new Date().toDateString()})
+    await transportApplications.updateOne({_id: req.body.appId}, {verificationStatus: req.body.verificationStatus,verificationDate:new Date().toDateString()})
     const policy = new Policy.model({
 
         type: req.body.policyType,
-        name: req.body.name,
+        name: req.body.policyName,
         applier: req.body.applier,
         amount: req.body.amount,
         policyId: req.body.policyId,
@@ -437,7 +437,6 @@ if(req.body.searchType==='Name') {
     if (req.body.verificationStatus === 'verified')
     {
         await policy.save();
-
 
        await User.updateOne({_id: req.body.applier}, {$push: {currentPolicies: policy}}).then((r) => {
 
@@ -483,7 +482,7 @@ exports.verifyLife=async (req, res, next) => {
     const policy = new Policy.model({
 
         type: req.body.policyType,
-        name: req.body.name,
+        name: req.body.policyName,
         applier: req.body.applier,
         amount: req.body.amount,
         policyId: req.body.policyId,
@@ -545,7 +544,7 @@ exports.verifyHealth = async (req, res, next) => {
     const policy = new Policy.model({
 
         type: req.body.policyType,
-        name: req.body.name,
+        name: req.body.policyName,
         applier: req.body.applier,
         amount: req.body.amount,
         policyId: req.body.policyId,
@@ -683,8 +682,75 @@ exports.getIndividualUser=async (req, res, next) => {
 }
 
 
-exports.getPolicyDetails=(req,res,next)=>{
+exports.getPolicyDetails=async (req, res, next) => {
 
-     const id=req.params.id;
+    const id = req.params.id;
+    const policy = await Policy.model.findById(id)
+    res.render('viewPolicy',{r:policy})
 
+}
+
+exports.getAllPolicies=async (req, res, next) => {
+    const arrr = await Policy.model.find({})
+    // console.log(arrr)
+    res.render('policiesList', {arr: arrr})
+}
+
+exports.searchPolicies=async (req, res, next) => {
+    console.log('Entered search policies')
+    const id = req.body.searchType
+    const searchWord = req.body.search;
+
+
+    if (id === 'Id') {
+        const pols = await Policy.model.findById(searchWord)
+        res.render('policiesList', {arr: pols})
+    }
+    else if(id==='Type'){
+
+        const pols=await Policy.model.find({})
+        const arrr=[]
+        const type=searchWord
+        const Type=searchWord.toUpperCase()
+        const tYPE=searchWord.toLowerCase()
+        console.log(type+Type+tYPE)
+        for(let i=0;i<pols.length;i++){
+            console.log(pols[i].type.includes(Type))
+            if(pols[i].type.includes(type)||pols[i].type.includes(Type)||pols[i].type.includes(tYPE)){
+                console.log(pols[i])
+                arrr.push(pols[i])
+            }
+        }
+        console.log(arrr)
+        res.render('policiesList', {arr: arrr})
+
+    }
+
+
+
+
+}
+
+
+exports.deleteQuery=async (req, res, next) => {
+
+    const id = req.params.id
+
+    await queries.findByIdAndDelete(id)
+    res.redirect('/answer-queries')
+}
+
+exports.deleteReview=async (req, res, next) => {
+
+    const id = req.body.id
+    const email = req.body.email
+
+    await reviews.findByIdAndDelete(id)
+  await  transporter.sendMail({
+        to: email,
+        from: 'dattasandeep000@gmail.com',
+        subject: 'Genesis Insurances Application for Agent verified and accepted!',
+        html: `<h2>Dear customer your review with ID ${id} has been removed for breaching the community guidelines!! </p>`
+    });
+    res.redirect('/reviews')
 }

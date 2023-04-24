@@ -31,7 +31,7 @@ const policySchema=new Schema({
             type:String,
         }
     },
-
+    applier:String,
 
     status:{
         // this is whether the policy is ongoing or completed

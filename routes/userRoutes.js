@@ -107,6 +107,8 @@ router.get('/data',adminController.getData)
 // Admin
 
 router.get('/answer-queries',adminController.getAnswerQueries)
+router.post('/deleteQuery/:id',adminController.deleteQuery)
+router.post('/deleteReview',adminController.deleteReview)
 router.get('/answered-queries',adminController.getAlreadyAnsweredQueries)
 router.get('/health-applications',adminController.getHealthApplications)
 router.get('/health-applications/:appId',adminController.getIndividualHealthApplication)
@@ -147,8 +149,10 @@ router.get('/agentboard',adminController.getAgentBoard)
 router.get('/agent-applications',adminController.getAgentApplications)
 router.get('/agent-application/:id',adminController.getIndividualAgentApplication)
 router.get('/usersList',adminController.getUserList)
+router.get('/policiesList',adminController.getAllPolicies)
 router.get('/users/:id',adminController.getIndividualUser)
 router.get('/policy/:id',adminController.getPolicyDetails)
 router.post('/search-users',adminController.searchUsers)
+router.post('/search-policies',adminController.searchPolicies)
 
 module.exports = router

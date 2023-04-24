@@ -565,17 +565,40 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
         }
     }
 
-    exports.deleteAcc = (req, res) => {
+    exports.deleteAcc = async (req, res) => {
+
+        const email=req.user.email+"deletedaccount"
+      if(req.session.type==='User') {
 
 
-        User.findByIdAndDelete(req.user._id).then(r => {
+          await User.updateOne({_id: req.user._id}, {email: email, deleted: true}).then(r => {
 
-            res.redirect('/')
-            console.log('User deleted')
-        })
-        console.log('Deleted the damn user!')
+              res.redirect('/')
+              console.log('User deleted')
+          })
+          console.log('Deleted the user!')
+      }
+      else if(req.session.type==='Agent'){
+          await Agent.updateOne({_id:req.user._id},{email: email, isActive: false}).then(r => {
+
+              res.redirect('/')
+              console.log('Agent deleted')
+          })
+          console.log('Deleted the user!')
+      }
+      else if(req.session.type==='Admin'){
+          await Admin.updateOne({_id:req.user._id},{email:email,deleted:true}).then(r => {
+
+              res.redirect('/')
+              console.log('Admin deleted')
+          })
+          console.log('Deleted the user!')
+      }
+
     }
-
+exports.getdropReview=(req,res,next)=>{
+    res.render('write-review')
+}
     exports.dropReview=(req,res,next)=>{
 
         const name=req.body.name;

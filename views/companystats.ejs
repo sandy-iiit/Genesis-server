@@ -109,7 +109,7 @@
             border-radius: 5px;
             pointer-events: none;
             z-index: 3;
-            animation: fadeIn 0.5s ease;
+            animation: fadeIn 1s ease;
         }
 
         @keyframes fadeIn {
@@ -187,10 +187,10 @@
                 let healthPolicyCount = 0;
 
                 setInterval(() => {
-                    totalUsersCount=totalUsersCount+50;
-                    transportPolicyCount=transportPolicyCount+50;
-                    lifePolicyCount=lifePolicyCount+50;
-                    healthPolicyCount=healthPolicyCount+50;
+                    totalUsersCount=totalUsersCount+1;
+                    transportPolicyCount=transportPolicyCount+1;
+                    lifePolicyCount=lifePolicyCount+1;
+                    healthPolicyCount=healthPolicyCount+1;
 
                     if (totalUsersCount <= totalUsers) {
                         document.querySelector('.value1').textContent = totalUsersCount;
@@ -204,7 +204,7 @@
                     if (healthPolicyCount <= healthPolicyUsers) {
                         document.querySelector('.value4').textContent = healthPolicyCount;
                     }
-                }, 10); // Update values every 10 milliseconds
+                }, 100); // Update values every 10 milliseconds
             })
 
             .catch(error => console.log(error));

@@ -20,8 +20,13 @@
         <div class="inner-item A">
            Review:   <%=arr[i].review%>
         </div>
-
-
+<%if(type==='Admin'){%>
+<form action="/deleteReview" method="post">
+    <input name="id" value="<%=arr[i]._id%>" style="display: none">
+    <input name="email" value="<%=arr[i].email%>" style="display: none">
+    <button type="submit">Delete</button>
+</form>
+        <%}%>
     </div>
 
 

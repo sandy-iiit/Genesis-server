@@ -36,6 +36,7 @@ exports.healthUploader= async function(req, res, next) {
         nomineeRelation:req.body.nomineeRelation,
         policyId:req.body.policyId,
         policyTerm:req.body.policyTerm,
+        policyName:req.body.policyName,
         policyType:req.body.policyType,
         amount:req.body.amount,
         applier:req.user._id,
@@ -57,6 +58,8 @@ exports.lifeUploader= async function(req, res, next) {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         age: req.body.age,
+        sex:req.body.sex,
+
         aadhar: req.files['aadhar'][0].id,
         pan:req.files['pan'][0].id,
         nomineeAadhar:req.files['nomineeAadhar'][0].id,
@@ -87,13 +90,13 @@ exports.lifeUploader= async function(req, res, next) {
 }
 
 exports.transportUploader= async function(req, res, next) {
-
+    console.log(req.body.sex,)
     const transportApplication = new TransportApplication({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         age: req.body.age,
         regNum:req.body.regNum,
-
+        sex:req.body.sex,
         aadhar: req.files['aadhar'][0].id,
         c_book:req.files['c_book'][0].id,
         nomineeAadhar:req.files['nomineeAadhar'][0].id,
