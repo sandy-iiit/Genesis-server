@@ -625,7 +625,7 @@ exports.getdropReview=(req,res,next)=>{
 
     }
     exports.quotegenerator= (req, res) => {
-      
+        console.log('Entered quote')
         const name = req.body.quotnam;
         const email = req.body.quotemail;
         const insuranceType = req.body.quotinsurance;
@@ -676,7 +676,7 @@ exports.getdropReview=(req,res,next)=>{
             return;
         }
         const message = {
-            from: 'manumanohar62405@gmail.com',
+            from: 'dattasandeep000@gmail.com',
             to: email,
             subject: 'Your Insurance Quote',
             text: `Dear ${name}, your insurance quote is ${quote}.`
@@ -697,21 +697,23 @@ exports.postaddpolicy = (req,res,next)=>{
     const name = req.body.name;
     const type = req.body.type.trim();
     const amount = req.body.amount;
-    const term = req.body.duration;
+    const term = req.body.term;
+    const duration=req.body.duration
     const details = req.body.details;
     const TC = req.body.tc;
     const GE = req.body.ge;
     const benefits = req.body.benefits;
     console.log(type)
     if (type == "life".trim()) {
-       const Life =  new lifepPolicy(
+        console.log(req.body.premium)
+       const Life =  new lifePolicy(
         {
             name:name,
             type:type,
             coverAmount:amount,
-            duration:term,
+            duration:duration,
             term:req.body.term,
-            premium:req.body.premium,
+            Premium:req.body.premium,
             details:details,
             TC:TC,
             GE:GE,
@@ -730,7 +732,8 @@ exports.postaddpolicy = (req,res,next)=>{
     })
     }
     else if(type=="car".trim()){
-       const trans_policy = new transport_policy(
+        console.log('Entered car')
+       const trans_policy = new transportPolicy(
         {
             name:name,
             type:type,
@@ -746,7 +749,7 @@ exports.postaddpolicy = (req,res,next)=>{
     trans_policy.save().then(result=>{
         console.log("added new transport policy");
         console.log(result);
-        res.redirect("/designform");
+        res.redirect("/details");
     }).catch(err=>{
  console.log(err)
     })
@@ -979,22 +982,22 @@ exports.getMyApps=async (req, res, next) => {
 exports.searchMyApps=async (req, res, next) => {
 
     const search = req.body.search
+    const searchType = req.body.searchType
     let arrr = []
 
-    if(search==='life'){
+    if(searchType==='Life'){
         const arr2 = await lifeApplications.find({applier: req.user._id})
         res.render('my-applications', {arr: arr2})
 
-    }else if(search==='motor'){
+    }else if(searchType==='Motor'){
         const arr1 = await transportApplications.find({applier: req.user._id})
         res.render('my-applications', {arr: arr1})
 
-    }else if(search==='health'){
+    }else if(searchType==='Health'){
         const arr3 = await healthApplications.find({applier: req.user._id})
         res.render('my-applications', {arr: arr3})
 
-    }else {
-
+    }else if(searchType==='Id') {
 
         const arr1 = await transportApplications.find({_id: search})
         const arr2 = await lifeApplications.find({_id: search})

@@ -6,7 +6,7 @@
 <%- include('navbar.ejs') %>
 <!--<div class="wrap">-->
 <div class="container2">
-    <div class="heading-wrap"><p class="heading">Your Completed Policies</p></div>
+    <div class="heading-wrap"><p  class="heading">Your Policies</p></div>
 
     <% for(let i=0;i<arr.length;i++){%>
     <%let a='';let b='img'%>
@@ -18,9 +18,7 @@
             <div class="inner-item1">
                 <div class="inner-item">
                     <%=arr[i].type%>
-                </div> <div style="font-size: 10px" class="inner-item">
-                    <%=arr[i].id%>
-                </div><div class="inner-item">
+                </div> <div class="inner-item">
                     <%=arr[i].name%>
                 </div>
                 <div class="inner-item">

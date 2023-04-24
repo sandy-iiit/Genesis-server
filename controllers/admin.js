@@ -34,7 +34,7 @@ const transporter = nodemailer.createTransport(
 exports.getData=async (req, res) => {
 
     const a = await Policy.model.countDocuments({})
-    const b = await Policy.model.countDocuments({type:'TRANSPORT '})
+    const b = await Policy.model.countDocuments({type:'TRANSPORT'})
     const c = await Policy.model.countDocuments({type:'LIFE'})
     const d = await Policy.model.countDocuments({type:'Health'})
 
@@ -142,6 +142,7 @@ exports.getIndividualHealthApplication=(req,res,next)=>{
             term:zrr.policyTerm,
             duration:zrr.duration,
             Status:zrr.verificationStatus,
+            userType:req.session.type,
 
         })
     })
@@ -175,6 +176,8 @@ exports.getIndividualLifeApplication=(req,res,next)=>{
             term:zrr.policyTerm,
             duration:zrr.duration,
             Status:zrr.verificationStatus,
+            userType:req.session.type,
+
 
         })
     })
@@ -213,6 +216,8 @@ exports.getIndividualTransportApplication=(req,res,next)=>{
             payType:zrr.payType,
             applier:zrr.applier,
             Status:zrr.verificationStatus,
+            userType:req.session.type,
+
 
         })
     })

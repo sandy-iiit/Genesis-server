@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f35d4e65-15aa-49ef-b5f3-c5bb5a41da83" name="Changes" comment="modified" />
+    <list default="true" id="f35d4e65-15aa-49ef-b5f3-c5bb5a41da83" name="Changes" comment="modified">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/lifepolicy.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/lifepolicy.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/my-policies.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/my-policies.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/services.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/services.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/userRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/userRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/designpolicy.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/designpolicy.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/details.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/details.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/individualHealthApplication.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/individualHealthApplication.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/individualLifeApplication.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/individualLifeApplication.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/individualTransportApplication.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/individualTransportApplication.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/my-applications.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/my-applications.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/my-policies.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/my-policies.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/services.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/services.ejs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
