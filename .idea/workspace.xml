@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f35d4e65-15aa-49ef-b5f3-c5bb5a41da83" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/public/images/p1.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/p2.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/p3.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/p4.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/agent-app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/agent-app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/life-form.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/life-form.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/agentboard.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/agentboard.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +121,7 @@
       <workItem from="1680080565299" duration="18488000" />
       <workItem from="1680150422206" duration="1320000" />
       <workItem from="1680259288689" duration="248000" />
-      <workItem from="1682494727837" duration="3991000" />
+      <workItem from="1682494727837" duration="5344000" />
     </task>
     <servers />
   </component>
