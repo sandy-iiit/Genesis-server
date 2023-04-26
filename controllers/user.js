@@ -596,9 +596,7 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
       }
 
     }
-exports.getdropReview=(req,res,next)=>{
-    res.render('write-review')
-}
+
     exports.dropReview=(req,res,next)=>{
 
         const name=req.body.name;
@@ -640,34 +638,34 @@ exports.getdropReview=(req,res,next)=>{
           case 'life':
          
             if (age < 18) {
-              quote = 50;
+              quote = 10000;
             } else if (age >= 18 && age < 35) {
-              quote = 100;
+              quote = 30000;
             } else if (age >= 35 && age < 50) {
-              quote = 200;
+              quote = 50000;
             } else {
-              quote = 500;
+              quote = 40000;
             }
             break;
           case 'transportation': 
             if (zip.startsWith('10') || zip.startsWith('11')) {
-              quote = 100;
+              quote = 10000;
             } else if (zip.startsWith('12') || zip.startsWith('13')) {
-              quote = 200;
+              quote = 20000;
             } else {
-              quote = 500;
+              quote = 15000;
             }
             break;
           case 'health':
          
             if (age < 18) {
-              quote = 50 + coverageLimit / 1000;
+              quote = 5000 + coverageLimit / 1000;
             } else if (age >= 18 && age < 35) {
-              quote = 100 + coverageLimit / 1000;
+              quote = 10000 + coverageLimit / 1000;
             } else if (age >= 35 && age < 50) {
-              quote = 200 + coverageLimit / 1000;
+              quote = 20000 + coverageLimit / 1000;
             } else {
-              quote = 500 + coverageLimit / 1000;
+              quote = 50000 + coverageLimit / 1000;
             }
             break;
           default:
