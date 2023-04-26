@@ -1009,39 +1009,3 @@ exports.searchMyApps=async (req, res, next) => {
     }
 
 }
-//
-// exports.postPay=async (req, res, next) => {
-//     const id = req.body.id
-//     const amount = req.body.amount
-//     const duration = req.body.duration
-//     console.log(duration)
-//     const term = req.body.term
-//
-//     if (!duration) {
-//         await transporter.sendMail({
-//             to: req.user.email,
-//             from: 'dattasandeep000@gmail.com',
-//             subject: 'Genesis Insurances Installment!',
-//             html: `Dear ${req.user.name} your payment for policy ${id} is successful`
-//         });
-//        const policy=await Policy.model.findById(id)
-//         User.updateOne({_id:req.user._id},{$pull:{currentPolicies:{_id:id}}},{$push:{policyHistory:policy}}).then(r=>{
-//             console.log('Added to history')
-//             res.redirect('/current-policies')
-//         })
-//     }
-//     else{
-//         await transporter.sendMail({
-//             to: req.user.email,
-//             from: 'dattasandeep000@gmail.com',
-//             subject: 'Genesis Insurances Installment!',
-//             html: `Dear ${req.user.name} your payment for policy ${id} is successful`
-//         });
-//         const policy=await Policy.model.findById(id)
-//
-//         User.updateOne({_id:req.user._id},{currentPolicies:{duration:duration-1}},).then(r=>{
-//             console.log('Added to history')
-//             res.redirect('/current-policies')
-//         })
-//     }
-// }
