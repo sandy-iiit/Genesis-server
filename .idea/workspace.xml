@@ -2,122 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f35d4e65-15aa-49ef-b5f3-c5bb5a41da83" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/public/css/login2.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/login2.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/admin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/acorn" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/acorn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/babylon" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/babylon" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/color-support" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/color-support" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/ejs" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/escodegen" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/escodegen" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/esdoc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/esdoc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/esgenerate" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/esgenerate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/esparse" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/esparse" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/esvalidate" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/esvalidate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/fxparser" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/fxparser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/jake" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/jake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/jison" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/jison" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/jison-lex" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/jison-lex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/jsesc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/jsesc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/loose-envify" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/loose-envify" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/marked" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/marked" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/mime" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/mime" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/mkdirp" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/mkdirp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/node-gyp" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/node-gyp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/node-pre-gyp" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/node-pre-gyp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/node-which" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/node-which" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/nopt" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/nopt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/rimraf" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/rimraf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/semver" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/semver" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/sshpk-conv" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/sshpk-conv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/sshpk-sign" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/sshpk-sign" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/sshpk-verify" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/sshpk-verify" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/uuid" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/uuid" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@mapbox/node-pre-gyp/bin/node-pre-gyp" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@mapbox/node-pre-gyp/bin/node-pre-gyp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/acorn/bin/acorn" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/acorn/bin/acorn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/acorn/bin/update_authors.sh" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/acorn/bin/update_authors.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/babylon/bin/babylon.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/babylon/bin/babylon.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/color-support/bin.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/color-support/bin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ejs/bin/cli.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/ejs/bin/cli.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ejs/lib/ejs.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/ejs/lib/ejs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/escodegen/bin/escodegen.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/escodegen/bin/escodegen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/escodegen/bin/esgenerate.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/escodegen/bin/esgenerate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/esdoc/out/src/ESDocCLI.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/esdoc/out/src/ESDocCLI.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/esprima/bin/esparse.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/esprima/bin/esparse.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/esprima/bin/esvalidate.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/esprima/bin/esvalidate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/fast-xml-parser/src/cli/cli.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/fast-xml-parser/src/cli/cli.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/jake/bin/bash_completion.sh" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/jake/bin/bash_completion.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/jake/bin/cli.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/jake/bin/cli.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/jison-lex/cli.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/jison-lex/cli.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/jison-lex/tests/all-tests.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/jison-lex/tests/all-tests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/jison/lib/cli.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/jison/lib/cli.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/jison/lib/jison.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/jison/lib/jison.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/jison/node_modules/.bin/escodegen" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/jison/node_modules/.bin/escodegen" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/jison/node_modules/.bin/esgenerate" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/jison/node_modules/.bin/esgenerate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/jison/node_modules/.bin/esparse" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/jison/node_modules/.bin/esparse" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/jison/node_modules/.bin/esvalidate" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/jison/node_modules/.bin/esvalidate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/jison/node_modules/escodegen/bin/escodegen.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/jison/node_modules/escodegen/bin/escodegen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/jison/node_modules/escodegen/bin/esgenerate.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/jison/node_modules/escodegen/bin/esgenerate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/jison/node_modules/esprima/bin/esparse.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/jison/node_modules/esprima/bin/esparse.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/jison/node_modules/esprima/bin/esvalidate.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/jison/node_modules/esprima/bin/esvalidate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/jison/tests/all-tests.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/jison/tests/all-tests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/jison/tests/parser/parser-tests.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/jison/tests/parser/parser-tests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/jison/tests/performance.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/jison/tests/performance.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/jsesc/bin/jsesc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/jsesc/bin/jsesc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/loose-envify/cli.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/loose-envify/cli.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/make-dir/node_modules/.bin/semver" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/make-dir/node_modules/.bin/semver" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/make-dir/node_modules/semver/bin/semver.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/make-dir/node_modules/semver/bin/semver.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/marked/bin/marked" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/marked/bin/marked" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/marked/www/demo.css" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/marked/www/demo.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/marked/www/demo.html" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/marked/www/demo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/marked/www/demo.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/marked/www/demo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mime/cli.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/mime/cli.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mime/src/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/mime/src/build.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mkdirp/bin/cmd.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/mkdirp/bin/cmd.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/multer/node_modules/.bin/mkdirp" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/multer/node_modules/.bin/mkdirp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/multer/node_modules/mkdirp/bin/cmd.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/multer/node_modules/mkdirp/bin/cmd.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/node-gyp/bin/node-gyp.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/node-gyp/bin/node-gyp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/node-gyp/gyp/gyp" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/node-gyp/gyp/gyp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/node-gyp/gyp/gyp.bat" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/node-gyp/gyp/gyp.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/node-gyp/gyp/gyp_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/node-gyp/gyp/gyp_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/node-gyp/gyp/pylib/gyp/MSVSSettings_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/node-gyp/gyp/pylib/gyp/MSVSSettings_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/node-gyp/gyp/pylib/gyp/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/node-gyp/gyp/pylib/gyp/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/node-gyp/gyp/pylib/gyp/common_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/node-gyp/gyp/pylib/gyp/common_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/node-gyp/gyp/pylib/gyp/easy_xml_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/node-gyp/gyp/pylib/gyp/easy_xml_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/node-gyp/gyp/pylib/gyp/flock_tool.py" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/node-gyp/gyp/pylib/gyp/flock_tool.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/node-gyp/gyp/pylib/gyp/generator/msvs_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/node-gyp/gyp/pylib/gyp/generator/msvs_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/node-gyp/gyp/pylib/gyp/input_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/node-gyp/gyp/pylib/gyp/input_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/node-gyp/gyp/pylib/gyp/mac_tool.py" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/node-gyp/gyp/pylib/gyp/mac_tool.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/node-gyp/gyp/pylib/gyp/win_tool.py" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/node-gyp/gyp/pylib/gyp/win_tool.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/node-gyp/gyp/test_gyp.py" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/node-gyp/gyp/test_gyp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/node-gyp/gyp/tools/emacs/run-unit-tests.sh" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/node-gyp/gyp/tools/emacs/run-unit-tests.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/node-gyp/gyp/tools/graphviz.py" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/node-gyp/gyp/tools/graphviz.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/node-gyp/gyp/tools/pretty_gyp.py" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/node-gyp/gyp/tools/pretty_gyp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/node-gyp/gyp/tools/pretty_sln.py" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/node-gyp/gyp/tools/pretty_sln.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/node-gyp/gyp/tools/pretty_vcproj.py" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/node-gyp/gyp/tools/pretty_vcproj.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/node-gyp/update-gyp.py" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/node-gyp/update-gyp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nopt/bin/nopt.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nopt/bin/nopt.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/request/node_modules/.bin/uuid" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/request/node_modules/.bin/uuid" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/request/node_modules/uuid/bin/uuid" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/request/node_modules/uuid/bin/uuid" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/rimraf/bin.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rimraf/bin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/semver/bin/semver.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/semver/bin/semver.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/sshpk/bin/sshpk-conv" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/sshpk/bin/sshpk-conv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/sshpk/bin/sshpk-sign" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/sshpk/bin/sshpk-sign" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/sshpk/bin/sshpk-verify" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/sshpk/bin/sshpk-verify" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/uuid/dist/bin/uuid" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/uuid/dist/bin/uuid" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/which/bin/node-which" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/which/bin/node-which" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/agent-app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/agent-app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/companystats.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/companystats.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/employeesignup.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/employeesignup.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/home.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/home.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/login.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/login.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/services.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/services.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +70,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f35d4e65-15aa-49ef-b5f3-c5bb5a41da83" name="Changes" comment="" />
+      <changelist id="3be042da-4e68-4c26-9a6a-7034ea0b4519" name="Changes" comment="" />
       <created>1677660430388</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -235,16 +120,6 @@
       <workItem from="1680080565299" duration="18488000" />
       <workItem from="1680150422206" duration="1320000" />
       <workItem from="1680259288689" duration="248000" />
-      <workItem from="1682494727837" duration="9030000" />
-      <workItem from="1682847897012" duration="1721000" />
-      <workItem from="1682850777364" duration="507000" />
-      <workItem from="1690663157190" duration="1448000" />
-      <workItem from="1691725349961" duration="2644000" />
-      <workItem from="1692934945931" duration="1374000" />
-      <workItem from="1694152214119" duration="9791000" />
-      <workItem from="1694178069436" duration="707000" />
-      <workItem from="1694317265494" duration="5355000" />
-      <workItem from="1694346944694" duration="11521000" />
     </task>
     <servers />
   </component>

@@ -62,8 +62,8 @@ exports.getLifePolicy=(req,res,next)=>{
 }
 
 exports.getLogin =(req,res,next)=>{
-    // res.render('login',{text:''})
-    res.render('login2')
+    res.render('login',{text:''})
+    // res.render('login2')
 }
 exports.getSignup =(req,res,next)=>{
     res.render('signup',{text:''})
