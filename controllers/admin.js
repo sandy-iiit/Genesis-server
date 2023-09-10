@@ -747,8 +747,9 @@ exports.deleteQuery=async (req, res, next) => {
 
 exports.deleteReview=async (req, res, next) => {
 
-    const id = req.body.id
-    const email = req.body.email
+        const {id,email} = req.body
+    // const id = req.body.id
+    // const email = req.body.email
 
     await reviews.findByIdAndDelete(id)
   await  transporter.sendMail({

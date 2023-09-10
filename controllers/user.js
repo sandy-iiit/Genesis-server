@@ -62,7 +62,8 @@ exports.getLifePolicy=(req,res,next)=>{
 }
 
 exports.getLogin =(req,res,next)=>{
-    res.render('login',{text:''})
+    // res.render('login',{text:''})
+    res.render('login2')
 }
 exports.getSignup =(req,res,next)=>{
     res.render('signup',{text:''})
@@ -363,7 +364,6 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
     exports.postLogin = async (req, res) => {
         const client = await MongoClient.connect('mongodb+srv://dattasandeep000:13072003@sandy.p06ijgx.mongodb.net/G1?retryWrites=true&w=majority', { useNewUrlParser: true });
         const db = await client.db();
-        const name = req.body.name
         const email = req.body.email
         const password = req.body.password
         const type = req.body.type
@@ -516,10 +516,9 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
             to: email,
             from: 'dattasandeep000@gmail.com',
             subject: 'Genesis Insurances Agent found!',
-            html: '<h1>Dear customer,</h1><h2>Agent Name: G Manohar</h2><h2>Agent mail: mano@gmail.com</h2>'
+            html: `<h1>Dear ${name} ,</h1><h2>Agent Name: G Manohar</h2><h2>Agent mail: mano@gmail.com</h2>`
         }).then(r => {
                 console.log('Mail sent!!');
-                res.redirect('/')
             }
         ).catch(err => {
             console.log(err)
@@ -599,10 +598,11 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
 
     exports.dropReview=(req,res,next)=>{
 
+        console.log("entered dropreview")
         const name=req.body.name;
         const email=req.body.email;
         const review=req.body.review;
-
+ console.log(name,email,review)
         const r=new Review({
             name:name,
             email:email,
@@ -612,27 +612,26 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
         r.save()
             .then(t=>{
                 console.log('Review sent')
-                res.redirect('/services')
+                // res.redirect('/services')
                 return transporter.sendMail({
                     to: email,
                     from: 'dattasandeep000@gmail.com',
                     subject: 'Genesis Insurances Review!',
-                    html: '<h1>ThankYou for your valuable review.We always try our best to keep up with your expectations!</h1>'
+                    html: `Dear ${name}, Thankyou for your valuable review.We always try our best to keep up with your expectations!`
                 });
             })
 
     }
     exports.quotegenerator= (req, res) => {
         console.log('Entered quote')
-        const name = req.body.quotnam;
-        const email = req.body.quotemail;
-        const insuranceType = req.body.quotinsurance;
-        const zip = req.body.quotzip;
-        const age = parseInt(req.body.quotage);
-        const dob = new Date(req.body.quotdob);
-        const coverageLimit = parseInt(req.body.quotcoverage);
-      
-       
+        const name = req.body.name;
+        const email = req.body.email;
+        const insuranceType = req.body.insuranceType;
+        const zip = req.body.zip;
+        const age = parseInt(req.body.age);
+        const dob = new Date(req.body.dob);
+        const coverageLimit = parseInt(req.body.coverageLimit);
+
         let quote = 0;
         switch (insuranceType) {
           case 'life':
@@ -681,7 +680,7 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
           };
           transporter.sendMail(message).then(result=>{
             console.log(result);
-            res.redirect("/services");
+            // res.redirect("/services");
           }).catch(error=>{
             console.log(error);
           })
@@ -973,7 +972,7 @@ exports.getMyApps=async (req, res, next) => {
     const arr2 = await lifeApplications.find({applier:req.user._id})
     const arr3 = await healthApplications.find({applier:req.user._id})
      arrr=arrr.concat(arr1,arr2,arr3)
-    console.log(arrr[1].policyType)
+    // console.log(arrr[1].policyType)
     res.render('my-applications',{arr:arrr})
 }
 
@@ -1005,5 +1004,5 @@ exports.searchMyApps=async (req, res, next) => {
 
         res.render('my-applications', {arr: arrr})
     }
-
+    
 }

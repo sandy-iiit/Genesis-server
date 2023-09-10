@@ -19,8 +19,10 @@ const User = require('./models/User')
 const Admin = require('./models/Admin')
 const Employee = require('./models/employee');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 app.use(cookieParser());
 
+app.use(cors()); // This allows requests from any origin
 
 
 

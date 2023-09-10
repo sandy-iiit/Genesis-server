@@ -147,66 +147,135 @@
         </div>
     </div>
 
-    <script>
-        // Get data from server
-        fetch('/data')
-            .then(response => response.json())
-            .then(data => {
-                // Set heights of bars based on data
-                const totalUsersBar = document.getElementById('total-users');
-                const transportPolicyBar = document.getElementById('transport-policy');
-                const lifePolicyBar = document.getElementById('life-policy');
-                const healthPolicyBar = document.getElementById('health-policy');
+<!--    <script>-->
+<!--        // Get data from server-->
+<!--        fetch('/data')-->
+<!--            .then(response => response.json())-->
+<!--            .then(data => {-->
+<!--                // Set heights of bars based on data-->
+<!--                const totalUsersBar = document.getElementById('total-users');-->
+<!--                const transportPolicyBar = document.getElementById('transport-policy');-->
+<!--                const lifePolicyBar = document.getElementById('life-policy');-->
+<!--                const healthPolicyBar = document.getElementById('health-policy');-->
 
-                const totalUsers = data.total_users;
-                const transportPolicyUsers = data.transport_policy_users;
-                const lifePolicyUsers = data.life_policy_users;
-                const healthPolicyUsers = data.health_policy_users;
+<!--                const totalUsers = data.total_users;-->
+<!--                const transportPolicyUsers = data.transport_policy_users;-->
+<!--                const lifePolicyUsers = data.life_policy_users;-->
+<!--                const healthPolicyUsers = data.health_policy_users;-->
 
-                totalUsersBar.style.height = (totalUsers / totalUsers) * 100 + '%';
+<!--                totalUsersBar.style.height = (totalUsers / totalUsers) * 100 + '%';-->
 
-                transportPolicyBar.style.height = (transportPolicyUsers / totalUsers) * 100 + '%';
-                lifePolicyBar.style.height = (lifePolicyUsers / totalUsers) * 100 + '%';
-                healthPolicyBar.style.height = (healthPolicyUsers / totalUsers) * 100 + '%';
+<!--                transportPolicyBar.style.height = (transportPolicyUsers / totalUsers) * 100 + '%';-->
+<!--                lifePolicyBar.style.height = (lifePolicyUsers / totalUsers) * 100 + '%';-->
+<!--                healthPolicyBar.style.height = (healthPolicyUsers / totalUsers) * 100 + '%';-->
 
-                totalUsersBar.setAttribute('data-value', totalUsers);
-                transportPolicyBar.setAttribute('data-value', transportPolicyUsers);
-                lifePolicyBar.setAttribute('data-value', lifePolicyUsers);
-                healthPolicyBar.setAttribute('data-value', healthPolicyUsers);
-
-
-                //  document.querySelector('.value1').textContent = totalUsers
-                //  document.querySelector('.value2').textContent =  transportPolicyUsers
-                //  document.querySelector('.value3').textContent = lifePolicyUsers
-                //  document.querySelector('.value4').textContent =  healthPolicyUsers
+<!--                totalUsersBar.setAttribute('data-value', totalUsers);-->
+<!--                transportPolicyBar.setAttribute('data-value', transportPolicyUsers);-->
+<!--                lifePolicyBar.setAttribute('data-value', lifePolicyUsers);-->
+<!--                healthPolicyBar.setAttribute('data-value', healthPolicyUsers);-->
 
 
-                let totalUsersCount = 0;
-                let transportPolicyCount = 0;
-                let lifePolicyCount = 0;
-                let healthPolicyCount = 0;
+<!--                //  document.querySelector('.value1').textContent = totalUsers-->
+<!--                //  document.querySelector('.value2').textContent =  transportPolicyUsers-->
+<!--                //  document.querySelector('.value3').textContent = lifePolicyUsers-->
+<!--                //  document.querySelector('.value4').textContent =  healthPolicyUsers-->
 
-                setInterval(() => {
-                    totalUsersCount=totalUsersCount+1;
-                    transportPolicyCount=transportPolicyCount+1;
-                    lifePolicyCount=lifePolicyCount+1;
-                    healthPolicyCount=healthPolicyCount+1;
 
-                    if (totalUsersCount <= totalUsers) {
-                        document.querySelector('.value1').textContent = totalUsersCount;
-                    }
-                    if (transportPolicyCount <= transportPolicyUsers) {
-                        document.querySelector('.value2').textContent = transportPolicyCount;
-                    }
-                    if (lifePolicyCount <= lifePolicyUsers) {
-                        document.querySelector('.value3').textContent = lifePolicyCount;
-                    }
-                    if (healthPolicyCount <= healthPolicyUsers) {
-                        document.querySelector('.value4').textContent = healthPolicyCount;
-                    }
-                }, 100); // Update values every 10 milliseconds
-            })
+<!--                let totalUsersCount = 0;-->
+<!--                let transportPolicyCount = 0;-->
+<!--                let lifePolicyCount = 0;-->
+<!--                let healthPolicyCount = 0;-->
 
-            .catch(error => console.log(error));
-    </script>
+<!--                setInterval(() => {-->
+<!--                    totalUsersCount=totalUsersCount+1;-->
+<!--                    transportPolicyCount=transportPolicyCount+1;-->
+<!--                    lifePolicyCount=lifePolicyCount+1;-->
+<!--                    healthPolicyCount=healthPolicyCount+1;-->
+
+<!--                    if (totalUsersCount <= totalUsers) {-->
+<!--                        document.querySelector('.value1').textContent = totalUsersCount;-->
+<!--                    }-->
+<!--                    if (transportPolicyCount <= transportPolicyUsers) {-->
+<!--                        document.querySelector('.value2').textContent = transportPolicyCount;-->
+<!--                    }-->
+<!--                    if (lifePolicyCount <= lifePolicyUsers) {-->
+<!--                        document.querySelector('.value3').textContent = lifePolicyCount;-->
+<!--                    }-->
+<!--                    if (healthPolicyCount <= healthPolicyUsers) {-->
+<!--                        document.querySelector('.value4').textContent = healthPolicyCount;-->
+<!--                    }-->
+<!--                }, 100); // Update values every 10 milliseconds-->
+<!--            })-->
+
+<!--            .catch(error => console.log(error));-->
+<!--    </script>-->
+
+<script>
+    // Create an XMLHttpRequest object
+    var xhr = new XMLHttpRequest();
+
+    // Define the request method and URL
+    xhr.open("GET", "/data", true);
+
+    // Set up a callback function to handle the response
+    xhr.onreadystatechange = function () {
+        // Check if the request is complete and successful (status code 200)
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            // Parse the JSON response
+            var data = JSON.parse(xhr.responseText);
+
+            // Set heights of bars based on data
+            const totalUsersBar = document.getElementById('total-users');
+            const transportPolicyBar = document.getElementById('transport-policy');
+            const lifePolicyBar = document.getElementById('life-policy');
+            const healthPolicyBar = document.getElementById('health-policy');
+
+            const totalUsers = data.total_users;
+            const transportPolicyUsers = data.transport_policy_users;
+            const lifePolicyUsers = data.life_policy_users;
+            const healthPolicyUsers = data.health_policy_users;
+
+            totalUsersBar.style.height = (totalUsers / totalUsers) * 100 + '%';
+            transportPolicyBar.style.height = (transportPolicyUsers / totalUsers) * 100 + '%';
+            lifePolicyBar.style.height = (lifePolicyUsers / totalUsers) * 100 + '%';
+            healthPolicyBar.style.height = (healthPolicyUsers / totalUsers) * 100 + '%';
+
+            totalUsersBar.setAttribute('data-value', totalUsers);
+            transportPolicyBar.setAttribute('data-value', transportPolicyUsers);
+            lifePolicyBar.setAttribute('data-value', lifePolicyUsers);
+            healthPolicyBar.setAttribute('data-value', healthPolicyUsers);
+
+            let totalUsersCount = 0;
+            let transportPolicyCount = 0;
+            let lifePolicyCount = 0;
+            let healthPolicyCount = 0;
+
+            setInterval(() => {
+                totalUsersCount = totalUsersCount + 1;
+                transportPolicyCount = transportPolicyCount + 1;
+                lifePolicyCount = lifePolicyCount + 1;
+                healthPolicyCount = healthPolicyCount + 1;
+
+                if (totalUsersCount <= totalUsers) {
+                    document.querySelector('.value1').textContent = totalUsersCount;
+                }
+                if (transportPolicyCount <= transportPolicyUsers) {
+                    document.querySelector('.value2').textContent = transportPolicyCount;
+                }
+                if (lifePolicyCount <= lifePolicyUsers) {
+                    document.querySelector('.value3').textContent = lifePolicyCount;
+                }
+                if (healthPolicyCount <= healthPolicyUsers) {
+                    document.querySelector('.value4').textContent = healthPolicyCount;
+                }
+            }, 100); // Update values every 10 milliseconds
+        }
+    };
+
+    // Send the request
+    xhr.send();
+</script>
+
     <%- include('footer.ejs') %>
+
+
