@@ -226,32 +226,107 @@ exports.getBuyPolicylife = (req,res,next)=>{
 
 const alpha=['A','B','C','D','E','F','G','H']
 
-exports.postSignup=(req,res)=> {
-    console.log('Entered Post signup')
-    const name = req.body.name
-    const age = req.body.age
-    const sex = req.body.sex
-    const address = req.body.address
-    const email = req.body.email
-    const phone = req.body.phone
-    const password = req.body.password
-    const id = Math.floor(Math.random() * 100000)
-    console.log([name, email, age, sex, address, phone, password, id])
-    bcrypt.hash(password, 12).then(async hashedPassword => {
-        const user = await User.findOne({email: email})
-        console.log('User')
-        console.log(user)
-        if (!user) {
-            const passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$";
-            const phoneRegex = '^[6-9]\\d{9}$'
-            console.log(password)
-            const isValid = password.match(passwordRegex);
-            const isValid2 = phone.match(phoneRegex)
-            console.log('isvalid' + isValid)
-            console.log('isvalid2' + isValid2)
-            if (isValid && isValid2) {
+// exports.postSignup=(req,res)=> {
+//     console.log('Entered Post signup')
+//     const name = req.body.name
+//     const age = req.body.age
+//     const sex = req.body.sex
+//     const address = req.body.address
+//     const email = req.body.email
+//     const phone = req.body.phone
+//     const password = req.body.password
+//     const id = Math.floor(Math.random() * 100000)
+//     console.log([name, email, age, sex, address, phone, password, id])
+//     bcrypt.hash(password, 12).then(async hashedPassword => {
+//         const user = await User.findOne({email: email})
+//         console.log('User')
+//         console.log(user)
+//         if (user===null) {
+//             const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/;
+//             const phoneRegex = /^[6-9]\d{9}$/;
+//
+//             console.log(password);
+//             const isValid = passwordRegex.test(password);
+//             const isValid2 = phoneRegex.test(phone);
+//             console.log('isvalid' + isValid)
+//             console.log('isvalid2' + isValid2)
+//             if (isValid && isValid2) {
+//
+//                 console.log('User creation started!')
+//                 const user2 = new User({
+//                     id: id,
+//                     name: name,
+//                     age: age,
+//                     sex: sex,
+//                     email: email,
+//                     address: address,
+//                     phone: phone,
+//                     password: hashedPassword,
+//
+//                 });
+//
+//                 return user2.save()
+//
+//
+//             } else {
+//                 if (!isValid) {
+//                     res.render('signup', {
+//                         login: '',
+//                         text: 'Password must contain at least one uppercase letter, one lower case character, and one number, and be at least 8 characters long.'
+//                     })
+//                 } else if (!isValid2) {
+//                     res.render('signup', {
+//                         login: '',
+//                         text: 'Enter valid phone number'
+//                     })
+//                 }
+//             }
+//         }
+//         else{
+//             await res.render('signup',{text:'User already exists!',login:''})
+//         }
+//
+//     }).then(result => {
+//
+//
+//         res.redirect('/login')
+//
+//         return transporter.sendMail({
+//             to: email,
+//             from: 'dattasandeep000@gmail.com',
+//             subject: 'Genesis Insurances Signup succeeded!',
+//             html: '<h1>You successfully signed up!</h1>'
+//         });
+//
+//     })
+// }
 
-                console.log('User creation started!')
+exports.postSignup = (req, res) => {
+    console.log('Entered Post signup');
+    const name = req.body.name;
+    const age = req.body.age;
+    const sex = req.body.sex;
+    const address = req.body.address;
+    const email = req.body.email;
+    const phone = req.body.phone;
+    const password = req.body.password;
+    const id = Math.floor(Math.random() * 100000);
+    console.log([name, email, age, sex, address, phone, password, id]);
+    bcrypt.hash(password, 12).then(async (hashedPassword) => {
+        const user = await User.findOne({ email: email });
+        console.log('User');
+        console.log(user);
+        if (user === null) {
+            const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/;
+            const phoneRegex = /^[6-9]\d{9}$/;
+
+            console.log(password);
+            const isValid = passwordRegex.test(password);
+            const isValid2 = phoneRegex.test(phone);
+            console.log('isvalid' + isValid);
+            console.log('isvalid2' + isValid2);
+            if (isValid && isValid2) {
+                console.log('User creation started!');
                 const user2 = new User({
                     id: id,
                     name: name,
@@ -261,41 +336,41 @@ exports.postSignup=(req,res)=> {
                     address: address,
                     phone: phone,
                     password: hashedPassword,
-
                 });
 
-                return user2.save()
-
-
+                return user2.save().then((result) => {
+                    res.redirect('/login');
+                    return transporter.sendMail({
+                        to: email,
+                        from: 'dattasandeep000@gmail.com',
+                        subject: 'Genesis Insurances Signup succeeded!',
+                        html: '<h1>You successfully signed up!</h1>',
+                    });
+                });
             } else {
                 if (!isValid) {
                     res.render('signup', {
                         login: '',
-                        text: 'Password must contain at least one uppercase letter, one lower case character, and one number, and be at least 8 characters long.'
-                    })
+                        text: 'Password must contain at least one uppercase letter, one lowercase character, and one number, and be at least 8 characters long.',
+                    });
                 } else if (!isValid2) {
                     res.render('signup', {
                         login: '',
-                        text: 'Enter valid phone number'
-                    })
+                        text: 'Enter a valid phone number',
+                    });
                 }
             }
+        } else {
+            await res.render('signup', { text: 'User already exists!', login: '' });
         }
-
-    }).then(result => {
-
-
-        res.redirect('/login')
-
-        return transporter.sendMail({
-            to: email,
-            from: 'dattasandeep000@gmail.com',
-            subject: 'Genesis Insurances Signup succeeded!',
-            html: '<h1>You successfully signed up!</h1>'
-        });
-
     })
-}
+        .catch((error) => {
+            // Handle errors here
+            console.error(error);
+            res.status(500).send('Internal Server Error');
+        });
+};
+
 
 exports.postemployeesignup = (req,res,next)=>{
   const name = req.body.name;
@@ -313,12 +388,13 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
     const employ = await employee.findOne({email:email})
     console.log('employ')
     console.log(employ)
-    if (!employ) {
-        const passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$";
-        const phoneRegex = '^[6-9]\\d{9}$'
-        console.log(password)
-        const isValid = password.match(passwordRegex);
-        const isValid2 = phone.match(phoneRegex)
+    if (employ===null) {
+        const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/;
+        const phoneRegex = /^[6-9]\d{9}$/;
+
+        console.log(password);
+        const isValid = passwordRegex.test(password);
+        const isValid2 = phoneRegex.test(phone);
         console.log('isvalid' + isValid)
         console.log('isvalid2' + isValid2)
         if (isValid && isValid2) {
@@ -534,11 +610,11 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
         const address = req.body.address
         const email = req.body.email
         const phone = req.body.phone
-
+        const age=req.body.age
         console.log('Name ' + name)
         if(req.session.type==='User'){
 
-            User.findByIdAndUpdate(req.user._id,{name: name, address: address, email: email, phone: phone})
+            User.findByIdAndUpdate(req.user._id,{name: name, address: address, email: email, phone: phone,age:age})
                 .then(r => {
                     res.redirect('/details')
                     console.log('User updated')
@@ -547,7 +623,7 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
         }
         else if(req.session.type==='Admin'){
 
-            Admin.findByIdAndUpdate(req.user._id,{name: name, address: address, email: email, phone: phone})
+            Admin.findByIdAndUpdate(req.user._id,{name: name, address: address, email: email, phone: phone,age:age})
                 .then(r => {
                     res.redirect('/details')
                     console.log('Admin updated')

@@ -6,7 +6,7 @@
 <!--<img class="car" src="/images/life-insurance.png">-->
 <form class="form" action="/life-form" method="post" enctype="multipart/form-data">
     <div class="row1"><p class="label">Name</p> <input  name="firstName" type="text" class="row13" placeholder="First name" required>
-        <input name="lastName" type="text" class="row13" placeholder="Last name"></div>
+        <input name="lastName" type="text" class="row13" placeholder="Last name" required></div>
 
     <div class="row1">
         <p class="label">Sex</p> <input name="sex" class="inner-row1" placeholder="Sex" required>
@@ -68,8 +68,8 @@
         <p class="label">Duration</p>
         <input type="text" class="inner-row1" name="duration" value="<%=r.duration%>" required>
     </div>
-    <input value="<%=applier%>" name="applier" style="display: none"/>
-    <input value="<%=r.type%>" name="policyType" style="display: none"/>
+    <input value="<%=applier%>" name="applier" style="display: none" required>
+    <input value="<%=r.type%>" name="policyType" style="display: none" required>
     <button class="button" type="submit">Submit</button>
 
 
