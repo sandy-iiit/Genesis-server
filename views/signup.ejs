@@ -83,8 +83,7 @@
             }
             else{
                 document.getElementById("err").innerHTML = "";
-
-                flag=true
+                flag2=true
             }
         }
 
@@ -94,6 +93,7 @@
             const passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$";
             const phoneRegex = /^[6-9]\d{9}$/;
             const passwordValue = passwordInput.value;
+
             function func2(){
                 console.log(!phoneRegex.test(phoneInput.value))
                 if(!phoneRegex.test(phoneInput.value)){

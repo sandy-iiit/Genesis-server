@@ -457,7 +457,7 @@ if(req.body.searchType==='Name') {
         })
     }
     else{
-        await transportApplications.findByIdAndDelete(req.params.id).then(() => {
+        await transportApplications.findByIdAndDelete(req.body.appId).then(() => {
             transporter.sendMail({
                 to: email,
                 from: 'dattasandeep000@gmail.com',
@@ -526,7 +526,7 @@ exports.verifyLife=async (req, res, next) => {
 
         })
     } else {
-        await lifeApplications.findByIdAndDelete(req.params.id).then(() => {
+        await lifeApplications.findByIdAndDelete(req.body.appId).then(() => {
             transporter.sendMail({
                 to: email,
                 from: 'dattasandeep000@gmail.com',
@@ -593,11 +593,14 @@ exports.verifyHealth = async (req, res, next) => {
 
         })
     } else {
-        await healthApplications.findByIdAndDelete(req.params.id).then(() => {
+        console.log(req.body.appId)
+
+        await healthApplications.findByIdAndDelete(req.body.appId).then(() => {
+            console.log("Entered delete!")
             transporter.sendMail({
                 to: email,
                 from: 'dattasandeep000@gmail.com',
-                subject: 'Genesis Insurances Application verified and accepted!',
+                subject: 'Genesis Insurances Application rejected!',
                 html: `<h2>Sorry ${gender} ${name} your health insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
             });
             res.redirect('/details')
