@@ -1,0 +1,17 @@
+# Read the number of test cases
+t = int(input())
+
+# Pre-calculate the factorials
+factorials = [1]
+for i in range(1, 251):
+    factorials.append(factorials[-1] * i)
+
+# Iterate through each test case
+for _ in range(t):
+    n = int(input())  # Length of the permutation
+    
+    # Calculate the maximum cost using the largest element at the front
+    max_cost = (n - 1) * factorials[n - 2]
+    
+    # Output the maximum cost for this test case
+    print(max_cost)

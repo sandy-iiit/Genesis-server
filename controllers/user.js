@@ -296,70 +296,80 @@ exports.postSignup=(req,res)=> {
     })
 }
 
-exports.postemployeesignup = (req,res,next)=>{
-  const name = req.body.name;
- const  email =  req.body.email;
- const   age = req.body.age;
- const   sex = req.body.sex;
- const   aadhar =req.body.aadhar;
-  const  address = req.body.address;
-  const  phone =  req.body.phone;
-  const  password = req.body.password;
-  const  dob=req.body.dob
-console.log(name,email,age,sex,aadhar,address,phone,password,dob);
- 
-bcrypt.hash(password,12).then(async hashedpassword=>{
-    const employ = await employee.findOne({email:email})
-    console.log('employ')
-    console.log(employ)
-    if (!employ) {
-        const passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$";
-        const phoneRegex = '^[6-9]\\d{9}$'
-        console.log(password)
-        const isValid = password.match(passwordRegex);
-        const isValid2 = phone.match(phoneRegex)
-        console.log('isvalid' + isValid)
-        console.log('isvalid2' + isValid2)
-        if (isValid && isValid2) {
+exports.postemployeesignup = async (req, res, next) => {
+    try {
+        const {
+            name,
+            email,
+            age,
+            sex,
+            aadhar,
+            address,
+            phone,
+            password,
+            dob
+        } = req.body;
 
-            console.log('Employee creation started!')
-           
-            const Employee = new employee({name:name,
-                email:email,
-                age:age,
-               sex:sex,
-            aadhar:aadhar,
-            address:address,phone:phone,password:hashedpassword,dob:dob})
-            console.log(Employee)
-             return Employee.save()
+        console.log(name, email, age, sex, aadhar, address, phone, password, dob);
 
+        const existingEmployee = await employee.findOne({
+            email: email
+        });
 
-        } else {
-            if (!isValid) {
-                res.render('signup', {
-                    login: '',
-                    text: 'Password must contain at least one uppercase letter, one lower case character, and one number, and be at least 8 characters long.'
-                })
-            } else if (!isValid2) {
-                res.render('signup', {
-                    login: '',
-                    text: 'Enter valid phone number'
-                })
-            }
+        if (existingEmployee) {
+            // Handle case where employee already exists
+            return res.render('signup', {
+                login: '',
+                text: 'Employee already exists'
+            });
         }
-    }
-}).then(result=>{
-    res.redirect('/login')
-    console.log(result)
-    return transporter.sendMail({
-        to: email,
-        from: 'dattasandeep000@gmail.com',
-        subject: 'Thanks for enrolling',
-        html: '<h1>meet you in office</h1>'
-    });
 
-})
-}
+        const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/;
+        const phoneRegex = /^[6-9]\d{9}$/;
+        const isValidPassword = password.match(passwordRegex);
+        const isValidPhone = phone.match(phoneRegex);
+
+        if (!isValidPassword || !isValidPhone) {
+            // Handle password and phone validation errors
+            return res.render('signup', {
+                login: '',
+                text: isValidPassword
+                    ? 'Enter valid phone number'
+                    : 'Password must contain at least one uppercase letter, one lowercase character, and one number, and be at least 8 characters long.'
+            });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 12);
+        const newEmployee = new employee({
+            name,
+            email,
+            age,
+            sex,
+            aadhar,
+            address,
+            phone,
+            password: hashedPassword,
+            dob
+        });
+
+        const savedEmployee = await newEmployee.save();
+
+        // Send email to the employee
+        await transporter.sendMail({
+            to: email,
+            from: 'dattasandeep000@gmail.com',
+            subject: 'Thanks for enrolling',
+            html: '<h1>Meet you in the office</h1>'
+        });
+
+        
+    } catch (error) {
+        // Handle any errors that might occur during the process
+        console.error(error);
+       
+    }
+};
+
     exports.postLogin = async (req, res) => {
         const client = await MongoClient.connect('mongodb+srv://dattasandeep000:13072003@sandy.p06ijgx.mongodb.net/G1?retryWrites=true&w=majority', { useNewUrlParser: true });
         const db = await client.db();
@@ -407,6 +417,7 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
             const admin=await Admin.findOne({email: email})
 
             if (admin) {
+                console.log(admin.password,password)
                 bcrypt.compare(password, admin.password, (err, matched) => {
                     console.log(password)
                     console.log(admin.password)
