@@ -41,12 +41,62 @@
 </div>
 
 
+<script>
+
+    // Function to check if an element is in the viewport
+function isInViewport(element) {
+    var rect = element.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
+
+// Function to animate policy cards when they come into view
+function animatePolicyCards() {
+    var policyCards = document.querySelectorAll(".cardone");
+    policyCards.forEach(function (card) {
+        if (isInViewport(card)) {
+            card.style.opacity = 1;
+            card.style.transform = "translateY(-100)";
+        }
+    });
+}
+
+// Listen for scroll events and trigger the animation
+window.addEventListener("scroll", animatePolicyCards);
+
+// Initial animation check in case some cards are already in the viewport on page load
+window.addEventListener("load", animatePolicyCards);
+
+</script>
+<script>
+    const observer =new IntersectionObserver((entries) => {
+        entries.forEach((entry)=>{
+            console.log(entry)
+            if (entry.isIntersecting)
+            {
+                entry.target.classList.add('show');
+            }
+            else{
+                entry.target.classList.remove('show');
+            }
+
+        });
+    });
+
+    const hiddenElements = document.querySelectorAll('.hidden');
+    hiddenElements.forEach((el)=> observer.observe(el));
+</script>
+
 <div class="container12">
     <%for(let i=0;i<array.length;i++){%>
 
-    <div class="card12">
-        <div class="item12">
-            <h4><%=array[i].name%></h4>
+    <div class="card12 show">
+        <div class="item12" style="color: darkblue">
+            <h4 class="sparkle u-hover--sparkle";font-size: x-large;><strong><%=array[i].name%></strong></h4>
         </div>
         <div class="item12">
             <h4>COVER AMOUNT: ₹ <%=array[i].coverAmount %></h4>
@@ -64,7 +114,7 @@
 
 
         <div class="item12">
-            <a href="/buypolicy3/<%= array[i]._id  %>"><button class="button">Select</button></a>
+            <a href="/buypolicy3/<%= array[i]._id%>"><button class="button">Select</button></a>
         </div>
     </div>
     <%}%>

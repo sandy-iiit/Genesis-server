@@ -105,7 +105,7 @@
 
 
 <h2 class="subheads"> WHY GENESIS? HOW GENESIS HELP YOU?</h2>
-<div class="genesis">
+<!-- <div class="genesis">
     <div>
         <img class='genimage' src="https://prod-sitefinity-library.kappro.com/images/default-source/career-corner/starting-career/insurance-producer_16.jpg?sfvrsn=d94c9803_5">
     </div>
@@ -126,21 +126,35 @@
 
         </p>
     </div>
-</div>
+</div> -->
 <!--     
 <div class="quotehealthcard" id="quotehealthcard">
 
     PURSUE YOUR BEST FOR <strong>SURE</strong> BECAUSE YOUR HEALTH SHOULD BE <strong>SECURE</strong>
 
 </div> -->
+<div class="animator">
+    <ul>
+        <li> <img class="image_anim" height="300vh" width="150vh" src="healthanim/National-Health-Policy.jpg" alt="healthinsurance" />Health insurance</li>
+        <li> <img class="image_anim" height="300vh" widt="150vh" src="/healthanim/protect.jpg" alt="sliced mango. " />Protector</li>
+        <li> <img class="image_anim" height="300vh" widt="150vh" src="/healthanim/application_lifebuoy.jpg" alt="a bunch of blueberries. " />Save your life</li>
+        <li> <img class="image_anim" height="300vh" widt="150vh" src="/healthanim/KYC.jpg" alt="a pineapple sitting on a table. " />KYC</li>
+        <li> <img class="image_anim" height="300vh" widt="150vh" src="/healthanim/support.jpg" alt="frozen raspberries. " /> We support you</li>
+        <li> <img class="image_anim" height="300vh" widt="150vh" src="/healthanim/insurancenofear.jpg" alt="a sliced strawberry. " />No fear of unexpected</li>
+        <li> <img class="image_anim" height="300vh" widt="150vh" src="/healthanim/guarantee.jpg" alt="an arrangement of assorted sliced fruits. " />You are guaranteed</li>
+        <li> <img class="image_anim" height="300vh" widt="150vh" src="/healthanim/healthwealth.jpg" alt="sliced watermelons. " />Health is wealth</li>
+        <li> <img class="image_anim" height="300vh" widt="150vh" src="/healthanim/security.png" alt="half of a lime. " />Secured</li>
+        <li> <img class="image_anim" height="300vh" widt="150vh" src="/healthanim/priority.jpg" alt="a single cherry with stem. " />You are our priority</li>
+      </ul>
+</div>
 
 
 <div class="containerone">
     <%for(let i=0;i<array.length;i++){%>
 
-    <div class="cardone" >
+    <div class="cardone hidden">
        <div class="ITEM1" style="color: darkblue">
-          <h1 style="font-size: x-large;">Policy Name:<br><strong><%=array[i].Name%></strong></h1>
+          <h1 class="highlight" style="font-size:x-large;">Policy Name:<br><strong><%=array[i].Name%></strong></h1>
        </div>
        <div class="ITEM1">
            <h2 style="font-size: x-large;">Cover:<%=array[i].Cover%>/-</h2>
@@ -155,7 +169,6 @@
         <div class="ITEM1">
             <a href="/policypage/<%= array[i]._id %>" class="viewpol" target="_blank"><button class="button">View Policy</button></a>
         </div>
-
    </div>
 <%}%>
 </div>
@@ -167,3 +180,80 @@
 
     <%- include('footer.ejs') %>
  
+    <script>
+
+        // Function to check if an element is in the viewport
+    function isInViewport(element) {
+        var rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+    
+    // Function to animate policy cards when they come into view
+    function animatePolicyCards() {
+        var policyCards = document.querySelectorAll(".cardone");
+        policyCards.forEach(function (card) {
+            if (isInViewport(card)) {
+                card.style.opacity = 1;
+                card.style.transform = "translateY(-100)";
+            }
+        });
+    }
+    
+    // Listen for scroll events and trigger the animation
+    window.addEventListener("scroll", animatePolicyCards);
+    
+    // Initial animation check in case some cards are already in the viewport on page load
+    window.addEventListener("load", animatePolicyCards);
+    
+    </script>
+    <script>
+        const observer =new IntersectionObserver((entries) => {
+            entries.forEach((entry)=>{
+                console.log(entry)
+                if (entry.isIntersecting)
+                {
+                    entry.target.classList.add('show');
+                }
+                else{
+                    entry.target.classList.remove('show');
+                }
+    
+            });
+        });
+    
+        const hiddenElements = document.querySelectorAll('.hidden');
+        hiddenElements.forEach((el)=> observer.observe(el));
+    </script>
+    
+    <script>
+
+        // Add event listener for hover-in
+        document.querySelectorAll('.cardone').forEach(function(element) {
+            element.addEventListener('mouseenter', function() {
+              // Find the .highlight element within .cardone and add the classes
+              const highlightElement = element.querySelector('.highlight');
+              if (highlightElement) {
+                highlightElement.classList.add('u-hover--sparkle','sparkle' );
+              }
+            });
+          });
+          
+          // Add event listener for hover-out
+          document.querySelectorAll('.cardone').forEach(function(element) {
+            element.addEventListener('mouseleave', function() {
+              // Find the .highlight element within .cardone and remove the classes
+              const highlightElement = element.querySelector('.highlight');
+              if (highlightElement) {
+                highlightElement.classList.remove('u-hover--sparkle','sparkle');
+              }
+            });
+          });
+          
+          
+        </script>
+        

@@ -81,6 +81,11 @@
                 document.getElementById("err").innerHTML = "&#10005; Please enter a valid email address.";
                 flag2=false
             }
+            else{
+                document.getElementById("err").innerHTML = "";
+
+                flag=true
+            }
         }
 
         if(flag2===true) {
@@ -93,6 +98,9 @@
                 console.log(!phoneRegex.test(phoneInput.value))
                 if(!phoneRegex.test(phoneInput.value)){
                     document.getElementById("err").innerHTML = "&#10005; Please enter a valid phone number.";
+                }
+                else{
+                    document.getElementById("err").innerHTML = "";
                 }
             }
             passwordInput.addEventListener('input', function () {

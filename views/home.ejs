@@ -12,6 +12,53 @@
 </head>
 <%- include('navbar.ejs') %>
 
+<div class="loading-page">
+    <h1 class="loading-text">GENESIS</h1>
+</div>
+
+<script>
+      
+    // Function to show the loading animation
+function showLoadingAnimation() {
+  var loadingPage = document.querySelector(".loading-page");
+  if (loadingPage) {
+      loadingPage.style.display = "flex";
+  }
+}
+
+// Function to hide the loading animation
+function hideLoadingAnimation() {
+  var loadingPage = document.querySelector(".loading-page");
+  if (loadingPage) {
+      loadingPage.style.display = "none";
+  }
+}
+
+// Show the loading animation when the page is reloaded
+window.addEventListener("beforeunload", function () {
+  showLoadingAnimation();
+});
+
+// Display a loading overlay or animation
+//showLoadingAnimation();
+
+// Delay the page unload for a specific amount of time (e.g., 3 seconds)
+setTimeout(function () {
+  // Remove the loading overlay or animation
+  hideLoadingAnimation();
+
+  // Allow the page to unload
+  window.removeEventListener("beforeunload", beforeUnloadHandler);
+}, 3000); // 3000 milliseconds (3 seconds)
+
+// Hide the loading animation after the page is fully loaded
+//window.addEventListener("load", function () {
+ // hideLoadingAnimation();
+//});
+
+
+    </script>
+
 <div class="topcontainer">
 
 
@@ -21,6 +68,7 @@
         <img
                 src="photos/images_pexels_com-pexels-photo-7688374.png"
                 alt="Slide 1">
+           
         <div class="caption">
           <h2>HAPPY LIFE</h2>
           <p>insurance is not just a product, it's a promise. A promise that in your time of need, you won't have to
@@ -56,8 +104,8 @@
 
 <div class="fullwidth-block" data-bg-color="#f1f1f1">
   <div class="container">
-    <h2 class="section-title">GENESIS OFFERS</h2>
-    <small class="section-subtitle">enjoy the Safety and Happiness</small>
+    <h2 class="section-title"><b>GENESIS OFFERS</b></h2>
+    <small class="section-subtitle"><b>enjoy the Safety and Happiness</b></small>
 
     <div class="row">
       <div class="col-md-3">
@@ -188,7 +236,7 @@
 
 
 <div class="maincardrr">
-  <h2 style="text-align:center" style="color:#3E54AC">Insurane starting at ... <span class="rupee">&#8377;</span>2/day</h2>
+  <h2 style="text-align:center" style="color:#3E54AC">Insurance starting at ... <span class="rupee">&#8377;</span>2/day</h2>
   <div class="cardsinsideme">
 
 
