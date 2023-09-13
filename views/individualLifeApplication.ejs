@@ -1,14 +1,16 @@
 <head>
-    <link rel="stylesheet" href="/css/life-form.css">
+    <link rel="stylesheet" href="/css/transport-form.css">
 </head>
 
 <%- include('navbar.ejs')%>
 <img class="car" src="/images/health-insurance.png">
 
-<form class="form" action="/verify-health-form/<%=applier%>" method="post" >
+<form class="form" action="/verifyLife" method="post" >
     <div class="row1"><p class="label">Name</p> <input name="firstName" type="text" class="row13" placeholder="First name" value="<%=firstName%>">
         <input name="lastName" type="text" class="row13" placeholder="Last name" value="<%=lastName%>"></div>
-
+    <div class="row1">
+        <p class="label">Sex</p> <input name="sex" class="inner-row1" value="<%=sex%>" placeholder="Sex">
+    </div>
 
     <div class="row2">
         <div class="subrow"><p class="label">AADHAR</p> <a href="/files/<%=aadhar%>">Open AADHAR</a></div>
@@ -21,7 +23,7 @@
     </div>
 
     <div class="row1">
-        <input class="health_" name="healthCondition" placeholder="Any health defects you have suffered previously or are suffering currently" value="<%=healthCondition%>">
+        <p class="label">Health Defects</p>  <input class="health_" name="healthCondition" placeholder="Any health defects you have suffered previously or are suffering currently" value="<%=healthCondition%>">
     </div>
 
     <div class="row1">
@@ -45,34 +47,36 @@
         <div class="subrow"><p class="label">Nominee AddressProof</p> <a href="/files/<%=nomineeAddressProof%>">Open Nominee AddressProof</a></div>
     </div>
     <div class="row1">
-        <p class="label">Policy Number</p>
-        <input class="inner-row1" name="policyNum" value="<%=policyNum%>">
-    </div>
-
-    <div class="row1">
         <p class="label">Policy Id</p>
         <input class="inner-row1" name="policyId" value="<%=policyId%>">
     </div>
+    <div class="row1">
+        <p class="label">Policy Name</p>
+        <input class="inner-row1" name="policyName" value="<%=policyName%>">
+    </div>
 
     <div class="row2">
-        <div class="subrow"> <p class="label">Cover Amount</p><input class="inner-row2" type="number" name="amount" value="<%=amount%>>"></div>
-        <div class="subrow"> <p class="label">Type</p><select name="payType" class="inner-row2" value="<%=payType%>>">
-                <option>Annually</option>
-                <option>Monthly</option>
-            </select></div>
+        <div class="subrow"> <p class="label">Cover Amount</p><input class="inner-row2" type="text" name="amount" value="<%=coverAmount%>"></div>
+        <div class="subrow"> <p class="label">Policy Term</p><input name="policyTerm" class="inner-row2" value="<%=term%>">
+        </div>
 
     </div>
     <div class="row1">
         <p class="label">Duration</p>
-        <input type="number" class="inner-row1" name="duration" >
+        <input type="number" class="inner-row1" name="duration" value="<%=duration%>" >
     </div>
     <div class="row1">
-        <p class="label">Status</p>
-        <input class="inner-row1" name="status" >
+    <p class="label">Applied By </p> <input value="<%=applier%>" name="applier" >
     </div>
-
+    <input  name="policyType" style="display: none" value="<%=policyType%>">
+    <input  name="appId" style="display: none" value="<%=appId%>">
+    <div class="row1">
+        <p class="label">Status</p>
+        <input class="inner-row1" name="verificationStatus" <%=Status%>>
+    </div>
+<%if(userType==='Admin'){%>
     <button class="button" type="submit">Verify</button>
-
+<%}%>
 
 
 </form>

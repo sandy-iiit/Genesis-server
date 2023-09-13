@@ -1,0 +1,57 @@
+<head>
+    <link rel="stylesheet" href="/css/agent-app.css">
+</head>
+<%- include('navbar.ejs') %>
+<div class="resdivv">
+
+    <div class="divdetailbox" style="height: 90%">
+        <!--        <form class="detail-box" action="/verifyAgent/<%=r._id%>" method="post">-->
+        <p style="text-align:center"><h3 class="hidemeok">YOUR PROFILE</h3></p><br>
+        <div class="detail-item">
+            <p class="label">Type</p>  <input class="input" name="name" value="<%=r.type%>"></input>
+        </div>
+        <%if(r.type.trim()==='TRANSPORT'){%>
+        <div class="detail-item">
+            <p class="label">View Policy Details</p>  <a href="/buy-policy/<%=r.policyId%>">View</a>
+        </div>
+        <%}else if(r.type==='LIFE'){%>
+        <div class="detail-item">
+            <p class="label">View Policy Details</p>  <a href="/buypolicy3/<%=r.policyId%>">View</a>
+        </div>
+        <%}else if(r.type==='Health'){%>
+        <div class="detail-item">
+            <p class="label">View Policy Details</p>  <a href="/policypage/<%=r.policyId%>">View</a>
+        </div>
+        <%}%>
+        <div class="detail-item">
+            <p class="label">Amount</p>   <input class="input" name="email" value="<%=r.amount%>"></input>
+        </div>
+        <div class="detail-item">
+            <p class="label">Term</p>   <input class="input" type="number" name="age" value="<%=r.term%>">
+        </div>
+        <div class="detail-item">
+            <p class="label">Beneficiary Name</p>  <input class="input" value="<%=r.beneficiaryDetails.name%>" disabled>
+        </div>
+        <div>
+            <p class="label">Beneficiary Age</p>   <input class="input address" name="address" value="<%=r.beneficiaryDetails.age%>">
+        </div>
+        <div class="detail-item">
+            <p class="label">Beneficiary Relation </p>   <input class="input" type="text" name="phone" value="<%=r.beneficiaryDetails.relation%>">
+        </div>
+        <div class="detail-item">
+            <p class="label">Status </p>   <input class="input" type="text" name="phone" value="<%=r.status%>">
+        </div>
+        <div class="detail-item">
+            <p class="label">Duration </p>   <input class="input" type="text" name="phone" value="<%=r.duration%>">
+        </div>
+
+
+        <!--            <div class="detail-item buttons">-->
+        <!--                <button class="btn1">-->
+        <!--                    Verify-->
+        <!--                </button>-->
+        <!--            </div>-->
+        <!--        </form>-->
+    </div>
+</div>
+<%- include('footer.ejs') %>

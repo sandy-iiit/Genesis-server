@@ -47,9 +47,23 @@ h1 {
 	margin-bottom: 20px;
 }
 
+     .card-icon2 {
+	height: 100px;
+	width: 100px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 20px;
+}
+
 .card-icon img {
 	max-width: 80%;
 	max-height: 80%;
+}
+     .card-icon2 img {
+	max-width: 100%;
+	max-height: 100%;
 }
 
 .card-content {
@@ -138,15 +152,60 @@ h1 {
             <a href="/tractpolicy" class="card-button">Go to Track Policies</a>
         </div>
     </div>
+    <%if(userType=='Admin'){%>
     <div class="card">
-        <div class="card-icon">
-            <img style="border-radius: 29px;object-fit: fill;"src="data:image/png;base64,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">
+        <div class="card-icon2">
+            <img style="border-radius: 29px;object-fit: fill;" src="/images/life-insurance.png">
         </div>
         <div class="card-content">
-            <h2>Change User Credentials</h2>
-            <p>Change user credentials change password,details.</p>
-            <a href="#" class="card-button">Go to Change User Credentials</a>
+            <h2>View Life Applications</h2>
+            <a href="/life-applications" class="card-button">View</a>
         </div>
+    </div>
+    <div class="card">
+        <div class="card-icon2">
+            <img style="border-radius: 29px;object-fit: fill;" src="/images/car.svg">
+           </div>
+
+             <div class="card-content">
+                <h2>View Motor Applications</h2>
+                <a href="/transport-applications" class="card-button">View</a>
+            </div>
+    </div>
+        <div class="card">
+            <div class="card-icon2">
+                <img style="border-radius: 29px;object-fit: fill;" src="/images/health-insurance.png">  </div>
+             <div class="card-content">
+                <h2>View Health Applications</h2>
+                <a href="/health-applications" class="card-button">View</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-icon2">
+                <img style="border-radius: 29px;object-fit: fill;" src="/images/health-insurance.png">  </div>
+             <div class="card-content">
+                <h2>View Agent Application</h2>
+                <a href="/agent-applications" class="card-button">View</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-icon2">
+                <img style="border-radius: 29px;object-fit: fill;" src="/css/profile.gif">  </div>
+             <div class="card-content">
+                <h2>View Users List</h2>
+                <a href="/usersList" class="card-button">View</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-icon2">
+                <img style="border-radius: 29px;object-fit: fill;" src="/css/profile.gif">  </div>
+             <div class="card-content">
+                <h2>View Total List of Policies</h2>
+                <a href="/policiesList" class="card-button">View</a>
+            </div>
+        </div>
+        <%}%>
+
     </div>
 </div>
 <%- include('footer.ejs') %>

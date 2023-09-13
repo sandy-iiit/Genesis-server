@@ -1,0 +1,52 @@
+.resdivv {
+    background-color: #3e54ac;
+    margin: 20px auto 20px auto;
+
+    padding: 20px;
+    border-radius: 30px;
+    width: 60%;
+}
+
+.divdetailbox {
+    background-color: rgba(192,212,250,0.7);
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.detail-item {
+    margin-bottom: 15px;
+}
+
+.label {
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.input {
+    padding: 8px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.address {
+    height: 80px;
+}
+
+.btn1 {
+    background-color: #3e54ac;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn1:hover {
+    background-color: #2f3d73;
+}

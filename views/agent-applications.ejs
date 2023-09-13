@@ -1,6 +1,7 @@
 
 <head>
     <link rel="stylesheet" href="/css/reviews.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 
 </head>
 
@@ -10,8 +11,8 @@
 
 <div class="container2">
 
-    <form class="bar" action="/search-transport-applications" method="post">
-       <select name="searchType"><option>Name</option><option>Id</option></select>
+    <form class="bar" action="/search-agent-applications" method="post">
+        <select name="searchType"><option>Name</option><option>Id</option></select>
         <input name="search" type="text"  class="search">
         <button class="search-submit" type="submit">Search</button>
     </form>
@@ -20,15 +21,13 @@
     <div class="items2">
 
         <div class="inner-item Q">
-            <div> Q  <%=i+1%>). First Name: <%=arr[i].firstName%></div>   <div> Last Name: <%=arr[i].lastName%></div>
+            <div>  Name: <%=arr[i].name%></div>
+            <div>  Email: <%=arr[i].email%></div>
         </div>
         <br>
-        <div class="inner-item Q">
-            <div> Q  <%=i+1%>). Applied on: <%=arr[i].appliedDate%></div>   <div> Verified on: <%=arr[i].verificationDate%></div>
-        </div>
         <br>
         <div class="inner-item A">
-            <a href="/transport-applications/<%=arr[i]._id%>">Open application</a>
+            <a href="/agent-application/<%=arr[i]._id%>">Open application</a>
         </div>
 
 

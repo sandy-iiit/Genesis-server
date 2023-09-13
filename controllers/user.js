@@ -1,18 +1,25 @@
 const User = require("../models/User");
-const user22 = require("../models/user2");
+const Agent = require("../models/employee");
 const bcrypt = require('bcryptjs');
+
+const healthApplications=require('../models/health-application')
+const lifeApplications=require('../models/life-application')
+const transportApplications=require('../models/transport-application')
+const Query = require("../models/Query");
+const Policy = require("../models/Policy");
+const Admin=require('../models/Admin')
+const transportPolicy=require('../models/transportpolicy-details')
+const lifePolicy=require('../models/lifepolicy-details')
+const healthPolicy=require('../models/healthpolicy-details')
+const changePassword=require('../models/passwordChange')
+const Review=require('../models/Review')
+const twilio = require("twilio");
+const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+const {MongoClient} = require("mongodb");
 const employee = require('../models/employee');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
-const Query = require("../models/Query");
-const Admin=require('../models/Admin');
-const transportPolicy=require('../models/transportpolicy-details');
-const lifepPolicy=require('../models/lifepolicy-details');
-const changePassword=require('../models/passwordChange');
-const Review=require('../models/Review');
-const Sequelize=require('sequelize')
-const twilio = require("twilio");
-const user = require("../models/user2");
 //
 // const transporter = nodemailer.createTransport(
 //     sendgridTransport({
@@ -29,7 +36,7 @@ const transporter = nodemailer.createTransport(
 
         auth: {
             user: 'dattasandeep000@gmail.com',
-            pass: 'akkkheqzgiwbscmz'
+            pass: process.env.PASSKEY
         },
     }
 );
@@ -47,7 +54,7 @@ exports.getBuyPolicy2=(req,res,next)=>{
     res.render('buy-policy2')
 }
 exports.getLifePolicy=(req,res,next)=>{
-    lifepPolicy.find({}).then(arrr=>{
+    lifePolicy.find({}).then(arrr=>{
 
         res.render('lifepolicy',{array:arrr})
 
@@ -77,26 +84,47 @@ exports.getBuyPolicy=(req,res,next)=>{
     })
 
 }
+exports.getPolicyPage=(req,res,next)=>{
+    console.log(req.params.id)
+    healthPolicy.findById(req.params.id).then((policy)=>{
+        res.render('policypage',{array:policy})
+    })}
+exports.gethealthPolicy=async (req,res,next)=>{
+    console.log('entered health policy');
+    await healthPolicy.find({}).then((arrr)=>{
+        console.log(arrr);
+        res.render('healthpolicies',{array:arrr})
+    })
+}
 
 exports.getDetails=(req,res,next)=>{
     // console.log(req.session.type+' Details : '+req.user._id)
-    if(req.session.type==='User'){
-        res.render('details',
-            {name:req.user.name,email:req.user.email,
-                age:req.user.age,sex:req.user.sex,address:req.user.address,phone:req.user.phone})
+if(!req.user){
+        res.render('404')
     }
-    else if(req.session.type==='Admin'){
-        res.render('admin-details',
-            {name:req.user.name,email:req.user.email,
-                age:req.user.age,sex:req.user.sex,address:req.user.address,phone:req.user.phone})
+    else {
+        if (req.session.type === 'User') {
+            res.render('details',
+                {
+                    name: req.user.name, email: req.user.email,
+                    age: req.user.age, sex: req.user.sex, address: req.user.address, phone: req.user.phone
+                })
+        } else if (req.session.type === 'Admin') {
+            res.render('admin-details',
+                {
+                    name: req.user.name, email: req.user.email,
+                    age: req.user.age, sex: req.user.sex, address: req.user.address, phone: req.user.phone
+                })
+        } else if (req.session.type === 'Agent') {
+
+            res.render('admin-details', {
+                    name: req.user.name, email: req.user.email,
+                    age: req.user.age, sex: req.user.sex, address: req.user.address, phone: req.user.phone
+                }
+            )
+        }
     }
-    else if(req.session.type==='Agent'){
-        
-        res.render('agentboard',{
-            
-            name:req.user.name
-        })
-    }
+
 
 }
 
@@ -105,7 +133,7 @@ exports.getMyDetails=(req,res,next)=>{
 }
 
 exports.getPasswordChange=(req,res,next)=>{
-    res.render('change-password')
+    res.render('change-password',{err:''})
 }
 const array2=[{name:'Term Insurance',Duration:2+'yrs',Installment:300,type:'motor'},{type:'life',name:'Term Insurance',Duration:5+'yrs',Installment:500},
     {type:'health',name:'Term Insurance',Duration:2+'yrs',Installment:300},{name:'Term Insurance',Duration:2+'yrs',Installment:300}
@@ -119,6 +147,7 @@ exports.getMyPolicies=(req,res)=>{
 }
 exports.getCurrentPolicies=(req,res)=>{
     User.findById(req.user.id).then(r=>{
+        console.log(r)
         res.render('my-policies',{arr:r.currentPolicies,str:'Pay Installments'})
 
     })
@@ -147,11 +176,23 @@ exports.getTransportForm=async (req, res) => {
 
     })
 }
-exports.getLifeForm=(req,res)=>{
-    res.render('life-form')
+exports.getLifeForm=async (req, res) => {
+    await lifePolicy.findById(req.params.id).then((r) => {
+        res.render('life-form',{r:r,applier:req.user._id})
+    }).catch(err=>{
+        console.log('Error')
+    })
 }
 exports.getHealthForm=(req,res)=>{
-    res.render('health-form')
+    console.log('Entered health form')
+    const id=req.params.id
+    console.log(id)
+    healthPolicy.findById(id).then((r)=>{
+        res.render('health-form',{r:r,applier:req.user._id})
+
+    }).catch(err=>{
+        console.log('Error')
+    })
 }
 exports.getAdminQueries=(req,res)=>{
     res.render('admin-queries',{arr:arr3})
@@ -173,7 +214,7 @@ exports.getContactUs=(req,res)=>{
 
 exports.getBuyPolicylife = (req,res,next)=>{
     console.log(req.params.id)
-    lifepPolicy.findById(req.params.id).then((policy)=>{
+    lifePolicy.findById(req.params.id).then((policy)=>{
         res.render('buypolicylife',{array:policy})
     })
 }
@@ -320,6 +361,8 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
 })
 }
     exports.postLogin = async (req, res) => {
+        const client = await MongoClient.connect('mongodb+srv://dattasandeep000:13072003@sandy.p06ijgx.mongodb.net/G1?retryWrites=true&w=majority', { useNewUrlParser: true });
+        const db = await client.db();
         const name = req.body.name
         const email = req.body.email
         const password = req.body.password
@@ -340,6 +383,7 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
                                 req.session.isLoggedIn = true;
                                 req.session.user = user;
                                 req.session.type=type;
+
                                 return req.session.save(err => {
                                     console.log(err);
                                     res.redirect('/');
@@ -419,7 +463,7 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
                             console.log('You have logged in employee')
                             setTimeout(()=>{
                                 console.log('Entered Timeout')
-                                req.session.destroy()},900*1000)
+                                req.session.destroy()},15000*1000)
                         });
                       
                         // console.log(req.cookies['user'].name)
@@ -502,7 +546,7 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
                     // console.log(r)
                 })
         }
-        else{
+        else if(req.session.type==='Admin'){
 
             Admin.findByIdAndUpdate(req.user._id,{name: name, address: address, email: email, phone: phone})
                 .then(r => {
@@ -511,19 +555,50 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
                     // console.log(r)
                 })
         }
+        else{
+            Agent.findByIdAndUpdate(req.user._id,{name: name, address: address, email: email, phone: phone})
+                .then(r => {
+                    res.redirect('/details')
+                    console.log('Agent updated')
+                    // console.log(r)
+                })
+        }
     }
 
-    exports.deleteAcc = (req, res) => {
+    exports.deleteAcc = async (req, res) => {
+
+        const email=req.user.email+"deletedaccount"
+      if(req.session.type==='User') {
 
 
-        User.findByIdAndDelete(req.user._id).then(r => {
+          await User.updateOne({_id: req.user._id}, {email: email, deleted: true}).then(r => {
 
-            res.redirect('/')
-            console.log('User deleted')
-        })
-        console.log('Deleted the damn user!')
+              res.redirect('/')
+              console.log('User deleted')
+          })
+          console.log('Deleted the user!')
+      }
+      else if(req.session.type==='Agent'){
+          await Agent.updateOne({_id:req.user._id},{email: email, isActive: false}).then(r => {
+
+              res.redirect('/')
+              console.log('Agent deleted')
+          })
+          console.log('Deleted the user!')
+      }
+      else if(req.session.type==='Admin'){
+          await Admin.updateOne({_id:req.user._id},{email:email,deleted:true}).then(r => {
+
+              res.redirect('/')
+              console.log('Admin deleted')
+          })
+          console.log('Deleted the user!')
+      }
+
     }
-
+exports.getdropReview=(req,res,next)=>{
+    res.render('write-review')
+}
     exports.dropReview=(req,res,next)=>{
 
         const name=req.body.name;
@@ -550,7 +625,7 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
 
     }
     exports.quotegenerator= (req, res) => {
-      
+        console.log('Entered quote')
         const name = req.body.quotnam;
         const email = req.body.quotemail;
         const insuranceType = req.body.quotinsurance;
@@ -601,7 +676,7 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
             return;
         }
         const message = {
-            from: 'manumanohar62405@gmail.com',
+            from: 'dattasandeep000@gmail.com',
             to: email,
             subject: 'Your Insurance Quote',
             text: `Dear ${name}, your insurance quote is ${quote}.`
@@ -622,21 +697,23 @@ exports.postaddpolicy = (req,res,next)=>{
     const name = req.body.name;
     const type = req.body.type.trim();
     const amount = req.body.amount;
-    const term = req.body.duration;
+    const term = req.body.term;
+    const duration=req.body.duration
     const details = req.body.details;
     const TC = req.body.tc;
     const GE = req.body.ge;
     const benefits = req.body.benefits;
     console.log(type)
     if (type == "life".trim()) {
-       const Life =  new lifepPolicy(
+        console.log(req.body.premium)
+       const Life =  new lifePolicy(
         {
             name:name,
             type:type,
             coverAmount:amount,
-            duration:term,
+            duration:duration,
             term:req.body.term,
-            premium:req.body.premium,
+            Premium:req.body.premium,
             details:details,
             TC:TC,
             GE:GE,
@@ -655,7 +732,8 @@ exports.postaddpolicy = (req,res,next)=>{
     })
     }
     else if(type=="car".trim()){
-       const trans_policy = new transport_policy(
+        console.log('Entered car')
+       const trans_policy = new transportPolicy(
         {
             name:name,
             type:type,
@@ -671,7 +749,7 @@ exports.postaddpolicy = (req,res,next)=>{
     trans_policy.save().then(result=>{
         console.log("added new transport policy");
         console.log(result);
-        res.redirect("/designform");
+        res.redirect("/details");
     }).catch(err=>{
  console.log(err)
     })
@@ -761,43 +839,209 @@ exports.postsendemail=(req,res,next)=>{
     }
 }
     exports.changePassword=async (req, res, next) => {
-
-        const phone = '+91' + req.body.phone
         const email = req.body.email
+        const pass=req.body.password
+        const Type=req.body.Type
         const OTP = Math.floor(Math.random() * 1000000)
+        const payload = { some: 'data' };
+        const secret = crypto.randomBytes(32).toString('hex');
+        const options = {
+            algorithm: 'HS256',
 
-        passchange = new changePassword({
-            userID: req.user,
-            email: email,
-            OTP: OTP,
-            phone: phone,
-            createdAt: new Date()
-        })
+            expiresIn: '1h',
+        };
 
-        await passchange.save()
+        const token = jwt.sign(payload, secret, options).slice(0,20);
+        console.log(token)
+        let user
+        const usr= await User.findOne({email:email})
+        const admin=await Admin.findOne({email:email})
+        const agent=await Agent.findOne({email:email})
+        if(Type==='User'){
+            user=usr
+        }else if(Type==='Admin'){
+            user=admin
+        }
+        else if(Type==='Agent'){
+            user=agent
+        }
+        console.log('pasword user'+user)
+       if(user) {
+           console.log(user)
+           bcrypt.hash(pass,11).then(async hashed => {
+               passchange = new changePassword({
+                   userID: req.user,
+                   email: email,
+                   OTP: OTP,
+                   phone: '+91' + user.phone,
+                   createdAt: new Date(),
+                   newPassword:hashed,
+                   token:token
+               })
+               await passchange.save().then(()=>{
+                   console.log('OTP1 '+OTP)
+               })
 
-       await transporter.sendMail({
-            to: email,
-            from: 'dattasandeep000@gmail.com',
-            subject: 'Genesis Insurances OTP for password change!',
-            html: `Dear user your otp to change your password is ${OTP}`
-        });
+           })
 
 
-        const account_sid = process.env.TWILIO_ACCOUNT_SID
-        const auth_token = process.env.TWILIO_AUTH_TOKEN
-        const client = twilio(account_sid, auth_token);
 
-        client.messages.create({
-            body: 'Dear user your OTP to for changing password is '+OTP,
-            from: '+16813346876',
-            to: phone
-        })
-            .then(message => {console.log(message.sid);res.render('otpverifier',{email})})
-            .catch(error => console.error(error));
+           await transporter.sendMail({
+               to: email,
+               from: 'dattasandeep000@gmail.com',
+               subject: 'Genesis Insurances OTP for password change!',
+               html: `Dear user your otp to change your password is ${OTP}`
+           });
+
+
+           const account_sid = process.env.TWILIO_ACCOUNT_SID
+           const auth_token = process.env.TWILIO_AUTH_TOKEN
+           const client = twilio(account_sid, auth_token);
+
+           client.messages.create({
+               body: 'Dear user your OTP to for changing password is ' + OTP,
+               from: '+16813346876',
+               to: '+91'+user.phone
+           })
+               .then(message => {
+                   console.log('OTP2 '+OTP)
+                   console.log(message.sid);
+                   console.log('token1 '+token)
+                   console.log('/verifyOTP/email/'+email+'/token/'+token)
+                   res.redirect('/verifyOTP/'+token)
+               })
+               .catch(error => console.error(error));
+       }else{
+           res.render('change-password',{err:'Sorry your email or phone number are not linked to our Genesis!Please enter valid details.'})
+       }
 }
 
+exports.getOTPVerifier=(req,res,next)=>{
+    console.log('Entered getOTPVerify')
+    res.render('otpverifier',{err:'',token:req.params.token})
+}
 
-exports.verifyOTP=(req,res,next)=>{
+exports.verifyOTP=async (req, res, next) => {
+    console.log('Entered verifyOTP')
+    const otp = req.body.OTP
+    console.log(otp)
+    const ctoken = req.body.token
+    console.log('token '+ctoken)
+   const r = await changePassword.findOne({token: ctoken})
+        console.log(r)
+        if(r) {
+            if (r.OTP == otp) {
+                const ussr=await User.findOne({email:r.email})
+                const admn=await Admin.findOne({email:r.email})
+                if(ussr){
+                    User.updateOne({email: r.email}, {password: r.newPassword}).then(y => {
+                        console.log('Updated Password')
+                        res.redirect('/login')
+                    })
+                }
+                else if(admn){
+                    const admin=await Admin.findOne({email:r.email})
+                    if(admin){
+                        Admin.updateOne({email:r.email},{password:r.newPassword}).then(y => {
+                            console.log('Updated Password')
+                            res.redirect('/login')
+                        })
+                    }
+                }
+                else{
+                    const admin=await Agent.findOne({email:r.email})
+                    if(admin){
+                        Agent.updateOne({email:r.email},{password:r.newPassword}).then(y => {
+                            console.log('Updated Password')
+                            res.redirect('/login')
+                        })
+                    }
+                }
+
+
+
+            } else {
+                res.render('otpverifier', {err: 'Incorrect OTP.',token:''})
+            }
+
+
+        }
+}
+
+exports.getMyApps=async (req, res, next) => {
+
+    let arrr=[]
+    const arr1 = await transportApplications.find({applier:req.user._id})
+    const arr2 = await lifeApplications.find({applier:req.user._id})
+    const arr3 = await healthApplications.find({applier:req.user._id})
+     arrr=arrr.concat(arr1,arr2,arr3)
+    console.log(arrr[1].policyType)
+    res.render('my-applications',{arr:arrr})
+}
+
+exports.searchMyApps=async (req, res, next) => {
+
+    const search = req.body.search
+    const searchType = req.body.searchType
+    let arrr = []
+
+    if(searchType==='Life'){
+        const arr2 = await lifeApplications.find({applier: req.user._id})
+        res.render('my-applications', {arr: arr2})
+
+    }else if(searchType==='Motor'){
+        const arr1 = await transportApplications.find({applier: req.user._id})
+        res.render('my-applications', {arr: arr1})
+
+    }else if(searchType==='Health'){
+        const arr3 = await healthApplications.find({applier: req.user._id})
+        res.render('my-applications', {arr: arr3})
+
+    }else if(searchType==='Id') {
+
+        const arr1 = await transportApplications.find({_id: search})
+        const arr2 = await lifeApplications.find({_id: search})
+        const arr3 = await healthApplications.find({_id: search})
+        arrr = arrr.concat(arr1, arr2, arr3)
+
+
+        res.render('my-applications', {arr: arrr})
+    }
 
 }
+//
+// exports.postPay=async (req, res, next) => {
+//     const id = req.body.id
+//     const amount = req.body.amount
+//     const duration = req.body.duration
+//     console.log(duration)
+//     const term = req.body.term
+//
+//     if (!duration) {
+//         await transporter.sendMail({
+//             to: req.user.email,
+//             from: 'dattasandeep000@gmail.com',
+//             subject: 'Genesis Insurances Installment!',
+//             html: `Dear ${req.user.name} your payment for policy ${id} is successful`
+//         });
+//        const policy=await Policy.model.findById(id)
+//         User.updateOne({_id:req.user._id},{$pull:{currentPolicies:{_id:id}}},{$push:{policyHistory:policy}}).then(r=>{
+//             console.log('Added to history')
+//             res.redirect('/current-policies')
+//         })
+//     }
+//     else{
+//         await transporter.sendMail({
+//             to: req.user.email,
+//             from: 'dattasandeep000@gmail.com',
+//             subject: 'Genesis Insurances Installment!',
+//             html: `Dear ${req.user.name} your payment for policy ${id} is successful`
+//         });
+//         const policy=await Policy.model.findById(id)
+//
+//         User.updateOne({_id:req.user._id},{currentPolicies:{duration:duration-1}},).then(r=>{
+//             console.log('Added to history')
+//             res.redirect('/current-policies')
+//         })
+//     }
+// }

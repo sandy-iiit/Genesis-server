@@ -20,7 +20,7 @@
             <p style="font-size: 15px;color: #3e54ac;">Answered on: <%=arr[i].answerDate%></p>
 
         </div>
-
+<div style="width: 100%;display: flex;justify-content: space-evenly">
         <form class="ansblock"  action="/queries/<%=arr[i]._id%>" method="post">
                 <% if(arr[i].status==='Answered'){%>
                 <span class="inner-item A">
@@ -28,9 +28,18 @@
                 </span>
                 <%}else{%>
                 <textarea class="ansss" name="answer"></textarea>
-                    <button class="submitterrr" type="submit">Answer</button>
+                <button class="submitterrr" type="submit">Answer</button>
+
+
             </form>
 <%}%>
+        <form action="/deleteQuery/<%=arr[i]._id%>" method="post">
+            <input name="id" style="display: none" value="<%=arr[i]._id%>">
+            <input name="askedBy" value="<%=arr[i].askedBy%>" style="display: none">
+            <button class="submitterrr" type="submit">Delete</button>
+
+        </form>
+</div>
     </div>
 
     <%}%>

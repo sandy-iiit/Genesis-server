@@ -1,0 +1,42 @@
+<head>
+    <link rel="stylesheet" href="/css/agent-app.css">
+</head>
+<%- include('navbar.ejs') %>
+<div class="resdivv">
+
+    <div class="divdetailbox" >
+        <form class="detail-box" action="/verifyAgent/<%=r._id%>" method="post">
+            <p style="text-align:center"><h3 class="hidemeok">YOUR PROFILE</h3></p><br>
+            <div class="detail-item">
+                <p class="label">Name</p>  <input class="input" name="name" value="<%=r.name%>"></input>
+            </div>
+            <div class="detail-item">
+                <p class="label">Email</p>   <input class="input" name="email" value="<%=r.email%>"></input>
+            </div>
+            <div class="detail-item">
+                <p class="label">Age</p>   <input class="input" type="number" name="age" value="<%=r.age%>">
+            </div>
+            <div class="detail-item">
+                <p class="label">Sex</p>  <input class="input" value="<%=r.sex%>" disabled>
+            </div>
+            <div class="detail-item">
+                <p class="label">DOB</p>  <input class="input" value="<%=r.dob%>" disabled>
+            </div>
+            <div class="detail-item">
+                <p class="label">AADHAR</p>   <input class="input address" name="address" value="<%=r.aadhar%>">
+            </div> <div class="detail-item">
+                <p class="label">Address</p>   <input class="input address" name="address" value="<%=r.address%>">
+            </div>
+            <div class="detail-item">
+                <p class="label">Phone </p>   <input class="input" type="number" name="phone" value="<%=r.phone%>">
+            </div>
+            <div class="detail-item buttons">
+                <button class="btn1">
+                    Verify
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<%- include('footer.ejs') %>

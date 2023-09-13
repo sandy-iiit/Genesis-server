@@ -3,7 +3,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/healthpolicies.css">
-    <link rel="stylesheet" href="/css/navbar.css">
+<!--    <link rel="stylesheet" href="/css/navbar.css">-->
     
 <title>Health Insurance Policies By Genesis</title>
 
@@ -138,21 +138,22 @@
 <div class="containerone">
     <%for(let i=0;i<array.length;i++){%>
 
-    <div class="cardone">
-       <div class="ITEM1">
-          <h1 style="font-size: x-large;">Policy:<%=array[i].name%></h1>
+    <div class="cardone" >
+       <div class="ITEM1" style="color: darkblue">
+          <h1 style="font-size: x-large;">Policy Name:<br><strong><%=array[i].Name%></strong></h1>
        </div>
        <div class="ITEM1">
-           <h2 style="font-size: x-large;">Cover:<%=array[i].Cover%></h2>
+           <h2 style="font-size: x-large;">Cover:<%=array[i].Cover%>/-</h2>
        </div>
        <div class="ITEM1">
-          <h2 style="font-size: x-large;">Preimum:<%=array[i].Premium%></h2>
-       </div>
+          <h2 style="font-size: x-large;">Premimum<br>Annual:<%= array[i].Premium.Annual%>/-</h2>
+          <h2 style="font-size: x-large;">Monthly:<%= array[i].Premium.Monthly%>/-</h2>
+        </div>
        <div class="ITEM1">
-           <h2 style="font-size: x-large;">Term:<%=array[i].term%></h2>
+           <h2 style="font-size: x-large;">Term:<%=array[i].Term%> Years</h2>
        </div>
         <div class="ITEM1">
-            <a href="/policypage" class="viewpol" target="_blank"><button class="button">View Policy</button></a>
+            <a href="/policypage/<%= array[i]._id %>" class="viewpol" target="_blank"><button class="button">View Policy</button></a>
         </div>
 
    </div>

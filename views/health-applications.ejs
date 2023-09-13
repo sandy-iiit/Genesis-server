@@ -12,7 +12,8 @@
 <div class="container2">
 
     <form class="bar" action="/search-health-applications" method="post">
-     <input name="search" type="text"  class="search">
+        <select name="searchType"><option>Name</option><option>Id</option></select>
+        <input name="search" type="text"  class="search">
         <button class="search-submit" type="submit">Search</button>
     </form>
 
@@ -20,9 +21,12 @@
     <div class="items2">
 
         <div class="inner-item Q">
-            <div> Q  <%=i+1%>). First Name: <%=arr[i].firstName%></div>   <div> Last Name: <%=arr[i].lastName%></div>
+            <div>    First Name: <%=arr[i].firstName%></div>   <div> Last Name: <%=arr[i].lastName%></div>
         </div>
         <br>
+        <div class="inner-item Q">
+            <div>  Applied on: <%=arr[i].appliedDate%></div>   <div> Verified on: <%=arr[i].verificationDate%></div>
+        </div>
         <br>
         <div class="inner-item A">
             <a href="/health-applications/<%=arr[i]._id%>">Open application</a>

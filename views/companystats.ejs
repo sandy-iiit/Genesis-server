@@ -109,7 +109,7 @@
             border-radius: 5px;
             pointer-events: none;
             z-index: 3;
-            animation: fadeIn 0.5s ease;
+            animation: fadeIn 1s ease;
         }
 
         @keyframes fadeIn {
@@ -204,7 +204,7 @@
                     if (healthPolicyCount <= healthPolicyUsers) {
                         document.querySelector('.value4').textContent = healthPolicyCount;
                     }
-                }, 0.00001); // Update values every 10 milliseconds
+                }, 100); // Update values every 10 milliseconds
             })
 
             .catch(error => console.log(error));

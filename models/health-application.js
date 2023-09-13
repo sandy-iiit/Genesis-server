@@ -6,6 +6,7 @@ const Schema = mongoose.Schema;
 const healthSchema=new Schema({
     firstName:String,
     lastName:String,
+    sex:String,
     aadhar:String,
     pan:String,
     dobProof:String,
@@ -17,13 +18,15 @@ const healthSchema=new Schema({
     nomineeAge:String,
     nomineeRelation:String,
     policyId:String,
-    policyNum:String,
+    policyName:String,
+    policyType:String,
+    policyTerm:String,
     amount:String,
-    payType:String,
     applier:String,
     duration:String,
     appliedDate:String,
     verificationDate:String,
+    verificationStatus:String,
 
 })
 

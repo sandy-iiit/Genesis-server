@@ -3,15 +3,17 @@
 </head>
 
 <%- include('navbar.ejs')%>
-<img class="car" src="/images/car.svg">
+<!--<img class="car" src="/images/car.svg">-->
 <form class="form" action="/verifyTransport" method="post">
     <div class="row1"><p class="label">Name</p> <input value="<%=firstName%>"  name="firstName" type="text" class="row13" placeholder="firstName">
         <input value="<%=lastName%>" name="lastName" type="text" class="row13" placeholder="lastName"></div>
-
-    <div class="row2">
-        <div class="subrow"><p class="label">AADHAR</p> <a href="/files/<%=aadhar%>">Open AADHAR</a></div></div>
-        <div class="subrow"><p class="label">C Book</p> <a href="/files/<%=c_book%>">Open AADHAR</a></div></div>
+    <div class="row1">
+        <p class="label">Sex</p> <input name="sex" class="inner-row1" value="<%=sex%>" >
     </div>
+    <div class="row2">
+        <div class="subrow"><p class="label">AADHAR</p> <a href="/files/<%=aadhar%>">Open AADHAR</a></div>
+    <div class="subrow"><p class="label">C Book</p> <a href="/files/<%=c_book%>">Open AADHAR</a></div></div>
+
     <div class="row1">
         <p class="label">Vehicle Registration number</p> <input value="<%=regNum%>" name="regNum" class="inner-row1" placeholder="Registation number">
     </div>
@@ -45,12 +47,12 @@
         </div>
         <div class="subrow">
             <p class="label">Nominee Relation</p>
-            <input class="inner-row2" name="nomineeRelation">
+            <input class="inner-row2" name="nomineeRelation" value="<%=nomineeRelation%>">
         </div>
     </div>
     <div class="row2">
         <div class="subrow"><p class="label">Nominee AADHAR</p> <a href="/files/<%=nomineeAadhar%>">Open nominee AADHAR</a></div>
-    <div class="subrow"><p class="label">Nominee AddressProof</p> <a href="/files/<%=nomineeAddressProof%>">Open Nominee AddressProof</a></div>
+        <div class="subrow"><p class="label">Nominee AddressProof</p> <a href="/files/<%=nomineeAddressProof%>">Open Nominee AddressProof</a></div>
     </div>
     <div class="row1">
         <p class="label">Policy Id</p>
@@ -65,16 +67,21 @@
         <div class="subrow"> <p class="label">Amount</p><input value="<%=amount%>" class="inner-row2" type="number" name="amount" ></div>
         <div class="subrow"> <p class="label">Term</p><input value="<%=policyTerm%>" class="inner-row2" type="text" name="policyTerm" ></div>
     </div>
-    <p>Applied By </p> <input value="<%=applier%>" name="applier" >
+    <div class="row1">
+        <p class="label">Applied By </p> <input class="inner-row1" value="<%=applier%>" name="applier" >
+
+    </div>
     <input  name="policyType" style="display: none" value="<%=policyType%>">
     <input  name="appId" style="display: none" value="<%=appId%>">
 
-    <div class="row1"><p class="label">Verification Status</p> <input   name="status" type="text" class="row13" placeholder="Status">
-       </div>
+    <div class="row1"><p class="label">Verification Status</p> <input   name="verificationStatus" type="text" class="row13" placeholder="Status" value="<%=Status%>">
+    </div>
 
 
-    <button class="button" type="submit">Verify</button>
 
+    <%if(userType==='Admin'){%>
+        <button class="button" type="submit">Verify</button>
+    <%}%>
 
 
 </form>

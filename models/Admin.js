@@ -38,6 +38,7 @@ const adminSchema= new Schema({
         type:Date,
         required:false
     },
+    deleted:Boolean,
 })
 
 

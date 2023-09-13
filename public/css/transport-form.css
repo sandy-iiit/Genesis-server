@@ -1,174 +1,115 @@
-
-.car{
-    width: 80%;
-    height: 100%;
-    margin-left: -15%;
-    animation: slide 2s ;
-    animation-timing-function: linear;
-
-}
-
-.form{
-    width: 40%;
-    height: 120%;
-    display: flex;
-    flex-direction: column;
-    overflow: scroll;
+.form {
+    width: 70%;
+    margin: 20px auto;
     background-color: rgba(192,212,250,0.9);
-    justify-content: space-evenly;
+    padding: 50px;
     border-radius: 30px;
-    overflow-x: hidden;
-    margin-left: auto;
-    margin-right: 10%;
-    margin-top: -40%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.row1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    border-style: solid;
+    border-color: #3e54ac;
     padding: 10px;
-}
-
-.row1{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.row2{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.row13{
     border-radius: 30px;
-    border-style: none;
-    width: 30%;
-    height: 30px;
 }
 
-.subrow{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.inner-row1{
-    border-radius: 30px;
-    border-style: none;
-    width: 40%;
-    height: 30px;
-
-
-}
-
-.inner-row2{
-    border-radius: 30px;
-    border-style: none;
-    width: 120px;
-    height: 30px;
-}
-
-select > .inner-row2{
-    width: 80px;
-}
-
-.label{
+.label {
+    width: 55%;
+    margin-right: 10px;
     font-size: 20px;
-    color: #3E54AC;
-    padding-right: 20px;
+    color: #3e54ac;
 }
 
-.button{
+.row13 {
     width: 20%;
-    margin-left: 40%;
-    height: 40px;
+    padding-left: 10px;
+
+}
+
+.row2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    border-style: solid;
+    border-color: #3e54ac;
+    padding: 10px;
     border-radius: 30px;
-    border-style: none;
-    background-color: #3E54AC;
+}
+
+.inner-row1 {
+    width: 45%;
+    padding-left: 10px;
+}
+
+.inner-row2 {
+    width: 45%;
+    padding-left: 10px;
+
+}
+
+.car {
+    width: 50px;
+    margin-bottom: 10px;
+}
+
+.button {
+    background-color: #3e54ac;
     color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 45%;
 }
 
-
-
-
-::-webkit-scrollbar {
-    width: 5px;
+.subrow {
+    width: 45%;
+}
+input[type="file"] {
+    width: 80%;
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-    background: none;
-    height: 100%;
-
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: #888;
-    height: 5px;
-    border-radius: 3px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: none;
-}
-
-@keyframes slide {
-    0%{
-        margin-left: -100%;
-    }
-    20% { margin-left: -80%; }
-
-    40%{
-        margin-left: -60%;
-    }
-    60%{
-        margin-left: -40%;
-    }
-    80%{
-        margin-left: -20%;
-    }
-    100%{
-        margin-left: -15%;
-    }
-
-
-
-}
-
-
-
-@media screen and (max-width: 1000px){
-    .car{
-margin-top: -200px;
-    margin-left: 70px;
-        animation-timing-function: linear;
-    }
-
-    .form{
-        width: 90%;
-        margin-left: 20px;
-        margin-top: -200px;
-    }
-
-    .label{
-        font-size: 15px;
-    }
-    .inner-row1{
-        width: 35%;
-        padding-right: 5px;
-
-    }
-
-    .inner-row2{
-        width: 100px;
-    }
-
-
-
-
-    .subrow{
+@media screen and (max-width: 768px) {
+    .row1 {
         flex-direction: column;
-
+        align-items: flex-start;
     }
 
-}
+    .label {
+        width: 100%;
+        margin-bottom: 10px;
+    }
 
+    .row13 {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .row2 {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .inner-row1 {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .inner-row2 {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .subrow {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
