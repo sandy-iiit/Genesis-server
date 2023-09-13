@@ -1,78 +1,94 @@
 <head>
-    <style>
-        .signup-form {
-  width: 50%;
-  margin: auto;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  padding: 20px;
-}
+  <style>
+    .signup-form {
+      width: 50%;
+      margin: auto;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 20px;
+    }
 
-.signup-form h2 {
-  text-align: center;
-}
+    .signup-form h2 {
+      text-align: center;
+    }
 
-.signup-form label {
-  display: block;
-  margin-bottom: 10px;
-}
+    .signup-form label {
+      display: block;
+      margin-bottom: 10px;
+    }
 
-.signup-form input[type="text"],
-.signup-form input[type="email"],
-.signup-form input[type="password"],
-.signup-form input[type="date"],
-.signup-form textarea,
-.signup-form select {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-bottom: 10px;
-}
+    .signup-form input[type="text"],
+    .signup-form input[type="email"],
+    .signup-form input[type="password"],
+    .signup-form input[type="date"],
+    .signup-form textarea,
+    .signup-form select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
 
-.signup-form input[type="submit"] {
-  background-color: #3E54AC;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-left: 20%;
-}
+    .signup-form input[type="submit"] {
+      background-color: #3E54AC;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-left: 20%;
+    }
 
-.signup-form input[type="submit"]:hover {
-  background-color: #3E54AC;
-}
+    .signup-form input[type="submit"]:hover {
+      background-color: #3E54AC;
+    }
 
-.signup-form textarea {
-  height: 100px;
-}
+    .signup-form textarea {
+      height: 100px;
+    }
 
-.signup-form select {
-  height: 40px;
-}
+    .signup-form select {
+      height: 40px;
+    }
 
-.signup-form .error {
-  color: red;
-  margin-top: 5px;
-}
-
-    </style>
+    .signup-form .error {
+      color: red;
+      margin-top: 5px;
+    }
+    .success-message {
+            background-color: #3E54AC;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 5px;
+            padding: 5px;
+            margin: 5px;
+            display: none;
+        }
+  </style>
 </head>
 <%- include('navbar.ejs') %>
-<div class="signup-form">
+  <div class="signup-form">
     <h2>Employee Signup</h2>
-    <form method="post" action="/employeesignupposting">
+    <div id="success-message" class="success-message">
+      Your data is submitted. Please wait for approval from the manager.
+  </div>
+    <form id="employee-form">
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" required>
-  
+      <span id="name-error" class="error"></span>
+
       <label for="email">Email:</label>
       <input type="email" id="email" name="email" required>
-  
+      <span id="email-error" class="error"></span>
+
       <label for="age">Age:</label>
       <input type="text" id="age" name="age" required>
-  
+      <span id="age-error" class="error"></span>
+
       <label for="sex">Sex:</label>
       <select id="sex" name="sex" required>
         <option value="">--Select--</option>
@@ -80,23 +96,158 @@
         <option value="Female">Female</option>
         <option value="Other">Other</option>
       </select>
-  
+      <span id="sex-error" class="error"></span>
+
       <label for="aadhar">Aadhar Number:</label>
       <input type="text" id="aadhar" name="aadhar" required>
-  
+      <span id="aadhar-error" class="error"></span>
+
       <label for="address">Address:</label>
       <textarea id="address" name="address" required></textarea>
-  
+      <span id="address-error" class="error"></span>
+
       <label for="phone">Phone:</label>
       <input type="text" id="phone" name="phone" required>
-  
+      <span id="phone-error" class="error"></span>
+
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" required>
-  
+      <span id="password-error" class="error"></span>
+
       <label for="dob">Date of Birth:</label>
       <input type="date" id="dob" name="dob">
-  
-      <input type="submit" value="Sign Up">
+      <span id="dob-error" class="error"></span>
+
+      <input type="button" value="Sign Up" id="submit-button">
     </form>
   </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var submitButton = document.getElementById("submit-button");
+
+      submitButton.addEventListener("click", function () {
+
+        clearErrorMessages();
+
+        // Perform your client-side validation here
+        // Perform client-side validation
+        var name = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
+        var age = document.getElementById("age").value;
+        var sex = document.getElementById("sex").value;
+        var aadhar = document.getElementById("aadhar").value;
+        var address = document.getElementById("address").value;
+        var phone = document.getElementById("phone").value;
+        var password = document.getElementById("password").value;
+        var dob = document.getElementById("dob").value;
+
+        // Validate Name (e.g., must be at least 2 characters)
+        if (name.length < 2) {
+          displayError("name-error", "Name must be at least 2 characters long.");
+          return;
+        }
+
+        // Validate Email (using a regular expression)
+        if (!isValidEmail(email)) {
+          displayError("email-error", "Please enter a valid email address.");
+          return;
+        }
+
+        // Validate Age (e.g., must be a number between 18 and 99)
+        if (isNaN(age) || age < 18 || age > 99) {
+          displayError("age-error", "Age must be a number between 18 and 99.");
+          return;
+        }
+
+        // Validate Aadhar Number (e.g., must be a 12-digit number)
+        if (!/^\d{12}$/.test(aadhar)) {
+          displayError("aadhar-error", "Aadhar Number must be a 12-digit number.");
+          return;
+        }
+
+        // Validate Phone Number (e.g., must be a 10-digit number)
+        if (!/^\d{10}$/.test(phone)) {
+          displayError("phone-error", "Phone Number must be a 10-digit number.");
+          return;
+        }
+
+        // Perform other validations for sex, address, password, and dob as needed...
+
+        // If all validations pass, send the data via AJAX
+        var formData = {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      age: document.getElementById("age").value,
+      sex: document.getElementById("sex").value,
+      aadhar: document.getElementById("aadhar").value,
+      address: document.getElementById("address").value,
+      phone: document.getElementById("phone").value,
+      password: document.getElementById("password").value,
+      dob: document.getElementById("dob").value,
+    };
+        console.log(formData)
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/employeesignupposting", true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onload = function () {
+          if (xhr.status === 200) {
+            // Handle the success response from the server
+            var successMessage = document.getElementById("success-message");
+        successMessage.style.display = "block";
+        var employeeForm = document.getElementById("employee-form");
+        employeeForm.reset();
+            // You can redirect or show a success message here
+          } else {
+            // Handle errors from the server
+            console.error(xhr.responseText);
+            // Display server-side validation errors if applicable
+            var errors = JSON.parse(xhr.responseText);
+            displayServerErrors(errors);
+          }
+        };
+
+        xhr.onerror = function () {
+          // Handle network errors
+          console.error("Network error occurred.");
+        };
+
+        var queryString = Object.keys(formData)
+      .map(function (key) {
+        return encodeURIComponent(key) + "=" + encodeURIComponent(formData[key]);
+      })
+      .join("&");
+
+    // Send the form data as form-urlencoded
+    xhr.send(queryString);
+      });
+
+      // Example function to validate an email address
+      function isValidEmail(email) {
+        var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        return emailPattern.test(email);
+      }
+
+      // Function to display validation errors
+      function displayError(elementId, errorMessage) {
+        var errorElement = document.getElementById(elementId);
+        errorElement.textContent = errorMessage;
+      }
+
+      // Function to clear error messages
+      function clearErrorMessages() {
+        var errorElements = document.querySelectorAll(".error");
+        errorElements.forEach(function (element) {
+          element.textContent = "";
+        });
+      }
+
+      // Function to display server-side validation errors
+      function displayServerErrors(errors) {
+        for (var field in errors) {
+          displayError(field + "-error", errors[field]);
+        }
+      }
+    });
+  </script>
+
 <%- include('footer.ejs') %>
