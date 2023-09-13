@@ -11,30 +11,22 @@
     </div>
     <div class="qrygen">
         <h2>Grab a Quote</h2>
-        <form class="quoteform" action="/generatequote" method="post">
+        <form class="quoteform" id="myForm1">
 
             <input type="text" placeholder="name" name="quotnam" id="quotnam">
             <span id="quotnamError" class="error" style="text-align: center;color: #3E54AC;"></span>
 
-
-            <input type="email" placeholder="email" name="quotemail" id="quotemail">
+            <input type="text" placeholder="email" name="quotemail" id="quotemail">
             <span id="quotemailError" class="error" style="text-align: center;color: #3E54AC;"></span>
-
 
             <input type="text" placeholder="insurance type" name="quotinsurance" id="quotinsurance">
             <span id="quotinsuranceError" class="error" style="text-align: center;color: #3E54AC;"></span>
-
 
             <input type="text" placeholder="zip code" name="quotzip" id="quotzip">
             <span id="quotzipError" class="error" style="text-align: center;color: #3E54AC;"></span>
 
             <input type="text" placeholder="age" name="quotage" id="quotage">
             <span id="quotageError" class="error" style="text-align: center;color: #3E54AC;"></span>
-
-
-            <input type="date" placeholder=" date of birth" name="quotdob" id="quotdob">
-            <span id="quotdobError" class="error" style="text-align: center;color: #3E54AC;"></span>
-
 
             <input type="text" placeholder="coverage limit" name="quotcoverage" id="quotcoverage">
             <span id="quotcoverageError" class="error" style="text-align: center;color: #3E54AC;"></span>
@@ -47,10 +39,10 @@
     <div class="qrygen qrygen1">
         <h2>Drop a Review</h2>
         <h2></h2>
-        <form class="quoteform" action="/drop-review" method="post" onsubmit="return validateForm()">
+        <form id="myForm" class="quoteform">
             <input type="text" placeholder="Name" name="name" id="quotnam1" required>
             <span class="error" id="nameError" style="text-align: center;color: #3E54AC;"></span>
-            <input type="text" placeholder="Email" name="email" id="quotnam1" required>
+            <input type="text" placeholder="Email" name="email" id="email">
             <span class="error" id="emailError" style="text-align: center;color: #3E54AC;"></span>
             <textarea name="review" id="queryy" cols="3" rows="4" placeholder="Write your review"></textarea>
             <span class="error" id="queryError" style="text-align: center;color: #3E54AC;"></span>
@@ -187,8 +179,7 @@
         });
     });
 
-    function submitForm(event) {
-        event.preventDefault();
+    function submitForm() {
 
 
         const nameField = document.getElementById('quotnam');
@@ -196,7 +187,6 @@
         const insuranceField = document.getElementById('quotinsurance');
         const zipField = document.getElementById('quotzip');
         const ageField = document.getElementById('quotage');
-        const dobField = document.getElementById('quotdob');
         const coverageField = document.getElementById('quotcoverage');
 
         const nameError = document.getElementById('quotnamError');
@@ -204,7 +194,6 @@
         const insuranceError = document.getElementById('quotinsuranceError');
         const zipError = document.getElementById('quotzipError');
         const ageError = document.getElementById('quotageError');
-        const dobError = document.getElementById('quotdobError');
         const coverageError = document.getElementById('quotcoverageError');
 
 
@@ -213,8 +202,8 @@
         insuranceError.textContent = '';
         zipError.textContent = '';
         ageError.textContent = '';
-        dobError.textContent = '';
         coverageError.textContent = '';
+        let re2=/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/
 
 
         const namePattern = /^[A-Za-z\s]+$/;
@@ -229,11 +218,12 @@
         if (!namePattern.test(nameField.value.trim())) {
             nameError.textContent = '\u2757 Name must contain only letters and spaces';
             nameField.focus();
+            console.log('name error')
             return false;
         }
-
-        if (emailField.value.trim() === '') {
-            emailError.textContent = '\u2757 email is required';
+        console.log("regex test ", re2.test(emailField.value))
+        if (!re2.test(emailField.value)) {
+            emailError.textContent = '\u2757 Please enter a valid email!';
             emailField.focus();
             return false;
         }
@@ -273,7 +263,7 @@
 
     function validateForm() {
         const nameField = document.getElementById('quotnam1');
-        const emailField = document.getElementById('quotemail1');
+        const emailField = document.getElementById('email');
         const queryField = document.getElementById('queryy');
         const nameError = document.getElementById('nameError');
         const emailError = document.getElementById('emailError');
@@ -281,7 +271,7 @@
 
         const namePattern = /^[A-Za-z\s]+$/;
 
-
+        let re2=/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/
         nameError.textContent = '';
         emailError.textContent = '';
         queryError.textContent = '';
@@ -296,8 +286,8 @@
             return false;
         }
 
-        if (emailField.value.trim() === '') {
-            emailError.textContent = '\u2757 email is required';
+        if (!re2.test(emailField.value)) {
+            emailError.textContent = '\u2757 Please enter a valid email!';
             emailError.focus();
             return false;
         }
@@ -309,10 +299,71 @@
             return false;
         }
 
-
         return true;
     }
 
+        // Function to handle the form submission with AJAX
 
+    document.getElementById("myForm").onsubmit = function (e) {
+        e.preventDefault(); // Prevent default form submission
+        let form = document.getElementById("myForm");
+
+        const name = document.getElementById('quotnam1').value;
+        const email = document.getElementById('email').value;
+        const review = document.getElementById('queryy').value;
+
+        // Create an object to hold the review data
+
+        // Create an XMLHttpRequest object
+        let xhr = new XMLHttpRequest();
+
+        // Define the request method (POST) and the server URL
+        xhr.open("POST", "http://localhost:3000/drop-review", true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        if(validateForm()){
+            xhr.send(`name=${name}&email=${email}&review=${review}`);
+            form.reset()
+        }
+
+        // Define a callback function to handle the response
+
+    }
+ document.getElementById("myForm1").onsubmit = function (e) {
+        e.preventDefault(); // Prevent default form submission
+     let form = document.getElementById("myForm1");
+
+// Get the values of each input element
+     let quotnamValue = document.getElementById("quotnam").value;
+     let quotemailValue = document.getElementById("quotemail").value;
+     let quotinsuranceValue = document.getElementById("quotinsurance").value;
+     let quotzipValue = document.getElementById("quotzip").value;
+     let quotageValue = document.getElementById("quotage").value;
+     let quotcoverageValue = document.getElementById("quotcoverage").value;
+
+     const name = quotnamValue
+     const email = quotemailValue;
+     const insuranceType = quotinsuranceValue
+     const zip = quotzipValue
+     const age = quotageValue;
+     const coverageLimit = quotcoverageValue
+        // Create an object to hold the review data
+
+        // Create an XMLHttpRequest object
+        let xhr = new XMLHttpRequest();
+
+        // Define the request method (POST) and the server URL
+        xhr.open("POST", "http://localhost:3000/generatequote", true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        console.log(submitForm())
+        if(submitForm()){
+            xhr.send(`name=${name}&email=${email}&age=${age}&zip=${zip}
+            &insuranceType=${insuranceType}&dob=${dob}&coverageLimit=${coverageLimit}`)
+            console.log(age)
+            form.reset()
+        }
+
+        // Define a callback function to handle the response
+
+    }
 
 </script>

@@ -63,6 +63,7 @@ exports.getLifePolicy=(req,res,next)=>{
 
 exports.getLogin =(req,res,next)=>{
     res.render('login',{text:''})
+    // res.render('login2')
 }
 exports.getSignup =(req,res,next)=>{
     res.render('signup',{text:''})
@@ -225,32 +226,107 @@ exports.getBuyPolicylife = (req,res,next)=>{
 
 const alpha=['A','B','C','D','E','F','G','H']
 
-exports.postSignup=(req,res)=> {
-    console.log('Entered Post signup')
-    const name = req.body.name
-    const age = req.body.age
-    const sex = req.body.sex
-    const address = req.body.address
-    const email = req.body.email
-    const phone = req.body.phone
-    const password = req.body.password
-    const id = Math.floor(Math.random() * 100000)
-    console.log([name, email, age, sex, address, phone, password, id])
-    bcrypt.hash(password, 12).then(async hashedPassword => {
-        const user = await User.findOne({email: email})
-        console.log('User')
-        console.log(user)
-        if (!user) {
-            const passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$";
-            const phoneRegex = '^[6-9]\\d{9}$'
-            console.log(password)
-            const isValid = password.match(passwordRegex);
-            const isValid2 = phone.match(phoneRegex)
-            console.log('isvalid' + isValid)
-            console.log('isvalid2' + isValid2)
-            if (isValid && isValid2) {
+// exports.postSignup=(req,res)=> {
+//     console.log('Entered Post signup')
+//     const name = req.body.name
+//     const age = req.body.age
+//     const sex = req.body.sex
+//     const address = req.body.address
+//     const email = req.body.email
+//     const phone = req.body.phone
+//     const password = req.body.password
+//     const id = Math.floor(Math.random() * 100000)
+//     console.log([name, email, age, sex, address, phone, password, id])
+//     bcrypt.hash(password, 12).then(async hashedPassword => {
+//         const user = await User.findOne({email: email})
+//         console.log('User')
+//         console.log(user)
+//         if (user===null) {
+//             const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/;
+//             const phoneRegex = /^[6-9]\d{9}$/;
+//
+//             console.log(password);
+//             const isValid = passwordRegex.test(password);
+//             const isValid2 = phoneRegex.test(phone);
+//             console.log('isvalid' + isValid)
+//             console.log('isvalid2' + isValid2)
+//             if (isValid && isValid2) {
+//
+//                 console.log('User creation started!')
+//                 const user2 = new User({
+//                     id: id,
+//                     name: name,
+//                     age: age,
+//                     sex: sex,
+//                     email: email,
+//                     address: address,
+//                     phone: phone,
+//                     password: hashedPassword,
+//
+//                 });
+//
+//                 return user2.save()
+//
+//
+//             } else {
+//                 if (!isValid) {
+//                     res.render('signup', {
+//                         login: '',
+//                         text: 'Password must contain at least one uppercase letter, one lower case character, and one number, and be at least 8 characters long.'
+//                     })
+//                 } else if (!isValid2) {
+//                     res.render('signup', {
+//                         login: '',
+//                         text: 'Enter valid phone number'
+//                     })
+//                 }
+//             }
+//         }
+//         else{
+//             await res.render('signup',{text:'User already exists!',login:''})
+//         }
+//
+//     }).then(result => {
+//
+//
+//         res.redirect('/login')
+//
+//         return transporter.sendMail({
+//             to: email,
+//             from: 'dattasandeep000@gmail.com',
+//             subject: 'Genesis Insurances Signup succeeded!',
+//             html: '<h1>You successfully signed up!</h1>'
+//         });
+//
+//     })
+// }
 
-                console.log('User creation started!')
+exports.postSignup = (req, res) => {
+    console.log('Entered Post signup');
+    const name = req.body.name;
+    const age = req.body.age;
+    const sex = req.body.sex;
+    const address = req.body.address;
+    const email = req.body.email;
+    const phone = req.body.phone;
+    const password = req.body.password;
+    const id = Math.floor(Math.random() * 100000);
+    console.log([name, email, age, sex, address, phone, password, id]);
+    bcrypt.hash(password, 12).then(async (hashedPassword) => {
+        const user = await User.findOne({ email: email });
+        console.log('User');
+        console.log(user);
+        if (user === null) {
+            const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/;
+            const phoneRegex = /^[6-9]\d{9}$/;
+
+            console.log(password);
+            const isValid = passwordRegex.test(password);
+            const isValid2 = phoneRegex.test(phone);
+            console.log('isvalid' + isValid);
+            console.log('isvalid2' + isValid2);
+            if (isValid && isValid2) {
+                console.log('User creation started!');
                 const user2 = new User({
                     id: id,
                     name: name,
@@ -260,42 +336,43 @@ exports.postSignup=(req,res)=> {
                     address: address,
                     phone: phone,
                     password: hashedPassword,
-
                 });
 
-                return user2.save()
-
-
+                return user2.save().then((result) => {
+                    res.redirect('/login');
+                    return transporter.sendMail({
+                        to: email,
+                        from: 'dattasandeep000@gmail.com',
+                        subject: 'Genesis Insurances Signup succeeded!',
+                        html: '<h1>You successfully signed up!</h1>',
+                    });
+                });
             } else {
                 if (!isValid) {
                     res.render('signup', {
                         login: '',
-                        text: 'Password must contain at least one uppercase letter, one lower case character, and one number, and be at least 8 characters long.'
-                    })
+                        text: 'Password must contain at least one uppercase letter, one lowercase character, and one number, and be at least 8 characters long.',
+                    });
                 } else if (!isValid2) {
                     res.render('signup', {
                         login: '',
-                        text: 'Enter valid phone number'
-                    })
+                        text: 'Enter a valid phone number',
+                    });
                 }
             }
+        } else {
+            await res.render('signup', { text: 'User already exists!', login: '' });
         }
-
-    }).then(result => {
-
-
-        res.redirect('/login')
-
-        return transporter.sendMail({
-            to: email,
-            from: 'dattasandeep000@gmail.com',
-            subject: 'Genesis Insurances Signup succeeded!',
-            html: '<h1>You successfully signed up!</h1>'
-        });
-
     })
-}
+        .catch((error) => {
+            // Handle errors here
+            console.error(error);
+            res.status(500).send('Internal Server Error');
+        });
+};
 
+
+<<<<<<< HEAD
 exports.postemployeesignup = async (req, res, next) => {
     try {
         const {
@@ -309,6 +386,34 @@ exports.postemployeesignup = async (req, res, next) => {
             password,
             dob
         } = req.body;
+=======
+exports.postemployeesignup = (req,res,next)=>{
+  const name = req.body.name;
+ const  email =  req.body.email;
+ const   age = req.body.age;
+ const   sex = req.body.sex;
+ const   aadhar =req.body.aadhar;
+  const  address = req.body.address;
+  const  phone =  req.body.phone;
+  const  password = req.body.password;
+  const  dob=req.body.dob
+console.log(name,email,age,sex,aadhar,address,phone,password,dob);
+ 
+bcrypt.hash(password,12).then(async hashedpassword=>{
+    const employ = await employee.findOne({email:email})
+    console.log('employ')
+    console.log(employ)
+    if (employ===null) {
+        const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/;
+        const phoneRegex = /^[6-9]\d{9}$/;
+
+        console.log(password);
+        const isValid = passwordRegex.test(password);
+        const isValid2 = phoneRegex.test(phone);
+        console.log('isvalid' + isValid)
+        console.log('isvalid2' + isValid2)
+        if (isValid && isValid2) {
+>>>>>>> bfba7af07da074e4202ae33153ac0da2cc24f981
 
         console.log(name, email, age, sex, aadhar, address, phone, password, dob);
 
@@ -373,7 +478,6 @@ exports.postemployeesignup = async (req, res, next) => {
     exports.postLogin = async (req, res) => {
         const client = await MongoClient.connect('mongodb+srv://dattasandeep000:13072003@sandy.p06ijgx.mongodb.net/G1?retryWrites=true&w=majority', { useNewUrlParser: true });
         const db = await client.db();
-        const name = req.body.name
         const email = req.body.email
         const password = req.body.password
         const type = req.body.type
@@ -527,10 +631,9 @@ exports.postemployeesignup = async (req, res, next) => {
             to: email,
             from: 'dattasandeep000@gmail.com',
             subject: 'Genesis Insurances Agent found!',
-            html: '<h1>Dear customer,</h1><h2>Agent Name: G Manohar</h2><h2>Agent mail: mano@gmail.com</h2>'
+            html: `<h1>Dear ${name} ,</h1><h2>Agent Name: G Manohar</h2><h2>Agent mail: mano@gmail.com</h2>`
         }).then(r => {
                 console.log('Mail sent!!');
-                res.redirect('/')
             }
         ).catch(err => {
             console.log(err)
@@ -546,11 +649,11 @@ exports.postemployeesignup = async (req, res, next) => {
         const address = req.body.address
         const email = req.body.email
         const phone = req.body.phone
-
+        const age=req.body.age
         console.log('Name ' + name)
         if(req.session.type==='User'){
 
-            User.findByIdAndUpdate(req.user._id,{name: name, address: address, email: email, phone: phone})
+            User.findByIdAndUpdate(req.user._id,{name: name, address: address, email: email, phone: phone,age:age})
                 .then(r => {
                     res.redirect('/details')
                     console.log('User updated')
@@ -559,7 +662,7 @@ exports.postemployeesignup = async (req, res, next) => {
         }
         else if(req.session.type==='Admin'){
 
-            Admin.findByIdAndUpdate(req.user._id,{name: name, address: address, email: email, phone: phone})
+            Admin.findByIdAndUpdate(req.user._id,{name: name, address: address, email: email, phone: phone,age:age})
                 .then(r => {
                     res.redirect('/details')
                     console.log('Admin updated')
@@ -607,15 +710,14 @@ exports.postemployeesignup = async (req, res, next) => {
       }
 
     }
-exports.getdropReview=(req,res,next)=>{
-    res.render('write-review')
-}
+
     exports.dropReview=(req,res,next)=>{
 
+        console.log("entered dropreview")
         const name=req.body.name;
         const email=req.body.email;
         const review=req.body.review;
-
+ console.log(name,email,review)
         const r=new Review({
             name:name,
             email:email,
@@ -625,60 +727,59 @@ exports.getdropReview=(req,res,next)=>{
         r.save()
             .then(t=>{
                 console.log('Review sent')
-                res.redirect('/services')
+                // res.redirect('/services')
                 return transporter.sendMail({
                     to: email,
                     from: 'dattasandeep000@gmail.com',
                     subject: 'Genesis Insurances Review!',
-                    html: '<h1>ThankYou for your valuable review.We always try our best to keep up with your expectations!</h1>'
+                    html: `Dear ${name}, Thankyou for your valuable review.We always try our best to keep up with your expectations!`
                 });
             })
 
     }
     exports.quotegenerator= (req, res) => {
         console.log('Entered quote')
-        const name = req.body.quotnam;
-        const email = req.body.quotemail;
-        const insuranceType = req.body.quotinsurance;
-        const zip = req.body.quotzip;
-        const age = parseInt(req.body.quotage);
-        const dob = new Date(req.body.quotdob);
-        const coverageLimit = parseInt(req.body.quotcoverage);
-      
-       
+        const name = req.body.name;
+        const email = req.body.email;
+        const insuranceType = req.body.insuranceType;
+        const zip = req.body.zip;
+        const age = parseInt(req.body.age);
+        const dob = new Date(req.body.dob);
+        const coverageLimit = parseInt(req.body.coverageLimit);
+
         let quote = 0;
         switch (insuranceType) {
           case 'life':
          
             if (age < 18) {
-              quote = 50;
+              quote = 10000;
             } else if (age >= 18 && age < 35) {
-              quote = 100;
+              quote = 30000;
             } else if (age >= 35 && age < 50) {
-              quote = 200;
+              quote = 50000;
             } else {
-              quote = 500;
+              quote = 40000;
             }
             break;
           case 'transportation': 
             if (zip.startsWith('10') || zip.startsWith('11')) {
-              quote = 100;
+              quote = 10000;
             } else if (zip.startsWith('12') || zip.startsWith('13')) {
-              quote = 200;
+              quote = 20000;
             } else {
-              quote = 500;
+              quote = 15000;
             }
             break;
           case 'health':
          
             if (age < 18) {
-              quote = 50 + coverageLimit / 1000;
+              quote = 5000 + coverageLimit / 1000;
             } else if (age >= 18 && age < 35) {
-              quote = 100 + coverageLimit / 1000;
+              quote = 10000 + coverageLimit / 1000;
             } else if (age >= 35 && age < 50) {
-              quote = 200 + coverageLimit / 1000;
+              quote = 20000 + coverageLimit / 1000;
             } else {
-              quote = 500 + coverageLimit / 1000;
+              quote = 50000 + coverageLimit / 1000;
             }
             break;
           default:
@@ -694,7 +795,7 @@ exports.getdropReview=(req,res,next)=>{
           };
           transporter.sendMail(message).then(result=>{
             console.log(result);
-            res.redirect("/services");
+            // res.redirect("/services");
           }).catch(error=>{
             console.log(error);
           })
@@ -986,7 +1087,7 @@ exports.getMyApps=async (req, res, next) => {
     const arr2 = await lifeApplications.find({applier:req.user._id})
     const arr3 = await healthApplications.find({applier:req.user._id})
      arrr=arrr.concat(arr1,arr2,arr3)
-    console.log(arrr[1].policyType)
+    // console.log(arrr[1].policyType)
     res.render('my-applications',{arr:arrr})
 }
 
@@ -1018,41 +1119,5 @@ exports.searchMyApps=async (req, res, next) => {
 
         res.render('my-applications', {arr: arrr})
     }
-
+    
 }
-//
-// exports.postPay=async (req, res, next) => {
-//     const id = req.body.id
-//     const amount = req.body.amount
-//     const duration = req.body.duration
-//     console.log(duration)
-//     const term = req.body.term
-//
-//     if (!duration) {
-//         await transporter.sendMail({
-//             to: req.user.email,
-//             from: 'dattasandeep000@gmail.com',
-//             subject: 'Genesis Insurances Installment!',
-//             html: `Dear ${req.user.name} your payment for policy ${id} is successful`
-//         });
-//        const policy=await Policy.model.findById(id)
-//         User.updateOne({_id:req.user._id},{$pull:{currentPolicies:{_id:id}}},{$push:{policyHistory:policy}}).then(r=>{
-//             console.log('Added to history')
-//             res.redirect('/current-policies')
-//         })
-//     }
-//     else{
-//         await transporter.sendMail({
-//             to: req.user.email,
-//             from: 'dattasandeep000@gmail.com',
-//             subject: 'Genesis Insurances Installment!',
-//             html: `Dear ${req.user.name} your payment for policy ${id} is successful`
-//         });
-//         const policy=await Policy.model.findById(id)
-//
-//         User.updateOne({_id:req.user._id},{currentPolicies:{duration:duration-1}},).then(r=>{
-//             console.log('Added to history')
-//             res.redirect('/current-policies')
-//         })
-//     }
-// }

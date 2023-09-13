@@ -5,71 +5,71 @@
 <%- include('navbar.ejs')%>
 <!--<img class="car" src="/images/life-insurance.png">-->
 <form class="form" action="/health-form" method="post" enctype="multipart/form-data">
-    <div class="row1"><p class="label">Name</p> <input  name="firstName" type="text" class="row13" placeholder="First name">
-        <input name="lastName" type="text" class="row13" placeholder="Last name"></div>
+    <div class="row1"><p class="label">Name</p> <input  name="firstName" type="text" class="row13" placeholder="First name" required>
+        <input name="lastName" type="text" class="row13" placeholder="Last name" required></div>
 
     <div class="row1">
-        <p class="label">Sex</p> <input name="sex" class="inner-row1" placeholder="Sex">
+        <p class="label">Sex</p> <input name="sex" class="inner-row1" placeholder="Sex" required>
     </div>
     <div class="row2">
-        <div class="subrow"><p class="label">AADHAR</p> <input type="file" class="inner-row2" name="aadhar"></div>
-        <div class="subrow"><p class="label">PAN</p> <input type="file" class="inner-row2" name="pan"></div>
+        <div class="subrow"><p class="label">AADHAR</p> <input type="file" class="inner-row2" name="aadhar" required></div>
+        <div class="subrow"><p class="label">PAN</p> <input type="file" class="inner-row2" name="pan" required></div>
     </div>
     <div class="row2">
-        <div class="subrow"><p class="label">DOB Proof</p><input  name="dobProof" type="file" class="inner-row2"></div>
-        <div class="subrow"><p class="label">Health Certificate</p><input type="file" name="healthCertificate" class="inner-row2"></div>
+        <div class="subrow"><p class="label">DOB Proof</p><input  name="dobProof" type="file" class="inner-row2" required></div>
+        <div class="subrow"><p class="label">Health Certificate</p><input type="file" name="healthCertificate" class="inner-row2" required></div>
 
     </div>
 
     <div class="row1">
-        <input class="health_" name="healthCondition" placeholder="Any health defects you have suffered previously or are suffering currently">
+        <input class="health_" name="healthCondition" placeholder="Any health defects you have suffered previously or are suffering currently" required>
     </div>
 
     <div class="row1">
         <p class="label">Nominee Name</p>
-        <input name="nominee" class="inner-row1">
+        <input name="nominee" class="inner-row1" required>
 
     </div>
 
     <div class="row2">
         <div class="subrow">
             <p class="label">Nominee Age</p>
-            <input class="inner-row2" name="nomineeAge">
+            <input class="inner-row2" name="nomineeAge" required>
         </div>
         <div class="subrow">
             <p class="label">Nominee Relation</p>
-            <input class="inner-row2" name="nomineeRelation">
+            <input class="inner-row2" name="nomineeRelation" required>
         </div>
     </div>
     <div class="row2">
-        <div class="subrow"><p class="label">Beneficiary AADHAR</p> <input type="file" class="inner-row2" name="nomineeAadhar"></div>
-        <div class="subrow"><p class="label">Beneficiary AddressProof</p> <input type="file" class="inner-row2" name="nomineeAddressProof"></div>
+        <div class="subrow"><p class="label">Beneficiary AADHAR</p> <input type="file" class="inner-row2" name="nomineeAadhar" required></div>
+        <div class="subrow"><p class="label">Beneficiary AddressProof</p> <input type="file" class="inner-row2" name="nomineeAddressProof" required></div>
     </div>
 
 
     <div class="row1">
         <p class="label">Policy Id</p>
-        <input class="inner-row1" name="policyId" value="<%=r._id%>">
+        <input class="inner-row1" name="policyId" value="<%=r._id%>" required>
     </div>
     <div class="row1">
         <p class="label">Policy Name</p>
-        <input class="inner-row1" name="policyName" value="<%=r.Name%>">
+        <input class="inner-row1" name="policyName" value="<%=r.Name%>" required>
     </div>
 
 
     <div class="row2">
-        <div class="subrow"> <p class="label">Cover Amount</p><input class="inner-row2" type="text" name="amount" value="<%=r.Cover%>"></div>
-        <div class="subrow"> <p class="label">Policy Term</p><input name="policyTerm" class="inner-row2" value="<%=r.Premium.Annual%>">
+        <div class="subrow"> <p class="label">Cover Amount</p><input class="inner-row2" type="text" name="amount" value="<%=r.Cover%>" required></div>
+        <div class="subrow"> <p class="label">Policy Term</p><input name="policyTerm" class="inner-row2" value="<%=r.Premium.Annual%>" required>
         </div>
 
     </div>
 
     <div class="row1">
         <p class="label">Duration</p>
-        <input type="text" class="inner-row1" name="duration" value="<%=r.Term%>" >
+        <input type="text" class="inner-row1" name="duration" value="<%=r.Term%>" required>
     </div>
-    <input value="<%=applier%>" name="applier" style="display: none"/>
-    <input value="<%=r.Policytype%>" name="policyType" style="display: none"/>
+    <input value="<%=applier%>" name="applier" style="display: none" required>
+    <input value="<%=r.Policytype%>" name="policyType" style="display: none" required>
     <button class="button" type="submit">Submit</button>
 
 

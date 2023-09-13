@@ -130,7 +130,7 @@
   </div>
 </div>
 </div>
-<div c>
+<div>
 
 </div>
 
@@ -145,30 +145,17 @@
           <h2 style="text-align: center;">Find An Agent</h2><br>
           <!-- <p>insurance is not just a product, it's a promise. A promise that in your time of need, you won't have to
           face it alone</p> -->
-          <form class="agentform" action="/findanagent" method="post">
+          <form class="agentform" id="agent">
 
             <input type="text" id="name" class="aget" placeholder="Name" name="name" required><br>
 
             <input type="email" id="email" class="aget" placeholder="Email" name="email" required><br>
-
-            <button type="submit">submit</button>
+            <p id="err" style="color: red;visibility: hidden">Enter a valid email!</p>
+            <button style="background-color: #3e54ac;padding: 4px 3px;" type="submit">Submit</button>
           </form>
 
         </div>
-        <!-- <div class="captionagent caption">
-          <h2 style="text-align: center;">Find An Agent</h2><br>
-          <p>insurance is not just a product, it's a promise. A promise that in your time of need, you won't have to
-          face it alone</p> -->
-        <!-- <form class="agentform">
 
-          <input type="text" id="name" class="aget" placeholder="Name" name="name" required><br>
-
-          <input type="email" id="email" class="aget" placeholder="Email" name="email" required><br>
-
-          <button type="submit">submit</button>
-        </form> -->
-        <!--
-                </div>   -->
       </div>
     </div>
     <div class="slide">
@@ -311,39 +298,37 @@
   prevBtn.addEventListener('click', prevSlide);
   nextBtn.addEventListener('click', nextSlide);
 
+  document.getElementById("agent").onsubmit = function (e) {
+    e.preventDefault(); // Prevent default form submission
+    let form = document.getElementById("agent");
 
-  // Get the carousel elements
-  const carousel1 = document.querySelector('.carousel1');
-  const slides1 = carousel1.querySelector('.slides1');
-  const slide1 = slides1.querySelectorAll('.slide')[0];
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
 
-  // Set the initial slide index
-  let currentSlide1 = 0;
+// Get the values from the input elements
+    const name = nameInput.value;
+    const email = emailInput.value;
 
-  // Function to move to the next slide
-  function nextSlide1() {
-    if (currentSlide1 === slide1.length - 1) {
-      currentSlide1 = 0;
-    } else {
-      currentSlide1++;
+
+    // Create an object to hold the review data
+    let re2=/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/
+
+    // Create an XMLHttpRequest object
+    let xhr = new XMLHttpRequest();
+
+    // Define the request method (POST) and the server URL
+    xhr.open("POST", "http://localhost:3000/findanagent", true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    if(re2.test(email)){
+      xhr.send(`name=${name}&email=${email}`);
+      form.reset()
     }
-    moveSlide1();
-  }
-  function prevSlide1() {
-    if (currentSlide1 === 0) {
-      currentSlide1 = slide1.length - 1;
-    } else {
-      currentSlide1--;
+    else{
+      document.getElementById('err').style.visibility='visible'
     }
-    moveSlide1();
+
+    // Define a callback function to handle the response
+
   }
-
-  function moveSlide1() {
-    slides1.style.transform = `translateX(-${currentSlide1 * slide1[0].offsetWidth}px)`;
-  }
-
-  carousel1.querySelector('.next1').addEventListener('click', nextSlide1);
-  carousel1.querySelector('.prev1').addEventListener('click', prevSlide1);
-
 
 </script>

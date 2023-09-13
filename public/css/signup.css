@@ -25,14 +25,14 @@ input:focus{
 
 
 .signup-age{
-    width: 35%;
+    width: 100px;
     height: 40px;
     border-radius: 30px;
     border-style: none;
     font-size: 20px;
     color: #3E54AC;
     animation: lilbtn 3s;
-    margin-left: 33%;
+    margin-left: 20%;
     margin-top: 4%;
     margin-bottom: 4%;
 
@@ -107,9 +107,9 @@ input::placeholder{
 }
 
 .agesex{
-    width: 400px;
+    width: 300px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
 }
 

@@ -11,43 +11,45 @@
 
     <form id="form" class="signup-form" action="/signup" method="post">
         <img class="loginimg" src="css/okoklogo-transformed.ico">
-        <p style="color: red"><%=text%></p>
+        <p  style="color: red"><%=text%></p>
+        <p id="err" style="color: red"></p>
         <div>
             <input name="name" id="name" type="text" class="signup-input" placeholder="Name" required>
         </div>
         <div>
-            <input name="email" id="email" type="text" class="signup-input" placeholder="Email" required>
+            <input onfocusout="func1()" name="email" id="email" type="text" class="signup-input" placeholder="Email" required>
         </div>
 
         <div class="agesex">
             <div>
-                <input name="age" id="age" type="number" class="signup-age" min="18"  placeholder="Age" required>
+                <input name="age" id="age" type="number" class="signup-age" min="18" max="80" placeholder="Age" required>
             </div>
             <div>
-                <select name="sex" required>
+                <select style="width: 110px" name="sex" required>
                     <option>Sex</option>
                     <option>Male</option>
                     <option>Female</option>
                 </select>
             </div>
         </div>
-
-
-
-        <div>
-            <input name="address" id="address" type="text" class="signup-input" placeholder="Address" required>
-        </div>
-        <div>
-            <input name="password" id="password" type="password" class="signup-input" placeholder="Password" required>
-        </div>
         <div class="phone">
             <div>
                 <input id="country-code" type="number" class="country-code" placeholder="+91">
             </div>
             <div>
-                <input name="phone" id="phone" type="number" class="signup-phn" placeholder="Phone Number" required>
+                <input onfocusout="func2()" name="phone" id="phone" type="number" class="signup-phn" placeholder="Phone Number" required>
             </div>
         </div>
+
+
+        <div>
+            <input name="address" id="address" type="text" class="signup-input" placeholder="Address" required>
+        </div>
+
+        <div>
+            <input name="password" id="password" type="password" class="signup-input" placeholder="Password" required>
+        </div>
+
 
         <button style="background-color: gray" class="submit" type="submit" disabled>
             Submit
@@ -64,36 +66,56 @@
 </body>
 
 <script>
+        let re2=/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/
 
         const passwordInput = document.getElementById('password');
         const phoneInput=document.getElementById('phone')
         const submitButton = document.querySelector('button[type="submit"]');
         const form=document.getElementById('form')
+        const email=document.getElementById('email')
 
-        const passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$";
+        let flag2=true
+        function func1(){
+            console.log(!re2.test(email.value))
+            if (!re2.test(email.value)) {
+                document.getElementById("err").innerHTML = "&#10005; Please enter a valid email address.";
+                flag2=false
+            }
+        }
+
+        if(flag2===true) {
+
+
+            const passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$";
+            const phoneRegex = /^[6-9]\d{9}$/;
             const passwordValue = passwordInput.value;
-        const phoneRegex='^[6-9]\\d{9}$'
-
-        passwordInput.addEventListener('input', function() {
-            console.log(passwordInput.value)
-            console.log(passwordInput.value.match(passwordRegex))
-
-            if (passwordInput.value.match(passwordRegex)){
-                submitButton.disabled = false;
-                submitButton.style.backgroundColor='#3e54ac'
-            } else {
-                submitButton.disabled = true;
+            function func2(){
+                console.log(!phoneRegex.test(phoneInput.value))
+                if(!phoneRegex.test(phoneInput.value)){
+                    document.getElementById("err").innerHTML = "&#10005; Please enter a valid phone number.";
+                }
             }
-        });
-        form.addEventListener('onsubmit', function(e) {
-            console.log(phoneInput.value)
-            console.log(phoneInput.value.match(phoneRegex))
+            passwordInput.addEventListener('input', function () {
+                console.log(passwordInput.value)
+                console.log(passwordInput.value.match(passwordRegex))
 
-            if (!phoneInput.value.match(phoneRegex)){
-                e.preventDefault()
-                alert('Phone number isn\'t valid')
-            }
-        });
+                if (passwordInput.value.match(passwordRegex)) {
+                    submitButton.disabled = false;
+                    submitButton.style.backgroundColor = '#3e54ac'
+                } else {
+                    submitButton.disabled = true;
+                }
+            });
+            form.addEventListener('onsubmit', function (e) {
+                console.log(phoneInput.value)
+                console.log(phoneInput.value.match(phoneRegex))
+
+                if (!phoneInput.value.match(phoneRegex)) {
+                    e.preventDefault()
+                    alert('Phone number isn\'t valid')
+                }
+            });
+        }
 
 
 
