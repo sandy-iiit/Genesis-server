@@ -3,14 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="f35d4e65-15aa-49ef-b5f3-c5bb5a41da83" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/details.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/details.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/signup.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/signup.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/details.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/details.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/health-form.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/health-form.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/life-form.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/life-form.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/individualHealthApplication.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/individualHealthApplication.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/lifepolicy.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/lifepolicy.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/signup.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/signup.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/transport-form.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/transport-form.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +128,8 @@
       <workItem from="1694404908532" duration="1442000" />
       <workItem from="1694495486717" duration="287000" />
       <workItem from="1694495819678" duration="609000" />
-      <workItem from="1694525470517" duration="9218000" />
+      <workItem from="1694525470517" duration="10784000" />
+      <workItem from="1694578776304" duration="3782000" />
     </task>
     <servers />
   </component>
