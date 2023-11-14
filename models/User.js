@@ -51,6 +51,7 @@ const userSchema= new Schema({
         }
     ],
     deleted:Boolean,
+
 })
 
 
