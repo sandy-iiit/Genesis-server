@@ -436,21 +436,6 @@ exports.postSignup = (req, res) => {
 };
 
 
-<<<<<<< HEAD
-exports.postemployeesignup = async (req, res, next) => {
-    try {
-        const {
-            name,
-            email,
-            age,
-            sex,
-            aadhar,
-            address,
-            phone,
-            password,
-            dob
-        } = req.body;
-=======
 exports.postemployeesignup = (req,res,next)=>{
   const name = req.body.name;
  const  email =  req.body.email;
@@ -477,68 +462,45 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
         console.log('isvalid' + isValid)
         console.log('isvalid2' + isValid2)
         if (isValid && isValid2) {
->>>>>>> bfba7af07da074e4202ae33153ac0da2cc24f981
 
-        console.log(name, email, age, sex, aadhar, address, phone, password, dob);
+            console.log('Employee creation started!')
+           
+            const Employee = new employee({name:name,
+                email:email,
+                age:age,
+               sex:sex,
+            aadhar:aadhar,
+            address:address,phone:phone,password:hashedpassword,dob:dob})
+            console.log(Employee)
+             return Employee.save()
 
-        const existingEmployee = await employee.findOne({
-            email: email
-        });
 
-        if (existingEmployee) {
-            // Handle case where employee already exists
-            return res.render('signup', {
-                login: '',
-                text: 'Employee already exists'
-            });
+        } else {
+            if (!isValid) {
+                res.render('signup', {
+                    login: '',
+                    text: 'Password must contain at least one uppercase letter, one lower case character, and one number, and be at least 8 characters long.'
+                })
+            } else if (!isValid2) {
+                res.render('signup', {
+                    login: '',
+                    text: 'Enter valid phone number'
+                })
+            }
         }
-
-        const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/;
-        const phoneRegex = /^[6-9]\d{9}$/;
-        const isValidPassword = password.match(passwordRegex);
-        const isValidPhone = phone.match(phoneRegex);
-
-        if (!isValidPassword || !isValidPhone) {
-            // Handle password and phone validation errors
-            return res.render('signup', {
-                login: '',
-                text: isValidPassword
-                    ? 'Enter valid phone number'
-                    : 'Password must contain at least one uppercase letter, one lowercase character, and one number, and be at least 8 characters long.'
-            });
-        }
-
-        const hashedPassword = await bcrypt.hash(password, 12);
-        const newEmployee = new employee({
-            name,
-            email,
-            age,
-            sex,
-            aadhar,
-            address,
-            phone,
-            password: hashedPassword,
-            dob
-        });
-
-        const savedEmployee = await newEmployee.save();
-
-        // Send email to the employee
-        await transporter.sendMail({
-            to: email,
-            from: 'dattasandeep000@gmail.com',
-            subject: 'Thanks for enrolling',
-            html: '<h1>Meet you in the office</h1>'
-        });
-
-        
-    } catch (error) {
-        // Handle any errors that might occur during the process
-        console.error(error);
-       
     }
-};
+}).then(result=>{
+    res.redirect('/login')
+    console.log(result)
+    return transporter.sendMail({
+        to: email,
+        from: 'dattasandeep000@gmail.com',
+        subject: 'Thanks for enrolling',
+        html: '<h1>meet you in office</h1>'
+    });
 
+})
+}
     exports.postLogin = async (req, res) => {
         // console.log(req)
         // const client = await MongoClient.connect('mongodb+srv://dattasandeep000:13072003@sandy.p06ijgx.mongodb.net/G1?retryWrites=true&w=majority', { useNewUrlParser: true });
@@ -602,7 +564,6 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
             const admin=await Admin.findOne({email: email})
             console.log(admin)
             if (admin) {
-                console.log(admin.password,password)
                 bcrypt.compare(password, admin.password, (err, matched) => {
                     console.log(password)
                     console.log(admin.password)
