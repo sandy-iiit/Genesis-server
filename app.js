@@ -92,7 +92,7 @@ app.get('*',(req,res)=>{
 mongoose.connect(process.env.MONGODB_URI1)
     .then(result => {
         app.listen(4000);
-        console.log('Server running in the port 3000')
+        console.log('Server running in the port 4000')
     })
     .catch(err => {
         console.log(err);

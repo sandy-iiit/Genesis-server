@@ -52,36 +52,40 @@ exports.getAnswerQueries=(req,res,next)=>{
     queries.find({status:'Not Answered'}).then(arr=>{
         // console.log(arr)
 
-        res.render('answer-queries',{arr:arr})
+        res.json(arr)
     })
 
 
 }
 
 exports.getAlreadyAnsweredQueries=(req,res,next)=>{
-    queries.find({status:'Answered',answeredBy:req.user._id}).then(arr=>{
+    console.log(req.body)
+    queries.find({status:'Answered',answeredBy:req.body.id}).then(arr=>{
+        console.log("Answered queries")
         console.log(arr)
 
-        res.render('answer-queries',{arr:arr})
+        res.status(200).json(arr)
     })
 }
 
 exports.getReviews=async (req, res, next) => {
 
-    reviews.find({}).then(arrr=>{
-        res.render('reviews',{arr:arrr,type:req.session.type})
-    })
+    const revs = await reviews.find({})
+    res.status(200).json(revs);
+
+
 
 }
 
 exports.postAnswer=(req,res,next)=>{
 
-    const params=req.params.queryId;
-    const answer=req.body.answer + '---Answered by agent: '+req.user.name
-    queries.findByIdAndUpdate(params,{answer:answer,status:'Answered',answeredBy:req.user._id,answerDate:new Date().toDateString()})
+    const params=req.body.queryId;
+    const answer=req.body.answer + '---Answered by agent: '+req.body.name
+    queries.findByIdAndUpdate(params,{answer:answer,status:'Answered',answeredBy:req.body.userId,answerDate:new Date().toDateString()})
         .then(query=>{
             console.log('Query was answered')
-            res.redirect('/details')
+            res.status(200).json({msg:"Query Answered!"})
+            // res.redirect('/details')
         })
         .catch(err=>{
             console.log(err)
@@ -742,10 +746,10 @@ exports.searchPolicies=async (req, res, next) => {
 
 exports.deleteQuery=async (req, res, next) => {
 
-    const id = req.params.id
+    const id = req.body.id
 
     await queries.findByIdAndDelete(id)
-    res.redirect('/answer-queries')
+    res.status(200).json({msg:"Deleted Query successfully"})
 }
 
 exports.deleteReview=async (req, res, next) => {
@@ -761,5 +765,7 @@ exports.deleteReview=async (req, res, next) => {
         subject: 'Genesis Insurances Application for Agent verified and accepted!',
         html: `<h2>Dear customer your review with ID ${id} has been removed for breaching the community guidelines!! </p>`
     });
-    res.redirect('/reviews')
+    // res.redirect('/reviews')
+    res.status(200).json({msg:"Deleted Review successfully"})
+
 }
