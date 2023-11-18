@@ -15,6 +15,53 @@
         <button class="button button5" onclick="openInfo('buyPolicy')">Buy Policy</button>
     </ul>
 </div>
+
+<!-- <div class="loading-page">
+    <h2 class="loading-text">Loading...</h2>
+  </div>
+  <script>
+        
+    // Function to show the loading animation
+  function showLoadingAnimation() {
+  var loadingPage = document.querySelector(".loading-page");
+  if (loadingPage) {
+      loadingPage.style.display = "flex";
+  }
+  }
+  
+  // Function to hide the loading animation
+  function hideLoadingAnimation() {
+  var loadingPage = document.querySelector(".loading-page");
+  if (loadingPage) {
+      loadingPage.style.display = "none";
+  }
+  }
+  
+  // Show the loading animation when the page is reloaded
+  window.addEventListener("beforeunload", function () {
+  showLoadingAnimation();
+  });
+  
+  // Display a loading overlay or animation
+  //showLoadingAnimation();
+  
+  // Delay the page unload for a specific amount of time (e.g., 3 seconds)
+  setTimeout(function () {
+  // Remove the loading overlay or animation
+  hideLoadingAnimation();
+  
+  // Allow the page to unload
+  window.removeEventListener("beforeunload", beforeUnloadHandler);
+  },500); // 3000 milliseconds (3 seconds)
+  
+  // Hide the loading animation after the page is fully loaded
+  //window.addEventListener("load", function () {
+  // hideLoadingAnimation();
+  //});
+  
+  
+    </script> -->
+  
 <div class="content" id="content">
     <div class="Details info" id="Details">
         <div class="info1">
@@ -44,7 +91,7 @@
     </div>
 
     <div class="buyPolicy info" id="buyPolicy" style="display:none">
-        <a href="/transport-form/<%=arr._id%>">final payment page</a>
+        <a href="/transport-form/<%=arr._id%>" style="text-align:center;" onclick="showLoadingAnimation()"><h5>Final Payment Page</h5></a>
     </div>
 </div>
 
@@ -62,3 +109,4 @@
     }
 </script>
 </html>
+

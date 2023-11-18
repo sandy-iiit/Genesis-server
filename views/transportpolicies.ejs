@@ -74,12 +74,74 @@
     <img src="/images/compinc.png" alt="comping" class="compimg">
 </div>
 
+<div class="animator">
+    <ul>
+        <li> <img class="image_anim" height="300vh" width="150vh" src="/vehin/Insurance.png" alt="healthinsurance" />Vehicle insurance</li>
+        <li> <img class="image_anim" height="300vh" widt="150vh" src="/healthanim/protect.jpg" alt="sliced mango. " />Protector</li>
+        <li> <img class="image_anim" height="300vh" widt="150vh" src="/vehin/v211batch11-filmful-191-caraccident_2.jpg" alt="a bunch of blueberries. " />Save your life</li>
+        <li> <img class="image_anim" height="300vh" widt="150vh" src="/healthanim/KYC.jpg" alt="a pineapple sitting on a table. " />KYC</li>
+        <li> <img class="image_anim" height="300vh" widt="150vh" src="/healthanim/support.jpg" alt="frozen raspberries. " /> We support you</li>
+        <li> <img class="image_anim" height="300vh" widt="150vh" src="/healthanim/insurancenofear.jpg" alt="a sliced strawberry. " />No fear of unexpected</li>
+        <li> <img class="image_anim" height="300vh" widt="150vh" src="/healthanim/guarantee.jpg" alt="an arrangement of assorted sliced fruits. " />You are guaranteed</li>
+        <li> <img class="image_anim" height="300vh" widt="150vh" src="/vehin/car-vehicle-puja-kit-1506862129-3369070.jpeg" alt="sliced watermelons. " />Vehicle Value In India</li>
+        <li> <img class="image_anim" height="300vh" widt="150vh" src="/healthanim/security.png" alt="half of a lime. " />Secured</li>
+        <li> <img class="image_anim" height="300vh" widt="150vh" src="/healthanim/priority.jpg" alt="a single cherry with stem. " />You are our priority</li>
+      </ul>
+</div>
+
+<script>
+
+    // Function to check if an element is in the viewport
+function isInViewport(element) {
+    var rect = element.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
+</script>
+<script>
+    function animatePolicyCards() {
+        var policyCards = document.querySelectorAll(".card12");
+        policyCards.forEach(function (card) {
+            if (isInViewport(card)) {
+                card.style.opacity = 1;
+                card.style.transform = "translateY(-10)";
+            }
+        });
+    }
+    
+    // Listen for scroll events and trigger the animation
+    window.addEventListener("scroll", animatePolicyCards);
+    
+    // Initial animation check in case some cards are already in the viewport on page load
+    window.addEventListener("load", animatePolicyCards);
+    
+    const observer =new IntersectionObserver((entries) => {
+        entries.forEach((entry)=>{
+            console.log(entry)
+            if (entry.isIntersecting)
+            {
+                entry.target.classList.add('show');
+            }
+            else{
+                entry.target.classList.remove('show');
+            }
+
+        });
+    });
+
+    const hiddenElements = document.querySelectorAll('.hidden');
+    hiddenElements.forEach((el)=> observer.observe(el));
+</script>
 <div class="container12">
     <%for(let i=0;i<array.length;i++){%>
 
-    <div class="card12">
-       <div class="item12">
-          <h4><%=array[i].name%></h4>
+    <div class="card12 show">
+       <div class="item12" style="color: darkblue" >
+          <h4 class="sparkle u-hover--sparkle";font-size: x-large;><%=array[i].name%></h4>
        </div>
        <div class="item12">
           <h4>IDV : <%=array[i].amount%></h4>

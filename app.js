@@ -11,7 +11,8 @@ const flash = require('connect-flash');
 const app=express()
 app.set('view engine', 'ejs');
 app.set('views', 'views');
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 require('dotenv').config()
 const userRoutes=require('./routes/userRoutes')
@@ -22,14 +23,16 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 app.use(cookieParser());
 
-app.use(cors()); // This allows requests from any origin
-
+app.use(cors({
+    origin: ['http://localhost:3000','http://10.0.14.118:3000'],
+    credentials: true,
+}));
 
 
 const store = new MongoDBStore({
     uri: process.env.MONGODB_URI2,
     collection: 'sessions',
-    // expires: 10*60,
+    expires: 2*60,
 
 });
 // const csrfProtection = csrf();
@@ -43,6 +46,7 @@ app.use(
 );
 
 app.use(flash());
+app.use(userRoutes)
 
 app.use((req, res, next) => {
     if (!req.session.user) {
@@ -80,7 +84,6 @@ app.use((req, res, next) => {
     // res.locals.csrfToken = req.csrfToken();
     next();
 });
-app.use(userRoutes)
 
 app.get('*',(req,res)=>{
     res.render('404')
@@ -88,8 +91,8 @@ app.get('*',(req,res)=>{
 
 mongoose.connect(process.env.MONGODB_URI1)
     .then(result => {
-        app.listen(3000);
-        console.log('Server running in the port 3000')
+        app.listen(4000);
+        console.log('Server running in the port 4000')
     })
     .catch(err => {
         console.log(err);

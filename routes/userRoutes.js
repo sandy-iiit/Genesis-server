@@ -45,7 +45,7 @@ router.get('/details',userController.getDetails)
 router.get('/my-details',userController.getMyDetails)
 router.get('/change-password',userController.getPasswordChange)
 router.get('/my-policies',userController.getMyPolicies)
-router.get('/my-queries',userController.getMyQueries)
+router.post('/my-queries',userController.getMyQueries)
 router.get('/current-policies',userController.getCurrentPolicies)
 // router.get('/policyHistory',userController.getPolicyHistory)
 router.get('/payment',userController.getPayment)
@@ -66,13 +66,15 @@ router.get('/policypage',userController.getHealthPolicyPage)
 router.get('/contactus',userController.getContactUs)
 router.post('/signup',userController.postSignup)
 router.post('/login',userController.postLogin)
-router.get('/logout',userController.postLogout)
+router.post('/logout',userController.postLogout)
 router.get('/settings',userController.getSettings)
+router.get('/check',userController.getChecked)
 router.post('/deleteacc',userController.deleteAcc)
 router.post('/write-query',userController.postWriteQuery)
 router.post('/findanagent',userController.postFindAgent)
-router.post('/updatedetails',userController.updateDetails)
+router.post('/updateDetails',userController.updateDetails)
 router.post('/drop-review',userController.dropReview)
+
 router.post('/health-form', upload.fields([
     { name: 'aadhar', maxCount: 1 },
     { name: 'pan', maxCount: 1 },
@@ -95,6 +97,7 @@ router.post('/transport-form', upload.fields([
     { name: 'nomineeAadhar', maxCount: 1 },
     { name: 'nomineeAddressProof', maxCount: 1 },
 ]),filesController.transportUploader)
+
 router.post('/change-password',userController.changePassword)
 router.post('/verifyOTP',userController.verifyOTP)
 router.get('/verifyOTP/:token',userController.getOTPVerifier)
@@ -107,9 +110,9 @@ router.get('/data',adminController.getData)
 // Admin
 
 router.get('/answer-queries',adminController.getAnswerQueries)
-router.post('/deleteQuery/:id',adminController.deleteQuery)
+router.post('/deleteQuery',adminController.deleteQuery)
 router.post('/deleteReview',adminController.deleteReview)
-router.get('/answered-queries',adminController.getAlreadyAnsweredQueries)
+router.post('/answered-queries',adminController.getAlreadyAnsweredQueries)
 router.get('/health-applications',adminController.getHealthApplications)
 router.get('/health-applications/:appId',adminController.getIndividualHealthApplication)
 router.post('/search-health-applications',adminController.getHealthApplicationsSearch)

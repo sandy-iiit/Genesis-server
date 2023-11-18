@@ -1,7 +1,7 @@
 {
   "name": "genesis",
   "version": "1.0.0",
-  "description": "",
+  "description": "README:GENESIS INSURANCE WEBSITE",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -35,5 +35,14 @@
     "sequelize": "^6.29.3",
     "sqlite3": "^5.1.6",
     "twilio": "^4.10.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sandy-iiit/Genesis.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/sandy-iiit/Genesis/issues"
+  },
+  "homepage": "https://github.com/sandy-iiit/Genesis#readme"
 }

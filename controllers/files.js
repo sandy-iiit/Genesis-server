@@ -17,6 +17,7 @@ conn.once('open', function() {
 const HealthApplication=require('../models/health-application')
 const LifeApplication=require('../models/life-application')
 const TransportApplication=require('../models/transport-application')
+
 exports.healthUploader= async function(req, res, next) {
 
     const healthApplication = new HealthApplication({
@@ -39,7 +40,7 @@ exports.healthUploader= async function(req, res, next) {
         policyName:req.body.policyName,
         policyType:req.body.policyType,
         amount:req.body.amount,
-        applier:req.user._id,
+        applier:req.body.applier,
         duration:req.body.duration,
         appliedDate:new Date().toDateString(),
         verificationStatus:'',
@@ -90,7 +91,8 @@ exports.lifeUploader= async function(req, res, next) {
 }
 
 exports.transportUploader= async function(req, res, next) {
-    console.log(req.body.sex,)
+    console.log("Entered transport uploader")
+    console.log(req.body)
     const transportApplication = new TransportApplication({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -107,8 +109,6 @@ exports.transportUploader= async function(req, res, next) {
         vehicleType:req.body.vehicleType,
         engine:req.body.engine,
         chassis:req.body.chassis,
-
-
         nominee:req.body.nominee,
         nomineeAge:req.body.nomineeAge,
         nomineeRelation:req.body.nomineeRelation,
@@ -118,17 +118,18 @@ exports.transportUploader= async function(req, res, next) {
         policyTerm:req.body.policyTerm,
         amount:req.body.amount,
         payType:req.body.payType,
-        applier:req.user._id,
+        applier:req.body.applier,
         appliedDate:new Date().toDateString(),
         verificationStatus:'',
         verificationDate:'',
-
-
     });
-    await transportApplication.save();
+    await transportApplication.save().then((r)=>{
+        console.log(r._id)
+    });
 
     console.log('File uploaded successfully');
-    res.redirect('/')
+    res.status(200).json({msg:"File has been uploaded successfully!!"})
+    // res.redirect('/')
 }
 
 exports.getFile= async function(req, res) {

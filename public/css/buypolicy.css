@@ -1,3 +1,11 @@
+.buyPolicy
+{
+  padding: 5px;
+  margin: auto;
+  
+}
+
+
 .button {
     background-color: #4CAF50;
     border: none;
@@ -98,3 +106,39 @@
     }
 
 }
+/* Styles for the loading page */
+.loading-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff; /* Initially white background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    overflow: hidden; /* Hide overflow to prevent scrollbars */
+  }
+  
+  /* Styles for the loading text */
+  .loading-text {
+    font-size: 48px; /* Adjust font size as needed */
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(45deg, pink, violet, darkblue, lightgreen, yellow, orange, red, pink);
+    background-size: 200% 100%; /* Initial position of the gradient */
+    animation: gradientTransition 3s linear infinite;
+  }
+  
+  /* Keyframes animation for the gradient transition */
+  @keyframes gradientTransition {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+  }
+  

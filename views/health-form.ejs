@@ -49,27 +49,27 @@
 
     <div class="row1">
         <p class="label">Policy Id</p>
-        <input class="inner-row1" name="policyId" value="<%=r._id%>" required>
+        <input class="inner-row1" name="policyId" readonly value="<%=r._id%>" required>
     </div>
     <div class="row1">
         <p class="label">Policy Name</p>
-        <input class="inner-row1" name="policyName" value="<%=r.Name%>" required>
+        <input class="inner-row1" name="policyName" readonly value="<%=r.Name%>" required>
     </div>
 
 
     <div class="row2">
-        <div class="subrow"> <p class="label">Cover Amount</p><input class="inner-row2" type="text" name="amount" value="<%=r.Cover%>" required></div>
-        <div class="subrow"> <p class="label">Policy Term</p><input name="policyTerm" class="inner-row2" value="<%=r.Premium.Annual%>" required>
+        <div class="subrow"> <p class="label">Cover Amount</p><input class="inner-row2" type="text" name="amount" readonly value="<%=r.Cover%>" required></div>
+        <div class="subrow"> <p class="label">Policy Term</p><input name="policyTerm" class="inner-row2" readonly value="<%=r.Premium.Annual%>" required>
         </div>
 
     </div>
 
     <div class="row1">
         <p class="label">Duration</p>
-        <input type="text" class="inner-row1" name="duration" value="<%=r.Term%>" required>
+        <input type="text" class="inner-row1" readonly name="duration" value="<%=r.Term%>" required>
     </div>
-    <input value="<%=applier%>" name="applier" style="display: none" required>
-    <input value="<%=r.Policytype%>" name="policyType" style="display: none" required>
+    <input value="<%=applier%>" name="applier" readonly style="display: none" required>
+    <input value="<%=r.Policytype%>" name="policyType" readonly style="display: none" required>
     <button class="button" type="submit">Submit</button>
 
 

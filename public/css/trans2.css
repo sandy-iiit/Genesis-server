@@ -1,3 +1,164 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+*,
+body,
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #383d4d #1e1f26;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: clamp(20px, 2.5vw, 36px);
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  text-align: center;
+}
+
+li>img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 3rem;
+}
+
+.animator>ul {
+  padding: 0;
+  margin: 0;
+  display: block;
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: auto;
+  white-space: nowrap;
+  text-align: center;
+  scroll-behavior: smooth;
+}
+
+.animator>ul>li {
+  position: sticky;
+  left: 0;
+  width: min(50vw, 350px);
+  display: inline-block;
+  text-align: center;
+  background-color:rgba(192,212,250) ;
+  color:royalblue;
+  padding-bottom: 1.5rem;
+  font-size: clamp(18px, 2.5vw, 22px);
+  box-shadow: -10px 0 30px 0 rgba(0, 0, 0, 0.25);
+  margin-left: -4px;
+}
+
+.animator
+{
+    padding: 5px;
+
+    margin : 3vh 8vh 100px 100px;
+    background-color: aliceblue;
+    border:2px solid black;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+}
+
+
+/* Define your color variables */
+:root {
+    --c-border: royalblue;
+    --c-background: #E3E4DB;
+    --c-text: #441151;
+  } 
+
+
+  
+  .sparkle {
+    max-width: 10em;
+    font-size:x-large;
+    color: var(--c-text);
+    margin: auto auto;
+  }
+  
+  .u-hover--sparkle {
+    box-sizing: border-box;
+    position: relative;
+    padding: 0.75em;
+  }
+  
+  .u-hover--sparkle::before,
+  .u-hover--sparkle::after {
+    content: '';
+    box-sizing: border-box;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    transform-origin: center;
+  }
+  
+  .u-hover--sparkle::before {
+    border-top: 0.2em solid var(--c-border);
+    border-bottom: 0.2em solid var(--c-border);
+    transform: scale3d(0, 1, 1);
+  }
+  
+  .u-hover--sparkle::after {
+    border-left: 0.2em solid var(--c-border);
+    border-right: 0.2em solid var(--c-border);
+    transform: scale3d(1, 0, 1);
+  }
+  
+  .u-hover--sparkle:hover::before,
+  .u-hover--sparkle:hover::after {
+    transform: scale3d(1, 1, 1);
+    transition: transform 900ms;
+  }
+  
+  .u-hover--sparkle:hover {
+    cursor: pointer;
+  }
+
+  .hidden{
+    opacity: 0;
+    filter: blur(0px);
+    transform:translateX(-2%);
+    transition: all 1s; 
+}
+
+  .show
+  {
+    opacity: 1;
+    filter:blur(0);
+    transform: translateX(0);
+
+  }
+  .card12:nth-child(1) {
+    transition-delay: 0ms;
+  }
+  .card12:nth-child(2) {
+    transition-delay: 200ms;
+  }
+  .card12:nth-child(3) {
+    transition-delay: 400ms; /* Add 'ms' here */
+  }
+  .card12:nth-child(4) {
+    transition-delay: 600ms;
+  }
+  
+  
+
 body{
     background-color: white;
     margin: 0;
@@ -51,6 +212,7 @@ a{
 }
 
 .card12{
+    
     border-radius: 20px;
     border-style: solid;
     flex: 0 1 23%;
@@ -68,6 +230,7 @@ a{
 .card12:hover{
     height: 450px;
     width: 28%;
+    transition:;
     margin: 2%;box-shadow: 13px 16px 21px 5px rgba(62,84,172,0.84);
 
 

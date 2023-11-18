@@ -3,9 +3,169 @@
     padding: 0;
 } */
 
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+*,
+body,
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #383d4d #1e1f26;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: clamp(20px, 2.5vw, 36px);
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  text-align: center;
+}
+
+li>img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 3rem;
+}
+
+.animator>ul {
+  padding: 0;
+  margin: 0;
+  display: block;
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: auto;
+  white-space: nowrap;
+  text-align: center;
+  scroll-behavior: smooth;
+}
+
+.animator>ul>li {
+  position: sticky;
+  left: 0;
+  width: min(50vw, 350px);
+  display: inline-block;
+  text-align: center;
+  background-color:rgba(192,212,250) ;
+  color:royalblue;
+  padding-bottom: 1.5rem;
+  font-size: clamp(18px, 2.5vw, 22px);
+  box-shadow: -10px 0 30px 0 rgba(0, 0, 0, 0.25);
+  margin-left: -4px;
+}
+
+.animator
+{
+
+    margin : 3vh 8vh 100px 100px;
+    padding:5px;
+    background-color: aliceblue;
+    border:2px solid black;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+}
+
+/* Define your color variables */
+:root {
+    --c-border: royalblue;
+    --c-background: #E3E4DB;
+    --c-text: #441151;
+  } 
 
 
+  
+  .sparkle {
+    max-width: 10em;
+    font-size:x-large;
+    color: var(--c-text);
+    margin: auto auto;
+  }
+  
+  .u-hover--sparkle {
+    box-sizing: border-box;
+    position: relative;
+    padding: 0.75em;
+  }
+  
+  .u-hover--sparkle::before,
+  .u-hover--sparkle::after {
+    content: '';
+    box-sizing: border-box;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    transform-origin: center;
+  }
+  
+  .u-hover--sparkle::before {
+    border-top: 0.2em solid var(--c-border);
+    border-bottom: 0.2em solid var(--c-border);
+    transform: scale3d(0, 1, 1);
+    transform: scale3d(1, 1, 1);
+    transition: transform 1000ms;
 
+  }
+  
+  .u-hover--sparkle::after {
+    border-left: 0.2em solid var(--c-border);
+    border-right: 0.2em solid var(--c-border);
+    transform: scale3d(1, 0, 1);
+    transform: scale3d(1, 1, 1);
+    transition: transform 1500ms;
+
+  }
+  
+  .u-hover--sparkle:hover::before,
+  .u-hover--sparkle:hover::after {
+  }
+  
+  .u-hover--sparkle:hover {
+    cursor: pointer;
+  }
+
+  .hidden{
+    opacity: 0;
+    filter: blur(0px);
+    transform:translateX(-2%);
+    transition: all 1s;
+
+  }
+
+  .show
+  {
+    opacity: 1;
+    filter:blur(0);
+    transform: translateX(0);
+
+  }
+  .cardone:nth-child(1) {
+    transition-delay: 0ms;
+  }
+  .cardone:nth-child(2) {
+    transition-delay: 200ms;
+  }
+  .cardone:nth-child(3) {
+    transition-delay: 400ms; /* Add 'ms' here */
+  }
+  .cardone:nth-child(4) {
+    transition-delay: 600ms;
+  }
+  
+  
 
 body{
     background-color: white;
@@ -176,6 +336,8 @@ margin-left: 100px;
     align-items: center;
 }
 
+
+
 .genimage
 {
     height: 40vh;
@@ -238,6 +400,11 @@ margin-left: 100px;
     height: 400px;
     flex-direction: column;
     justify-content: space-evenly;
+    /* opacity: 0;Initially, cards are hidden */
+  /* transform: scale(0.8); Initially, cards are scaled down */
+
+  /* Add transition for smooth animation */
+  /* transition: opacity 0.5s ease, transform 0.5s ease; */
     /* font: 10px sans-serif; */
 }
 
@@ -412,9 +579,19 @@ margin-left: 100px;
         flex-direction: column;
         margin: 2%; */
         justify-content: space-evenly;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px; /* Adjust the gap between cards as needed */
+        margin-top: 100vh; /* Push cards below the viewport initially */
      }
      .cardone
      {
+        opacity: 0; /* Initially hidden */
+        transform: translateY(20px); /* Move cards down slightly */
+        transition: opacity 0.5s, transform 0.5s;
+    
         flex: 0 0 80%;
       }
 
@@ -448,4 +625,27 @@ margin-left: 100px;
         border-radius: 15%;
     }
     
+}
+/* Styles for the policy cards container */
+.policy-cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust the gap between cards as needed */
+    margin-top: 100vh; /* Push cards below the viewport initially */
+}
+
+/* Styles for the policy card */
+.policy-card {
+    width: 200px; /* Adjust the card width as needed */
+    height: 200px; /* Adjust the card height as needed */
+    background-color: #3498db;
+    color: #fff;
+    text-align: center;
+    line-height: 200px; /* Center content vertically */
+    font-size: 24px;
+    opacity: 0; /* Initially hidden */
+    transform: translateY(20px); /* Move cards down slightly */
+    transition: opacity 0.5s, transform 0.5s;
 }

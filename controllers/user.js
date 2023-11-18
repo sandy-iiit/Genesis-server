@@ -41,6 +41,63 @@ const transporter = nodemailer.createTransport(
     }
 );
 
+exports.getChecked=async (req, res) => {
+    // if(req.session.user){
+    //   res.status(200).json(req.session.user)
+    // }
+    // else{
+    //     res.status(200).json({msg:"Session Expired!!"})
+    // }
+
+    console.log("Check")
+    const jwtToken = req.cookies.jwtToken;
+
+    if (jwtToken) {
+        // JWT token is present, you can verify it or use it as needed
+        try {
+            const decoded = jwt.verify(jwtToken, 'secretKey');
+            console.log(decoded.userId)
+            const user = await User.findById(decoded.userId);
+            const admin = await Admin.findById(decoded.userId);
+            const agent = await Agent.findById(decoded.userId)
+            console.log('Decoded JWT:', decoded);
+            // console.log(user)
+            if(user!==null){
+                let u={...user._doc,type:"User"}
+                console.log(u)
+                res.status(200).json(u);
+
+            }
+            else if(admin!==null){
+
+
+                let u={...admin._doc,type:"Admin"}
+                console.log(u)
+
+                res.status(200).json(u);
+
+            }
+            else if(agent!==null){
+                let u={...agent._doc,type:"Agent"}
+
+                res.status(200).json(u);
+            }
+
+            else{
+                res.status(200).json({success: false, message: 'Unauthorized'});
+
+            }
+        } catch (error) {
+            console.error('Error verifying JWT:', error);
+            res.status(200).json({success: false, message: 'Unauthorized'});
+        }
+    } else {
+        // JWT token not present in the cookie
+        res.status(200).json({success: false, message: 'Unauthorized'});
+    }
+}
+
+
 exports.getHealthPolicyPage=(req,res)=>{
     res.render('policypage')
 }
@@ -161,10 +218,12 @@ const arr3=[{Q:"Cant I Pay my installments collectively for my plan id of Motor3
     {Q:"Cant I Pay my installments collectively for my plan id of Motor32AP?",A:'Yes'},
     {Q:"Cant I Pay my installments collectively for my plan id of Motor32AP?",A:'Yes'}]
 exports.getMyQueries=async (req, res) => {
-    console.log(req.user._id)
-    const arrr = await Query.find( {askedBy: req.user._id})
-    console.log(arrr[0])
-    res.render('my-queries', {arr: arrr})
+    const userId=req.body.userId
+    console.log(req.body.userId)
+    const arrr = await Query.find( {askedBy: userId})
+    console.log(arrr.length)
+    // res.render('my-queries', {arr: arrr})
+    res.status(200).json(arrr)
 }
 
 exports.getWriteQuery=(req,res)=>{
@@ -172,8 +231,8 @@ exports.getWriteQuery=(req,res)=>{
 }
 
 exports.getTransportForm=async (req, res) => {
-    await transportPolicy.findById(req.params.id).then((r) => {
-        res.render('transport-form', {r: r,applier:req.user._id})
+    await transportPolicy.findById(req.body.id).then((r) => {
+        // res.render('transport-form', {r: r,applier:req.user._id})
 
     })
 }
@@ -336,32 +395,37 @@ exports.postSignup = (req, res) => {
                     address: address,
                     phone: phone,
                     password: hashedPassword,
+                    type:"User"
+
                 });
 
                 return user2.save().then((result) => {
-                    res.redirect('/login');
+                    // res.redirect('/login');
+                    const u={
+                        userId:result._id
+                    }
+                    const token = jwt.sign(u,"secretKey", { expiresIn: '1h' });
+                    res.cookie('jwtToken', token, { httpOnly: true, expiresIn: new Date(Date.now() + 60 * 60 * 1000) });
+                    res.status(200).json(result)
                     return transporter.sendMail({
                         to: email,
                         from: 'dattasandeep000@gmail.com',
                         subject: 'Genesis Insurances Signup succeeded!',
                         html: '<h1>You successfully signed up!</h1>',
                     });
+
                 });
             } else {
                 if (!isValid) {
-                    res.render('signup', {
-                        login: '',
-                        text: 'Password must contain at least one uppercase letter, one lowercase character, and one number, and be at least 8 characters long.',
-                    });
+                   res.status(200).json({msg:"Incorrect Password format!"})
                 } else if (!isValid2) {
-                    res.render('signup', {
-                        login: '',
-                        text: 'Enter a valid phone number',
-                    });
+                    res.status(200).json({msg:"Incorrect Phone number format!"})
+
                 }
             }
         } else {
-            await res.render('signup', { text: 'User already exists!', login: '' });
+            res.status(200).json({msg:"User already exists!"})
+            // await res.render('signup', { text: 'User already exists!', login: '' });
         }
     })
         .catch((error) => {
@@ -476,9 +540,11 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
 };
 
     exports.postLogin = async (req, res) => {
-        const client = await MongoClient.connect('mongodb+srv://dattasandeep000:13072003@sandy.p06ijgx.mongodb.net/G1?retryWrites=true&w=majority', { useNewUrlParser: true });
-        const db = await client.db();
+        // console.log(req)
+        // const client = await MongoClient.connect('mongodb+srv://dattasandeep000:13072003@sandy.p06ijgx.mongodb.net/G1?retryWrites=true&w=majority', { useNewUrlParser: true });
+        // const db = await client.db();
         const email = req.body.email
+        console.log(email)
         const password = req.body.password
         const type = req.body.type
         console.log(type)
@@ -490,67 +556,92 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
                             console.log(password)
                             console.log(user.password)
                             if (!matched) {
-                                res.render('login', {text: 'Invalid Password!', login: false})
+                                res.json({msg: 'Incorrect credentials!'})
                                 console.log('Not matched')
                                 // res.send('Incorrect password')
                             } else if (matched) {
-                                req.session.isLoggedIn = true;
-                                req.session.user = user;
-                                req.session.type=type;
 
-                                return req.session.save(err => {
-                                    console.log(err);
-                                    res.redirect('/');
-                                    console.log('You have logged in')
-                                    setTimeout(()=>{
-                                        console.log('Entered Timeout')
-                                        req.session.destroy()},900*1000)
-                                });
+                                const u={
+                                    userId:user._id,
+                                }
+                                let a={...user,type:"User"}
+
+                                const token = jwt.sign(u, "secretKey", { expiresIn: '1h' });
+                                res.cookie('jwtToken', token, { httpOnly: true, expiresIn: new Date(Date.now() + 60 * 60 * 1000) });
+                                res.status(200).json(a._doc)
+
+                                // req.session.isLoggedIn = true;
+                                // req.session.user = user;
+                                // req.session.type=type;
+                                //
+                                //  req.session.save(err => {
+                                //     console.log(err);
+                                //      res.status(200).json(req.session.user)
+                                //     console.log('You have logged in')
+                                //     setTimeout(()=>{
+                                //         console.log('Entered Timeout')
+                                //         // res.clearCookie("id")
+                                //         req.session.destroy()},200*1000)
+                                // });
+
+
 
                                 // console.log(req.cookies['user'].name)
                             }
                         })
                     } else {
-                        res.render('login', {text: 'Enter valid email and username!'})
+                        // res.render('login', {text: 'Enter valid email and username!'})
+                        res.json({msg:"No such user!"})
 
                     }
 
 
 
         }else if(type==='Admin'){
+            console.log("Entered admin")
             const admin=await Admin.findOne({email: email})
-
+            console.log(admin)
             if (admin) {
                 console.log(admin.password,password)
                 bcrypt.compare(password, admin.password, (err, matched) => {
                     console.log(password)
                     console.log(admin.password)
                     if (!matched) {
-                        res.render('login', {text: 'Invalid Password!', login: false})
+                        // res.render('login', {text: 'Invalid Password!', login: false})
+                        res.status(200).json({msg:"Incorrect credentials!"})
                         console.log('Not matched')
                         // res.send('Incorrect password')
                     } else if (matched) {
-                        req.session.isLoggedIn = true;
-                        req.session.user = admin;
-                        console.log('admin session set')
-                        
-                        req.session.type=type;
-                        return req.session.save(err => {
-                            console.log(err);
-                            res.redirect('/');
-                            console.log('You have logged in')
-                            
-                            setTimeout(()=>{
-                                console.log('Entered Timeout')
-                                req.session.destroy()},900*1000)
-                        });
+                        // req.session.isLoggedIn = true;
+                        // req.session.user = admin;
+                        // console.log('admin session set')
+                        //
+                        // req.session.type=type;
+                        // return req.session.save(err => {
+                        //     console.log(err);
+                        //     res.status(200).json(req.session.user);
+                        //     console.log('You have logged in')
+                        //
+                        //     setTimeout(()=>{
+                        //         console.log('Entered Timeout')
+                        //         req.session.destroy()},900*1000)
+                        //     // res.status(200).json(admin)
+                        //
+                        // });
+                        const u={
+                            userId:admin._id,
+                        }
+                        let a={...admin,type:"User"}
+                        const token = jwt.sign(u, "secretKey", { expiresIn: '1h' });
+                        res.cookie('jwtToken', token, { httpOnly: true, expiresIn: new Date(Date.now() + 60 * 60) });
+                        res.status(200).json(a._doc)
 
                         // console.log(req.cookies['user'].name)
                     }
                 })
             } else {
-                res.render('login', {text: 'Enter valid email and username!'})
-
+                // res.render('login', {text: 'Enter valid email and username!'})
+                res.json({msg:"No such Admin!"})
             }
         }
 
@@ -561,32 +652,42 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
                     console.log(password)
                     console.log(employ.password)
                     if (!matched) {
-                        res.render('login', {text: 'Invalid Password!', login: false})
+                        res.json({msg: 'Incorrect credentials!'})
                         console.log('Not matched')
                         // res.send('Incorrect password')
                     } else if (matched) {
                         if(employ.isActive == true){
-                        req.session.isLoggedIn = true;
-                        req.session.user = employ;
-                        console.log(req.session.user)
-                        console.log('employee session set')
-                        console.log()
-                        req.session.type=type;
-                        return req.session.save(err => {
-                            console.log(err);
-                            res.redirect('/');
-                            console.log('You have logged in employee')
-                            setTimeout(()=>{
-                                console.log('Entered Timeout')
-                                req.session.destroy()},15000*1000)
-                        });
+                        // req.session.isLoggedIn = true;
+                        // req.session.user = employ;
+                        // console.log(req.session.user)
+                        // console.log('employee session set')
+                        // console.log()
+                        // req.session.type=type;
+                        // return req.session.save(err => {
+                        //     console.log(err);
+                        //     // res.redirect('/');
+                        //     res.status(200).json(req.session.user)
+                        //     console.log('You have logged in employee')
+                        //     setTimeout(()=>{
+                        //         console.log('Entered Timeout')
+                        //         req.session.destroy()},3000*1000)
+                        // });
+                            const u={
+                                userId:employ._id,
+                            }
+                            let a={...employ,type:"User"}
+                            const token = jwt.sign(u, "secretKey", { expiresIn: '1h' });
+                            res.cookie('jwtToken', token, { httpOnly: true, expiresIn: new Date(Date.now() + 60 * 60) });
+                            res.status(200).json(a._doc)
                       
                         // console.log(req.cookies['user'].name)
                     }
                     else{
-                        res.render('login', {text: 'wait for approval', login: false})
+                        // res.render('login', {text: 'wait for approval', login: false})
                         console.log('No aPRROVAL')
-                    }
+                            res.json({msg:"No such Agent!"})
+
+                        }
                 }
                 })
             }
@@ -595,9 +696,12 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
     }
 
     exports.postLogout = async (req, res) => {
-        await req.session.destroy()
-        console.log(req.session)
-        res.redirect('/')
+        // await req.session.destroy()
+        // console.log(req.session)
+        // Delete the 'jwtToken' cookie
+        res.clearCookie('jwtToken');
+        res.status(200).json({msg:"Cookie deleted!"})
+        // res.redirect('/')
         // res.redirect('/')
         // res.render('home',{login:req.cookies['cookieName']})
     }
@@ -606,18 +710,18 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
 
         const query = req.body.question
         const answer = 'Yet to be Answered'
-
+        const userId=req.body.userId
 
        const Q=new Query({
             question: query,
             answer: answer,
-            askedBy: req.user._id,
+            askedBy: userId,
             status:'Not Answered',
            askDate:new Date().toDateString(),
         });
            Q.save().then(r => {
             console.log('query added successfully!')
-            res.redirect('/details')
+            res.status(200).json({msg:"Query Added!"})
         }).catch((err)=>{
             console.log(err)
         })
@@ -650,29 +754,31 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
         const email = req.body.email
         const phone = req.body.phone
         const age=req.body.age
+        console.log(req.body.id)
         console.log('Name ' + name)
-        if(req.session.type==='User'){
+        if(req.body.type==='User'){
 
-            User.findByIdAndUpdate(req.user._id,{name: name, address: address, email: email, phone: phone,age:age})
+            User.findByIdAndUpdate(req.body.id,{name: name, address: address, email: email, phone: phone,age:age})
                 .then(r => {
-                    res.redirect('/details')
+                    // res.redirect('/details')
                     console.log('User updated')
                     // console.log(r)
                 })
         }
-        else if(req.session.type==='Admin'){
+        else if(req.body.type==='Admin'){
 
-            Admin.findByIdAndUpdate(req.user._id,{name: name, address: address, email: email, phone: phone,age:age})
+            Admin.findByIdAndUpdate(req.body.id,{name: name, address: address, email: email, phone: phone,age:age})
                 .then(r => {
-                    res.redirect('/details')
+                    console.log(r)
+                    // res.redirect('/details')
                     console.log('Admin updated')
                     // console.log(r)
                 })
         }
         else{
-            Agent.findByIdAndUpdate(req.user._id,{name: name, address: address, email: email, phone: phone})
+            Agent.findByIdAndUpdate(req.body.id,{name: name, address: address, email: email, phone: phone})
                 .then(r => {
-                    res.redirect('/details')
+                    // res.redirect('/details')
                     console.log('Agent updated')
                     // console.log(r)
                 })
