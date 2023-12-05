@@ -95,34 +95,35 @@ exports.postAnswer=(req,res,next)=>{
 }
 
 exports.getHealthApplications=(req,res,next)=>{
+    console.log("entered health admin")
 
     healthApplications.find({verificationStatus:''})
         .then(zrr=>{
-        res.render('health-applications',{arr:zrr})
+        res.status(200).json(zrr)
     })
 }
 exports.getLifeApplications=(req,res,next)=>{
-
+    console.log("entered life admin")
     lifeApplications.find({verificationStatus:''})
         .then(zrr=>{
-        res.render('life-applications',{arr:zrr})
+            res.status(200).json(zrr)
     })
 }
 exports.getTransportApplications=(req,res,next)=>{
+    console.log("entered transport admin")
 
     transportApplications.find({verificationStatus:''})
         .then(zrr=>{
             TRANSPORTAPPLICATIONS=zrr;
             console.log('Trans')
-            console.log(TRANSPORTAPPLICATIONS)
-        res.render('transport-applications',{arr:zrr})
+            res.status(200).json(zrr)
     })
 }
 exports.getIndividualHealthApplication=(req,res,next)=>{
     console.log('Entered individual health application')
-    healthApplications.findById(req.params.appId).then(zrr=>{
+    healthApplications.findById(req.body.appId).then(zrr=>{
 
-        res.render('individualHealthApplication',{
+        res.json({
             firstName: zrr.firstName,
             lastName: zrr.lastName,
             aadhar: zrr.aadhar,
@@ -155,8 +156,8 @@ exports.getIndividualHealthApplication=(req,res,next)=>{
 exports.getIndividualLifeApplication=(req,res,next)=>{
     console.log('Entered individual life application')
 
-    lifeApplications.findById(req.params.appId).then(zrr=>{
-        res.render('individualLifeApplication',{
+    lifeApplications.findById(req.body.appId).then(zrr=>{
+        res.json({
             appId:req.params.appId,
             firstName: zrr.firstName,
             lastName: zrr.lastName,
@@ -188,12 +189,12 @@ exports.getIndividualLifeApplication=(req,res,next)=>{
 }
 exports.getIndividualTransportApplication=(req,res,next)=>{
     console.log('Entered individual transport application')
-
-    transportApplications.findById(req.params.appId).then(zrr=>{
+    console.log(req.body.id)
+    transportApplications.findById(req.body.appId).then(zrr=>{
 
         console.log(zrr.sex)
-        res.render('individualTransportApplication',{
-            appId:req.params.appId,
+        res.json({
+            appId:req.body.appId,
             firstName:zrr.firstName,
             lastName:zrr.lastName,
             regNum:zrr.regNum,
@@ -414,7 +415,7 @@ if(req.body.searchType==='Name') {
         }
 
         exports.verifyTransport=async (req, res, next) => {
-            const gender= req.user.sex==='Male'?'Mr':'Mrs'
+            const gender= req.body.sex==='Male'?'Mr':'Mrs'
 
 
          console.log('Entered verifyTransport')
@@ -422,7 +423,7 @@ if(req.body.searchType==='Name') {
     await transportApplications.updateOne({_id: req.body.appId}, {verificationStatus: req.body.verificationStatus,verificationDate:new Date().toDateString()})
     const policy = new Policy.model({
 
-        type: req.body.policyType,
+               type: req.body.policyType,
         name: req.body.policyName,
         applier: req.body.applier,
         amount: req.body.amount,
@@ -430,9 +431,9 @@ if(req.body.searchType==='Name') {
         appId: req.body.appId,
         term: req.body.policyTerm,
         beneficiaryDetails: {
-            name: req.body.nominee,
-            age: req.body.nomineeAge,
-            relation: req.body.nomineeRelation,
+            name: req.body.bname,
+            age: req.body.bage,
+            relation: req.body.brelation,
 
         },
         status: 'Ongoing'
@@ -456,7 +457,8 @@ if(req.body.searchType==='Name') {
                 subject: 'Genesis Insurances Application verified and accepted!',
                 html: `<h1>Congratulations ${gender} ${name} your motor insurance application with id ${req.body.applier} has been verified and accepted! </h1>`
             });
-            res.redirect('/details')
+            // res.redirect('/details')
+           res.json({msg:"Updated verification status!"})
 
         })
     }
@@ -620,7 +622,7 @@ exports.verifyHealth = async (req, res, next) => {
 
         exports.getAgentApplications = async (req, res, next) => {
             const arrr = await Agent.find({isActive: false})
-            res.render('agent-applications', {arr: arrr})
+            res.status(200).json(arrr)
         }
 
         exports.getIndividualAgentApplication = async (req, res, next) => {

@@ -79,7 +79,8 @@ router.post('/health-form', upload.fields([
     { name: 'aadhar', maxCount: 1 },
     { name: 'pan', maxCount: 1 },
     {name:'dobProof',maxCount:1},
-    {name:'healthCertificate',maxCount:1}, { name: 'nomineeAadhar', maxCount: 1 },
+    {name:'healthCertificate',maxCount:1},
+    { name: 'nomineeAadhar', maxCount: 1 },
     { name: 'nomineeAddressProof', maxCount: 1 },
 ]),filesController.healthUploader)
 
@@ -87,7 +88,8 @@ router.post('/life-form', upload.fields([
     { name: 'aadhar', maxCount: 1 },
     { name: 'pan', maxCount: 1 },
     {name:'dobProof',maxCount:1},
-    {name:'healthCertificate',maxCount:1}, { name: 'nomineeAadhar', maxCount: 1 },
+    {name:'healthCertificate',maxCount:1},
+    { name: 'nomineeAadhar', maxCount: 1 },
     { name: 'nomineeAddressProof', maxCount: 1 },
 ]),filesController.lifeUploader)
 
@@ -103,7 +105,7 @@ router.post('/verifyOTP',userController.verifyOTP)
 router.get('/verifyOTP/:token',userController.getOTPVerifier)
 router.get('/healthpolicies',userController.gethealthPolicy)
 router.get('/policypage/:id',userController.getPolicyPage)
-router.get('/myApplications',userController.getMyApps)
+router.post('/myApplications',userController.getMyApps)
 router.post('/search-my-applications',userController.searchMyApps)
 // router.post('/pay',userController.postPay)
 router.get('/data',adminController.getData)
@@ -118,7 +120,8 @@ router.get('/health-applications/:appId',adminController.getIndividualHealthAppl
 router.post('/search-health-applications',adminController.getHealthApplicationsSearch)
 router.get('/reviews',adminController.getReviews)
 router.post('/queries/:queryId',adminController.postAnswer)
-router.get('/files/:fileId',filesController.getFile)
+
+router.post('/files',filesController.getFile2)
  
 router.get('/designform',adminController.designform)
 router.get('/tractpolicy',adminController.trackpolicy)
@@ -133,9 +136,9 @@ router.get('/companystats',adminController.getcompanystats)
 router.get('/employeesignup',adminController.employeesignuppage)
 router.get('/life-applications',adminController.getLifeApplications)
 router.get('/transport-applications',adminController.getTransportApplications)
-router.get('/health-applications/:appId',adminController.getIndividualHealthApplication)
-router.get('/life-applications/:appId',adminController.getIndividualLifeApplication)
-router.get('/transport-applications/:appId',adminController.getIndividualTransportApplication)
+router.post('/health-individual-application',adminController.getIndividualHealthApplication)
+router.post('/life-individual-application',adminController.getIndividualLifeApplication)
+router.post('/transport-individual-application',adminController.getIndividualTransportApplication)
 router.post('/search-health-applications',adminController.getHealthApplicationsSearch)
 router.post('/search-life-applications',adminController.getLifeApplicationsSearch)
 router.post('/search-transport-applications',adminController.getTransportApplicationsSearch)

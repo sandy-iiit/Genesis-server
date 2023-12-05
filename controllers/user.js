@@ -102,20 +102,25 @@ exports.getHealthPolicyPage=(req,res)=>{
     res.render('policypage')
 }
 exports.getVehiclePolicies=async (req, res, next) => {
-    await transportPolicy.find().then((arrr)=>{
-        res.render('transportpolicies', {array: arrr})
-    })
+
+    console.log("Entered transport policy")
+    const arrr=await transportPolicy.find()
+    res.status(200).json(arrr)
+}
+exports.getLifePolicy= async (req,res,next)=>{
+    console.log("Entered life policy")
+    const arrr=await lifePolicy.find()
+    res.status(200).json(arrr)
+}
+exports.gethealthPolicy= async (req,res,next)=>{
+    console.log('entered health policy');
+    const arrr=await healthPolicy.find()
+    console.log(arrr)
+    res.status(200).json(arrr)
 }
 
 exports.getBuyPolicy2=(req,res,next)=>{
     res.render('buy-policy2')
-}
-exports.getLifePolicy=(req,res,next)=>{
-    lifePolicy.find({}).then(arrr=>{
-
-        res.render('lifepolicy',{array:arrr})
-
-    })
 }
 
 exports.getLogin =(req,res,next)=>{
@@ -147,13 +152,7 @@ exports.getPolicyPage=(req,res,next)=>{
     healthPolicy.findById(req.params.id).then((policy)=>{
         res.render('policypage',{array:policy})
     })}
-exports.gethealthPolicy=async (req,res,next)=>{
-    console.log('entered health policy');
-    await healthPolicy.find({}).then((arrr)=>{
-        console.log(arrr);
-        res.render('healthpolicies',{array:arrr})
-    })
-}
+
 
 exports.getDetails=(req,res,next)=>{
     // console.log(req.session.type+' Details : '+req.user._id)
@@ -705,6 +704,7 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
         })
 
     }
+
     exports.getSettings = (req, res) => {
         res.render('settings')
     }
@@ -952,39 +952,42 @@ exports.postpolicydetails =(req,res,next)=>{
 
 
 exports.postsendemail=(req,res,next)=>{
-    const type = req.body.recipient
+    console.log("Entered send mail")
+    const type = req.body.type
+    console.log(type)
     const subject = req.body.subject
     const message1 = req.body.message
-    if(type=='particular_user'){
-        const usermail = req.body.useremail
+    if(type==='particular_user'){
+        const usermail = req.body.email
         const message = {
-            from: req.user.email,
+            from: req.body.sender,
             to: usermail,
             subject:  subject,
             text: message1
           };
+        console.log(message)
           transporter.sendMail(message).then(result=>{
             console.log(result);
-            res.redirect("/details");
+            // res.redirect("/details");
           }).catch(error=>{
             console.log(error);
           })
     }
-    else if(type=='admin'){
+    else if(type==='admin'){
         Admin.find({}).then(mails=>{
             send_emails = mails.map(mail => mail.email);
             return send_emails
         }).then(emails=>{
                 console.log(emails);
                 const message = {
-                    from: req.user.email,
+                    // from: req.user.email,
                     to: emails,
                     subject:  subject,
                     text: message1
                   };
                   transporter.sendMail(message).then(result=>{
                     console.log(result);
-                    res.redirect("/details");
+                    // res.redirect("/details");
                   }).catch(error=>{
                     console.log(error);
                   })
@@ -993,21 +996,21 @@ exports.postsendemail=(req,res,next)=>{
             console.log(err)
         })
     }
-    else if(type=='users'){
+    else if(type==='users'){
         User.find({}).then(mails=>{
             send_emails = mails.map(mail => mail.email);
             return send_emails
         }).then(emails=>{
                 console.log(emails);
                 const message = {
-                    from: req.user.email,
+                    // from: req.user.email,
                     to: emails,
                     subject:  subject,
                     text: message1
                   };
                   transporter.sendMail(message).then(result=>{
                     console.log(result);
-                    res.redirect("/details");
+                    // res.redirect("/details");
                   }).catch(error=>{
                     console.log(error);
                   })
@@ -1016,6 +1019,7 @@ exports.postsendemail=(req,res,next)=>{
             console.log(err)
         })
     }
+    res.json({message:"Mail sent"})
 }
     exports.changePassword=async (req, res, next) => {
         const email = req.body.email
@@ -1148,14 +1152,17 @@ exports.verifyOTP=async (req, res, next) => {
 }
 
 exports.getMyApps=async (req, res, next) => {
-
-    let arrr=[]
-    const arr1 = await transportApplications.find({applier:req.user._id})
-    const arr2 = await lifeApplications.find({applier:req.user._id})
-    const arr3 = await healthApplications.find({applier:req.user._id})
-     arrr=arrr.concat(arr1,arr2,arr3)
+    console.log("Entered my apps")
+    let arr=[]
+    console.log(req.body)
+    const arr1 = await transportApplications.find({applier:req.body.id})
+    const arr2 = await lifeApplications.find({applier:req.body.id})
+    const arr3 = await healthApplications.find({applier:req.body.id})
+    arr=arr.concat(arr1,arr2,arr3)
     // console.log(arrr[1].policyType)
-    res.render('my-applications',{arr:arrr})
+    // res.render('my-applications',{arr:arrr})
+    res.status(200).json(arr)
+    console.log("Sent apps!")
 }
 
 exports.searchMyApps=async (req, res, next) => {
@@ -1165,16 +1172,16 @@ exports.searchMyApps=async (req, res, next) => {
     let arrr = []
 
     if(searchType==='Life'){
-        const arr2 = await lifeApplications.find({applier: req.user._id})
-        res.render('my-applications', {arr: arr2})
+        const arr2 = await lifeApplications.find({applier: req.body.id})
+        res.json(arr2)
 
     }else if(searchType==='Motor'){
-        const arr1 = await transportApplications.find({applier: req.user._id})
-        res.render('my-applications', {arr: arr1})
+        const arr1 = await transportApplications.find({applier: req.body.id})
+        res.json(arr1)
 
     }else if(searchType==='Health'){
-        const arr3 = await healthApplications.find({applier: req.user._id})
-        res.render('my-applications', {arr: arr3})
+        const arr3 = await healthApplications.find({applier: req.body.id})
+        res.json(arr3)
 
     }else if(searchType==='Id') {
 
@@ -1184,7 +1191,7 @@ exports.searchMyApps=async (req, res, next) => {
         arrr = arrr.concat(arr1, arr2, arr3)
 
 
-        res.render('my-applications', {arr: arrr})
+        res.json(arrr)
     }
     
 }
