@@ -143,15 +143,16 @@ exports.getHealthPolicies=(req,res,next)=>{
 exports.getBuyPolicy=(req,res,next)=>{
     console.log(req.params.id)
     transportPolicy.findById(req.params.id).then((policy)=>{
-        res.render('buypolicy',{arr:policy})
+        res.json(policy)
     })
 
 }
-exports.getPolicyPage=(req,res,next)=>{
+exports.getPolicyPage=async (req, res, next) => {
+    console.log("Entered getHealthPolicy")
     console.log(req.params.id)
-    healthPolicy.findById(req.params.id).then((policy)=>{
-        res.render('policypage',{array:policy})
-    })}
+    const p = await healthPolicy.findById(req.params.id)
+    res.json(p)
+}
 
 
 exports.getDetails=(req,res,next)=>{
@@ -274,7 +275,7 @@ exports.getContactUs=(req,res)=>{
 exports.getBuyPolicylife = (req,res,next)=>{
     console.log(req.params.id)
     lifePolicy.findById(req.params.id).then((policy)=>{
-        res.render('buypolicylife',{array:policy})
+        res.json(policy)
     })
 }
 

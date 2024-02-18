@@ -21,7 +21,6 @@ const querySchema=new Schema({
     },
     status:{
         type:String,
-
     },
     answeredBy:{
         type:String,

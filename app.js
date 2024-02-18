@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 require('dotenv').config()
-const userRoutes=require('./routes/userRoutes')
+const userRoutes=require('./routes/Routes')
 const User = require('./models/User')
 const Admin = require('./models/Admin')
 const Employee = require('./models/employee');

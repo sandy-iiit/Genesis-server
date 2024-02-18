@@ -7,12 +7,11 @@ const healthApplications=require('../models/health-application')
 const User=require('../models/User')
 const Agent=require('../models/employee')
 const Policy=require('../models/Policy')
- 
+const _=require("lodash")
 const lifeApplications=require('../models/life-application')
 const transportApplications=require('../models/transport-application')
 const nodemailer = require("nodemailer");
 const mongoose = require("mongoose");
-
 var TRANSPORTAPPLICATIONS=[]
 var HEALTHAPPLICATIONS=[]
 var LIFEAPPLICATIONS=[]
@@ -122,7 +121,7 @@ exports.getTransportApplications=(req,res,next)=>{
 exports.getIndividualHealthApplication=(req,res,next)=>{
     console.log('Entered individual health application')
     healthApplications.findById(req.body.appId).then(zrr=>{
-
+        console.log(zrr.sex)
         res.json({
             firstName: zrr.firstName,
             lastName: zrr.lastName,
@@ -231,7 +230,6 @@ exports.getIndividualTransportApplication=(req,res,next)=>{
 exports.getHealthApplicationsSearch=async (req, res, next) => {
     console.log('entered the func')
     console.log(req.body.search)
-    console.log(req.body.search)
     if(req.body.searchType==='Name') {
         if (req.body.search !== 'verified') {
             healthApplications.find({})
@@ -248,7 +246,7 @@ exports.getHealthApplicationsSearch=async (req, res, next) => {
                                 arrr.push(r[i])
                             }
                         }
-                        res.render('health-applications', {arr: arrr})
+                    res.json(arrr)
 
 
                         // })
@@ -259,7 +257,7 @@ exports.getHealthApplicationsSearch=async (req, res, next) => {
                 )
         } else {
             healthApplications.find({verificationStatus: 'verified'}).then(arrr => {
-                res.render('health-applications', {arr: arrr})
+                res.json(arrr)
 
             })
         }
@@ -268,7 +266,7 @@ exports.getHealthApplicationsSearch=async (req, res, next) => {
         const application = await healthApplications.findById(req.body.search)
         console.log(application)
         arr.push(application)
-        res.render('health-applications', {arr: arr})
+        res.json(arr)
     }
     }
 
@@ -310,7 +308,7 @@ exports.getHealthApplicationsSearch=async (req, res, next) => {
                                     arrr.push(r[i])
                                 }
                             }
-                            res.render('life-applications', {arr: arrr})
+                            res.json(arrr)
 
 
                             // })
@@ -321,7 +319,7 @@ exports.getHealthApplicationsSearch=async (req, res, next) => {
                     )
             } else {
                 lifeApplications.find({verificationStatus: 'verified'}).then(arrr => {
-                    res.render('life-applications', {arr: arrr})
+                    res.json(arrr)
 
                 })
             }
@@ -330,7 +328,7 @@ exports.getHealthApplicationsSearch=async (req, res, next) => {
             const application = await lifeApplications.findById(req.body.search)
             console.log(application)
             arr.push(application)
-            res.render('life-applications', {arr: arr})
+            res.json(arr)
         }
     }
     exports.getAgentApplicationsSearch = async (req, res, next) => {
@@ -351,12 +349,12 @@ if(req.body.searchType==='Name') {
                     arrr.push(r[i])
                 }
             }
-            res.render('agent-applications', {arr: arrr})
+            res.json(arrr)
         }
     } else {
         console.log('entered else')
         const agents1 = await Agent.find({isActive: true})
-        res.render('agent-applications', {arr: agents1})
+        res.json(agents1)
 
 
     }
@@ -364,7 +362,7 @@ if(req.body.searchType==='Name') {
     const arr = []
     const application = await Agent.findById(req.body.search)
     arr.push(application)
-    res.render('agent-applications', {arr: arr})
+    res.json(arr)
 }
     }
     exports.getTransportApplicationsSearch = async (req, res, next) => {
@@ -386,7 +384,7 @@ if(req.body.searchType==='Name') {
                                         arrr.push(r[i])
                                     }
                                 }
-                                res.render('transport-applications', {arr: arrr})
+                            res.json(arrr)
 
 
                                 // })
@@ -397,7 +395,7 @@ if(req.body.searchType==='Name') {
                         )
                 } else {
                     transportApplications.find({verificationStatus: 'verified'}).then(arrr => {
-                        res.render('transport-applications', {arr: arrr})
+                        res.json(arrr)
 
                     })
                 }
@@ -406,7 +404,7 @@ if(req.body.searchType==='Name') {
                 const application = await transportApplications.findById(req.body.search)
 
                 arr.push(application)
-                res.render('transport-applications', {arr: arr})
+                res.json(arr)
             }
             // } else {
 
@@ -444,7 +442,7 @@ if(req.body.searchType==='Name') {
 
     const email = applier.email
     const name = applier.name
-    if (req.body.verificationStatus === 'verified')
+    if (_.lowerCase(req.body.verificationStatus) === 'verified')
     {
         await policy.save();
 
@@ -467,10 +465,10 @@ if(req.body.searchType==='Name') {
             transporter.sendMail({
                 to: email,
                 from: 'dattasandeep000@gmail.com',
-                subject: 'Genesis Insurances Application verified and accepted!',
+                subject: 'Genesis Insurances Application rejected!',
                 html: `<h2>Sorry ${gender} ${name} your motor insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
             });
-            res.redirect('/details')
+            res.json({msg:"Updated verification status!"})
         })
 
     }
@@ -515,7 +513,7 @@ exports.verifyLife=async (req, res, next) => {
     const email = applier.email
     const name = applier.name
     console.log(req.body.verificationStatus)
-    if (req.body.verificationStatus === 'verified') {
+    if (_.toLowerCase(req.body.verificationStatus) === 'verified') {
         await policy.save();
 
 
@@ -528,7 +526,7 @@ exports.verifyLife=async (req, res, next) => {
                 subject: 'Genesis Insurances Application verified and accepted!',
                 html: `<h1>Congratulations ${gender} ${name} your life insurance application with id ${req.body.appId} has been verified and accepted! </h1>`
             });
-            res.redirect('/details')
+           res.json({msg:"Updated verification status!"})
 
         })
     } else {
@@ -539,7 +537,7 @@ exports.verifyLife=async (req, res, next) => {
                 subject: 'Genesis Insurances Application verified and accepted!',
                 html: `<h2>Sorry ${gender} ${name} your life insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
             });
-            res.redirect('/details')
+            res.json({msg:"Updated verification status!"})
 
         })
     }
@@ -577,13 +575,13 @@ exports.verifyHealth = async (req, res, next) => {
     const email = applier.email
     const name = applier.name
     console.log(req.body.verificationStatus)
-    if (req.body.verificationStatus === 'verified') {
+    if (_.toLowerCase(req.body.verificationStatus) === 'Verified') {
         policy.save();
         await healthApplications.updateOne({_id: req.body.appId}, {
             verificationStatus: req.body.verificationStatus,
             verificationDate: new Date().toDateString()
         }).then(()=>{
-            console.log('Updated application')
+            res.json({msg:"Updated verification status!"})
         })
 
        await User.updateOne({_id: req.body.applier}, {$push: {currentPolicies: policy}}).then((r) => {
@@ -609,7 +607,7 @@ exports.verifyHealth = async (req, res, next) => {
                 subject: 'Genesis Insurances Application rejected!',
                 html: `<h2>Sorry ${gender} ${name} your health insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
             });
-            res.redirect('/details')
+            res.json({msg:"Updated verification status!"})
         })
 
     }
