@@ -43,7 +43,7 @@ exports.healthUploader= async function(req, res, next) {
         applier:req.body.applier,
         duration:req.body.duration,
         appliedDate:new Date().toDateString(),
-        verificationStatus:'',
+        verificationStatus:'Not Verified Yet',
         verificationDate:'',
 
 
@@ -84,7 +84,7 @@ exports.lifeUploader= async function(req, res, next) {
         applier:req.body.applier,
         duration:req.body.duration,
         appliedDate:new Date().toDateString(),
-        verificationStatus:'',
+        verificationStatus:'Not Verified Yet',
         verificationDate:'',
 
     });
@@ -127,7 +127,7 @@ exports.transportUploader= async function(req, res, next) {
         payType:req.body.payType,
         applier:req.body.applier,
         appliedDate:new Date().toDateString(),
-        verificationStatus:'',
+        verificationStatus:'Not Verified Yet',
         verificationDate:'',
     });
     await transportApplication.save().then((r)=>{
