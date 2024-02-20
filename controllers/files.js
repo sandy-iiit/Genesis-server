@@ -48,10 +48,14 @@ exports.healthUploader= async function(req, res, next) {
 
 
     });
-    await healthApplication.save();
+    await healthApplication.save().then((r)=>{
+        console.log(r._id)
+    });
 
     console.log('File uploaded successfully');
-    res.redirect('/')
+    res.status(200).json({msg:"File has been uploaded successfully!!"})
+
+    // res.redirect('/')
 }
 exports.lifeUploader= async function(req, res, next) {
 
@@ -77,17 +81,20 @@ exports.lifeUploader= async function(req, res, next) {
         policyType:req.body.policyType,
 
         amount:req.body.amount,
-        applier:req.user._id,
+        applier:req.body.applier,
         duration:req.body.duration,
         appliedDate:new Date().toDateString(),
         verificationStatus:'',
         verificationDate:'',
 
     });
-    await lifeApplication.save();
+    await lifeApplication.save().then((r)=>{
+        console.log(r._id)
+    });
 
     console.log('File uploaded successfully');
-    res.redirect('/')
+    res.status(200).json({msg:"File has been uploaded successfully!!"})
+
 }
 
 exports.transportUploader= async function(req, res, next) {
@@ -134,6 +141,7 @@ exports.transportUploader= async function(req, res, next) {
 
 exports.getFile= async function(req, res) {
     console.log('entered getFile')
+    console.log(req.params.fileId)
     const fileId = new mongoose.Types.ObjectId(req.params.fileId);
     try {
         const client = await MongoClient.connect(uri, { useNewUrlParser: true });
@@ -153,7 +161,34 @@ exports.getFile= async function(req, res) {
         res.status(500).send('Internal Server Error');
     }
 
-
-
-
 }
+
+exports.getFile2 = async function (req, res) {
+    console.log('entered getFile2');
+    console.log(req.body.fileId);
+    const fileId = new mongoose.Types.ObjectId(req.body.fileId);
+
+    try {
+        const client = await MongoClient.connect(uri, { useNewUrlParser: true });
+        const db = await client.db();
+
+        const bucket = new GridFSBucket(db);
+
+        const downloadStream = bucket.openDownloadStream(fileId);
+
+        res.set('Content-Type', 'application/pdf');
+        res.set('Content-Disposition', 'inline; filename="file.pdf"');
+
+        // Get the server's URL and construct the file URL
+        const serverURL = 'http://localhost:4000'; // Replace with your server's URL
+        const fileURL = `${serverURL}/files/${req.body.fileId}`;
+
+        // Send the file URL in the response
+        res.json({ fileURL });
+
+        downloadStream.pipe(res);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};

@@ -7,12 +7,11 @@ const healthApplications=require('../models/health-application')
 const User=require('../models/User')
 const Agent=require('../models/employee')
 const Policy=require('../models/Policy')
- 
+const _=require("lodash")
 const lifeApplications=require('../models/life-application')
 const transportApplications=require('../models/transport-application')
 const nodemailer = require("nodemailer");
 const mongoose = require("mongoose");
-
 var TRANSPORTAPPLICATIONS=[]
 var HEALTHAPPLICATIONS=[]
 var LIFEAPPLICATIONS=[]
@@ -95,34 +94,35 @@ exports.postAnswer=(req,res,next)=>{
 }
 
 exports.getHealthApplications=(req,res,next)=>{
+    console.log("entered health admin")
 
     healthApplications.find({verificationStatus:''})
         .then(zrr=>{
-        res.render('health-applications',{arr:zrr})
+        res.status(200).json(zrr)
     })
 }
 exports.getLifeApplications=(req,res,next)=>{
-
+    console.log("entered life admin")
     lifeApplications.find({verificationStatus:''})
         .then(zrr=>{
-        res.render('life-applications',{arr:zrr})
+            res.status(200).json(zrr)
     })
 }
 exports.getTransportApplications=(req,res,next)=>{
+    console.log("entered transport admin")
 
     transportApplications.find({verificationStatus:''})
         .then(zrr=>{
             TRANSPORTAPPLICATIONS=zrr;
             console.log('Trans')
-            console.log(TRANSPORTAPPLICATIONS)
-        res.render('transport-applications',{arr:zrr})
+            res.status(200).json(zrr)
     })
 }
 exports.getIndividualHealthApplication=(req,res,next)=>{
     console.log('Entered individual health application')
-    healthApplications.findById(req.params.appId).then(zrr=>{
-
-        res.render('individualHealthApplication',{
+    healthApplications.findById(req.body.appId).then(zrr=>{
+        console.log(zrr.sex)
+        res.json({
             firstName: zrr.firstName,
             lastName: zrr.lastName,
             aadhar: zrr.aadhar,
@@ -155,8 +155,8 @@ exports.getIndividualHealthApplication=(req,res,next)=>{
 exports.getIndividualLifeApplication=(req,res,next)=>{
     console.log('Entered individual life application')
 
-    lifeApplications.findById(req.params.appId).then(zrr=>{
-        res.render('individualLifeApplication',{
+    lifeApplications.findById(req.body.appId).then(zrr=>{
+        res.json({
             appId:req.params.appId,
             firstName: zrr.firstName,
             lastName: zrr.lastName,
@@ -188,12 +188,12 @@ exports.getIndividualLifeApplication=(req,res,next)=>{
 }
 exports.getIndividualTransportApplication=(req,res,next)=>{
     console.log('Entered individual transport application')
-
-    transportApplications.findById(req.params.appId).then(zrr=>{
+    console.log(req.body.id)
+    transportApplications.findById(req.body.appId).then(zrr=>{
 
         console.log(zrr.sex)
-        res.render('individualTransportApplication',{
-            appId:req.params.appId,
+        res.json({
+            appId:req.body.appId,
             firstName:zrr.firstName,
             lastName:zrr.lastName,
             regNum:zrr.regNum,
@@ -230,7 +230,6 @@ exports.getIndividualTransportApplication=(req,res,next)=>{
 exports.getHealthApplicationsSearch=async (req, res, next) => {
     console.log('entered the func')
     console.log(req.body.search)
-    console.log(req.body.search)
     if(req.body.searchType==='Name') {
         if (req.body.search !== 'verified') {
             healthApplications.find({})
@@ -247,7 +246,7 @@ exports.getHealthApplicationsSearch=async (req, res, next) => {
                                 arrr.push(r[i])
                             }
                         }
-                        res.render('health-applications', {arr: arrr})
+                    res.json(arrr)
 
 
                         // })
@@ -258,7 +257,7 @@ exports.getHealthApplicationsSearch=async (req, res, next) => {
                 )
         } else {
             healthApplications.find({verificationStatus: 'verified'}).then(arrr => {
-                res.render('health-applications', {arr: arrr})
+                res.json(arrr)
 
             })
         }
@@ -267,7 +266,7 @@ exports.getHealthApplicationsSearch=async (req, res, next) => {
         const application = await healthApplications.findById(req.body.search)
         console.log(application)
         arr.push(application)
-        res.render('health-applications', {arr: arr})
+        res.json(arr)
     }
     }
 
@@ -309,7 +308,7 @@ exports.getHealthApplicationsSearch=async (req, res, next) => {
                                     arrr.push(r[i])
                                 }
                             }
-                            res.render('life-applications', {arr: arrr})
+                            res.json(arrr)
 
 
                             // })
@@ -320,7 +319,7 @@ exports.getHealthApplicationsSearch=async (req, res, next) => {
                     )
             } else {
                 lifeApplications.find({verificationStatus: 'verified'}).then(arrr => {
-                    res.render('life-applications', {arr: arrr})
+                    res.json(arrr)
 
                 })
             }
@@ -329,7 +328,7 @@ exports.getHealthApplicationsSearch=async (req, res, next) => {
             const application = await lifeApplications.findById(req.body.search)
             console.log(application)
             arr.push(application)
-            res.render('life-applications', {arr: arr})
+            res.json(arr)
         }
     }
     exports.getAgentApplicationsSearch = async (req, res, next) => {
@@ -350,12 +349,12 @@ if(req.body.searchType==='Name') {
                     arrr.push(r[i])
                 }
             }
-            res.render('agent-applications', {arr: arrr})
+            res.json(arrr)
         }
     } else {
         console.log('entered else')
         const agents1 = await Agent.find({isActive: true})
-        res.render('agent-applications', {arr: agents1})
+        res.json(agents1)
 
 
     }
@@ -363,7 +362,7 @@ if(req.body.searchType==='Name') {
     const arr = []
     const application = await Agent.findById(req.body.search)
     arr.push(application)
-    res.render('agent-applications', {arr: arr})
+    res.json(arr)
 }
     }
     exports.getTransportApplicationsSearch = async (req, res, next) => {
@@ -385,7 +384,7 @@ if(req.body.searchType==='Name') {
                                         arrr.push(r[i])
                                     }
                                 }
-                                res.render('transport-applications', {arr: arrr})
+                            res.json(arrr)
 
 
                                 // })
@@ -396,7 +395,7 @@ if(req.body.searchType==='Name') {
                         )
                 } else {
                     transportApplications.find({verificationStatus: 'verified'}).then(arrr => {
-                        res.render('transport-applications', {arr: arrr})
+                        res.json(arrr)
 
                     })
                 }
@@ -405,7 +404,7 @@ if(req.body.searchType==='Name') {
                 const application = await transportApplications.findById(req.body.search)
 
                 arr.push(application)
-                res.render('transport-applications', {arr: arr})
+                res.json(arr)
             }
             // } else {
 
@@ -414,7 +413,7 @@ if(req.body.searchType==='Name') {
         }
 
         exports.verifyTransport=async (req, res, next) => {
-            const gender= req.user.sex==='Male'?'Mr':'Mrs'
+            const gender= req.body.sex==='Male'?'Mr':'Mrs'
 
 
          console.log('Entered verifyTransport')
@@ -422,7 +421,7 @@ if(req.body.searchType==='Name') {
     await transportApplications.updateOne({_id: req.body.appId}, {verificationStatus: req.body.verificationStatus,verificationDate:new Date().toDateString()})
     const policy = new Policy.model({
 
-        type: req.body.policyType,
+               type: req.body.policyType,
         name: req.body.policyName,
         applier: req.body.applier,
         amount: req.body.amount,
@@ -430,9 +429,9 @@ if(req.body.searchType==='Name') {
         appId: req.body.appId,
         term: req.body.policyTerm,
         beneficiaryDetails: {
-            name: req.body.nominee,
-            age: req.body.nomineeAge,
-            relation: req.body.nomineeRelation,
+            name: req.body.bname,
+            age: req.body.bage,
+            relation: req.body.brelation,
 
         },
         status: 'Ongoing'
@@ -443,7 +442,7 @@ if(req.body.searchType==='Name') {
 
     const email = applier.email
     const name = applier.name
-    if (req.body.verificationStatus === 'verified')
+    if (_.lowerCase(req.body.verificationStatus) === 'verified')
     {
         await policy.save();
 
@@ -456,7 +455,8 @@ if(req.body.searchType==='Name') {
                 subject: 'Genesis Insurances Application verified and accepted!',
                 html: `<h1>Congratulations ${gender} ${name} your motor insurance application with id ${req.body.applier} has been verified and accepted! </h1>`
             });
-            res.redirect('/details')
+            // res.redirect('/details')
+           res.json({msg:"Updated verification status!"})
 
         })
     }
@@ -465,10 +465,10 @@ if(req.body.searchType==='Name') {
             transporter.sendMail({
                 to: email,
                 from: 'dattasandeep000@gmail.com',
-                subject: 'Genesis Insurances Application verified and accepted!',
+                subject: 'Genesis Insurances Application rejected!',
                 html: `<h2>Sorry ${gender} ${name} your motor insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
             });
-            res.redirect('/details')
+            res.json({msg:"Updated verification status!"})
         })
 
     }
@@ -513,7 +513,7 @@ exports.verifyLife=async (req, res, next) => {
     const email = applier.email
     const name = applier.name
     console.log(req.body.verificationStatus)
-    if (req.body.verificationStatus === 'verified') {
+    if (_.toLowerCase(req.body.verificationStatus) === 'verified') {
         await policy.save();
 
 
@@ -526,7 +526,7 @@ exports.verifyLife=async (req, res, next) => {
                 subject: 'Genesis Insurances Application verified and accepted!',
                 html: `<h1>Congratulations ${gender} ${name} your life insurance application with id ${req.body.appId} has been verified and accepted! </h1>`
             });
-            res.redirect('/details')
+           res.json({msg:"Updated verification status!"})
 
         })
     } else {
@@ -537,7 +537,7 @@ exports.verifyLife=async (req, res, next) => {
                 subject: 'Genesis Insurances Application verified and accepted!',
                 html: `<h2>Sorry ${gender} ${name} your life insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
             });
-            res.redirect('/details')
+            res.json({msg:"Updated verification status!"})
 
         })
     }
@@ -575,13 +575,13 @@ exports.verifyHealth = async (req, res, next) => {
     const email = applier.email
     const name = applier.name
     console.log(req.body.verificationStatus)
-    if (req.body.verificationStatus === 'verified') {
+    if (_.toLowerCase(req.body.verificationStatus) === 'Verified') {
         policy.save();
         await healthApplications.updateOne({_id: req.body.appId}, {
             verificationStatus: req.body.verificationStatus,
             verificationDate: new Date().toDateString()
         }).then(()=>{
-            console.log('Updated application')
+            res.json({msg:"Updated verification status!"})
         })
 
        await User.updateOne({_id: req.body.applier}, {$push: {currentPolicies: policy}}).then((r) => {
@@ -607,7 +607,7 @@ exports.verifyHealth = async (req, res, next) => {
                 subject: 'Genesis Insurances Application rejected!',
                 html: `<h2>Sorry ${gender} ${name} your health insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
             });
-            res.redirect('/details')
+            res.json({msg:"Updated verification status!"})
         })
 
     }
@@ -620,7 +620,7 @@ exports.verifyHealth = async (req, res, next) => {
 
         exports.getAgentApplications = async (req, res, next) => {
             const arrr = await Agent.find({isActive: false})
-            res.render('agent-applications', {arr: arrr})
+            res.status(200).json(arrr)
         }
 
         exports.getIndividualAgentApplication = async (req, res, next) => {
