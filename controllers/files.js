@@ -19,7 +19,8 @@ const LifeApplication=require('../models/life-application')
 const TransportApplication=require('../models/transport-application')
 
 exports.healthUploader= async function(req, res, next) {
-
+    console.log("Entered Health Uploader")
+    console.log(req.body)
     const healthApplication = new HealthApplication({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -99,43 +100,48 @@ exports.lifeUploader= async function(req, res, next) {
 
 exports.transportUploader= async function(req, res, next) {
     console.log("Entered transport uploader")
+    // if (req.csrfToken() === req.body.csrf) {
     console.log(req.body)
     const transportApplication = new TransportApplication({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         age: req.body.age,
-        regNum:req.body.regNum,
-        sex:req.body.sex,
+        regNum: req.body.regNum,
+        sex: req.body.sex,
         aadhar: req.files['aadhar'][0].id,
-        c_book:req.files['c_book'][0].id,
-        nomineeAadhar:req.files['nomineeAadhar'][0].id,
-        nomineeAddressProof:req.files['nomineeAddressProof'][0].id,
-        vehicleCompany:req.body.company,
-        model:req.body.model,
-        yearOfMfg:req.body.yearOfMfg,
-        vehicleType:req.body.vehicleType,
-        engine:req.body.engine,
-        chassis:req.body.chassis,
-        nominee:req.body.nominee,
-        nomineeAge:req.body.nomineeAge,
-        nomineeRelation:req.body.nomineeRelation,
-        policyId:req.body.policyId,
-        policyName:req.body.policyName,
-        policyType:req.body.policyType,
-        policyTerm:req.body.policyTerm,
-        amount:req.body.amount,
-        payType:req.body.payType,
-        applier:req.body.applier,
-        appliedDate:new Date().toDateString(),
-        verificationStatus:'Not Verified Yet',
-        verificationDate:'',
+        c_book: req.files['c_book'][0].id,
+        nomineeAadhar: req.files['nomineeAadhar'][0].id,
+        nomineeAddressProof: req.files['nomineeAddressProof'][0].id,
+        vehicleCompany: req.body.company,
+        model: req.body.model,
+        yearOfMfg: req.body.yearOfMfg,
+        vehicleType: req.body.vehicleType,
+        engine: req.body.engine,
+        chassis: req.body.chassis,
+        nominee: req.body.nominee,
+        nomineeAge: req.body.nomineeAge,
+        nomineeRelation: req.body.nomineeRelation,
+        policyId: req.body.policyId,
+        policyName: req.body.policyName,
+        policyType: req.body.policyType,
+        policyTerm: req.body.policyTerm,
+        amount: req.body.amount,
+        payType: req.body.payType,
+        applier: req.body.applier,
+        appliedDate: new Date().toDateString(),
+        verificationStatus: 'Not Verified Yet',
+        verificationDate: '',
     });
-    await transportApplication.save().then((r)=>{
+    await transportApplication.save().then((r) => {
         console.log(r._id)
     });
 
     console.log('File uploaded successfully');
-    res.status(200).json({msg:"File has been uploaded successfully!!"})
+    res.status(200).json({msg: "File has been uploaded successfully!!"})
+// }
+    // else{
+    //     res.status(200).json({msg: "CSRF Error"})
+    // }
     // res.redirect('/')
 }
 

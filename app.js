@@ -29,6 +29,15 @@ app.use(cors({
     credentials: true,
 }));
 
+const csrfProtection = csrf({
+    cookie: true,
+    secure: true, // For HTTPS
+    httpOnly: true, // Prevent client-side JavaScript access
+    expiresIn: 30 * 60 * 1000 // Expire in 30 minutes
+});
+
+
+app.use(csrfProtection);
 
 const store = new MongoDBStore({
     uri: process.env.MONGODB_URI2,
@@ -47,6 +56,12 @@ app.use(
 );
 
 app.use(flash());
+app.get('/getCSRFToken', (req, res) => {
+    console.log("Get csrf function")
+    const tk=req.csrfToken()
+    console.log(tk)
+    res.json({ CSRFToken: tk });
+});
 app.use(userRoutes)
 
 app.use((req, res, next) => {
@@ -85,6 +100,7 @@ app.use((req, res, next) => {
     // res.locals.csrfToken = req.csrfToken();
     next();
 });
+
 
 app.get('*',(req,res)=>{
     res.render('404')

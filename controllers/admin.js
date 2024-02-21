@@ -116,23 +116,26 @@ exports.postAnswer=(req,res,next)=>{
 exports.getHealthApplications=(req,res,next)=>{
     console.log("entered health admin")
 
-    healthApplications.find({verificationStatus:''})
-        .then(zrr=>{
+    healthApplications.find({
+        verificationStatus: { $in: ["", "Not Verified Yet"] }
+    })        .then(zrr=>{
         res.status(200).json(zrr)
     })
 }
 exports.getLifeApplications=(req,res,next)=>{
     console.log("entered life admin")
-    lifeApplications.find({verificationStatus:''})
-        .then(zrr=>{
+    lifeApplications.find({
+        verificationStatus: { $in: ["", "Not Verified Yet"] }
+    })        .then(zrr=>{
             res.status(200).json(zrr)
     })
 }
 exports.getTransportApplications=(req,res,next)=>{
     console.log("entered transport admin")
 
-    transportApplications.find({verificationStatus:''})
-        .then(zrr=>{
+    transportApplications.find({
+        verificationStatus: { $in: ["", "Not Verified Yet"] }
+    })        .then(zrr=>{
             TRANSPORTAPPLICATIONS=zrr;
             console.log('Trans')
             res.status(200).json(zrr)
@@ -276,7 +279,7 @@ exports.getHealthApplicationsSearch=async (req, res, next) => {
                     }
                 )
         } else {
-            healthApplications.find({verificationStatus: 'verified'}).then(arrr => {
+            healthApplications.find({verificationStatus: { $in: ['verified', 'Verified'] }}).then(arrr => {
                 res.json(arrr)
 
             })
@@ -330,11 +333,6 @@ exports.getHealthApplicationsSearch=async (req, res, next) => {
                             }
                             res.json(arrr)
 
-
-                            // })
-                            // .catch(err=>{
-                            //     console.log('err')
-                            // })
                         }
                     )
             } else {
@@ -414,7 +412,7 @@ if(req.body.searchType==='Name') {
                             }
                         )
                 } else {
-                    transportApplications.find({verificationStatus: 'verified'}).then(arrr => {
+                    transportApplications.find({verificationStatus: { $in: ['verified', 'Verified'] }}).then(arrr => {
                         res.json(arrr)
 
                     })
@@ -438,7 +436,6 @@ if(req.body.searchType==='Name') {
 
          console.log('Entered verifyTransport')
             console.log(req.body.status)
-    await transportApplications.updateOne({_id: req.body.appId}, {verificationStatus: req.body.verificationStatus,verificationDate:new Date().toDateString()})
     const policy = new Policy.model({
 
                type: req.body.policyType,
@@ -465,6 +462,7 @@ if(req.body.searchType==='Name') {
     if (_.lowerCase(req.body.verificationStatus) === 'verified')
     {
         await policy.save();
+        await transportApplications.updateOne({_id: req.body.appId}, {verificationStatus: req.body.verificationStatus,verificationDate:new Date().toDateString()})
 
        await User.updateOne({_id: req.body.applier}, {$push: {currentPolicies: policy}}).then((r) => {
 
@@ -504,10 +502,7 @@ exports.verifyLife=async (req, res, next) => {
 
     console.log('Entered verifyLife')
     console.log('ver sta '+req.body.verificationStatus)
-    await lifeApplications.updateOne({_id: req.body.appId}, {
-        verificationStatus: req.body.verificationStatus,
-        verificationDate: new Date().toDateString()
-    })
+
     const policy = new Policy.model({
 
         type: req.body.policyType,
@@ -535,7 +530,10 @@ exports.verifyLife=async (req, res, next) => {
     console.log(req.body.verificationStatus)
     if (_.lowerCase(req.body.verificationStatus) === 'verified') {
         await policy.save();
-
+        await lifeApplications.updateOne({_id: req.body.appId}, {
+            verificationStatus: req.body.verificationStatus,
+            verificationDate: new Date().toDateString()
+        })
 
        await User.updateOne({_id: req.body.applier}, {$push: {currentPolicies: policy}}).then((r) => {
 
@@ -613,7 +611,6 @@ exports.verifyHealth = async (req, res, next) => {
                 subject: 'Genesis Insurances Application verified and accepted!',
                 html: `<h1>Congratulations ${gender} ${name} your health insurance application with id ${req.body.appId} has been verified and accepted! </h1>`
             });
-           res.json({msg:"Updated verification status!"})
 
         })
     } else {

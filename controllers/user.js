@@ -41,7 +41,7 @@ const transporter = nodemailer.createTransport(
         },
     }
 );
-
+let n=0
 exports.getChecked=async (req, res) => {
     // if(req.session.user){
     //   res.status(200).json(req.session.user)
@@ -51,8 +51,10 @@ exports.getChecked=async (req, res) => {
     // }
 
     console.log("Check")
+    n=n+1
+    console.log(n)
     const jwtToken = req.cookies.jwtToken;
-
+    console.log(jwtToken)
     if (jwtToken) {
         // JWT token is present, you can verify it or use it as needed
         try {
@@ -292,81 +294,6 @@ exports.getBuyPolicylife = (req,res,next)=>{
 
 const alpha=['A','B','C','D','E','F','G','H']
 
-// exports.postSignup=(req,res)=> {
-//     console.log('Entered Post signup')
-//     const name = req.body.name
-//     const age = req.body.age
-//     const sex = req.body.sex
-//     const address = req.body.address
-//     const email = req.body.email
-//     const phone = req.body.phone
-//     const password = req.body.password
-//     const id = Math.floor(Math.random() * 100000)
-//     console.log([name, email, age, sex, address, phone, password, id])
-//     bcrypt.hash(password, 12).then(async hashedPassword => {
-//         const user = await User.findOne({email: email})
-//         console.log('User')
-//         console.log(user)
-//         if (user===null) {
-//             const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/;
-//             const phoneRegex = /^[6-9]\d{9}$/;
-//
-//             console.log(password);
-//             const isValid = passwordRegex.test(password);
-//             const isValid2 = phoneRegex.test(phone);
-//             console.log('isvalid' + isValid)
-//             console.log('isvalid2' + isValid2)
-//             if (isValid && isValid2) {
-//
-//                 console.log('User creation started!')
-//                 const user2 = new User({
-//                     id: id,
-//                     name: name,
-//                     age: age,
-//                     sex: sex,
-//                     email: email,
-//                     address: address,
-//                     phone: phone,
-//                     password: hashedPassword,
-//
-//                 });
-//
-//                 return user2.save()
-//
-//
-//             } else {
-//                 if (!isValid) {
-//                     res.render('signup', {
-//                         login: '',
-//                         text: 'Password must contain at least one uppercase letter, one lower case character, and one number, and be at least 8 characters long.'
-//                     })
-//                 } else if (!isValid2) {
-//                     res.render('signup', {
-//                         login: '',
-//                         text: 'Enter valid phone number'
-//                     })
-//                 }
-//             }
-//         }
-//         else{
-//             await res.render('signup',{text:'User already exists!',login:''})
-//         }
-//
-//     }).then(result => {
-//
-//
-//         res.redirect('/login')
-//
-//         return transporter.sendMail({
-//             to: email,
-//             from: 'dattasandeep000@gmail.com',
-//             subject: 'Genesis Insurances Signup succeeded!',
-//             html: '<h1>You successfully signed up!</h1>'
-//         });
-//
-//     })
-// }
-
 exports.postSignup = (req, res) => {
     console.log('Entered Post signup');
     const name = req.body.name;
@@ -537,6 +464,7 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
 
                                 const token = jwt.sign(u, "secretKey", { expiresIn: '1h' });
                                 res.cookie('jwtToken', token, { httpOnly: true, expiresIn: new Date(Date.now() + 60 * 60 * 1000) });
+                                console.log(req.cookies.jwtToken)
                                 res.status(200).json(a._doc)
 
                                 // req.session.isLoggedIn = true;
@@ -698,9 +626,7 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
         // Delete the 'jwtToken' cookie
         res.clearCookie('jwtToken');
         res.status(200).json({msg:"Cookie deleted!"})
-        // res.redirect('/')
-        // res.redirect('/')
-        // res.render('home',{login:req.cookies['cookieName']})
+
     }
 
     exports.postWriteQuery = (req, res) => {
