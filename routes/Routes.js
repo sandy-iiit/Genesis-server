@@ -161,4 +161,5 @@ router.post('/search-policies',adminController.searchPolicies)
 router.post('/generatequote',userController.quotegenerator)
 router.post('/getmypolicies',userController.GetMyPolicies)
 router.post('/policy_details',adminController.postpolicydetails)
+router.get('/allusers',adminController.getusers)
 module.exports = router

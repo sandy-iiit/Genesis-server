@@ -782,3 +782,22 @@ exports.postpolicydetails = async (req, res, next) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
+
+exports.getusers = async (req, res) => {
+    try {
+        const allUsers = await User.find();
+        const formattedUsers = allUsers.map(user => ({
+            name: user.name,
+            email: user.email,
+            age: user.age,
+            sex: user.sex,
+            address: user.address,
+            phone: user.phone
+        }));
+        res.status(200).json(formattedUsers);
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        res.status(500).json({ error: 'Internal server error. Failed to fetch users.' });
+    }
+};
+
