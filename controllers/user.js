@@ -20,6 +20,7 @@ const {MongoClient} = require("mongodb");
 const employee = require('../models/employee');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
+const { log } = require("console");
 //
 // const transporter = nodemailer.createTransport(
 //     sendgridTransport({
@@ -975,21 +976,6 @@ exports.postaddpolicy = (req,res,next)=>{
    
 }
 
-exports.postpolicydetails = async (req, res, next) => {
-    try {
-        const email = req.body.email;
-        const users = await User.find({ email: email });
-
-        if (users.length > 0) {
-            res.status(200).json(users);
-        } else {
-            res.status(404).json({ message: 'User not found' });
-        }
-    } catch (error) {
-        console.error('Error fetching user details:', error);
-        res.status(500).json({ message: 'Internal server error' });
-    }
-};
 
 
 exports.postsendemail=(req,res,next)=>{
@@ -1063,10 +1049,13 @@ exports.postsendemail=(req,res,next)=>{
     res.json({message:"Mail sent"})
 }
     exports.changePassword=async (req, res, next) => {
+        console.log("Entered Change Password")
         const email = req.body.email
+        console.log(email)
         const pass=req.body.password
-        const Type=req.body.Type
-        const OTP = Math.floor(Math.random() * 1000000)
+        const Type=req.body.type
+        console.log(Type)
+        let OTP = Math.floor(Math.random() * 1000000)
         const payload = { some: 'data' };
         const secret = crypto.randomBytes(32).toString('hex');
         const options = {
@@ -1075,8 +1064,12 @@ exports.postsendemail=(req,res,next)=>{
             expiresIn: '1h',
         };
 
-        const token = jwt.sign(payload, secret, options).slice(0,20);
+        let token = jwt.sign(payload, secret, options).slice(20,41);
         console.log(token)
+        const r = await changePassword.findOne({email: email})
+        if(r){
+            await changePassword.findOneAndDelete({email:email})
+        }
         let user
         const usr= await User.findOne({email:email})
         const admin=await Admin.findOne({email:email})
@@ -1117,26 +1110,10 @@ exports.postsendemail=(req,res,next)=>{
                html: `Dear user your otp to change your password is ${OTP}`
            });
 
+           res.json({token:token})
 
-           const account_sid = process.env.TWILIO_ACCOUNT_SID
-           const auth_token = process.env.TWILIO_AUTH_TOKEN
-           const client = twilio(account_sid, auth_token);
-
-           client.messages.create({
-               body: 'Dear user your OTP to for changing password is ' + OTP,
-               from: '+16813346876',
-               to: '+91'+user.phone
-           })
-               .then(message => {
-                   console.log('OTP2 '+OTP)
-                   console.log(message.sid);
-                   console.log('token1 '+token)
-                   console.log('/verifyOTP/email/'+email+'/token/'+token)
-                   res.redirect('/verifyOTP/'+token)
-               })
-               .catch(error => console.error(error));
        }else{
-           res.render('change-password',{err:'Sorry your email or phone number are not linked to our Genesis!Please enter valid details.'})
+           res.json({msg:'Sorry your email or phone number are not linked to our Genesis!Please enter valid details.'})
        }
 }
 
@@ -1154,13 +1131,14 @@ exports.verifyOTP=async (req, res, next) => {
    const r = await changePassword.findOne({token: ctoken})
         console.log(r)
         if(r) {
+            console.log(r.OTP==otp)
             if (r.OTP == otp) {
                 const ussr=await User.findOne({email:r.email})
                 const admn=await Admin.findOne({email:r.email})
                 if(ussr){
                     User.updateOne({email: r.email}, {password: r.newPassword}).then(y => {
                         console.log('Updated Password')
-                        res.redirect('/login')
+                        res.json({msg:"Password updated successfully!"})
                     })
                 }
                 else if(admn){
@@ -1168,7 +1146,7 @@ exports.verifyOTP=async (req, res, next) => {
                     if(admin){
                         Admin.updateOne({email:r.email},{password:r.newPassword}).then(y => {
                             console.log('Updated Password')
-                            res.redirect('/login')
+                            res.json({msg:"Password updated successfully!"})
                         })
                     }
                 }
@@ -1177,7 +1155,8 @@ exports.verifyOTP=async (req, res, next) => {
                     if(admin){
                         Agent.updateOne({email:r.email},{password:r.newPassword}).then(y => {
                             console.log('Updated Password')
-                            res.redirect('/login')
+                            res.json({msg:"Password updated successfully!"})
+
                         })
                     }
                 }
@@ -1185,7 +1164,7 @@ exports.verifyOTP=async (req, res, next) => {
 
 
             } else {
-                res.render('otpverifier', {err: 'Incorrect OTP.',token:''})
+                res.json({msg: 'Incorrect OTP.'})
             }
 
 
@@ -1235,4 +1214,34 @@ exports.searchMyApps=async (req, res, next) => {
         res.json(arrr)
     }
     
+}
+exports.GetMyPolicies = async (req,res) => {
+    console.log("Entered Function")
+    const email = req.body.email;
+    console.log("i am get policies",email)
+    try {
+
+        const user = await User.findOne({email: email });
+        console.log("USER:::::::::::::::::::::::")
+        console.log(user)
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+
+        const currentPolicies = user.currentPolicies.map(policy => ({
+            beneficiaryDetails: policy.beneficiaryDetails,
+            type: policy.type,
+            name: policy.name,
+            amount: policy.amount,
+            term: policy.term,
+            status: policy.status
+        }));
+
+        res.status(200).json({ currentPolicies });
+    } catch (error) {
+        console.error('Error fetching user and policies:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
 }

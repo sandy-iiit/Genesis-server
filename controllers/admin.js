@@ -46,6 +46,26 @@ exports.getData=async (req, res) => {
     res.json(data);
 }
  
+
+exports.getusers = async (req, res) => {
+    try {
+        const allUsers = await User.find();
+        const formattedUsers = allUsers.map(user => ({
+            name: user.name,
+            email: user.email,
+            age: user.age,
+            sex: user.sex,
+            address: user.address,
+            phone: user.phone
+        }));
+        res.status(200).json(formattedUsers);
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        res.status(500).json({ error: 'Internal server error. Failed to fetch users.' });
+    }
+};
+
+
 exports.getAnswerQueries=(req,res,next)=>{
 
     queries.find({status:'Not Answered'}).then(arr=>{
@@ -293,7 +313,7 @@ exports.getHealthApplicationsSearch=async (req, res, next) => {
         console.log('entered the func')
         console.log(req.body.search)
         if(req.body.searchType==='Name') {
-            if (req.body.search !== 'verified') {
+            if (_.lowerCase(req.body.search) !== 'verified' ) {
                 lifeApplications.find({})
                     .then(async r => {
                             console.log('tarns2')
@@ -318,7 +338,7 @@ exports.getHealthApplicationsSearch=async (req, res, next) => {
                         }
                     )
             } else {
-                lifeApplications.find({verificationStatus: 'verified'}).then(arrr => {
+                lifeApplications.find({verificationStatus: { $in: ['verified', 'Verified'] }}).then(arrr => {
                     res.json(arrr)
 
                 })
@@ -479,7 +499,7 @@ if(req.body.searchType==='Name') {
 
 
 exports.verifyLife=async (req, res, next) => {
-    const gender = req.user.sex === 'Male' ? 'Mr' : 'Mrs'
+    const gender = req.body.sex === 'Male' ? 'Mr' : 'Mrs'
 
 
     console.log('Entered verifyLife')
@@ -513,7 +533,7 @@ exports.verifyLife=async (req, res, next) => {
     const email = applier.email
     const name = applier.name
     console.log(req.body.verificationStatus)
-    if (_.toLowerCase(req.body.verificationStatus) === 'verified') {
+    if (_.lowerCase(req.body.verificationStatus) === 'verified') {
         await policy.save();
 
 
@@ -543,7 +563,7 @@ exports.verifyLife=async (req, res, next) => {
     }
 }
 exports.verifyHealth = async (req, res, next) => {
-    const gender = req.user.sex === 'Male' ? 'Mr' : 'Mrs'
+    const gender = req.body.sex === 'Male' ? 'Mr' : 'Mrs'
 
 
     console.log('Entered verifyHealth')
@@ -575,7 +595,7 @@ exports.verifyHealth = async (req, res, next) => {
     const email = applier.email
     const name = applier.name
     console.log(req.body.verificationStatus)
-    if (_.toLowerCase(req.body.verificationStatus) === 'Verified') {
+    if (_.lowerCase(req.body.verificationStatus) === 'verified') {
         policy.save();
         await healthApplications.updateOne({_id: req.body.appId}, {
             verificationStatus: req.body.verificationStatus,
@@ -593,7 +613,7 @@ exports.verifyHealth = async (req, res, next) => {
                 subject: 'Genesis Insurances Application verified and accepted!',
                 html: `<h1>Congratulations ${gender} ${name} your health insurance application with id ${req.body.appId} has been verified and accepted! </h1>`
             });
-            res.redirect('/details')
+           res.json({msg:"Updated verification status!"})
 
         })
     } else {
@@ -769,3 +789,19 @@ exports.deleteReview=async (req, res, next) => {
     res.status(200).json({msg:"Deleted Review successfully"})
 
 }
+
+exports.postpolicydetails = async (req, res, next) => {
+    try {
+        const email = req.body.email;
+        const users = await User.find({ email: email });
+
+        if (users.length > 0) {
+            res.status(200).json(users);
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        console.error('Error fetching user details:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
