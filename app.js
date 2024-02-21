@@ -1,4 +1,3 @@
-
 const path = require('path');
 
 const express = require('express');
@@ -21,9 +20,11 @@ const Admin = require('./models/Admin')
 const Employee = require('./models/employee');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const morgan = require('morgan');
+const morgan=require("morgan")
+const fs = require('fs');
+
 app.use(cookieParser());
-app.use(morgan('dev')); 
+
 app.use(cors({
     origin: ['http://localhost:3000','http://10.0.14.118:3000'],
     credentials: true,
@@ -54,6 +55,8 @@ app.use(
         store: store
     })
 );
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
+app.use(morgan('combined', { stream: accessLogStream }));
 
 app.use(flash());
 app.get('/getCSRFToken', (req, res) => {
