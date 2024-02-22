@@ -16,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 require('dotenv').config()
 const userRoutes=require('./routes/Routes')
+const adminRoutes=require('./routes/adminRoutes')
 const User = require('./models/User')
 const Admin = require('./models/Admin')
 const Employee = require('./models/employee');
@@ -67,6 +68,7 @@ app.get('/getCSRFToken', (req, res) => {
     res.json({ CSRFToken: tk });
 });
 app.use(userRoutes)
+app.use(adminRoutes)
 
 app.use((req, res, next) => {
     if (!req.session.user) {

@@ -362,72 +362,140 @@ exports.postSignup = (req, res) => {
         });
 };
 
+exports.postemployeesignup = (req, res, next) => {
+    console.log("Entered Employee signup")
+    const name = req.body.name;
+    const email = req.body.email;
+    const age = req.body.age;
+    const sex = req.body.sex;
+    const aadhar = req.body.aadhar;
+    const address = req.body.address;
+    const phone = req.body.phone;
+    const password = req.body.password;
+    const dob = req.body.dob;
 
-exports.postemployeesignup = (req,res,next)=>{
-  const name = req.body.name;
- const  email =  req.body.email;
- const   age = req.body.age;
- const   sex = req.body.sex;
- const   aadhar =req.body.aadhar;
-  const  address = req.body.address;
-  const  phone =  req.body.phone;
-  const  password = req.body.password;
-  const  dob=req.body.dob
-console.log(name,email,age,sex,aadhar,address,phone,password,dob);
- 
-bcrypt.hash(password,12).then(async hashedpassword=>{
-    const employ = await employee.findOne({email:email})
-    console.log('employ')
-    console.log(employ)
-    if (employ===null) {
-        const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/;
-        const phoneRegex = /^[6-9]\d{9}$/;
+    bcrypt.hash(password, 12)
+        .then(async hashedpassword => {
+            const employ = await employee.findOne({ email: email });
+            if (employ === null) {
+                const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/;
+                const phoneRegex = /^[6-9]\d{9}$/;
+                const isValid = passwordRegex.test(password);
+                const isValid2 = phoneRegex.test(phone);
+                if (isValid && isValid2) {
+                    const Employee = new employee({
+                        name: name,
+                        email: email,
+                        age: age,
+                        sex: sex,
+                        aadhar: aadhar,
+                        address: address,
+                        phone: phone,
+                        password: hashedpassword,
+                        dob: dob
+                    });
+                    await Employee.save();
+                    console.log(Employee)
+                    console.log('====================================');
+                    console.log("employee created in some way");
+                    console.log('====================================');
+                    // Sending confirmation email
+                    await transporter.sendMail({
+                        to: email,
+                        from: 'dattasandeep000@gmail.com',
+                        subject: 'Thanks for enrolling',
+                        html: `
+                            <!DOCTYPE html>
+                            <html lang="en">
+                            <head>
+                                <meta charset="UTF-8">
+                                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                <title>Employee Enrollment Confirmation</title>
+                                <style>
+                                    body {
+                                        font-family: Arial, sans-serif;
+                                        margin: 0;
+                                        padding: 0;
+                                        background-color: #f4f4f4;
+                                        color: #333;
+                                    }
+                    
+                                    .container {
+                                        max-width: 600px;
+                                        margin: 0 auto;
+                                        padding: 20px;
+                                        background-color: #fff;
+                                        border-radius: 8px;
+                                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                                    }
+                    
+                                    h1 {
+                                        color: #007bff;
+                                    }
+                    
+                                    p {
+                                        margin-bottom: 20px;
+                                    }
+                    
+                                    .approval-message {
+                                        font-weight: bold;
+                                        color: #dc3545;
+                                    }
+                    
+                                    .meet-in-office {
+                                        font-size: 24px;
+                                        margin-top: 30px;
+                                        padding: 20px;
+                                        background-color: #007bff;
+                                        color: #fff;
+                                        border-radius: 8px;
+                                        text-align: center;
+                                    }
+                    
+                                    .signature {
+                                        margin-top: 30px;
+                                        font-style: italic;
+                                        color: #777;
+                                    }
+                                </style>
+                            </head>
+                            <body>
+                                <div class="container">
+                                    <h1>Welcome to Our Company!</h1>
+                                    <p>Dear Employee,</p>
+                                    <p>Thank you for enrolling with us. Your information has been received successfully.</p>
+                                    <p class="approval-message">Please wait for approval from the manager.</p>
+                                    <div class="meet-in-office">
+                                        <p>Meet you in office</p>
+                                    </div>
+                                    <p>If you have any questions or need further assistance, feel free to contact us.</p>
+                                    <div class="signature">
+                                        Best regards,<br>
+                                        Your Genesis Team
+                                    </div>
+                                </div>
+                            </body>
+                            </html>
+                        `
+                    });
 
-        console.log(password);
-        const isValid = passwordRegex.test(password);
-        const isValid2 = phoneRegex.test(phone);
-        console.log('isvalid' + isValid)
-        console.log('isvalid2' + isValid2)
-        if (isValid && isValid2) {
 
-            console.log('Employee creation started!')
-           
-            const Employee = new employee({name:name,
-                email:email,
-                age:age,
-               sex:sex,
-            aadhar:aadhar,
-            address:address,phone:phone,password:hashedpassword,dob:dob})
-            console.log(Employee)
-             return Employee.save()
-
-
-        } else {
-            if (!isValid) {
-                res.render('signup', {
-                    login: '',
-                    text: 'Password must contain at least one uppercase letter, one lower case character, and one number, and be at least 8 characters long.'
-                })
-            } else if (!isValid2) {
-                res.render('signup', {
-                    login: '',
-                    text: 'Enter valid phone number'
-                })
+                    res.status(200).json({ message: 'Employee signed up successfully' });
+                } else {
+                    if (!isValid) {
+                        res.status(400).json({ error: 'Password must contain at least one uppercase letter, one lower case character, and one number, and be at least 8 characters long.' });
+                    } else if (!isValid2) {
+                        res.status(400).json({ error: 'Enter valid phone number' });
+                    }
+                }
             }
-        }
-    }
-}).then(result=>{
-    res.redirect('/login')
-    console.log(result)
-    return transporter.sendMail({
-        to: email,
-        from: 'dattasandeep000@gmail.com',
-        subject: 'Thanks for enrolling',
-        html: '<h1>meet you in office</h1>'
-    });
-
-})
-}
+        })
+        .catch(error => {
+            console.error('Error signing up employee:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        });
+};
     exports.postLogin = async (req, res) => {
         // console.log(req)
         // const client = await MongoClient.connect('mongodb+srv://dattasandeep000:13072003@sandy.p06ijgx.mongodb.net/G1?retryWrites=true&w=majority', { useNewUrlParser: true });
@@ -731,141 +799,149 @@ bcrypt.hash(password,12).then(async hashedpassword=>{
             })
 
     }
-    exports.quotegenerator= (req, res) => {
-        console.log('Entered quote')
-        const name = req.body.name;
-        const email = req.body.email;
-        const insuranceType = req.body.insuranceType;
-        const zip = req.body.zip;
-        const age = parseInt(req.body.age);
-        const dob = new Date(req.body.dob);
-        const coverageLimit = parseInt(req.body.coverageLimit);
+exports.quotegenerator= (req, res) => {
+    console.log('Entered quote')
+    const name = req.body.name;
+    const email = req.body.email;
+    const insuranceType = req.body.insuranceType;
+    const zip = req.body.zip;
+    const age = parseInt(req.body.age);
 
-        let quote = 0;
-        switch (insuranceType) {
-          case 'life':
-         
+    const coverageLimit = parseInt(req.body.coverageLimit);
+
+    let quote = 0;
+    switch (insuranceType) {
+        case 'life':
+
             if (age < 18) {
-              quote = 10000;
+                quote = 10000;
             } else if (age >= 18 && age < 35) {
-              quote = 30000;
+                quote = 30000;
             } else if (age >= 35 && age < 50) {
-              quote = 50000;
+                quote = 50000;
             } else {
-              quote = 40000;
+                quote = 40000;
             }
             break;
-          case 'transportation': 
+        case 'transportation':
             if (zip.startsWith('10') || zip.startsWith('11')) {
-              quote = 10000;
+                quote = 10000;
             } else if (zip.startsWith('12') || zip.startsWith('13')) {
-              quote = 20000;
+                quote = 20000;
             } else {
-              quote = 15000;
+                quote = 15000;
             }
             break;
-          case 'health':
-         
+        case 'health':
+
             if (age < 18) {
-              quote = 5000 + coverageLimit / 1000;
+                quote = 5000 + coverageLimit / 1000;
             } else if (age >= 18 && age < 35) {
-              quote = 10000 + coverageLimit / 1000;
+                quote = 10000 + coverageLimit / 1000;
             } else if (age >= 35 && age < 50) {
-              quote = 20000 + coverageLimit / 1000;
+                quote = 20000 + coverageLimit / 1000;
             } else {
-              quote = 50000 + coverageLimit / 1000;
+                quote = 50000 + coverageLimit / 1000;
             }
             break;
-          default:
-          
+        default:
+
             res.status(400).send('Invalid insurance type');
             return;
-        }
-        const message = {
-            from: 'dattasandeep000@gmail.com',
-            to: email,
-            subject: 'Your Insurance Quote',
-            text: `Dear ${name}, your insurance quote is ${quote}.`
-          };
-          transporter.sendMail(message).then(result=>{
-            console.log(result);
-            // res.redirect("/services");
-          }).catch(error=>{
-            console.log(error);
-          })
-          
-          
-   
-      };
-
-
-exports.postaddpolicy = (req,res,next)=>{
-    const name = req.body.name;
-    const type = req.body.type.trim();
-    const amount = req.body.amount;
-    const term = req.body.term;
-    const duration=req.body.duration
-    const details = req.body.details;
-    const TC = req.body.tc;
-    const GE = req.body.ge;
-    const benefits = req.body.benefits;
-    console.log(type)
-    if (type == "life".trim()) {
-        console.log(req.body.premium)
-       const Life =  new lifePolicy(
-        {
-            name:name,
-            type:type,
-            coverAmount:amount,
-            duration:duration,
-            term:req.body.term,
-            Premium:req.body.premium,
-            details:details,
-            TC:TC,
-            GE:GE,
-            benefits:benefits
-    
-            
-        }
-       );
-       console.log(Life)
-       Life.save().then(result=>{
-        console.log("added new life policy");
-        console.log(result);
-        res.redirect("/designform");
-    }).catch(err=>{
- console.log(err)
-    })
     }
-    else if(type=="car".trim()){
-        console.log('Entered car')
-       const trans_policy = new transportPolicy(
-        {
-            name:name,
-            type:type,
-            amount:amount,
-            term:term,
-            details:details,
-            TC:TC,
-            GE:GE,
-            benefits:benefits
+    const message = {
+        from: 'dattasandeep000@gmail.com',
+        to: email,
+        subject: 'Your Insurance Quote',
+        html: `
+                <html>
+                    <head>
+                        <style>
+                            body {
+                                font-family: Arial, sans-serif;
+                                background-color: #f5f5f5;
+                                padding: 20px;
+                            }
+                            .container {
+                                max-width: 600px;
+                                margin: 0 auto;
+                                background-color: #fff;
+                                border-radius: 10px;
+                                padding: 20px;
+                                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                            }
+                            h1 {
+                                color: #007bff;
+                                text-align: center;
+                            }
+                            p {
+                                margin-bottom: 20px;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="container">
+                            <h1>Your Insurance Quote</h1>
+                            <p>Dear ${name},</p>
+                            <p>Your insurance quote is ${quote}.</p>
+                        </div>
+                    </body>
+                </html>
+            `
+    };
 
-    });
-    console.log(trans_policy);
-    trans_policy.save().then(result=>{
-        console.log("added new transport policy");
+    transporter.sendMail(message).then(result=>{
         console.log(result);
-        res.redirect("/details");
-    }).catch(err=>{
- console.log(err)
+        // res.redirect("/services");
+    }).catch(error=>{
+        console.log(error);
     })
+
+
+
+};
+
+exports.postaddpolicy = async (req, res, next) => {
+    try {
+        // Determine the policy type
+        const policyType = req.body.policytype;
+        console.log("entered policy");
+        let Policy;
+        let typeofpolicy;
+
+        let obj;
+        // Based on the policy type, select the appropriate model
+        switch (policyType) {
+            case 'life':
+                Policy = lifePolicy;
+                typeofpolicy = "LIFE"
+                obj =  {...req.body,type:typeofpolicy,coverAmount:req.body.amount,Premium:req.body.Premiums};
+                break;
+            case 'health':
+                Policy = healthPolicy;
+                typeofpolicy = "HEALTH"
+                break;
+            case 'transport':
+                Policy = transportPolicy;
+                typeofpolicy = "TRANSPORT"
+                obj = {...req.body,type:typeofpolicy};
+                break;
+            default:
+                return res.status(400).json({ message: 'Invalid policy type' });
+        }
+
+        // Create a new policy instance
+        const newPolicy = new Policy(obj);
+        console.log(obj);
+        // Save the policy to the database
+        await newPolicy.save();
+
+        res.status(200).json({ message: 'Policy created successfully', policy: newPolicy });
+    } catch (error) {
+        console.error('Error creating policy:', error);
+        res.status(500).json({ message: 'Server error' });
     }
-   else if(type=="health") {
-
-   }
-   
-}
-
+};
 
 
 exports.postsendemail=(req,res,next)=>{

@@ -415,11 +415,11 @@ if(req.body.searchType==='Name') {
 
 
          console.log('Entered verifyTransport')
-            console.log(req.body.status)
+            console.log(req.body)
     const policy = new Policy.model({
 
                type: req.body.policyType,
-        name: req.body.policyName,
+        name: req.body.name,
         applier: req.body.applier,
         amount: req.body.amount,
         policyId: req.body.policyId,
@@ -485,17 +485,17 @@ exports.verifyLife=async (req, res, next) => {
 
     const policy = new Policy.model({
 
-        type: req.body.policyType,
-        name: req.body.policyName,
+        type: req.body.type,
+        name: req.body.name,
         applier: req.body.applier,
         amount: req.body.amount,
         policyId: req.body.policyId,
         appId: req.body.appId,
         term: req.body.policyTerm,
         beneficiaryDetails: {
-            name: req.body.nominee,
-            age: req.body.nomineeAge,
-            relation: req.body.nomineeRelation,
+            name: req.body.bname,
+            age: req.body.bage,
+            relation: req.body.brelation,
 
         },
         status: 'Ongoing',
@@ -551,16 +551,16 @@ exports.verifyHealth = async (req, res, next) => {
     const policy = new Policy.model({
 
         type: req.body.policyType,
-        name: req.body.policyName,
+        name: req.body.name,
         applier: req.body.applier,
         amount: req.body.amount,
         policyId: req.body.policyId,
         appId: req.body.appId,
         term: req.body.policyTerm,
         beneficiaryDetails: {
-            name: req.body.nominee,
-            age: req.body.nomineeAge,
-            relation: req.body.nomineeRelation,
+            name: req.body.bname,
+            age: req.body.bage,
+            relation: req.body.brelation,
 
         },
         status: 'Ongoing',
@@ -759,7 +759,7 @@ exports.deleteReview=async (req, res, next) => {
   await  transporter.sendMail({
         to: email,
         from: 'dattasandeep000@gmail.com',
-        subject: 'Genesis Insurances Application for Agent verified and accepted!',
+        subject: 'Genesis Insurances Review Deleted!',
         html: `<h2>Dear customer your review with ID ${id} has been removed for breaching the community guidelines!! </p>`
     });
     // res.redirect('/reviews')
