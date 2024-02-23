@@ -108,8 +108,9 @@ app.use((req, res, next) => {
 });
 
 
-app.get('*',(req,res)=>{
-    res.render('404')
+app.use((err, req, res, next) => {
+    console.error(err.stack)
+    res.status(500).send('Something broke!')
 })
 
 mongoose.connect(process.env.MONGODB_URI1)
