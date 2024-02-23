@@ -362,8 +362,8 @@ exports.postSignup = (req, res) => {
         });
 };
 
-
 exports.postemployeesignup = (req, res, next) => {
+    console.log("Entered Employee signup")
     const name = req.body.name;
     const email = req.body.email;
     const age = req.body.age;
@@ -479,7 +479,6 @@ exports.postemployeesignup = (req, res, next) => {
                             </html>
                         `
                     });
-                    
 
                     res.status(200).json({ message: 'Employee signed up successfully' });
                 } else {
@@ -496,7 +495,6 @@ exports.postemployeesignup = (req, res, next) => {
             res.status(500).json({ error: 'Internal server error' });
         });
 };
-
     exports.postLogin = async (req, res) => {
         // console.log(req)
         // const client = await MongoClient.connect('mongodb+srv://dattasandeep000:13072003@sandy.p06ijgx.mongodb.net/G1?retryWrites=true&w=majority', { useNewUrlParser: true });
@@ -800,61 +798,61 @@ exports.postemployeesignup = (req, res, next) => {
             })
 
     }
-    exports.quotegenerator= (req, res) => {
-        console.log('Entered quote')
-        const name = req.body.name;
-        const email = req.body.email;
-        const insuranceType = req.body.insuranceType;
-        const zip = req.body.zip;
-        const age = parseInt(req.body.age);
-        
-        const coverageLimit = parseInt(req.body.coverageLimit);
+exports.quotegenerator= (req, res) => {
+    console.log('Entered quote')
+    const name = req.body.name;
+    const email = req.body.email;
+    const insuranceType = req.body.insuranceType;
+    const zip = req.body.zip;
+    const age = parseInt(req.body.age);
 
-        let quote = 0;
-        switch (insuranceType) {
-          case 'life':
-         
+    const coverageLimit = parseInt(req.body.coverageLimit);
+
+    let quote = 0;
+    switch (insuranceType) {
+        case 'life':
+
             if (age < 18) {
-              quote = 10000;
+                quote = 10000;
             } else if (age >= 18 && age < 35) {
-              quote = 30000;
+                quote = 30000;
             } else if (age >= 35 && age < 50) {
-              quote = 50000;
+                quote = 50000;
             } else {
-              quote = 40000;
+                quote = 40000;
             }
             break;
-          case 'transportation': 
+        case 'transportation':
             if (zip.startsWith('10') || zip.startsWith('11')) {
-              quote = 10000;
+                quote = 10000;
             } else if (zip.startsWith('12') || zip.startsWith('13')) {
-              quote = 20000;
+                quote = 20000;
             } else {
-              quote = 15000;
+                quote = 15000;
             }
             break;
-          case 'health':
-         
+        case 'health':
+
             if (age < 18) {
-              quote = 5000 + coverageLimit / 1000;
+                quote = 5000 + coverageLimit / 1000;
             } else if (age >= 18 && age < 35) {
-              quote = 10000 + coverageLimit / 1000;
+                quote = 10000 + coverageLimit / 1000;
             } else if (age >= 35 && age < 50) {
-              quote = 20000 + coverageLimit / 1000;
+                quote = 20000 + coverageLimit / 1000;
             } else {
-              quote = 50000 + coverageLimit / 1000;
+                quote = 50000 + coverageLimit / 1000;
             }
             break;
-          default:
-          
+        default:
+
             res.status(400).send('Invalid insurance type');
             return;
-        }
-        const message = {
-            from: 'dattasandeep000@gmail.com',
-            to: email,
-            subject: 'Your Insurance Quote',
-            html: `
+    }
+    const message = {
+        from: 'dattasandeep000@gmail.com',
+        to: email,
+        subject: 'Your Insurance Quote',
+        html: `
                 <html>
                     <head>
                         <style>
@@ -889,62 +887,60 @@ exports.postemployeesignup = (req, res, next) => {
                     </body>
                 </html>
             `
-        };
-        
-          transporter.sendMail(message).then(result=>{
-            console.log(result);
-            // res.redirect("/services");
-          }).catch(error=>{
-            console.log(error);
-          })
-          
-          
-   
-      };
-
-
-      exports.postaddpolicy = async (req, res, next) => {
-        try {
-            // Determine the policy type
-            const policyType = req.body.policytype;
-            console.log("entered policy");
-            let Policy;
-            let typeofpolicy;
-            
-            let obj;  
-            // Based on the policy type, select the appropriate model
-            switch (policyType) {
-                case 'life':
-                    Policy = lifePolicy;
-                    typeofpolicy = "LIFE"
-                     obj =  {...req.body,type:typeofpolicy,coverAmount:req.body.amount,Premium:req.body.Premiums};
-                    break;
-                case 'health':
-                    Policy = healthPolicy;
-                    typeofpolicy = "HEALTH"
-                    break;
-                case 'transport':
-                    Policy = transportPolicy;
-                    typeofpolicy = "TRANSPORT"
-                    obj = {...req.body,type:typeofpolicy};
-                    break;
-                default:
-                    return res.status(400).json({ message: 'Invalid policy type' });
-            }
-           
-            // Create a new policy instance
-            const newPolicy = new Policy(obj);
-            console.log(obj);
-            // Save the policy to the database
-            await newPolicy.save();
-    
-            res.status(200).json({ message: 'Policy created successfully', policy: newPolicy });
-        } catch (error) {
-            console.error('Error creating policy:', error);
-            res.status(500).json({ message: 'Server error' });
-        }
     };
 
+    transporter.sendMail(message).then(result=>{
+        console.log(result);
+        // res.redirect("/services");
+    }).catch(error=>{
+        console.log(error);
+    })
+
+
+
+};
+
+exports.postaddpolicy = async (req, res, next) => {
+    try {
+        // Determine the policy type
+        const policyType = req.body.policytype;
+        console.log("entered policy");
+        let Policy;
+        let typeofpolicy;
+
+        let obj;
+        // Based on the policy type, select the appropriate model
+        switch (policyType) {
+            case 'life':
+                Policy = lifePolicy;
+                typeofpolicy = "LIFE"
+                obj =  {...req.body,type:typeofpolicy,coverAmount:req.body.amount,Premium:req.body.Premiums};
+                break;
+            case 'health':
+                Policy = healthPolicy;
+                typeofpolicy = "HEALTH"
+                break;
+            case 'transport':
+                Policy = transportPolicy;
+                typeofpolicy = "TRANSPORT"
+                obj = {...req.body,type:typeofpolicy};
+                break;
+            default:
+                return res.status(400).json({ message: 'Invalid policy type' });
+        }
+
+        // Create a new policy instance
+        const newPolicy = new Policy(obj);
+        console.log(obj);
+        // Save the policy to the database
+        await newPolicy.save();
+
+        res.status(200).json({ message: 'Policy created successfully', policy: newPolicy });
+    } catch (error) {
+        console.error('Error creating policy:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
 
 
 exports.postsendemail=(req,res,next)=>{
