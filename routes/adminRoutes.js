@@ -32,7 +32,7 @@ router.get('/sendemail',adminController.getemailform)
 router.post('/send_email',userController.postsendemail)
 router.get('/companystats',adminController.getcompanystats)
 
-router.get('/employeesignup',adminController.employeesignuppage)
+// router.get('/employeesignup',adminController.employeesignuppage)
 router.get('/life-applications',adminController.getLifeApplications)
 router.get('/transport-applications',adminController.getTransportApplications)
 router.post('/health-individual-application',adminController.getIndividualHealthApplication)
