@@ -46,26 +46,6 @@ exports.getData=async (req, res) => {
     res.json(data);
 }
  
-
-exports.getusers = async (req, res) => {
-    try {
-        const allUsers = await User.find();
-        const formattedUsers = allUsers.map(user => ({
-            name: user.name,
-            email: user.email,
-            age: user.age,
-            sex: user.sex,
-            address: user.address,
-            phone: user.phone
-        }));
-        res.status(200).json(formattedUsers);
-    } catch (error) {
-        console.error('Error fetching users:', error);
-        res.status(500).json({ error: 'Internal server error. Failed to fetch users.' });
-    }
-};
-
-
 exports.getAnswerQueries=(req,res,next)=>{
 
     queries.find({status:'Not Answered'}).then(arr=>{
@@ -300,7 +280,7 @@ exports.getHealthApplicationsSearch=async (req, res, next) => {
     exports.trackpolicy = (req, res, next) => {
         res.render('tractpolicy', {users: user});
     }
-    exports.employeesignuppage = (req, res, next) => {
+    exports.employeerpage = (req, res, next) => {
         res.render('employeesignup');
     }
 
@@ -820,4 +800,3 @@ exports.getusers = async (req, res) => {
         res.status(500).json({ error: 'Internal server error. Failed to fetch users.' });
     }
 };
-
