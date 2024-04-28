@@ -497,7 +497,8 @@ exports.postemployeesignup = (req, res, next) => {
         });
 };
     exports.postLogin = async (req, res) => {
-        // console.log(req)
+        console.log("Login route")
+        console.log(req)
         // const client = await MongoClient.connect('mongodb+srv://dattasandeep000:13072003@sandy.p06ijgx.mongodb.net/G1?retryWrites=true&w=majority', { useNewUrlParser: true });
         // const db = await client.db();
         const email = req.body.email

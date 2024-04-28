@@ -113,6 +113,10 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!')
 })
 
+app.get("/test",(req,res)=>{
+    res.json({msg:"Hello!!"})
+})
+
 mongoose.connect(process.env.MONGODB_URI1)
     .then(result => {
         app.listen(4000);
