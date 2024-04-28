@@ -18,5 +18,5 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t dattasandeep/backend:latest .
-          docker push dattasandeep/backend:latest
+          docker build -t dattasandeep/genesis-backend1:latest .
+          docker push dattasandeep/genesis-backend1:latest
