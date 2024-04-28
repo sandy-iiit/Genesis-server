@@ -1,3 +1,4 @@
+
 const User = require("../models/User");
 const Agent = require("../models/employee");
 const bcrypt = require('bcryptjs');
@@ -52,6 +53,8 @@ exports.getChecked=async (req, res) => {
     console.log("Check")
     n=n+1
     console.log(n)
+    console.log("req cookies for checking jwt")
+    console.log(req.cookies)
     const jwtToken = req.cookies.jwtToken;
     console.log(jwtToken)
     if (jwtToken) {
@@ -480,6 +483,7 @@ exports.postemployeesignup = (req, res, next) => {
                         `
                     });
 
+
                     res.status(200).json({ message: 'Employee signed up successfully' });
                 } else {
                     if (!isValid) {
@@ -589,6 +593,7 @@ exports.postemployeesignup = (req, res, next) => {
                         }
                         let a={...admin,type:"User"}
                         const token = jwt.sign(u, "secretKey", { expiresIn: '1h' });
+                        console.log("jwt token " + token)
                         res.cookie('jwtToken', token, { httpOnly: true, expiresIn: new Date(Date.now() + 60 * 60) });
                         res.status(200).json(a._doc)
 
@@ -641,13 +646,18 @@ exports.postemployeesignup = (req, res, next) => {
                     else{
                         // res.render('login', {text: 'wait for approval', login: false})
                         console.log('No aPRROVAL')
-                            res.json({msg:"Your are not Agent! wait for the approval  from admin"});
+                            res.json({msg:"No such Agent!"})
 
                         }
                 }
                 })
             }
         }
+        else {
+            console.log("no user stupid")
+            res.status(400);
+        }
+
 
     }
 
@@ -692,6 +702,7 @@ exports.postemployeesignup = (req, res, next) => {
             html: `<h1>Dear ${name} ,</h1><h2>Agent Name: G Manohar</h2><h2>Agent mail: mano@gmail.com</h2>`
         }).then(r => {
                 console.log('Mail sent!!');
+                res.status(200);
             }
         ).catch(err => {
             console.log(err)
@@ -704,42 +715,46 @@ exports.postemployeesignup = (req, res, next) => {
     }
 
     exports.updateDetails = (req, res) => {
-        const name = req.body.name
-        const address = req.body.address
-        const email = req.body.email
-        const phone = req.body.phone
-        const age=req.body.age
-        console.log(req.body.id)
-        console.log('Name ' + name)
-        if(req.body.type==='User'){
-
-            User.findByIdAndUpdate(req.body.id,{name: name, address: address, email: email, phone: phone,age:age})
-                .then(r => {
-                    // res.redirect('/details')
-                    console.log('User updated')
-                    // console.log(r)
+        const name = req.body.name;
+        const address = req.body.address;
+        const email = req.body.email;
+        const phone = req.body.phone;
+        const age = req.body.age;
+        console.log(req.body.id);
+        console.log('Name ' + name);
+        if (req.body.type === 'User') {
+            User.findByIdAndUpdate(req.body.id, { name: name, address: address, email: email, phone: phone, age: age })
+                .then(() => {
+                    console.log('User updated');
+                    res.status(200).json({ message: 'User details updated successfully' });
                 })
-        }
-        else if(req.body.type==='Admin'){
-
-            Admin.findByIdAndUpdate(req.body.id,{name: name, address: address, email: email, phone: phone,age:age})
-                .then(r => {
-                    console.log(r)
-                    // res.redirect('/details')
-                    console.log('Admin updated')
-                    // console.log(r)
+                .catch(err => {
+                    console.error('Error updating user:', err);
+                    res.status(500).json({ message: 'Internal server error' });
+                });
+        } else if (req.body.type === 'Admin') {
+            Admin.findByIdAndUpdate(req.body.id, { name: name, address: address, email: email, phone: phone, age: age })
+                .then(() => {
+                    console.log('Admin updated');
+                    res.status(200).json({ message: 'Admin details updated successfully' });
                 })
-        }
-        else{
-            Agent.findByIdAndUpdate(req.body.id,{name: name, address: address, email: email, phone: phone})
-                .then(r => {
-                    // res.redirect('/details')
-                    console.log('Agent updated')
-                    // console.log(r)
+                .catch(err => {
+                    console.error('Error updating admin:', err);
+                    res.status(500).json({ message: 'Internal server error' });
+                });
+        } else {
+            Agent.findByIdAndUpdate(req.body.id, { name: name, address: address, email: email, phone: phone })
+                .then(() => {
+                    console.log('Agent updated');
+                    res.status(200).json({ message: 'Agent details updated successfully' });
                 })
+                .catch(err => {
+                    console.error('Error updating agent:', err);
+                    res.status(500).json({ message: 'Internal server error' });
+                });
         }
-    }
-
+    };
+    
     exports.deleteAcc = async (req, res) => {
 
         const email=req.user.email+"deletedaccount"
@@ -772,32 +787,35 @@ exports.postemployeesignup = (req, res, next) => {
 
     }
 
-    exports.dropReview=(req,res,next)=>{
-
-        console.log("entered dropreview")
-        const name=req.body.name;
-        const email=req.body.email;
-        const review=req.body.review;
- console.log(name,email,review)
-        const r=new Review({
-            name:name,
-            email:email,
-            review:review
-        })
-
+    exports.dropReview = (req, res, next) => {
+        console.log("entered dropreview");
+        const name = req.body.name;
+        const email = req.body.email;
+        const review = req.body.review;
+        console.log(name, email, review);
+        const r = new Review({
+            name: name,
+            email: email,
+            review: review
+        });
+    
         r.save()
-            .then(t=>{
-                console.log('Review sent')
-                // res.redirect('/services')
+            .then(() => {
+                console.log('Review sent');
+                res.status(200).json({ message: 'Review submitted successfully' });
                 return transporter.sendMail({
                     to: email,
                     from: 'dattasandeep000@gmail.com',
                     subject: 'Genesis Insurances Review!',
-                    html: `Dear ${name}, Thankyou for your valuable review.We always try our best to keep up with your expectations!`
+                    html: `Dear ${name}, Thank you for your valuable review. We always try our best to keep up with your expectations!`
                 });
             })
-
-    }
+            .catch(err => {
+                console.error('Error submitting review:', err);
+                res.status(500).json({ message: 'Internal server error' });
+            });
+    };
+    
 exports.quotegenerator= (req, res) => {
     console.log('Entered quote')
     const name = req.body.name;
@@ -1210,3 +1228,4 @@ exports.GetMyPolicies = async (req,res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 }
+

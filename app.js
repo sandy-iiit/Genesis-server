@@ -1,3 +1,7 @@
+
+
+//app.js 
+
 const path = require('path');
 
 const express = require('express');
@@ -23,6 +27,66 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const morgan=require("morgan")
 const fs = require('fs');
+
+
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsdoc = require('swagger-jsdoc');
+
+const swaggerOptions = {
+    swaggerDefinition: {
+      openapi: '3.0.0',
+      info: {
+        title: 'Your API Documentation',
+        description: 'API documentation for your Express application',
+        version: '1.0.0',
+      },
+      servers: [
+        {
+          url: 'http://localhost:4000', // Update the URL accordingly
+        },
+      ],
+      components: {
+        securitySchemes: {
+          csrfAuth: {
+            type: 'apiKey',
+            in: 'header',
+            name: 'X-CSRF-Token',
+          },
+          JWTToken: {
+            type: 'apiKey',
+            in: 'cookie',
+            name: 'jwtToken',
+          },
+        },
+      },
+    },
+    apis: ['./routes/*.js', './app.js'], // Path to the files containing Swagger annotations
+    requestInterceptor: (req) => {
+      // Get the CSRF token from your backend (e.g., from a cookie or a meta tag)
+      const csrfToken = req.csrfToken();
+      // Set the CSRF token in the request headers
+      req.headers['X-CSRF-Token'] = csrfToken;
+
+      // Get the JWT token from your backend (e.g., from a cookie)
+      const jwtToken = req.cookies.jwtToken;
+      console.log("swagger part");
+      console.log(jwtToken);
+      // Set the JWT token in the request cookies
+      req.cookies.jwtToken = jwtToken;
+
+      return req;
+    },
+  };
+
+
+const swaggerSpecs = swaggerJsdoc(swaggerOptions);
+
+
+
+
+// Serve Swagger UI
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
+
 
 app.use(cookieParser());
 
@@ -56,18 +120,48 @@ app.use(
         store: store
     })
 );
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
-app.use(morgan('combined', { stream: accessLogStream }));
 
-app.use(flash());
+
+/**
+ * @swagger
+ * /getCSRFToken:
+ *   get:
+ *     summary: Get CSRF Token
+ *     description: Get a CSRF token for use in form submissions.
+ *     responses:
+ *       '200':
+ *         description: A CSRF token is returned.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 CSRFToken:
+ *                   type: string
+ *                   description: The CSRF token generated for the session.
+ *     security:
+ *       - csrfAuth: []
+ */
+
 app.get('/getCSRFToken', (req, res) => {
     console.log("Get csrf function")
+
     const tk=req.csrfToken()
     console.log(tk)
     res.json({ CSRFToken: tk });
 });
+
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
+app.use(morgan('combined', { stream: accessLogStream }));
+
+app.use(flash());
+
+
 app.use(userRoutes)
 app.use(adminRoutes)
+
+
+
 
 app.use((req, res, next) => {
     if (!req.session.user) {
@@ -121,3 +215,5 @@ mongoose.connect(process.env.MONGODB_URI1)
         console.log(err);
         
     });
+
+

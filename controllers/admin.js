@@ -280,7 +280,7 @@ exports.getHealthApplicationsSearch=async (req, res, next) => {
     exports.trackpolicy = (req, res, next) => {
         res.render('tractpolicy', {users: user});
     }
-    exports.employeerpage = (req, res, next) => {
+    exports.employeesignuppage = (req, res, next) => {
         res.render('employeesignup');
     }
 
@@ -411,7 +411,7 @@ if(req.body.searchType==='Name') {
         }
 
         exports.verifyTransport=async (req, res, next) => {
-            const gender= req.body.sex==='Male'?'Mr':'Mrs'
+        const gender= req.body.sex==='Male'?'Mr':'Mrs'
 
 
          console.log('Entered verifyTransport')
@@ -749,6 +749,9 @@ exports.deleteQuery=async (req, res, next) => {
     res.status(200).json({msg:"Deleted Query successfully"})
 }
 
+
+
+
 exports.deleteReview=async (req, res, next) => {
 
         const {id,email} = req.body
@@ -800,3 +803,4 @@ exports.getusers = async (req, res) => {
         res.status(500).json({ error: 'Internal server error. Failed to fetch users.' });
     }
 };
+
