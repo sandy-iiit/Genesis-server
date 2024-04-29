@@ -4,8 +4,9 @@
   "description": "README:GENESIS INSURANCE WEBSITE",
   "main": "app.js",
   "scripts": {
+    "test:report": "jest --reporters=default --reporters=jest-html-reporters",
     "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +25,7 @@
     "express": "^4.18.2",
     "express-session": "^1.17.3",
     "gridfs-stream": "^1.1.1",
+    "jest-html-reporters": "^3.1.7",
     "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.21",
     "mongodb": "^5.2.0",
@@ -47,5 +49,11 @@
   "bugs": {
     "url": "https://github.com/sandy-iiit/Genesis/issues"
   },
-  "homepage": "https://github.com/sandy-iiit/Genesis#readme"
+  "homepage": "https://github.com/sandy-iiit/Genesis#readme",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-html-reporter": "^3.10.2",
+    "superagent": "^9.0.1",
+    "supertest": "^7.0.0"
+  }
 }

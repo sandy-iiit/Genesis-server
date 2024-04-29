@@ -791,12 +791,14 @@ exports.postemployeesignup = (req, res, next) => {
             .then(t=>{
                 console.log('Review sent')
                 // res.redirect('/services')
-                return transporter.sendMail({
+                 transporter.sendMail({
                     to: email,
                     from: 'dattasandeep000@gmail.com',
                     subject: 'Genesis Insurances Review!',
                     html: `Dear ${name}, Thankyou for your valuable review.We always try our best to keep up with your expectations!`
                 });
+
+                res.status(200).json({msg:"Review sent!"})
             })
 
     }

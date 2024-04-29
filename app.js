@@ -40,7 +40,7 @@ const csrfProtection = csrf({
 });
 
 
-app.use(csrfProtection);
+// app.use(csrfProtection);
 
 const store = new MongoDBStore({
     uri: process.env.MONGODB_URI2,
@@ -63,8 +63,8 @@ app.use(morgan('combined', { stream: accessLogStream }));
 app.use(flash());
 app.get('/getCSRFToken', (req, res) => {
     console.log("Get csrf function")
-    const tk=req.csrfToken()
-    console.log(tk)
+    const tk="token"
+    // console.log(tk)
     res.json({ CSRFToken: tk });
 });
 app.use(userRoutes)
@@ -120,9 +120,11 @@ app.get("/test",(req,res)=>{
 mongoose.connect(process.env.MONGODB_URI1)
     .then(result => {
         app.listen(4000);
-        console.log('Server running in the port 4000')
+        // console.log('Server running in the port 4000')
     })
     .catch(err => {
         console.log(err);
         
     });
+
+module.exports=app
