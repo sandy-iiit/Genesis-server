@@ -38,6 +38,7 @@
     "nodemailer-sendgrid-transport": "^0.2.0",
     "regex": "^0.1.1",
     "sequelize": "^6.29.3",
+    "serverless-http": "^3.2.0",
     "sqlite3": "^5.1.6",
     "twilio": "^4.10.0",
     "vercel": "^34.1.3"
