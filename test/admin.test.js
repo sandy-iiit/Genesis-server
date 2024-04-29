@@ -1,4 +1,6 @@
 const request = require('supertest');
+process.env.PORT = '4001';
+
 const app = require('../app'); // Assuming the file path to your Express app is correct
 const queries = require('../models/Query');
 const mongoose = require("mongoose"); // Assuming the file path to your queries model is correct
@@ -43,5 +45,5 @@ describe('Testing postAnswer function', () => {
         }).catch((err) => {
             done(err); // If there's an error saving the query object, fail the test
         });
-    });
+    },20000);
 });

@@ -508,7 +508,7 @@ exports.postemployeesignup = (req, res, next) => {
         console.log(type)
         if (type === 'User') {
             const user=await User.findOne({email: email})
-
+            // console.log(user)
                     if (user) {
                         bcrypt.compare(password, user.password, (err, matched) => {
                             console.log(password)

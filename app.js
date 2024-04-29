@@ -3,7 +3,6 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const serverless = require('serverless-http');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
@@ -122,22 +121,12 @@ app.get("/test",(req,res)=>{
 
 mongoose.connect(process.env.MONGODB_URI1)
     .then(result => {
-        if(process.env.NODE_ENV !== "production") {
-            app.listen(4000);
-            console.log('Server running in the port 4000')
-        }
+        app.listen(process.env.PORT || 4000);
+        // console.log('Server running in the port 4000')
     })
     .catch(err => {
         console.log(err);
         
     });
 
-if(process.env.NODE_ENV === "production") {
-    const handler = serverless(app, { provider: 'azure' });
-    module.exports.genesis = async (context, req) => {
-        context.res = await handler(context, req);
-    }
-}
-else {
-    module.exports=app
-}
+module.exports=app

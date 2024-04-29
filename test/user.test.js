@@ -1,5 +1,7 @@
 
 const request = require('supertest');
+process.env.PORT = '4000';
+
 const app = require('../app'); // Replace this with the path to your Express app file
 const User = require('../models/User'); // Replace this with the path to your User model file
 const Review = require('../models/Review'); // Replace this with the path to your Review model file

@@ -20,6 +20,17 @@ jobs:
         run: |
           docker build -t dattasandeep/genesis-backend1:latest .
           docker push dattasandeep/genesis-backend1:latest
+          
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Pull image from docker hub
+        run: docker pull dattasandeep/genesis-backend1:latest
+      - name: Delete old container
+        run: docker rm -f dattasandeep/genesis-backend1:latest
+      - name: Run Docker Container
+        run: docker run -d -p 4000:4000 --name genesis-server dattasandeep/genesis-backend1:latest
 #name: CI/CD
 #
 #on:
