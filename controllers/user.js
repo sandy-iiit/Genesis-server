@@ -53,6 +53,7 @@ exports.getChecked=async (req, res) => {
     n=n+1
     console.log(n)
     const jwtToken = req.cookies.jwtToken;
+    console.log("checking the jwt token")
     console.log(jwtToken)
     if (jwtToken) {
         // JWT token is present, you can verify it or use it as needed
@@ -525,9 +526,10 @@ exports.postemployeesignup = (req, res, next) => {
                                 let a={...user,type:"User"}
 
                                 const token = jwt.sign(u, "secretKey", { expiresIn: '1h' });
-                                res.cookie('jwtToken', token, { httpOnly: true, expiresIn: new Date(Date.now() + 60 * 60 * 1000) });
-                                console.log(req.cookies.jwtToken)
-                                res.status(200).json(a._doc)
+                                // res.cookie('jwtToken', token, { httpOnly: true, expiresIn: new Date(Date.now() + 60 * 60 * 1000) });
+                                // console.log(req.cookies.jwtToken)
+
+                                res.status(200).json({token:token,a:a._doc})
 
                                 // req.session.isLoggedIn = true;
                                 // req.session.user = user;
@@ -591,10 +593,8 @@ exports.postemployeesignup = (req, res, next) => {
                         }
                         let a={...admin,type:"User"}
                         const token = jwt.sign(u, "secretKey", { expiresIn: '1h' });
-                        res.cookie('jwtToken', token, { httpOnly: true, expiresIn: new Date(Date.now() + 60 * 60) });
-                        res.status(200).json(a._doc)
-
-                        // console.log(req.cookies['user'].name)
+                        // res.cookie('jwtToken', token, { httpOnly: true, expiresIn: new Date(Date.now() + 60 * 60) });
+                        res.status(200).json({token:token,a:a._doc})
                     }
                 })
             } else {
@@ -635,8 +635,8 @@ exports.postemployeesignup = (req, res, next) => {
                             }
                             let a={...employ,type:"User"}
                             const token = jwt.sign(u, "secretKey", { expiresIn: '1h' });
-                            res.cookie('jwtToken', token, { httpOnly: true, expiresIn: new Date(Date.now() + 60 * 60) });
-                            res.status(200).json(a._doc)
+                            // res.cookie('jwtToken', token, { httpOnly: true, expiresIn: new Date(Date.now() + 60 * 60) });
+                            res.status(200).json({token:token,a:a._doc})
                       
                         // console.log(req.cookies['user'].name)
                     }

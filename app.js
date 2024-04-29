@@ -62,7 +62,7 @@ app.use(morgan('combined', { stream: accessLogStream }));
 
 app.use(flash());
 app.get('/getCSRFToken', (req, res) => {
-    console.log("Get csrf function")
+    // console.log("Get csrf function")
     const tk="token"
     // console.log(tk)
     res.json({ CSRFToken: tk });
