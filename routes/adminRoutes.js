@@ -68,7 +68,7 @@ router.get('/allusers',adminController.getusers)
 router.get('/users/emails', async (req, res) => {
     try {
         // Fetch all users from the database
-        const users = await User.find({}, 'email');
+        const users = await User.find({});
 
         // Extract email addresses from the user documents
         const userEmails = users.map(user => user.email);
