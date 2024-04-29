@@ -5,6 +5,7 @@ const router = express.Router()
 const adminController=require('../controllers/admin.js')
 const userController=require('../controllers/user.js')
 const filesController = require("../controllers/files");
+const User = require("lodash");
 
 
 
@@ -62,4 +63,26 @@ router.post('/generatequote',userController.quotegenerator)
 router.post('/getmypolicies',userController.GetMyPolicies)
 router.post('/policy_details',adminController.postpolicydetails)
 router.get('/allusers',adminController.getusers)
+
+
+router.get('/users/emails', async (req, res) => {
+    try {
+        // Fetch all users from the database
+        const users = await User.find({}, 'email');
+
+        // Extract email addresses from the user documents
+        const userEmails = users.map(user => user.email);
+
+        // Send the list of user emails as a response
+        res.status(200).json(userEmails);
+    } catch (error) {
+        // Handle any errors that occur during the database query
+        console.error('Error fetching user emails:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
+
+
 module.exports = router
