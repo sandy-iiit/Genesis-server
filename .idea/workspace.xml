@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f35d4e65-15aa-49ef-b5f3-c5bb5a41da83" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/vercel.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.github/workflows/ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jest-html-reporters-attach/jest_html_reporters/result.js" beforeDir="false" afterPath="$PROJECT_DIR$/jest-html-reporters-attach/jest_html_reporters/result.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/admin.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/admin.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/user.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/user.test.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,7 +185,7 @@
       <workItem from="1714287634369" duration="8522000" />
       <workItem from="1714304715915" duration="9411000" />
       <workItem from="1714374117850" duration="13356000" />
-      <workItem from="1714395080632" duration="8919000" />
+      <workItem from="1714395080632" duration="10711000" />
     </task>
     <servers />
   </component>
