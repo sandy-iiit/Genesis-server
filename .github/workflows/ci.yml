@@ -27,7 +27,9 @@ jobs:
     steps:
       - name: Pull image from docker hub
         run: docker pull dattasandeep/genesis-backend1:latest
+      - name: Stop old container
+        run: docker stop genesis-server
       - name: Delete old container
-        run: docker rm -f dattasandeep/genesis-backend1:latest
+        run: docker rm -f genesis-server
       - name: Run Docker Container
         run: docker run -d -p 4000:4000 --name genesis-server dattasandeep/genesis-backend1:latest
