@@ -2,78 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f35d4e65-15aa-49ef-b5f3-c5bb5a41da83" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/coverage/clover.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/coverage-final.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/Genesis/app.js.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/Genesis/controllers/admin.js.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/Genesis/controllers/files.js.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/Genesis/controllers/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/Genesis/controllers/user.js.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/Genesis/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/Genesis/models/Admin.js.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/Genesis/models/Policy.js.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/Genesis/models/Query.js.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/Genesis/models/Review.js.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/Genesis/models/User.js.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/Genesis/models/employee.js.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/Genesis/models/health-application.js.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/Genesis/models/healthpolicy-details.js.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/Genesis/models/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/Genesis/models/life-application.js.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/Genesis/models/lifepolicy-details.js.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/Genesis/models/passwordChange.js.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/Genesis/models/transport-application.js.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/Genesis/models/transportpolicy-details.js.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/Genesis/routes/Routes.js.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/Genesis/routes/adminRoutes.js.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/Genesis/routes/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/base.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/block-navigation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/favicon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/prettify.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/prettify.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/sort-arrow-sprite.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov-report/sorter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coverage/lcov.info" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jest-html-reporters-attach/jest_html_reporters/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jest-html-reporters-attach/jest_html_reporters/result.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jest_html_reporters.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/admin.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/user.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tester.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/user.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/function-bind/.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/function-bind/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/function-bind/.eslintrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/function-bind/.jscs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/function-bind/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/function-bind/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/function-bind/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/function-bind/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/function-bind/implementation.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/function-bind/implementation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/function-bind/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/function-bind/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/semver/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/semver/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/semver/bin/semver.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/semver/bin/semver.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/semver/classes/comparator.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/semver/classes/comparator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/semver/classes/range.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/semver/classes/range.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/semver/classes/semver.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/semver/classes/semver.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/semver/functions/coerce.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/semver/functions/coerce.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/semver/functions/diff.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/semver/functions/diff.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/semver/functions/inc.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/semver/functions/inc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/semver/functions/parse.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/semver/functions/parse.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/semver/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/semver/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/semver/internal/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/semver/internal/constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/semver/internal/parse-options.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/semver/internal/parse-options.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/semver/internal/re.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/semver/internal/re.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/semver/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/semver/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/semver/ranges/intersects.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/semver/ranges/intersects.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/semver/ranges/subset.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/semver/ranges/subset.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -254,7 +188,8 @@
       <workItem from="1712914463386" duration="1035000" />
       <workItem from="1714287634369" duration="8522000" />
       <workItem from="1714304715915" duration="9411000" />
-      <workItem from="1714374117850" duration="12976000" />
+      <workItem from="1714374117850" duration="13356000" />
+      <workItem from="1714395080632" duration="1978000" />
     </task>
     <servers />
   </component>

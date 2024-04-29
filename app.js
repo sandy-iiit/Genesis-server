@@ -70,6 +70,8 @@ app.get('/getCSRFToken', (req, res) => {
 app.use(userRoutes)
 app.use(adminRoutes)
 
+app.get("/", (_, res) => res.send("Hello"))
+
 app.use((req, res, next) => {
     if (!req.session.user) {
         return next();
