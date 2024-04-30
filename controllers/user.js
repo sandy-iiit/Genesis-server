@@ -48,11 +48,12 @@ exports.getChecked=async (req, res) => {
     // else{
     //     res.status(200).json({msg:"Session Expired!!"})
     // }
+    console.log("Check Token")
 
-    console.log("Check")
+    console.log(req.params.jwtToken)
     n=n+1
     console.log(n)
-    const jwtToken = req.cookies.jwtToken;
+    const jwtToken = req.params.jwtToken;
     console.log("checking the jwt token")
     console.log(jwtToken)
     if (jwtToken) {
