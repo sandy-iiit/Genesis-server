@@ -90,8 +90,61 @@ router.get('/answer-queries', adminController.getAnswerQueries);
  *     name: Authorization
  *     description: Enter JWT token in the format "Bearer {token}"
  */
-
 router.post('/deleteQuery', adminController.deleteQuery);
+
+
+
+
+/**
+ * @swagger
+ * /getalladmins:
+ *   get:
+ *     summary: Get all admins
+ *     description: Retrieve a list of all admins from the database.
+ *     security:
+ *       - csrfAuth: []
+ *     responses:
+ *       '200':
+ *         description: A successful response with a list of admins.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Admin'
+ *       '404':
+ *         description: No admins found.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: No admins found
+ *       '500':
+ *         description: Internal server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Internal server error
+ */
+
+
+router.get('/getalladmins',adminController.getAllAdmins)
+
+router.post('/deleteadmin', adminController.deleteAdminByEmail);
+
+router.get('/getallusers', adminController.getAllUsers);
+router.post('/deleteuser', adminController.deleteUserByEmail);
+
+router.get('/getallagents', adminController.getAllAgents);
+router.post('/deleteagent', adminController.deleteAgentByEmail);
+
 router.post('/deleteReview', adminController.deleteReview);
 router.post('/answered-queries', adminController.getAlreadyAnsweredQueries);
 router.get('/health-applications', adminController.getHealthApplications);
@@ -120,7 +173,7 @@ router.get('/files/:fileId', filesController.getFile);
 router.post('/verifyTransport', adminController.verifyTransport);
 router.post('/verifyLife', adminController.verifyLife);
 router.post('/verifyHealth', adminController.verifyHealth);
-router.post('/verifyAgent/:id', adminController.verifyAgent);
+router.post('/verifyAgent/', adminController.verifyAgent);
 router.get('/agentboard', adminController.getAgentBoard);
 router.get('/agent-applications', adminController.getAgentApplications);
 router.get('/agent-application/:id', adminController.getIndividualAgentApplication);

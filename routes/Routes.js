@@ -536,6 +536,8 @@ router.post('/transport-form', upload.fields([
 router.post('/change-password',userController.changePassword)
 router.post('/verifyOTP',userController.verifyOTP)
 router.get('/verifyOTP/:token',userController.getOTPVerifier)
+
+
 router.get('/healthpolicies',userController.gethealthPolicy)
 router.get('/policypage/:id',userController.getPolicyPage)
 router.post('/myApplications',userController.getMyApps)

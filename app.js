@@ -162,38 +162,41 @@ app.use(adminRoutes)
 
 
 
-
 app.use((req, res, next) => {
-    if (!req.session.user) {
-        return next();
-    }
-    if(req.session.type==='User'){
-
-        User.findById(req.session.user._id)
-            .then(user => {
-                req.user = user;
-                next();
-            })
-            .catch(err => console.log(err));
-    }else if(req.session.type==='Admin'){
-
-        Admin.findById(req.session.user._id)
-            .then(user => {
-                req.user = user;
-                next();
-            })
-            .catch(err => console.log(err));
-    }
-    else if(req.session.type==='Agent'){
-
-        Employee.findById(req.session.user._id)
-            .then(user => {
-                req.user = user;
-                next();
-            })
-            .catch(err => console.log(err));
-    }
+  if (!req.session.user) {
+      return next();
+  }
+  if (req.session.type === 'User') {
+      User.findById(req.session.user._id)
+          .then(user => {
+              req.user = user;
+              next();
+          })
+          .catch(err => console.log(err));
+  } else if (req.session.type === 'Admin') {
+      Admin.findById(req.session.user._id)
+          .then(user => {
+              req.user = user;
+              next();
+          })
+          .catch(err => console.log(err));
+  } else if (req.session.type === 'Agent') {
+      Employee.findById(req.session.user._id)
+          .then(user => {
+              req.user = user;
+              next();
+          })
+          .catch(err => console.log(err));
+  } else if (req.session.type === 'SuperAdmin') { // Add this block for SuperAdmin
+      SuperAdmin.findById(req.session.user._id)
+          .then(user => {
+              req.user = user;
+              next();
+          })
+          .catch(err => console.log(err));
+  }
 });
+
 app.use((req, res, next) => {
     res.locals.isAuthenticated = req.session.isLoggedIn;
     // res.locals.csrfToken = req.csrfToken();
