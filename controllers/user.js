@@ -50,10 +50,10 @@ exports.getChecked=async (req, res) => {
     // }
     console.log("Check Token")
 
-    console.log(req.params.jwtToken)
+    console.log(req.body.jwtToken)
     n=n+1
     console.log(n)
-    const jwtToken = req.params.jwtToken;
+    const jwtToken = req.body.jwtToken;
     console.log("checking the jwt token")
     console.log(jwtToken)
     if (jwtToken) {
