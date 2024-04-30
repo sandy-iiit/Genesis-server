@@ -28,7 +28,7 @@ const fs = require('fs');
 app.use(cookieParser());
 
 app.use(cors({
-    origin: ['http://localhost:3000','http://10.0.14.118:3000','https://genesis-react-1.vercel.app'],
+    origin: ['http://localhost:3000','http://10.0.14.118:3000','http://34.213.59.11:3000'],
     // origin: "*",
     credentials: true,
 }));
