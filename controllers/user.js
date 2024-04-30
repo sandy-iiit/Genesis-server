@@ -526,8 +526,11 @@ exports.postemployeesignup = (req, res, next) => {
                                 let a={...user,type:"User"}
 
                                 const token = jwt.sign(u, "secretKey", { expiresIn: '1h' });
-                                // res.cookie('jwtToken', token, { httpOnly: true, expiresIn: new Date(Date.now() + 60 * 60 * 1000) });
-                                // console.log(req.cookies.jwtToken)
+                                res.cookie('jwtToken', token, {
+                                    httpOnly: true,
+                                    expiresIn: new Date(Date.now() + 60 * 60 * 1000),
+                                    domain: 'http://52.27.64.157:4000' // Replace 'yourdomain.com' with your actual domain
+                                });                                // console.log(req.cookies.jwtToken)
 
                                 res.status(200).json({token:token,a:a._doc})
 
@@ -593,7 +596,11 @@ exports.postemployeesignup = (req, res, next) => {
                         }
                         let a={...admin,type:"User"}
                         const token = jwt.sign(u, "secretKey", { expiresIn: '1h' });
-                        // res.cookie('jwtToken', token, { httpOnly: true, expiresIn: new Date(Date.now() + 60 * 60) });
+                        res.cookie('jwtToken', token, {
+                            httpOnly: true,
+                            expiresIn: new Date(Date.now() + 60 * 60 * 1000),
+                            domain: 'http://52.27.64.157:4000' // Replace 'yourdomain.com' with your actual domain
+                        });
                         res.status(200).json({token:token,a:a._doc})
                     }
                 })
@@ -635,7 +642,11 @@ exports.postemployeesignup = (req, res, next) => {
                             }
                             let a={...employ,type:"User"}
                             const token = jwt.sign(u, "secretKey", { expiresIn: '1h' });
-                            // res.cookie('jwtToken', token, { httpOnly: true, expiresIn: new Date(Date.now() + 60 * 60) });
+                            res.cookie('jwtToken', token, {
+                                httpOnly: true,
+                                expiresIn: new Date(Date.now() + 60 * 60 * 1000),
+                                domain: 'http://52.27.64.157:4000' // Replace 'yourdomain.com' with your actual domain
+                            });
                             res.status(200).json({token:token,a:a._doc})
                       
                         // console.log(req.cookies['user'].name)
