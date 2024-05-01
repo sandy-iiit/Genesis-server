@@ -302,14 +302,11 @@ exports.postSignup = (req, res) => {
         console.log(user);
         if (user === null) {
             const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/;
-            const phoneRegex = /^[6-9]\d{9}$/;
 
             console.log(password);
             const isValid = passwordRegex.test(password);
-            const isValid2 = phoneRegex.test(phone);
             console.log('isvalid' + isValid);
-            console.log('isvalid2' + isValid2);
-            if (isValid && isValid2) {
+            if (isValid) {
                 console.log('User creation started!');
                 const user2 = new User({
                     id: id,
@@ -330,7 +327,7 @@ exports.postSignup = (req, res) => {
                         userId:result._id
                     }
                     const token = jwt.sign(u,"secretKey", { expiresIn: '1h' });
-                    res.cookie('jwtToken', token, { httpOnly: true, expiresIn: new Date(Date.now() + 60 * 60 * 1000) });
+                    // res.cookie('jwtToken', token, { httpOnly: true, expiresIn: new Date(Date.now() + 60 * 60 * 1000) });
                     res.status(200).json(result)
                     return transporter.sendMail({
                         to: email,
@@ -343,9 +340,6 @@ exports.postSignup = (req, res) => {
             } else {
                 if (!isValid) {
                    res.status(200).json({msg:"Incorrect Password format!"})
-                } else if (!isValid2) {
-                    res.status(200).json({msg:"Incorrect Phone number format!"})
-
                 }
             }
         } else {
@@ -679,15 +673,14 @@ exports.postemployeesignup = (req, res, next) => {
                 }
     
                 // Credentials are correct, generate JWT token for Super Admin
-                const payload = { userId: superAdmin._id };
-                const token = jwt.sign(payload, "secretKey", { expiresIn: '1h' });
-    
-                // Set the JWT token as a cookie
-                res.cookie('jwtToken', token, { httpOnly: true, expiresIn: new Date(Date.now() + 60 * 60 * 1000) });
-    
+                const u={
+                    userId:superAdmin._id,
+                }
+                let a={...superAdmin,type:"SuperAdmin"}
+                const token = jwt.sign(u, "secretKey", { expiresIn: '1h' });
+
                 // Return Super Admin data along with the token if needed
-                const superAdminData = { ...superAdmin.toObject(), type: "SuperAdmin" };
-                res.status(200).json({ superAdmin: superAdminData, token });
+                res.status(200).json({token:token,a:a._doc})
             });
         }
         else {

@@ -189,48 +189,8 @@ router.post('/logout',userController.postLogout)
 router.get('/settings',userController.getSettings)
 
 
-/**
- * @swagger
- * /check:
- *   get:
- *     summary: Check user authentication
- *     description: Check if the user is authenticated and return user information.
- *     security:
- *       - csrfAuth: []
- *       - JWTToken: []
- *     responses:
- *       '200':
- *         description: User authentication successful
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 userId:
- *                   type: string
- *                   description: The ID of the authenticated user.
- *                 email:
- *                   type: string
- *                   description: The email address of the authenticated user.
- *                 type:
- *                   type: string
- *                   description: The type of the authenticated user (User/Admin/Agent).
- *       '401':
- *         description: Unauthorized
- *       '500':
- *         description: Internal server error
- *
- * securitySchemes:
- *   csrfAuth:
- *     type: apiKey
- *     in: header
- *     name: X-CSRF-Token
- *   JWTToken:
- *     type: apiKey
- *     in: cookie
- *     name: jwtToken
- */
-router.get('/check',userController.getChecked)
+
+router.post('/check',userController.getChecked)
 router.post('/deleteacc',userController.deleteAcc)
 
 
