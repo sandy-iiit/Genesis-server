@@ -152,7 +152,9 @@ app.get('/getCSRFToken', (req, res) => {
 });
 
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
-app.use(morgan('combined', { stream: accessLogStream }));
+// Setup morgan to log access with time taken
+app.use(morgan(':method :url :status :response-time ms - :res[content-length]', { stream: accessLogStream }));
+
 
 app.use(flash());
 
@@ -219,4 +221,4 @@ mongoose.connect(process.env.MONGODB_URI1)
         
     });
 
-
+  // fs.writeFileSync('./swagger.json', JSON.stringify(swaggerSpecs, null, 2), 'utf8');
