@@ -15,8 +15,9 @@ const mongoose = require("mongoose");
 var TRANSPORTAPPLICATIONS=[]
 var HEALTHAPPLICATIONS=[]
 var LIFEAPPLICATIONS=[]
-
-
+const redis = require('redis');
+const client = require('../utils/redis');
+const Admin = require('../models/Admin');
 
 const transporter = nodemailer.createTransport(
     {
@@ -27,25 +28,173 @@ const transporter = nodemailer.createTransport(
             pass: process.env.PASSKEY
         },
     }
-);
+); 
 
 
-exports.getData=async (req, res) => {
 
-    const a = await Policy.model.countDocuments({})
-    const b = await Policy.model.countDocuments({type:'TRANSPORT'})
-    const c = await Policy.model.countDocuments({type:'LIFE'})
-    const d = await Policy.model.countDocuments({type:'Health'})
 
-    const data = {
-        total_users:a,
-        transport_policy_users: b,
-        life_policy_users: c,
-        health_policy_users: d,
-    };
-    res.json(data);
-}
- 
+// Assuming you have your Redis client exported in redisClient.js
+
+exports.getAllAdmins = async (req, res) => {
+    try {
+        const cacheKey = 'all-admins';
+        let admins = await client.get(cacheKey);
+
+        if (!admins) {
+            admins = await Admin.find({}, '-password');
+
+            // Check if admins exist
+            if (!admins || admins.length === 0) {
+                return res.status(404).json({ message: 'No admins found' });
+            }
+
+            client.set(cacheKey, JSON.stringify(admins));
+            console.log('Admins data set into Redis cache');
+        } else {
+            console.log('Admins data retrieved from Redis cache');
+            admins = JSON.parse(admins);
+        }
+
+        res.status(200).json(admins);
+    } catch (error) {
+        console.error('Error fetching admins:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+
+
+
+exports.deleteAdminByEmail = async (req, res) => {
+    const { email } = req.body;
+    console.log(email);
+    console.log("inside deleting admin");
+    try {
+        // Find the admin by email
+        const admin = await Admin.findOne({ email });
+
+        // Check if admin exists
+        if (!admin) {
+            return res.status(404).json({ message: 'Admin not found' });
+        }
+
+        // Delete the admin by id
+        await Admin.findByIdAndDelete(admin._id);
+        console.log("admin deleted successfully");
+        client.del('all-admins');
+        console.log("chanegs in all-admins updating the cache..")
+        res.status(200).json({ message: 'Admin deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting admin:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+
+// get all users :
+
+exports.getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find({}, '-password');
+        if (!users || users.length === 0) {
+            return res.status(404).json({ message: 'No users found' });
+        }
+        res.status(200).json(users);
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+exports.deleteUserByEmail = async (req, res) => {
+    const { email } = req.body;
+    console.log(email);
+    console.log("inside deleting user");
+    try {
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        await User.findByIdAndDelete(user._id);
+        console.log("user deleted successfully");
+        res.status(200).json({ message: 'User deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+
+
+// get all agents :
+
+
+exports.getAllAgents = async (req, res) => {
+    try {
+        const agents = await Agent.find({}, '-password');
+        if (!agents || agents.length === 0) {
+            return res.status(404).json({ message: 'No agents found' });
+        }
+        res.status(200).json(agents);
+    } catch (error) {
+        console.error('Error fetching agents:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+exports.deleteAgentByEmail = async (req, res) => {
+    const { email } = req.body;
+    console.log(email);
+    console.log("inside deleting agent");
+    try {
+        const agent = await Agent.findOne({ email });
+        if (!agent) {
+            return res.status(404).json({ message: 'Agent not found' });
+        }
+        await Agent.findByIdAndDelete(agent._id);
+        console.log("agent deleted successfully");
+        res.status(200).json({ message: 'Agent deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting agent:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+
+exports.getData = async (req, res) => {
+    try {
+        const cacheKey = 'policy-data';
+        let data = await client.get(cacheKey);
+
+        if (!data) {
+            const totalUsers = await Policy.model.countDocuments({});
+            const transportUsers = await Policy.model.countDocuments({ type: 'TRANSPORT' });
+            const lifeUsers = await Policy.model.countDocuments({ type: 'LIFE' });
+            const healthUsers = await Policy.model.countDocuments({ type: 'HEALTH' });
+
+            data = {
+                total_users: totalUsers,
+                transport_policy_users: transportUsers,
+                life_policy_users: lifeUsers,
+                health_policy_users: healthUsers,
+            };
+
+            client.set(cacheKey, JSON.stringify(data));
+            console.log('Policy data set into Redis cache');
+        } else {
+            console.log('Policy data retrieved from Redis cache');
+            data = JSON.parse(data);
+        }
+
+        res.status(200).json(data);
+    } catch (error) {
+        console.error('Error retrieving policy data:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+
+
 exports.getAnswerQueries=(req,res,next)=>{
 
     queries.find({status:'Not Answered'}).then(arr=>{
@@ -93,15 +242,40 @@ exports.postAnswer=(req,res,next)=>{
 
 }
 
-exports.getHealthApplications=(req,res,next)=>{
-    console.log("entered health admin")
+// exports.getHealthApplications=(req,res,next)=>{
+//     console.log("entered health admin")
 
-    healthApplications.find({
-        verificationStatus: { $in: ["", "Not Verified Yet"] }
-    })        .then(zrr=>{
-        res.status(200).json(zrr)
-    })
-}
+//     healthApplications.find({
+//         verificationStatus: { $in: ["", "Not Verified Yet"] }
+//     })        .then(zrr=>{
+//         res.status(200).json(zrr)
+//     })
+// }
+
+exports.getHealthApplications = async (req, res, next) => {
+    try {
+        const cacheKey = 'health-applications';
+        let applications = await client.get(cacheKey);
+
+        if (!applications) {
+            applications = await healthApplications.find({
+                verificationStatus: { $in: ["", "Not Verified Yet"] }
+            });
+
+            client.set(cacheKey, JSON.stringify(applications));
+            console.log('Health applications data set into Redis cache');
+        } else {
+            console.log('Health applications data retrieved from Redis cache');
+            applications = JSON.parse(applications);
+        }
+
+        res.status(200).json(applications);
+    } catch (error) {
+        console.error('Error retrieving health applications:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
 exports.getLifeApplications=(req,res,next)=>{
     console.log("entered life admin")
     lifeApplications.find({
@@ -411,7 +585,7 @@ if(req.body.searchType==='Name') {
         }
 
         exports.verifyTransport=async (req, res, next) => {
-            const gender= req.body.sex==='Male'?'Mr':'Mrs'
+        const gender= req.body.sex==='Male'?'Mr':'Mrs'
 
 
          console.log('Entered verifyTransport')
@@ -540,75 +714,73 @@ exports.verifyLife=async (req, res, next) => {
         })
     }
 }
+
 exports.verifyHealth = async (req, res, next) => {
-    const gender = req.body.sex === 'Male' ? 'Mr' : 'Mrs'
+    try {
+        const gender = req.body.sex === 'Male' ? 'Mr' : 'Mrs';
 
+        const policy = new Policy.model({
+            type: req.body.policyType,
+            name: req.body.name,
+            applier: req.body.applier,
+            amount: req.body.amount,
+            policyId: req.body.policyId,
+            appId: req.body.appId,
+            term: req.body.policyTerm,
+            beneficiaryDetails: {
+                name: req.body.bname,
+                age: req.body.bage,
+                relation: req.body.brelation,
+            },
+            status: 'Ongoing',
+            duration: req.body.duration
+        });
 
-    console.log('Entered verifyHealth')
-    console.log('ver sta '+req.body.verificationStatus)
+        const applier = await User.findById(req.body.applier);
+        const email = applier.email;
+        const name = applier.name;
 
+        if (_.lowerCase(req.body.verificationStatus) === 'verified') {
+            policy.save();
+            await healthApplications.updateOne({_id: req.body.appId}, {
+                verificationStatus: req.body.verificationStatus,
+                verificationDate: new Date().toDateString()
+            });
+            await User.updateOne({_id: req.body.applier}, {$push: {currentPolicies: policy}});
 
-    const policy = new Policy.model({
+            console.log('Policy added to user!!! hooray');
 
-        type: req.body.policyType,
-        name: req.body.name,
-        applier: req.body.applier,
-        amount: req.body.amount,
-        policyId: req.body.policyId,
-        appId: req.body.appId,
-        term: req.body.policyTerm,
-        beneficiaryDetails: {
-            name: req.body.bname,
-            age: req.body.bage,
-            relation: req.body.brelation,
-
-        },
-        status: 'Ongoing',
-        duration: req.body.duration
-
-
-    })
-    const applier = await User.findById(req.body.applier)
-
-    const email = applier.email
-    const name = applier.name
-    console.log(req.body.verificationStatus)
-    if (_.lowerCase(req.body.verificationStatus) === 'verified') {
-        policy.save();
-        await healthApplications.updateOne({_id: req.body.appId}, {
-            verificationStatus: req.body.verificationStatus,
-            verificationDate: new Date().toDateString()
-        }).then(()=>{
-            res.json({msg:"Updated verification status!"})
-        })
-
-       await User.updateOne({_id: req.body.applier}, {$push: {currentPolicies: policy}}).then((r) => {
-
-            console.log('Policy added to user!!! hooray')
             transporter.sendMail({
                 to: email,
                 from: 'dattasandeep000@gmail.com',
                 subject: 'Genesis Insurances Application verified and accepted!',
                 html: `<h1>Congratulations ${gender} ${name} your health insurance application with id ${req.body.appId} has been verified and accepted! </h1>`
             });
+        } else {
+            await healthApplications.findByIdAndDelete(req.body.appId);
 
-        })
-    } else {
-        console.log(req.body.appId)
-
-        await healthApplications.findByIdAndDelete(req.body.appId).then(() => {
-            console.log("Entered delete!")
             transporter.sendMail({
                 to: email,
                 from: 'dattasandeep000@gmail.com',
                 subject: 'Genesis Insurances Application rejected!',
                 html: `<h2>Sorry ${gender} ${name} your health insurance application with id ${req.body.applier} has been rejected! </h2><p>Please contact our agents for more details!</p>`
             });
-            res.json({msg:"Updated verification status!"})
-        })
+        }
 
+        // Update cache after verification
+        client.del('health-applications'); // Invalidate cache for health applications
+        console.log('Health applications cache invalidated');
+
+        res.json({ msg: "Updated verification status!" });
+    } catch (error) {
+        console.error('Error verifying health:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
-}
+};
+
+
+
+
         exports.getAgentBoard = (req, res, next) => {
             console.log(req.session.type)
             res.render('agentboard', {userType: req.session.type, name: req.user.name})
@@ -628,22 +800,31 @@ exports.verifyHealth = async (req, res, next) => {
         }
 
         exports.verifyAgent = async (req, res, next) => {
-            const id = req.params.id
-            await Agent.updateOne({_id: id}, {isActive: true})
-                await Agent.findById(id).then(r => {
-                console.log('Agent activated')
-                    console.log(r)
-                const gender=r.sex==='Male'?'Mr':'Mrs'
-                console.log(r.email)
+            try {
+                const { email } = req.body;
+                 console.log("verifying the user with email  "+email)
+                const updatedAgent = await Agent.findOneAndUpdate({ email }, { isActive: true }, { new: true });
+         
+                if (!updatedAgent) {
+                    return res.status(404).json({ message: 'Agent not found' });
+                }
+         
+                const gender = updatedAgent.sex === 'Male' ? 'Mr' : 'Mrs';
                 transporter.sendMail({
-                    to: r.email,
+                    to: updatedAgent.email,
                     from: 'dattasandeep000@gmail.com',
                     subject: 'Genesis Insurances Application for Agent verified and accepted!',
-                    html: `<h2>Dear ${gender} ${r.name} your application for becoming our agent with id ${r._id} has been accepted! </h2><p>Please contact our agents for more details!</p>`
+                    html: `<h2>Dear ${gender} ${updatedAgent.name},</h2><p>Your application for becoming our agent with ID ${updatedAgent._id} has been accepted! Please contact our agents for more details.</p>`
                 });
-                res.redirect('/agent-applications')
-            })
-        }
+              console.log("agent verified")
+                res.status(200).json({ message: 'Agent verified and accepted', agent: updatedAgent });
+
+            } catch (error) {
+                console.error('Error verifying agent:', error);
+                res.status(500).json({ message: 'Internal server error' });
+            }
+        };
+        
 
 exports.getUserList=async (req, res, next) => {
     const users = await User.find({})
@@ -748,6 +929,9 @@ exports.deleteQuery=async (req, res, next) => {
     await queries.findByIdAndDelete(id)
     res.status(200).json({msg:"Deleted Query successfully"})
 }
+
+
+
 
 exports.deleteReview=async (req, res, next) => {
 

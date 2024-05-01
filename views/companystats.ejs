@@ -186,7 +186,6 @@
 <!--                let lifePolicyCount = 0;-->
 <!--                let healthPolicyCount = 0;-->
 
-<<<<<<< HEAD
 <!--                setInterval(() => {-->
 <!--                    totalUsersCount=totalUsersCount+1;-->
 <!--                    transportPolicyCount=transportPolicyCount+1;-->
@@ -278,27 +277,3 @@
 </script>
 
     <%- include('footer.ejs') %>
-
-=======
-                setInterval(() => {
-                    totalUsersCount=totalUsersCount+1;
-                    transportPolicyCount=transportPolicyCount+1;
-                    lifePolicyCount=lifePolicyCount+1;
-                    healthPolicyCount=healthPolicyCount+1;
-
-                    if (totalUsersCount <= totalUsers) {
-                        document.querySelector('.value1').textContent = totalUsersCount;
-                    }
-                    if (transportPolicyCount <= transportPolicyUsers) {
-                        document.querySelector('.value2').textContent = transportPolicyCount;
-                    }
-                    if (lifePolicyCount <= lifePolicyUsers) {
-                        document.querySelector('.value3').textContent = lifePolicyCount;
-                    }
-                    if (healthPolicyCount <= healthPolicyUsers) {
-                        document.querySelector('.value4').textContent = healthPolicyCount;
-                    }
-                }, 0.00001); // Update values every 10 milliseconds
-            })
->>>>>>> origin/mano
-

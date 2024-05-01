@@ -1,3 +1,4 @@
+
 const User = require("../models/User");
 const Agent = require("../models/employee");
 const bcrypt = require('bcryptjs');
@@ -20,6 +21,7 @@ const {MongoClient} = require("mongodb");
 const employee = require('../models/employee');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
+const SuperAdmin = require('../models/SuperAdmin')
 //
 // const transporter = nodemailer.createTransport(
 //     sendgridTransport({
@@ -63,43 +65,40 @@ exports.getChecked=async (req, res) => {
             console.log(decoded.userId)
             const user = await User.findById(decoded.userId);
             const admin = await Admin.findById(decoded.userId);
-            const agent = await Agent.findById(decoded.userId)
+            const agent = await Agent.findById(decoded.userId);
+            const superAdmin = await SuperAdmin.findById(decoded.userId); // Add this line for SuperAdmin
+
             console.log('Decoded JWT:', decoded);
-            // console.log(user)
-            if(user!==null){
-                let u={...user._doc,type:"User"}
-                console.log(u)
+
+            if (user !== null) {
+                let u = { ...user._doc, type: "User" };
+                console.log(u);
                 res.status(200).json(u);
-
-            }
-            else if(admin!==null){
-
-
-                let u={...admin._doc,type:"Admin"}
-                console.log(u)
-
+            } else if (admin !== null) {
+                let u = { ...admin._doc, type: "Admin" };
+                console.log(u);
                 res.status(200).json(u);
-
-            }
-            else if(agent!==null){
-                let u={...agent._doc,type:"Agent"}
-
+            } else if (agent !== null) {
+                let u = { ...agent._doc, type: "Agent" };
+                console.log(u);
                 res.status(200).json(u);
-            }
-
-            else{
-                res.status(200).json({success: false, message: 'Unauthorized'});
-
+            } else if (superAdmin !== null) { // Add this block for SuperAdmin
+                let u = { ...superAdmin._doc, type: "SuperAdmin" };
+                console.log(u);
+                res.status(200).json(u);
+            } else {
+                res.status(200).json({ success: false, message: 'Unauthorized' });
             }
         } catch (error) {
             console.error('Error verifying JWT:', error);
-            res.status(200).json({success: false, message: 'Unauthorized'});
+            res.status(200).json({ success: false, message: 'Unauthorized' });
         }
     } else {
         // JWT token not present in the cookie
-        res.status(200).json({success: false, message: 'Unauthorized'});
+        res.status(200).json({ success: false, message: 'Unauthorized' });
     }
 }
+
 
 
 exports.getHealthPolicyPage=(req,res)=>{
@@ -158,37 +157,34 @@ exports.getPolicyPage=async (req, res, next) => {
     res.json(p)
 }
 
-
-exports.getDetails=(req,res,next)=>{
-    // console.log(req.session.type+' Details : '+req.user._id)
-if(!req.user){
-        res.render('404')
-    }
-    else {
+exports.getDetails = (req, res, next) => {
+    if (!req.user) {
+        res.render('404');
+    } else {
         if (req.session.type === 'User') {
-            res.render('details',
-                {
-                    name: req.user.name, email: req.user.email,
-                    age: req.user.age, sex: req.user.sex, address: req.user.address, phone: req.user.phone
-                })
+            res.render('details', {
+                name: req.user.name, email: req.user.email,
+                age: req.user.age, sex: req.user.sex, address: req.user.address, phone: req.user.phone
+            });
         } else if (req.session.type === 'Admin') {
-            res.render('admin-details',
-                {
-                    name: req.user.name, email: req.user.email,
-                    age: req.user.age, sex: req.user.sex, address: req.user.address, phone: req.user.phone
-                })
-        } else if (req.session.type === 'Agent') {
-
             res.render('admin-details', {
-                    name: req.user.name, email: req.user.email,
-                    age: req.user.age, sex: req.user.sex, address: req.user.address, phone: req.user.phone
-                }
-            )
+                name: req.user.name, email: req.user.email,
+                age: req.user.age, sex: req.user.sex, address: req.user.address, phone: req.user.phone
+            });
+        } else if (req.session.type === 'Agent') {
+            res.render('admin-details', {
+                name: req.user.name, email: req.user.email,
+                age: req.user.age, sex: req.user.sex, address: req.user.address, phone: req.user.phone
+            });
+        } else if (req.session.type === 'SuperAdmin') { // Add this block for SuperAdmin
+            res.render('superadmin-details', {
+                name: req.user.name, email: req.user.email,
+                age: req.user.age, sex: req.user.sex, address: req.user.address, phone: req.user.phone
+            });
         }
     }
+};
 
-
-}
 
 exports.getMyDetails=(req,res,next)=>{
     res.render('my-details')
@@ -384,6 +380,7 @@ exports.postemployeesignup = (req, res, next) => {
                 const phoneRegex = /^[6-9]\d{9}$/;
                 const isValid = passwordRegex.test(password);
                 const isValid2 = phoneRegex.test(phone);
+                console.log(isValid,isValid2,"chceking validity");
                 if (isValid && isValid2) {
                     const Employee = new employee({
                         name: name,
@@ -605,7 +602,7 @@ exports.postemployeesignup = (req, res, next) => {
                         res.status(200).json({token:token,a:a._doc})
                     }
                 })
-            } else {
+            }  else {
                 // res.render('login', {text: 'Enter valid email and username!'})
                 res.json({msg:"No such Admin!"})
             }
@@ -663,6 +660,42 @@ exports.postemployeesignup = (req, res, next) => {
             }
         }
 
+        else if (type === 'SuperAdmin') {
+            // Check if the provided credentials belong to a Super Admin
+            const superAdmin = await SuperAdmin.findOne({ email });
+    
+            if (!superAdmin) {
+                return res.status(401).json({ msg: 'No such Super Admin!' });
+            }
+    
+            bcrypt.compare(password, superAdmin.password, (err, matched) => {
+                if (err) {
+                    console.error('Error comparing passwords:', err);
+                    return res.status(500).json({ msg: 'Internal Server Error' });
+                }
+    
+                if (!matched) {
+                    return res.status(401).json({ msg: 'Incorrect credentials!' });
+                }
+    
+                // Credentials are correct, generate JWT token for Super Admin
+                const payload = { userId: superAdmin._id };
+                const token = jwt.sign(payload, "secretKey", { expiresIn: '1h' });
+    
+                // Set the JWT token as a cookie
+                res.cookie('jwtToken', token, { httpOnly: true, expiresIn: new Date(Date.now() + 60 * 60 * 1000) });
+    
+                // Return Super Admin data along with the token if needed
+                const superAdminData = { ...superAdmin.toObject(), type: "SuperAdmin" };
+                res.status(200).json({ superAdmin: superAdminData, token });
+            });
+        }
+        else {
+            console.log("no user stupid")
+            res.status(400);
+        }
+
+
     }
 
     exports.postLogout = async (req, res) => {
@@ -706,6 +739,7 @@ exports.postemployeesignup = (req, res, next) => {
             html: `<h1>Dear ${name} ,</h1><h2>Agent Name: G Manohar</h2><h2>Agent mail: mano@gmail.com</h2>`
         }).then(r => {
                 console.log('Mail sent!!');
+                res.status(200);
             }
         ).catch(err => {
             console.log(err)
@@ -716,89 +750,106 @@ exports.postemployeesignup = (req, res, next) => {
     exports.getSettings = (req, res) => {
         res.render('settings')
     }
-
     exports.updateDetails = (req, res) => {
-        const name = req.body.name
-        const address = req.body.address
-        const email = req.body.email
-        const phone = req.body.phone
-        const age=req.body.age
-        console.log(req.body.id)
-        console.log('Name ' + name)
-        if(req.body.type==='User'){
-
-            User.findByIdAndUpdate(req.body.id,{name: name, address: address, email: email, phone: phone,age:age})
-                .then(r => {
-                    // res.redirect('/details')
-                    console.log('User updated')
-                    // console.log(r)
+        const name = req.body.name;
+        const address = req.body.address;
+        const email = req.body.email;
+        const phone = req.body.phone;
+        const age = req.body.age;
+        console.log(req.body.id);
+        console.log('Name ' + name);
+    
+        if (req.body.type === 'User') {
+            User.findByIdAndUpdate(req.body.id, { name, address, email, phone, age })
+                .then(() => {
+                    console.log('User updated');
+                    res.status(200).json({ message: 'User details updated successfully' });
                 })
-        }
-        else if(req.body.type==='Admin'){
-
-            Admin.findByIdAndUpdate(req.body.id,{name: name, address: address, email: email, phone: phone,age:age})
-                .then(r => {
-                    console.log(r)
-                    // res.redirect('/details')
-                    console.log('Admin updated')
-                    // console.log(r)
+                .catch(err => {
+                    console.error('Error updating user:', err);
+                    res.status(500).json({ message: 'Internal server error' });
+                });
+        } else if (req.body.type === 'Admin') {
+            Admin.findByIdAndUpdate(req.body.id, { name, address, email, phone, age })
+                .then(() => {
+                    console.log('Admin updated');
+                    res.status(200).json({ message: 'Admin details updated successfully' });
                 })
-        }
-        else{
-            Agent.findByIdAndUpdate(req.body.id,{name: name, address: address, email: email, phone: phone})
-                .then(r => {
-                    // res.redirect('/details')
-                    console.log('Agent updated')
-                    // console.log(r)
+                .catch(err => {
+                    console.error('Error updating admin:', err);
+                    res.status(500).json({ message: 'Internal server error' });
+                });
+        } else if (req.body.type === 'SuperAdmin') {
+            SuperAdmin.findByIdAndUpdate(req.body.id, { name, address, email, phone, age })
+                .then(() => {
+                    console.log('SuperAdmin updated');
+                    res.status(200).json({ message: 'SuperAdmin details updated successfully' });
                 })
+                .catch(err => {
+                    console.error('Error updating SuperAdmin:', err);
+                    res.status(500).json({ message: 'Internal server error' });
+                });
+        } else {
+            Agent.findByIdAndUpdate(req.body.id, { name, address, email, phone })
+                .then(() => {
+                    console.log('Agent updated');
+                    res.status(200).json({ message: 'Agent details updated successfully' });
+                })
+                .catch(err => {
+                    console.error('Error updating agent:', err);
+                    res.status(500).json({ message: 'Internal server error' });
+                });
         }
-    }
+    };
+    
 
     exports.deleteAcc = async (req, res) => {
-
-        const email=req.user.email+"deletedaccount"
-      if(req.session.type==='User') {
-
-
-          await User.updateOne({_id: req.user._id}, {email: email, deleted: true}).then(r => {
-
-              res.redirect('/')
-              console.log('User deleted')
-          })
-          console.log('Deleted the user!')
-      }
-      else if(req.session.type==='Agent'){
-          await Agent.updateOne({_id:req.user._id},{email: email, isActive: false}).then(r => {
-
-              res.redirect('/')
-              console.log('Agent deleted')
-          })
-          console.log('Deleted the user!')
-      }
-      else if(req.session.type==='Admin'){
-          await Admin.updateOne({_id:req.user._id},{email:email,deleted:true}).then(r => {
-
-              res.redirect('/')
-              console.log('Admin deleted')
-          })
-          console.log('Deleted the user!')
-      }
-
+        const email = req.user.email + "deletedaccount";
+        console.log("email: " + email);
+    
+        let response;
+        if (req.session.type === 'User') {
+            await User.updateOne({ _id: req.user._id }, { email: email, deleted: true }).then(r => {
+                response = { message: 'User deleted' };
+                console.log('User deleted');
+            }).catch(err => {
+                response = { error: err.message };
+                console.error('Error deleting user:', err);
+            });
+        } else if (req.session.type === 'Agent') {
+            await Agent.updateOne({ _id: req.user._id }, { email: email, isActive: false }).then(r => {
+                response = { message: 'Agent deleted' };
+                console.log('Agent deleted');
+            }).catch(err => {
+                response = { error: err.message };
+                console.error('Error deleting agent:', err);
+            });
+        } else if (req.session.type === 'Admin') {
+            await Admin.updateOne({ _id: req.user._id }, { email: email, deleted: true }).then(r => {
+                response = { message: 'Admin deleted' };
+                console.log('Admin deleted');
+            }).catch(err => {
+                response = { error: err.message };
+                console.error('Error deleting admin:', err);
+            });
+        }
+    
+        res.json(response);
     }
+    
 
-    exports.dropReview=(req,res,next)=>{
-
-        console.log("entered dropreview")
-        const name=req.body.name;
-        const email=req.body.email;
-        const review=req.body.review;
- console.log(name,email,review)
-        const r=new Review({
-            name:name,
-            email:email,
-            review:review
-        })
-
+    exports.dropReview = (req, res, next) => {
+        console.log("entered dropreview");
+        const name = req.body.name;
+        const email = req.body.email;
+        const review = req.body.review;
+        console.log(name, email, review);
+        const r = new Review({
+            name: name,
+            email: email,
+            review: review
+        });
+    
         r.save()
             .then(t=>{
                 console.log('Review sent')
@@ -807,13 +858,17 @@ exports.postemployeesignup = (req, res, next) => {
                     to: email,
                     from: 'dattasandeep000@gmail.com',
                     subject: 'Genesis Insurances Review!',
-                    html: `Dear ${name}, Thankyou for your valuable review.We always try our best to keep up with your expectations!`
+                    html: `Dear ${name}, Thank you for your valuable review. We always try our best to keep up with your expectations!`
                 });
 
                 res.status(200).json({msg:"Review sent!"})
             })
-
-    }
+            .catch(err => {
+                console.error('Error submitting review:', err);
+                res.status(500).json({ message: 'Internal server error' });
+            });
+    };
+    
 exports.quotegenerator= (req, res) => {
     console.log('Entered quote')
     const name = req.body.name;
@@ -1212,6 +1267,7 @@ exports.GetMyPolicies = async (req,res) => {
 
 
         const currentPolicies = user.currentPolicies.map(policy => ({
+            policyId:policy.policyId,
             beneficiaryDetails: policy.beneficiaryDetails,
             type: policy.type,
             name: policy.name,
