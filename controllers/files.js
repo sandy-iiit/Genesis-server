@@ -187,8 +187,8 @@ exports.getFile2 = async function (req, res) {
 
         // Get the server's URL and construct the file URL
         // const serverURL = 'http://52.27.64.157:4000'; // Replace with your server's URL
-        const serverURL = 'http://localhost:4000'; // Replace with your server's URL
-        // const serverURL = 'https://genesis-server.onrender.com'; // Replace with your server's URL
+        // const serverURL = 'http://localhost:4000'; // Replace with your server's URL
+        const serverURL = 'https://genesis-server.onrender.com'; // Replace with your server's URL
         const fileURL = `${serverURL}/files/${req.body.fileId}`;
 
         // Send the file URL in the response
