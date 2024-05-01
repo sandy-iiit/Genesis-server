@@ -253,27 +253,12 @@ exports.postAnswer=(req,res,next)=>{
 // }
 
 exports.getHealthApplications = async (req, res, next) => {
-    try {
-        const cacheKey = 'health-applications';
-        let applications = await client.get(cacheKey);
-
-        if (!applications) {
-            applications = await healthApplications.find({
-                verificationStatus: { $in: ["", "Not Verified Yet"] }
-            });
-
-            client.set(cacheKey, JSON.stringify(applications));
-            console.log('Health applications data set into Redis cache');
-        } else {
-            console.log('Health applications data retrieved from Redis cache');
-            applications = JSON.parse(applications);
-        }
-
-        res.status(200).json(applications);
-    } catch (error) {
-        console.error('Error retrieving health applications:', error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
+    console.log("entered health admin")
+    healthApplications.find({
+        verificationStatus: { $in: ["", "Not Verified Yet"] }
+    })        .then(zrr=>{
+        res.status(200).json(zrr)
+    })
 };
 
 exports.getLifeApplications=(req,res,next)=>{
